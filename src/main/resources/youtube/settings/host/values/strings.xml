@@ -496,8 +496,8 @@ Known issue: autoplay does not work"</string>
     <string name="revanced_hide_timed_reactions_summary_off">Timed reactions are shown</string>
     <string name="revanced_hide_timed_reactions_summary_on">Timed reactions are hidden</string>
     <string name="revanced_hide_timed_reactions_title">Hide timed reactions</string>
-    <string name="revanced_hide_reminder_button_summary_off">Notify me button are shown</string>
-    <string name="revanced_hide_reminder_button_summary_on">Notify me button are hidden</string>
+    <string name="revanced_hide_reminder_button_summary_off">Notify me buttons are shown</string>
+    <string name="revanced_hide_reminder_button_summary_on">Notify me buttons are hidden</string>
     <string name="revanced_hide_reminder_button_title">Hide notify me button</string>
     <string name="revanced_hide_time_stamp_summary_off">Time stamp is shown</string>
     <string name="revanced_hide_time_stamp_summary_on">Time stamp is hidden</string>
