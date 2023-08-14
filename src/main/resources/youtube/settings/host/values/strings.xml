@@ -24,7 +24,7 @@
     <string name="revanced_custom_filter_title">Enable custom filter</string>
     <string name="revanced_custom_playback_speeds_invalid">Invalid custom playback speeds. Reset to default values.</string>
     <string name="revanced_custom_playback_speeds_warning" formatted="false">Custom speeds must be less than %sx. Reset to default values.</string>
-    <string name="revanced_custom_playback_speeds_summary">Add or change the playback speeds available</string>
+    <string name="revanced_custom_playback_speeds_summary">Add or change available playback speeds</string>
     <string name="revanced_custom_playback_speeds_title">Edit custom playback speeds</string>
     <string name="revanced_custom_seekbar_color_value_summary">Type the hex code of the seekbar color</string>
     <string name="revanced_custom_seekbar_color_value_title">Custom seekbar color value</string>
@@ -273,8 +273,8 @@
     <string name="revanced_hide_end_screen_cards_summary_off">End screen cards are shown</string>
     <string name="revanced_hide_end_screen_cards_summary_on">End screen cards are hidden</string>
     <string name="revanced_hide_end_screen_cards_title">Hide end screen cards</string>
-    <string name="revanced_hide_end_screen_overlay_summary_off">End screen overlay are shown</string>
-    <string name="revanced_hide_end_screen_overlay_summary_on">End screen overlay are hidden</string>
+    <string name="revanced_hide_end_screen_overlay_summary_off">End screen overlay is shown</string>
+    <string name="revanced_hide_end_screen_overlay_summary_on">End screen overlay is hidden</string>
     <string name="revanced_hide_end_screen_overlay_title">Hide end screen overlay</string>
     <string name="revanced_hide_expandable_chip_summary_off">Expandable chips are shown</string>
     <string name="revanced_hide_expandable_chip_summary_on">Expandable chips are hidden</string>
@@ -286,8 +286,8 @@
     <string name="revanced_hide_feed_survey_summary_off">Feed surveys are shown</string>
     <string name="revanced_hide_feed_survey_summary_on">Feed surveys are hidden</string>
     <string name="revanced_hide_feed_survey_title">Hide feed surveys</string>
-    <string name="revanced_hide_filmstrip_overlay_summary_off">Film strip overlay are shown</string>
-    <string name="revanced_hide_filmstrip_overlay_summary_on">Film strip overlay are hidden</string>
+    <string name="revanced_hide_filmstrip_overlay_summary_off">Film strip overlay is shown</string>
+    <string name="revanced_hide_filmstrip_overlay_summary_on">Film strip overlay is hidden</string>
     <string name="revanced_hide_filmstrip_overlay_title">Hide film strip overlay</string>
     <string name="revanced_hide_floating_microphone_summary_off">Floating microphone button is shown</string>
     <string name="revanced_hide_floating_microphone_summary_on">Floating microphone button is hidden</string>
@@ -643,7 +643,7 @@ Known issues
 - Ambient mode may not work
 - Clip cannot be played normally
 - Downloading videos may not work
-- Filmstrip overlay are always hidden
+- Filmstrip overlay is always hidden
 - Seekbar thumbnails are hidden"</string>
     <string name="revanced_spoof_player_parameter_type_title">Spoof player parameter type</string>
     <string name="revanced_spoof_player_parameter_summary">Spoofs player parameters to prevent playback issues</string>
