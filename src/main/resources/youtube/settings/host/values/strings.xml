@@ -465,8 +465,8 @@ Only available on YouTube v18.24.37+"</string>
     <string name="revanced_hide_shorts_player_toolbar_summary_off">Toolbar is shown</string>
     <string name="revanced_hide_shorts_player_toolbar_summary_on">Toolbar is hidden</string>
     <string name="revanced_hide_shorts_player_toolbar_title">Hide toolbar</string>
-    <string name="revanced_hide_shorts_shelf_summary_off">Shorts shelves are shown</string>
-    <string name="revanced_hide_shorts_shelf_summary_on">Shorts shelves are hidden</string>
+    <string name="revanced_hide_shorts_shelf_summary_off">Shorts shelf is shown</string>
+    <string name="revanced_hide_shorts_shelf_summary_on">Shorts shelf is hidden</string>
     <string name="revanced_hide_shorts_shelf_title">Hide shorts shelf</string>
     <string name="revanced_hide_snack_bar_summary_off">Snack bar is shown</string>
     <string name="revanced_hide_snack_bar_summary_on">Snack bar is hidden</string>
@@ -488,7 +488,7 @@ Only available on YouTube v18.24.37+"</string>
 - Watch it Again"</string>
     <string name="revanced_hide_suggestions_shelf_title">Hide suggestions shelf</string>
     <string name="revanced_hide_suggested_video_overlay_summary">"Hides suggested video overlay to play next
-Known issue: autoplay does not work"</string>
+Known issue: Autoplay does not work"</string>
     <string name="revanced_hide_suggested_video_overlay_title">Hide suggested video overlay</string>
     <string name="revanced_hide_ticket_shelf_summary_off">Ticket shelves are shown</string>
     <string name="revanced_hide_ticket_shelf_summary_on">Ticket shelves are hidden</string>
