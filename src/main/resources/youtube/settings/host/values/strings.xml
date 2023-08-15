@@ -301,8 +301,8 @@
     <string name="revanced_hide_general_ads_summary_off">General ads are shown</string>
     <string name="revanced_hide_general_ads_summary_on">General ads are hidden</string>
     <string name="revanced_hide_general_ads_title">Hide general ads</string>
-    <string name="revanced_hide_get_premium_summary_off">YouTube Premium promotion are shown</string>
-    <string name="revanced_hide_get_premium_summary_on">YouTube Premium promotion are hidden</string>
+    <string name="revanced_hide_get_premium_summary_off">YouTube Premium promotion is shown</string>
+    <string name="revanced_hide_get_premium_summary_on">YouTube Premium promotion is hidden</string>
     <string name="revanced_hide_get_premium_title">Hide YouTube Premium promotion</string>
     <string name="revanced_hide_gray_description_summary_off">Gray description is shown</string>
     <string name="revanced_hide_gray_description_summary_on">Gray description is hidden</string>
@@ -313,8 +313,8 @@
     <string name="revanced_hide_home_button_summary_off">Home button is shown</string>
     <string name="revanced_hide_home_button_summary_on">Home button is hidden</string>
     <string name="revanced_hide_home_button_title">Hide home button</string>
-    <string name="revanced_hide_image_shelf_summary_off">Image shelves are shown</string>
-    <string name="revanced_hide_image_shelf_summary_on">Image shelves are hidden</string>
+    <string name="revanced_hide_image_shelf_summary_off">Image shelf is shown</string>
+    <string name="revanced_hide_image_shelf_summary_on">Image shelf is hidden</string>
     <string name="revanced_hide_image_shelf_title">Hide image shelf</string>
     <string name="revanced_hide_info_cards_section_summary_off">Info cards sections are shown</string>
     <string name="revanced_hide_info_cards_section_summary_on">Info cards sections are hidden</string>
@@ -343,8 +343,8 @@
     <string name="revanced_hide_medical_panel_summary_off">Medical panels are shown</string>
     <string name="revanced_hide_medical_panel_summary_on">Medical panels are hidden</string>
     <string name="revanced_hide_medical_panel_title">Hide medical panels</string>
-    <string name="revanced_hide_merchandise_shelf_summary_off">Merchandise shelves are shown</string>
-    <string name="revanced_hide_merchandise_shelf_summary_on">Merchandise shelves are hidden</string>
+    <string name="revanced_hide_merchandise_shelf_summary_off">Merchandise shelf is shown</string>
+    <string name="revanced_hide_merchandise_shelf_summary_on">Merchandise shelf is hidden</string>
     <string name="revanced_hide_merchandise_shelf_title">Hide merchandise shelf</string>
     <string name="revanced_hide_mix_playlists_summary_off">Mix playlist is shown</string>
     <string name="revanced_hide_mix_playlists_summary_on">Mix playlist is hidden</string>
