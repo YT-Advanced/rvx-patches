@@ -605,14 +605,20 @@ Si más tarde se desactiva, la antigua interfaz de usuario puede permanecer hast
     <string name="revanced_spoof_app_version_target_entry_title">Versión a usar de la aplicación</string>
     <string name="revanced_spoof_app_version_target_summary">Escriba la versión a modificar de la app</string>
     <string name="revanced_spoof_app_version_target_title">Modificar versión de aplicación</string>
-    <string name="revanced_spoof_player_parameter_summary">"Los parámetros del reproductor se modifican para evitar problemas de reproducción
+    <string name="revanced_spoof_player_parameter_type_summary_off">"Parámetros del reproductor de Shorts
 
 Problemas conocidos
-- Es posible que el Modo Ambiente no funcione
-- El Clip no puede reproducirse normalmente
+- La marca de agua del canal siempre está oculta
 - La descarga de vídeos puede no funcionar
-- La superposición de la tira de película siempre está oculta
+- Las tarjetas de pantalla final siempre están ocultas"</string>
+    <string name="revanced_spoof_player_parameter_type_summary_on">"Parámetros del reproductor en modo incógnito
+
+Problemas conocidos
+- El modo ambiente puede no funcionar
+- La descarga de vídeos puede no funcionar
 - Las miniaturas de la barra de progreso están ocultas"</string>
+    <string name="revanced_spoof_player_parameter_type_title">Tipo de parámetro del reproductor a modificar</string>
+    <string name="revanced_spoof_player_parameter_summary">Modifica los parámetros del reproductor para evitar problemas de reproducción</string>
     <string name="revanced_spoof_player_parameter_title">Modificar parámetro del reproductor</string>
     <string name="revanced_swipe_controls">Controles deslizantes</string>
     <string name="revanced_swipe_magnitude_threshold_summary">La cantidad de umbral para que ocurra el deslizamiento</string>

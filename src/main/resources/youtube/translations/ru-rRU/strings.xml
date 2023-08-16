@@ -602,14 +602,20 @@
     <string name="revanced_spoof_app_version_target_entry_title">Целевая версия приложения при подмене</string>
     <string name="revanced_spoof_app_version_target_summary">Введите целевую версию приложения для подмены</string>
     <string name="revanced_spoof_app_version_target_title">Подмена версии приложения</string>
-    <string name="revanced_spoof_player_parameter_summary">"Подмена параметров плеера для предотвращения проблем с воспроизведением
+    <string name="revanced_spoof_player_parameter_type_summary_off">"Параметры плеера \"Shorts\"
 
 Известные проблемы:
-• Режим фоновой подсветки может не работать
-• Клипы нормально не воспроизводятся
-• Загрузка видео может не работать
-• Покадровая лента в стиле \"старой кинопленки\" всегда скрыта
-• Миниатюры прогресса воспроизведения скрыты"</string>
+- Логотип канала всегда скрыт
+- Скачивание видео может не работать
+- Конечные заставки всегда скрыты"</string>
+    <string name="revanced_spoof_player_parameter_type_summary_on">"Параметры плеера в режиме инкогнито
+
+Известные проблемы:
+- Фоновая подсветка может не работать
+- Загрузка видео может не работать
+- Миниатюры прогресса воспроизведения скрыты"</string>
+    <string name="revanced_spoof_player_parameter_type_title">Тип подмены параметров плеера</string>
+    <string name="revanced_spoof_player_parameter_summary">Подменяет параметры плеера для предотвращения проблем с воспроизведением видео</string>
     <string name="revanced_spoof_player_parameter_title">Подмена параметров плеера</string>
     <string name="revanced_swipe_controls">Жесты</string>
     <string name="revanced_swipe_magnitude_threshold_summary">Минимальная амплитуда распознаваемого как жест движения</string>

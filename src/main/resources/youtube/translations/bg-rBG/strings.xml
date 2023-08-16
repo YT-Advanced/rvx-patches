@@ -604,14 +604,20 @@
     <string name="revanced_spoof_app_version_target_entry_title">Подлъгване за исканата версията на приложението</string>
     <string name="revanced_spoof_app_version_target_summary">Задайте желаната фалшива версия на приложението</string>
     <string name="revanced_spoof_app_version_target_title">Редактиране на фалшивата версия</string>
-    <string name="revanced_spoof_player_parameter_summary">"Фалшифициране параметрите на плейъра за предотвратяване на проблеми при възпроизвеждане
+    <string name="revanced_spoof_player_parameter_type_summary_off">"Параметри на плейъра за кратки клипове
 
 Известни проблеми
-• Околния режим може и да не работи
-• Клиповете може да не се възпроизвеждат нормално
-• Изтеклянето на клипове може да не работи
-• Филмовите ленти винаги се показват
-• Прегледа при превъртане не се показва"</string>
+ - Водния знак на канала е винаги скрит
+ - Изтеглянето на клипове може да не работи
+ - Крайните карти са винаги скрити"</string>
+    <string name="revanced_spoof_player_parameter_type_summary_on">"Параметри на плейъра в таен режим
+
+Известни проблеми
+ - Околния режим може да не работи
+ - Изтеглянето на клипове може да не работи
+ - Прегледа във времевата лента е скрит"</string>
+    <string name="revanced_spoof_player_parameter_type_title">Вид на фалшивия параметър на плейъра</string>
+    <string name="revanced_spoof_player_parameter_summary">Фалшифициране на параметрите н плейъра за отстраняване на проблеми с възпройзвеждането</string>
     <string name="revanced_spoof_player_parameter_title">Фалшив параметър на плейъра</string>
     <string name="revanced_swipe_controls">Плъзгащи контроли</string>
     <string name="revanced_swipe_magnitude_threshold_summary">Праг преди да се осъществи плъзгането</string>

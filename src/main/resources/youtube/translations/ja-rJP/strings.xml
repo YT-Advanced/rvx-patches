@@ -604,14 +604,19 @@
     <string name="revanced_spoof_app_version_target_entry_title">偽装するバージョンを選択</string>
     <string name="revanced_spoof_app_version_target_summary">偽装したいバージョンを入力してください</string>
     <string name="revanced_spoof_app_version_target_title">偽装するアプリのバージョンを編集する</string>
-    <string name="revanced_spoof_player_parameter_summary">"プレーヤーのパラメータを偽装して、バッファリングの問題を修正します
+    <string name="revanced_spoof_player_parameter_type_summary_off">"YouTubeショートのプレーヤーのパラメータ
+既知の問題：
+‐ 動画の右下のウォーターマークは表示されません
+‐ 動画のダウンロードに失敗することがあります
+‐ 動画の終了画面のカードは表示されません"</string>
+    <string name="revanced_spoof_player_parameter_type_summary_on">"シークレットモードのプレイヤーパラメータ
 
- 既知の問題点
- • アンビエントモードが機能しない可能性があります
- • クリップが正常に再生できません
- • 動画のダウンロードが機能しない可能性があります
- • 再生バー(シークバー)長押しで表示される映写スライドは非表示になります
- • シークバーのサムネイルが非表示になります"</string>
+既知の問題
+- アンビエントモードが動作しない場合があります
+- 動画のダウンロードが動作しない場合があります
+- シークバーに表示されるサムネイルが非表示になります"</string>
+    <string name="revanced_spoof_player_parameter_type_title">偽装するプレーヤーのパラメータの種類を選択</string>
+    <string name="revanced_spoof_player_parameter_summary">バッファリングの問題を修正するために、プレーヤーのパラメータを偽装します</string>
     <string name="revanced_spoof_player_parameter_title">偽装するプレーヤーのパラメータの種類を選択</string>
     <string name="revanced_swipe_controls">スワイプコントロール</string>
     <string name="revanced_swipe_magnitude_threshold_summary">スワイプのしきい値を設定します</string>

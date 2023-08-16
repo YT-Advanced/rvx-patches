@@ -604,12 +604,20 @@ Lưu ý:
     <string name="revanced_spoof_app_version_target_entry_title">Phiên bản giả mạo</string>
     <string name="revanced_spoof_app_version_target_summary">Nhập phiên bản YouTube mà bạn muốn giả mạo</string>
     <string name="revanced_spoof_app_version_target_title">Chỉnh sửa phiên bản giả mạo</string>
-    <string name="revanced_spoof_player_parameter_summary">"Giả mạo thông số trình phát để khắc phục vấn đề giật hình khi phát video.
+    <string name="revanced_spoof_player_parameter_type_summary_off">"Thông số của trình phát Shorts.
 
 Sự cố đã biết:
-- Chế độ môi trường xung quanh, Tua chính xác và Tải video xuống để xem khi không có mạng có thể không hoạt động.
-- Đoạn video không thể phát bình thường.
-- Thanh tiến trình trong hình thu nhỏ video luôn ẩn."</string>
+- Hình mờ video luôn ẩn.
+- Màn hình kết thúc luôn ẩn.
+- Tải video xuống để xem khi không có mạng có thể không hoạt động."</string>
+    <string name="revanced_spoof_player_parameter_type_summary_on">"Thông số của trình phát ở chế độ ẩn danh.
+
+Sự cố đã biết:
+- Chế độ môi trường xung quanh có thể không hoạt động.
+- Tải video xuống để xem khi không có mạng có thể không hoạt động.
+- Thanh tiến trình trong hình thu nhỏ luôn ẩn."</string>
+    <string name="revanced_spoof_player_parameter_type_title">Loại thông số của trình phát giả mạo</string>
+    <string name="revanced_spoof_player_parameter_summary">Giả mạo thông số của trình phát để khắc phục vấn đề giật hình khi phát video</string>
     <string name="revanced_spoof_player_parameter_title">Giả mạo thông số trình phát</string>
     <string name="revanced_swipe_controls">Điều khiển bằng cử chỉ vuốt</string>
     <string name="revanced_swipe_magnitude_threshold_summary">Độ rộng của ngưỡng vuốt để thực hiện cử chỉ vuốt</string>

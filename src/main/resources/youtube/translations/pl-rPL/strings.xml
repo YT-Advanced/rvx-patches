@@ -603,14 +603,20 @@ Jeśli później opcja ta zostanie wyłączona, stare UI może pozostać do czas
     <string name="revanced_spoof_app_version_target_entry_title">Oszukana wersja aplikacji</string>
     <string name="revanced_spoof_app_version_target_summary">Wpisz wersję, którą chcesz oszukiwać</string>
     <string name="revanced_spoof_app_version_target_title">Zmień oszukaną wersję aplikacji</string>
-    <string name="revanced_spoof_player_parameter_summary">"Oszukuje parametry, by zapobiec problemom z odtwarzaniem
+    <string name="revanced_spoof_player_parameter_type_summary_off">"Parametry Shortów
 
 Znane problemy
-• Oświetlenie kinowe może nie działać
-• Nie można zobaczyć klipów normalnie
-• Pobieranie wideo może nie działać
-• Precyzyjniejsze przesuwanie po pasku nie działa
-• Podgląd wideo nie działa"</string>
+- Znaki wodne kanałów są ukryte
+- Pobieranie wideo może nie działać
+- Karty końcowe wideo są ukryte"</string>
+    <string name="revanced_spoof_player_parameter_type_summary_on">"Parametry trybu incognito
+
+Znane problemy
+- Oświetlnie kinowe może nie działać
+- Pobieranie wideo może nie działać
+- Podgląd wideo jest wyłączony"</string>
+    <string name="revanced_spoof_player_parameter_type_title">Oszukane parametry</string>
+    <string name="revanced_spoof_player_parameter_summary">Oszukuje parametry, by uniknąć problemów z odtwarzaniem wideo</string>
     <string name="revanced_spoof_player_parameter_title">Oszukaj parametry</string>
     <string name="revanced_swipe_controls">Sterowanie przesuwaniem</string>
     <string name="revanced_swipe_magnitude_threshold_summary">Minimalna długość przesunięcia</string>
