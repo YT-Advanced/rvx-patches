@@ -18,7 +18,6 @@ import app.revanced.patches.youtube.utils.annotations.YouTubeCompatibility
 import app.revanced.patches.youtube.utils.fingerprints.NewFlyoutPanelOnClickListenerFingerprint
 import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch
 import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch.Companion.contexts
-import app.revanced.patches.youtube.utils.videocpn.patch.VideoCpnPatch
 import app.revanced.patches.youtube.utils.videoid.withoutshorts.patch.VideoIdWithoutShortsPatch
 import app.revanced.patches.youtube.video.quality.fingerprints.NewVideoQualityChangedFingerprint
 import app.revanced.patches.youtube.video.quality.fingerprints.VideoQualityReferenceFingerprint
@@ -38,8 +37,7 @@ import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 @DependsOn(
     [
         VideoIdWithoutShortsPatch::class,
-        SettingsPatch::class,
-        VideoCpnPatch::class
+        SettingsPatch::class
     ]
 )
 @YouTubeCompatibility
@@ -122,7 +120,6 @@ class VideoQualityPatch : BytecodePatch(
             )
         } ?: return VideoQualitySettingsParentFingerprint.toErrorResult()
 
-        VideoCpnPatch.injectCall("$INTEGRATIONS_VIDEO_QUALITY_CLASS_DESCRIPTOR->newVideoStarted(Ljava/lang/String;Z)V")
         VideoIdWithoutShortsPatch.injectCall("$INTEGRATIONS_VIDEO_QUALITY_CLASS_DESCRIPTOR->newVideoStarted(Ljava/lang/String;)V")
 
         /**
