@@ -59,7 +59,7 @@ class UpgradeButtonPatch : BytecodePatch(
                 addInstructionsWithLabels(
                     targetIndex + 1, """
                         move-result v1
-                        const/4 v2, 0x3
+                        const/4 v2, 0x4
                         if-le v1, v2, :dismiss
                         invoke-interface {v$targetRegisterA, v2}, Ljava/util/List;->remove(I)Ljava/lang/Object;
                         :dismiss
