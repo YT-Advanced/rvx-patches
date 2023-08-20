@@ -10,6 +10,11 @@ object TimeCounterFingerprint : MethodFingerprint(
     parameters = listOf(),
     returnType = "V",
     opcodes = listOf(
+        Opcode.INVOKE_VIRTUAL,
+        Opcode.MOVE_RESULT_WIDE,
+        Opcode.INVOKE_STATIC,
+        Opcode.MOVE_RESULT_OBJECT,
+        Opcode.INVOKE_INTERFACE,
         Opcode.RETURN_VOID,
         Opcode.IGET_BOOLEAN,
         Opcode.IF_EQZ,
@@ -19,26 +24,12 @@ object TimeCounterFingerprint : MethodFingerprint(
         Opcode.SUB_LONG_2ADDR,
         Opcode.INVOKE_STATIC,
         Opcode.MOVE_RESULT_OBJECT,
-        Opcode.IGET_OBJECT,
-        Opcode.IGET_WIDE,
-        Opcode.IGET_WIDE,
-        Opcode.SUB_LONG_2ADDR,
-        Opcode.IGET_WIDE,
-        Opcode.SUB_LONG_2ADDR,
-        Opcode.INVOKE_STATIC,
-        Opcode.MOVE_RESULT_OBJECT,
-        Opcode.IGET_OBJECT,
-        Opcode.IGET_WIDE,
-        Opcode.IGET_WIDE,
-        Opcode.SUB_LONG_2ADDR,
-        Opcode.INVOKE_STATIC,
-        Opcode.MOVE_RESULT_OBJECT,
-        Opcode.INVOKE_INTERFACE,
-        Opcode.RETURN_VOID
+        null, //iget-wide or iget-object
+        Opcode.IGET_WIDE
     ),
     customFingerprint = { _, classDef ->
         // On older devices this fingerprint resolves very slowly.
         // Speed this up by checking for the number of methods.
-        classDef.methods.count() == 14 || classDef.methods.count() == 15
+        classDef.methods.count() == 14 || classDef.methods.count() == 15 || classDef.methods.count() == 17
     }
 )
