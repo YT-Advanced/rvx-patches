@@ -533,8 +533,8 @@ Known issue: Autoplay does not work"</string>
     <string name="revanced_whitelisting_sponsorblock">SponsorBlock</string>
     <string name="revanced_whitelisting_sponsorblock_button">SB</string>
     <string name="revanced_whitelisting_title">Channel Whitelist</string>
-    <string name="revanced_whitelist_api_key_title">Youtube API Key</string>
-    <string name="revanced_whitelist_api_key_summary">Youtube API Key v3 used by whitelist feature</string>
+    <string name="revanced_whitelist_api_key_title">YouTube API key</string>
+    <string name="revanced_whitelist_api_key_summary">YouTube API key v3 used by whitelist feature</string>
     <string name="revanced_hide_view_products_summary_off">View products banner is shown</string>
     <string name="revanced_hide_view_products_summary_on">View products banner is hidden</string>
     <string name="revanced_hide_view_products_title">Hide view products banner</string>
@@ -622,7 +622,7 @@ Since these setting is quite outdated, it may not be valid"</string>
     <string name="revanced_show_fullscreen_title_title">Show fullscreen title</string>
     <string name="revanced_alt_thumbnails_preference_screen_title">Alternative thumbnails</string>
     <string name="revanced_alt_thumbnail_title">Enable alternative thumbnails</string>
-    <string name="revanced_alt_thumbnail_summary_on">Youtube thumbnails replaced with alternative ones</string>
+    <string name="revanced_alt_thumbnail_summary_on">YouTube thumbnails replaced with alternative ones</string>
     <string name="revanced_alt_thumbnail_summary_off">Original YouTube thumbnails shown</string>
     <string name="revanced_alt_thumbnail_type_title">Video time to take the still from</string>
     <string name="revanced_alt_thumbnail_type_entry_1">Beginning of video</string>
