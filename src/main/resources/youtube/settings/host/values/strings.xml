@@ -528,7 +528,7 @@ Known issue: Autoplay does not work"</string>
     <string name="revanced_whitelisting_remove_failed" formatted="false">Failed to remove channel %s from the %s whitelist</string>
     <string name="revanced_whitelisting_settings_summary">Check or remove the list of channels added to the whitelist</string>
     <string name="revanced_whitelisting_settings_title">Whitelist settings</string>
-    <string name="revanced_whitelisting_speed">Video Speed</string>
+    <string name="revanced_whitelisting_speed">Playback Speed</string>
     <string name="revanced_whitelisting_speed_button">Speed</string>
     <string name="revanced_whitelisting_sponsorblock">SponsorBlock</string>
     <string name="revanced_whitelisting_sponsorblock_button">SB</string>
