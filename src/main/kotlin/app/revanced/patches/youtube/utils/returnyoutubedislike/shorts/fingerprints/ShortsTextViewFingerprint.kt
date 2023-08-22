@@ -24,8 +24,7 @@ object ShortsTextViewFingerprint : MethodFingerprint(
         Opcode.IF_EQ,
         Opcode.RETURN_VOID,
         Opcode.IGET_OBJECT,     // TextView field
-        null,
-        null,
-        Opcode.IF_NEZ,
+        Opcode.IGET_BOOLEAN,    // boolean field
+        Opcode.CHECK_CAST
     )
 )
