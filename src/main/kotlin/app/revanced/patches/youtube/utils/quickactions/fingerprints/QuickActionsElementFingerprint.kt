@@ -8,6 +8,7 @@ import com.android.tools.smali.dexlib2.Opcode
 object QuickActionsElementFingerprint : MethodFingerprint(
     returnType = "V",
     opcodes = listOf(
+        Opcode.RETURN_VOID,
         Opcode.CONST,
         Opcode.INVOKE_VIRTUAL,
         Opcode.MOVE_RESULT_OBJECT,
