@@ -40,7 +40,7 @@ import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 )
 @RedditCompatibility
 @RequiresIntegrations
-@Version("0.0.2")
+
 class HideAdsPatch : BytecodePatch(
     listOf(
         AdPostFingerprint,
