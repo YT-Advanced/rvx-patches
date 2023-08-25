@@ -20,7 +20,7 @@ import app.revanced.patches.youtube.fullscreen.fullscreenpanels.fingerprints.Ful
 import app.revanced.patches.youtube.fullscreen.fullscreenpanels.fingerprints.FullscreenViewAdderFingerprint
 import app.revanced.patches.youtube.utils.annotations.YouTubeCompatibility
 import app.revanced.patches.youtube.utils.fingerprints.LayoutConstructorFingerprint
-import app.revanced.patches.youtube.utils.quickactions.patch.QuickActionsHookPatch
+
 import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch
 import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.Companion.FullScreenEngagementPanel
 import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch
@@ -37,7 +37,6 @@ import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
 @Description("Hides video description and comments panel in fullscreen view.")
 @DependsOn(
     [
-        QuickActionsHookPatch::class,
         SettingsPatch::class,
         SharedResourceIdPatch::class
     ]
