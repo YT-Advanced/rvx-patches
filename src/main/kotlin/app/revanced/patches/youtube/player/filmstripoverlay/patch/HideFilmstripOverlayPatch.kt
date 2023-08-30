@@ -16,7 +16,6 @@ import app.revanced.patcher.util.smali.ExternalLabel
 import app.revanced.patches.youtube.player.filmstripoverlay.fingerprints.FilmStripOverlayConfigFingerprint
 import app.revanced.patches.youtube.player.filmstripoverlay.fingerprints.FilmStripOverlayInteractionFingerprint
 import app.revanced.patches.youtube.player.filmstripoverlay.fingerprints.FilmStripOverlayParentFingerprint
-import app.revanced.patches.youtube.player.filmstripoverlay.fingerprints.FilmStripOverlayPreviewFingerprint
 import app.revanced.patches.youtube.utils.annotations.YouTubeCompatibility
 import app.revanced.patches.youtube.utils.fingerprints.YouTubeControlsOverlayFingerprint
 import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch
@@ -52,8 +51,7 @@ class HideFilmstripOverlayPatch : BytecodePatch(
         FilmStripOverlayParentFingerprint.result?.classDef?.let { classDef ->
             arrayOf(
                 FilmStripOverlayConfigFingerprint,
-                FilmStripOverlayInteractionFingerprint,
-                FilmStripOverlayPreviewFingerprint
+                FilmStripOverlayInteractionFingerprint
             ).forEach { fingerprint ->
                 fingerprint.also {
                     it.resolve(
