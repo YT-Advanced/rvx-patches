@@ -48,7 +48,7 @@ class CategoryBarPatch : BytecodePatch(
         SettingsPatch.addMusicPreference(
             CategoryType.GENERAL,
             "revanced_hide_category_bar",
-            "true"
+            "false"
         )
     }
 }
