@@ -3,7 +3,6 @@ package app.revanced.patches.youtube.video.quality.patch
 import app.revanced.extensions.exception
 import app.revanced.patcher.annotation.Description
 import app.revanced.patcher.annotation.Name
-
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
@@ -16,7 +15,6 @@ import app.revanced.patches.youtube.utils.annotations.YouTubeCompatibility
 import app.revanced.patches.youtube.utils.fingerprints.NewFlyoutPanelOnClickListenerFingerprint
 import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch
 import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch.Companion.contexts
-import app.revanced.patches.youtube.utils.videocpn.patch.VideoCpnPatch
 import app.revanced.patches.youtube.utils.videoid.withoutshorts.patch.VideoIdWithoutShortsPatch
 import app.revanced.patches.youtube.video.quality.fingerprints.NewVideoQualityChangedFingerprint
 import app.revanced.patches.youtube.video.quality.fingerprints.VideoQualityReferenceFingerprint
@@ -36,12 +34,10 @@ import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 @DependsOn(
     [
         VideoIdWithoutShortsPatch::class,
-        SettingsPatch::class,
-        VideoCpnPatch::class
+        SettingsPatch::class
     ]
 )
 @YouTubeCompatibility
-
 class VideoQualityPatch : BytecodePatch(
     listOf(
         NewFlyoutPanelOnClickListenerFingerprint,
@@ -120,7 +116,6 @@ class VideoQualityPatch : BytecodePatch(
             )
         } ?: throw VideoQualitySettingsParentFingerprint.exception
 
-        // VideoCpnPatch.injectCall("$INTEGRATIONS_VIDEO_QUALITY_CLASS_DESCRIPTOR->newVideoStarted(Ljava/lang/String;Z)V")
         VideoIdWithoutShortsPatch.injectCall("$INTEGRATIONS_VIDEO_QUALITY_CLASS_DESCRIPTOR->newVideoStarted(Ljava/lang/String;)V")
 
         /**
@@ -140,6 +135,7 @@ class VideoQualityPatch : BytecodePatch(
         )
 
         SettingsPatch.updatePatchStatus("default-video-quality")
+
     }
 
     private companion object {
