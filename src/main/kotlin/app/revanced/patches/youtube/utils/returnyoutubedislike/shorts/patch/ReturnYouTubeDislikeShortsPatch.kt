@@ -8,6 +8,7 @@ import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.util.smali.ExternalLabel
 import app.revanced.patches.youtube.utils.returnyoutubedislike.shorts.fingerprints.ShortsTextViewFingerprint
 import app.revanced.util.integrations.Constants.UTILS_PATH
+import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 
 class ReturnYouTubeDislikeShortsPatch : BytecodePatch(
@@ -18,12 +19,16 @@ class ReturnYouTubeDislikeShortsPatch : BytecodePatch(
             it.mutableMethod.apply {
                 val patternResult = it.scanResult.patternScanResult!!
 
+                val isDisLikesBooleanIndex =
+                    implementation!!.instructions.indexOfFirst { instruction ->
+                        instruction.opcode == Opcode.IGET_BOOLEAN
+                    }
                 // If the field is true, the TextView is for a dislike button.
                 val isDisLikesBooleanReference =
-                    getInstruction<ReferenceInstruction>(patternResult.endIndex - 1).reference
+                    getInstruction<ReferenceInstruction>(isDisLikesBooleanIndex).reference
 
                 val textViewFieldReference = // Like/Dislike button TextView field
-                    getInstruction<ReferenceInstruction>(patternResult.endIndex - 2).reference
+                    getInstruction<ReferenceInstruction>(patternResult.endIndex).reference
 
                 // Check if the hooked TextView object is that of the dislike button.
                 // If RYD is disabled, or the TextView object is not that of the dislike button, the execution flow is not interrupted.
@@ -44,7 +49,8 @@ class ReturnYouTubeDislikeShortsPatch : BytecodePatch(
                     """, ExternalLabel("ryd_disabled", getInstruction(insertIndex))
                 )
             }
-        } ?: throw ShortsTextViewFingerprint.exception    }
+        } ?: throw ShortsTextViewFingerprint.exception
+    }
 
     private companion object {
         const val INTEGRATIONS_RYD_CLASS_DESCRIPTOR =
