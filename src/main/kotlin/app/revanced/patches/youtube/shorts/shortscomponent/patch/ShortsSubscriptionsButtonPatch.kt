@@ -8,8 +8,6 @@ import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint.Companion.resolve
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patches.youtube.shorts.shortscomponent.fingerprints.ShortsSubscriptionsFingerprint
-import app.revanced.patches.youtube.shorts.shortscomponent.fingerprints.ShortsSubscriptionsTabletFingerprint
-import app.revanced.patches.youtube.shorts.shortscomponent.fingerprints.ShortsSubscriptionsTabletParentFingerprint
 import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.Companion.ReelPlayerFooter
 import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.Companion.ReelPlayerPausedStateButton
 import app.revanced.util.bytecode.getWideLiteralIndex
@@ -22,8 +20,7 @@ import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 
 class ShortsSubscriptionsButtonPatch : BytecodePatch(
     listOf(
-        ShortsSubscriptionsFingerprint,
-        ShortsSubscriptionsTabletParentFingerprint
+        ShortsSubscriptionsFingerprint
     )
 ) {
     override fun execute(context: BytecodeContext) {
@@ -39,47 +36,6 @@ class ShortsSubscriptionsButtonPatch : BytecodePatch(
             }
         } ?: throw ShortsSubscriptionsFingerprint.exception
 
-        /**
-         * Deprecated in YouTube v18.31.xx+
-         */
-        ShortsSubscriptionsTabletParentFingerprint.result?.let { parentResult ->
-            parentResult.mutableMethod.apply {
-                val targetIndex = getWideLiteralIndex(ReelPlayerFooter) - 1
-                if (getInstruction(targetIndex).opcode != Opcode.IPUT)
-                    throw ShortsSubscriptionsTabletFingerprint.exception
-                subscriptionFieldReference =
-                    (getInstruction<ReferenceInstruction>(targetIndex)).reference as FieldReference
-            }
-
-            ShortsSubscriptionsTabletFingerprint.also {
-                it.resolve(
-                    context,
-                    parentResult.classDef
-                )
-            }.result?.mutableMethod?.let {
-                with(it.implementation!!.instructions) {
-                    filter { instruction ->
-                        val fieldReference =
-                            (instruction as? ReferenceInstruction)?.reference as? FieldReference
-                        instruction.opcode == Opcode.IGET && fieldReference == subscriptionFieldReference
-                    }.forEach { instruction ->
-                        val insertIndex = indexOf(instruction) + 1
-                        val register = (instruction as TwoRegisterInstruction).registerA
-
-                        it.addInstructions(
-                            insertIndex, """
-                                invoke-static {v$register}, $SHORTS->hideShortsPlayerSubscriptionsButton(I)I
-                                move-result v$register
-                                """
-                        )
-                    }
-                }
-            }
         }
 
     }
-
-    private companion object {
-        private lateinit var subscriptionFieldReference: FieldReference
-    }
-}
