@@ -1,8 +1,6 @@
 package app.revanced.patches.youtube.utils.resourceid.patch
 
 import app.revanced.patcher.data.ResourceContext
-import app.revanced.patcher.patch.PatchException
-
 import app.revanced.patcher.patch.ResourcePatch
 import app.revanced.patcher.patch.annotations.DependsOn
 import app.revanced.patches.shared.patch.mapping.ResourceMappingPatch
@@ -59,6 +57,7 @@ class SharedResourceIdPatch : ResourcePatch {
         var ReelDynShare: Long = -1
         var ReelPlayerBadge: Long = -1
         var ReelPlayerBadge2: Long = -1
+        var ReelPlayerFooter: Long = -1
         var ReelPlayerInfoPanel: Long = -1
         var ReelPlayerPausedStateButton: Long = -1
         var ReelRightDislikeIcon: Long = -1
@@ -89,7 +88,7 @@ class SharedResourceIdPatch : ResourcePatch {
         fun find(resourceType: ResourceType, resourceName: String) = ResourceMappingPatch
             .resourceMappings
             .find { it.type == resourceType.value && it.name == resourceName }?.id
-            ?: throw PatchException("Failed to find resource id : $resourceName")
+            ?: -1
 
         AccountSwitcherAccessibility = find(STRING, "account_switcher_accessibility_label")
         AccessibilityCaptionsButtonName = find(STRING, "accessibility_captions_button_name")
@@ -134,6 +133,7 @@ class SharedResourceIdPatch : ResourcePatch {
         ReelDynShare = find(ID, "reel_dyn_share")
         ReelPlayerBadge = find(ID, "reel_player_badge")
         ReelPlayerBadge2 = find(ID, "reel_player_badge2")
+        ReelPlayerFooter = find(LAYOUT, "reel_player_dyn_footer_vert_stories3")
         ReelPlayerInfoPanel = find(ID, "reel_player_info_panel")
         ReelPlayerPausedStateButton = find(ID, "reel_player_paused_state_buttons")
         ReelRightDislikeIcon = find(DRAWABLE, "reel_right_dislike_icon")
@@ -157,5 +157,6 @@ class SharedResourceIdPatch : ResourcePatch {
         YtOutlineArrowTimeBlack = find(DRAWABLE, "yt_outline_arrow_time_black_24")
         YtOutlineFireBlack = find(DRAWABLE, "yt_outline_fire_black_24")
         YtOutlineSearchBlack = find(DRAWABLE, "yt_outline_search_black_24")
+
     }
 }
