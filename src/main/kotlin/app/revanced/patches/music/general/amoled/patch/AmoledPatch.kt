@@ -21,7 +21,6 @@ import org.w3c.dom.Element
             ]
         )
     ],
-    dependencies = [LithoThemePatch::class]
 )
 @Suppress("unused")
 object AmoledPatch : ResourcePatch() {
