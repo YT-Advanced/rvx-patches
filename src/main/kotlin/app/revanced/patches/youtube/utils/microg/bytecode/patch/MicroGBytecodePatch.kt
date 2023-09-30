@@ -55,7 +55,7 @@ object MicroGBytecodePatch : BytecodePatch(
                 PACKAGE_NAME,
                 packageName
             ),
-            setOf(
+            listOf(
                 ServiceCheckFingerprint,
                 GooglePlayUtilityFingerprint,
                 CastDynamiteModuleFingerprint,

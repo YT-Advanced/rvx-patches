@@ -52,6 +52,12 @@ object SettingsPatch : AbstractSettingsResourcePatch(
     "youtube/settings/host",
     true
 ) {
+    private val THREAD_COUNT = Runtime.getRuntime().availableProcessors()
+    private val threadPoolExecutor = Executors.newFixedThreadPool(THREAD_COUNT)
+
+    internal lateinit var contexts: ResourceContext
+    internal var upward1828: Boolean = false
+
     override fun execute(context: ResourceContext) {
         super.execute(context)
         contexts = context
@@ -185,23 +191,15 @@ object SettingsPatch : AbstractSettingsResourcePatch(
 
     }
 
-    companion object {
-        private val THREAD_COUNT = Runtime.getRuntime().availableProcessors()
-        private val threadPoolExecutor = Executors.newFixedThreadPool(THREAD_COUNT)
+    internal fun addPreference(settingArray: Array<String>) {
+        contexts.addPreference(settingArray)
+    }
 
-        internal lateinit var contexts: ResourceContext
-        internal var upward1828: Boolean = false
+    internal fun addReVancedPreference(key: String) {
+        contexts.addReVancedPreference(key)
+    }
 
-        internal fun addPreference(settingArray: Array<String>) {
-            contexts.addPreference(settingArray)
-        }
-
-        internal fun addReVancedPreference(key: String) {
-            contexts.addReVancedPreference(key)
-        }
-
-        internal fun updatePatchStatus(patchTitle: String) {
-            contexts.updatePatchStatus(patchTitle)
-        }
+    internal fun updatePatchStatus(patchTitle: String) {
+        contexts.updatePatchStatus(patchTitle)
     }
 }
