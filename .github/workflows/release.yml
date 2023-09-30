@@ -6,10 +6,12 @@ on:
     branches:
       - main
       - dev
+      - v15.0
   pull_request:
     branches:
       - main
       - dev
+      - v15.0
 
 jobs:
   release:
