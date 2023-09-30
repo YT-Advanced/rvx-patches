@@ -12,7 +12,7 @@ import app.revanced.patches.youtube.general.widesearchbar.fingerprints.SetAction
 import app.revanced.patches.youtube.utils.fingerprints.SetToolBarPaddingFingerprint
 import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch
 import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch
-import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch.Companion.contexts
+import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch.contexts
 import app.revanced.util.integrations.Constants.GENERAL
 
 @Patch(

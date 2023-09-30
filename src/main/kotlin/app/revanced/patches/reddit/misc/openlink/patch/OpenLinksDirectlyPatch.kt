@@ -7,7 +7,7 @@ import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.reddit.misc.openlink.fingerprints.ScreenNavigatorFingerprint
-import app.revanced.patches.reddit.utils.settings.bytecode.patch.SettingsBytecodePatch.Companion.updateSettingsStatus
+import app.revanced.patches.reddit.utils.settings.bytecode.patch.SettingsBytecodePatch.updateSettingsStatus
 import app.revanced.patches.reddit.utils.settings.resource.patch.SettingsPatch
 
 @Patch(

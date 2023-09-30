@@ -10,7 +10,7 @@ import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.util.smali.ExternalLabel
 import app.revanced.patches.reddit.layout.screenshotpopup.fingerprints.ScreenshotTakenBannerFingerprint
 import app.revanced.patches.reddit.utils.resourceid.patch.SharedResourceIdPatch
-import app.revanced.patches.reddit.utils.settings.bytecode.patch.SettingsBytecodePatch.Companion.updateSettingsStatus
+import app.revanced.patches.reddit.utils.settings.bytecode.patch.SettingsBytecodePatch.updateSettingsStatus
 import app.revanced.patches.reddit.utils.settings.resource.patch.SettingsPatch
 
 @Patch(

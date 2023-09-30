@@ -13,7 +13,7 @@ import app.revanced.patches.music.player.replace.fingerprints.PlaybackStartDescr
 import app.revanced.patches.music.utils.resourceid.patch.SharedResourceIdPatch
 import app.revanced.patches.music.utils.resourceid.patch.SharedResourceIdPatch.PlayerCastMediaRouteButton
 import app.revanced.patches.music.utils.settings.resource.patch.SettingsPatch
-import app.revanced.patches.music.utils.settings.resource.patch.SettingsPatch.Companion.contexts
+import app.revanced.patches.music.utils.settings.resource.patch.SettingsPatch.contexts
 import app.revanced.patches.music.utils.videotype.patch.VideoTypeHookPatch
 import app.revanced.util.bytecode.getWideLiteralIndex
 import app.revanced.util.enum.CategoryType

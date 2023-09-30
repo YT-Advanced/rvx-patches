@@ -5,7 +5,7 @@ import app.revanced.patcher.patch.PatchException
 import app.revanced.patcher.patch.ResourcePatch
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
-import app.revanced.patches.youtube.layout.theme.patch.GeneralThemePatch.Companion.isMonetPatchIncluded
+import app.revanced.patches.youtube.layout.theme.patch.GeneralThemePatch.isMonetPatchIncluded
 import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch
 import app.revanced.util.resources.ResourceHelper.updatePatchStatusTheme
 import org.w3c.dom.Element

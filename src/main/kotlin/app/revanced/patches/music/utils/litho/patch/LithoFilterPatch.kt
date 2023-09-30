@@ -8,7 +8,7 @@ import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.music.utils.litho.fingerprints.LithoFilterFingerprint
 import app.revanced.patches.shared.patch.litho.ComponentParserPatch
-import app.revanced.patches.shared.patch.litho.ComponentParserPatch.Companion.pathBuilderHook
+import app.revanced.patches.shared.patch.litho.ComponentParserPatch.pathBuilderHook
 import app.revanced.util.integrations.Constants.MUSIC_ADS_PATH
 import java.io.Closeable
 

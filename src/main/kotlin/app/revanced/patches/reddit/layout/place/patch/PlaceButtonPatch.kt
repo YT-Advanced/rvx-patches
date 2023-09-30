@@ -8,7 +8,7 @@ import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.reddit.layout.place.fingerprints.HomePagerScreenFingerprint
-import app.revanced.patches.reddit.utils.settings.bytecode.patch.SettingsBytecodePatch.Companion.updateSettingsStatus
+import app.revanced.patches.reddit.utils.settings.bytecode.patch.SettingsBytecodePatch.updateSettingsStatus
 import app.revanced.patches.reddit.utils.settings.resource.patch.SettingsPatch
 import app.revanced.util.bytecode.getStringIndex
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction

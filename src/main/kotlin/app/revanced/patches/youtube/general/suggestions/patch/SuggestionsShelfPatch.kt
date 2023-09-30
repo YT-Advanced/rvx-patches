@@ -9,7 +9,7 @@ import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.util.smali.ExternalLabel
-import app.revanced.patches.shared.patch.litho.ComponentParserPatch.Companion.emptyComponentLabel
+import app.revanced.patches.shared.patch.litho.ComponentParserPatch.emptyComponentLabel
 import app.revanced.patches.youtube.general.suggestions.fingerprints.BreakingNewsFingerprint
 import app.revanced.patches.youtube.general.suggestions.fingerprints.SuggestionContentsBuilderFingerprint
 import app.revanced.patches.youtube.utils.litho.patch.LithoFilterPatch

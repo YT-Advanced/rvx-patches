@@ -5,7 +5,7 @@ import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.shared.patch.versionspoof.AbstractVersionSpoofPatch
 import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch
-import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch.Companion.contexts
+import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch.contexts
 import app.revanced.util.integrations.Constants.MISC_PATH
 import app.revanced.util.resources.ResourceUtils.copyXmlNode
 

@@ -13,7 +13,7 @@ import app.revanced.patches.youtube.alternativethumbnails.general.fingerprints.C
 import app.revanced.patches.youtube.alternativethumbnails.general.fingerprints.MessageDigestImageUrlFingerprint
 import app.revanced.patches.youtube.alternativethumbnails.general.fingerprints.MessageDigestImageUrlParentFingerprint
 import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch
-import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch.Companion.contexts
+import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch.contexts
 import app.revanced.util.integrations.Constants.ALTERNATIVE_THUMBNAILS
 import app.revanced.util.resources.ResourceUtils.copyXmlNode
 

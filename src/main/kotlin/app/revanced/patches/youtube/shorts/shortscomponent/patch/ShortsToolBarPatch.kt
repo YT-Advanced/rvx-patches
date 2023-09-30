@@ -9,7 +9,7 @@ import app.revanced.patcher.patch.PatchException
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod
 import app.revanced.patches.youtube.shorts.shortscomponent.fingerprints.ShortsCommentFingerprint
 import app.revanced.patches.youtube.utils.fingerprints.SetToolBarPaddingFingerprint
-import app.revanced.patches.youtube.utils.navbarindex.patch.NavBarIndexHookPatch.Companion.injectIndex
+import app.revanced.patches.youtube.utils.navbarindex.patch.NavBarIndexHookPatch.injectIndex
 import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.ToolBarPaddingHome
 import app.revanced.util.bytecode.getWideLiteralIndex
 import app.revanced.util.integrations.Constants.SHORTS

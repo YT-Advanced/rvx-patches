@@ -9,7 +9,7 @@ import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.util.smali.ExternalLabel
 import app.revanced.patches.reddit.misc.tracking.url.fingerprints.ShareLinkFormatterFingerprint
-import app.revanced.patches.reddit.utils.settings.bytecode.patch.SettingsBytecodePatch.Companion.updateSettingsStatus
+import app.revanced.patches.reddit.utils.settings.bytecode.patch.SettingsBytecodePatch.updateSettingsStatus
 import app.revanced.patches.reddit.utils.settings.resource.patch.SettingsPatch
 
 @Patch(

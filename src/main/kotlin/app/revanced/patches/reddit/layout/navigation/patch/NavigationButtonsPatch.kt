@@ -8,7 +8,7 @@ import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.reddit.layout.navigation.fingerprints.BottomNavScreenFingerprint
-import app.revanced.patches.reddit.utils.settings.bytecode.patch.SettingsBytecodePatch.Companion.updateSettingsStatus
+import app.revanced.patches.reddit.utils.settings.bytecode.patch.SettingsBytecodePatch.updateSettingsStatus
 import app.revanced.patches.reddit.utils.settings.resource.patch.SettingsPatch
 import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 
@@ -22,6 +22,9 @@ import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 object NavigationButtonsPatch : BytecodePatch(
     setOf(BottomNavScreenFingerprint)
 ) {
+    private const val INTEGRATIONS_METHOD_DESCRIPTOR =
+        "Lapp/revanced/reddit/patches/NavigationButtonsPatch;" +
+                "->hideNavigationButtons(Landroid/view/ViewGroup;)V"
     override fun execute(context: BytecodeContext) {
 
         BottomNavScreenFingerprint.result?.let {
@@ -39,11 +42,5 @@ object NavigationButtonsPatch : BytecodePatch(
 
         updateSettingsStatus("NavigationButtons")
 
-    }
-
-    companion object {
-        private const val INTEGRATIONS_METHOD_DESCRIPTOR =
-            "Lapp/revanced/reddit/patches/NavigationButtonsPatch;" +
-                    "->hideNavigationButtons(Landroid/view/ViewGroup;)V"
     }
 }

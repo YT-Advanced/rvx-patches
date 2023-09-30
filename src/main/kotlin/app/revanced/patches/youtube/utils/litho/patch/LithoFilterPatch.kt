@@ -9,7 +9,7 @@ import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod
 import app.revanced.patches.shared.patch.litho.ComponentParserPatch
-import app.revanced.patches.shared.patch.litho.ComponentParserPatch.Companion.generalHook
+import app.revanced.patches.shared.patch.litho.ComponentParserPatch.generalHook
 import app.revanced.patches.youtube.utils.litho.fingerprints.GeneralByteBufferFingerprint
 import app.revanced.patches.youtube.utils.litho.fingerprints.LithoFilterFingerprint
 import app.revanced.patches.youtube.utils.litho.fingerprints.LowLevelByteBufferFingerprint

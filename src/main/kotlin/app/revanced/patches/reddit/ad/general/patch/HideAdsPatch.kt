@@ -15,7 +15,7 @@ import app.revanced.patches.reddit.ad.banner.patch.HideBannerPatch
 import app.revanced.patches.reddit.ad.comments.patch.HideCommentAdsPatch
 import app.revanced.patches.reddit.ad.general.fingerprints.AdPostFingerprint
 import app.revanced.patches.reddit.ad.general.fingerprints.NewAdPostFingerprint
-import app.revanced.patches.reddit.utils.settings.bytecode.patch.SettingsBytecodePatch.Companion.updateSettingsStatus
+import app.revanced.patches.reddit.utils.settings.bytecode.patch.SettingsBytecodePatch.updateSettingsStatus
 import app.revanced.patches.reddit.utils.settings.resource.patch.SettingsPatch
 import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction

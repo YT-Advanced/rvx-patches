@@ -18,7 +18,7 @@ import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch
 import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.InlineTimeBarPlayedNotHighlightedColor
 import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.ReelTimeBarPlayedColor
 import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch
-import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch.Companion.contexts
+import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch.contexts
 import app.revanced.util.bytecode.getWideLiteralIndex
 import app.revanced.util.integrations.Constants.SEEKBAR
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
