@@ -23,7 +23,7 @@ object SettingsBytecodePatch : BytecodePatch(
         SettingsHeadersFragmentFingerprint
     )
 ) {
-    const val INTEGRATIONS_CLASS_DESCRIPTOR =
+    private const val INTEGRATIONS_CLASS_DESCRIPTOR =
         "$MUSIC_INTEGRATIONS_PATH/settingsmenu/SharedPreferenceChangeListener;"
 
     override fun execute(context: BytecodeContext) {

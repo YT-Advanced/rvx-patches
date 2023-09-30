@@ -19,7 +19,7 @@ class DoubleBackToClosePatch : BytecodePatch(
         ScrollTopParentFingerprint
     )
 ) {
-    const val INTEGRATIONS_CLASS_DESCRIPTOR =
+    private const val INTEGRATIONS_CLASS_DESCRIPTOR =
         "$UTILS_PATH/DoubleBackToClosePatch;"
 
     override fun execute(context: BytecodeContext) {

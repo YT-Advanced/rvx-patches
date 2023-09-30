@@ -59,7 +59,7 @@ object SpoofPlayerParameterPatch : BytecodePatch(
         StoryboardThumbnailParentFingerprint
     )
 ) {
-    const val INTEGRATIONS_CLASS_DESCRIPTOR =
+    private const val INTEGRATIONS_CLASS_DESCRIPTOR =
         "$MISC_PATH/SpoofPlayerParameterPatch;"
 
     override fun execute(context: BytecodeContext) {

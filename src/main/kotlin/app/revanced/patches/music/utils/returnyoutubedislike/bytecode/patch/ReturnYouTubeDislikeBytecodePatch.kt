@@ -33,7 +33,7 @@ object ReturnYouTubeDislikeBytecodePatch : BytecodePatch(
         TextComponentFingerprint
     )
 ) {
-    const val INTEGRATIONS_RYD_CLASS_DESCRIPTOR =
+    private const val INTEGRATIONS_RYD_CLASS_DESCRIPTOR =
         "$MUSIC_UTILS_PATH/ReturnYouTubeDislikePatch;"
 
     override fun execute(context: BytecodeContext) {

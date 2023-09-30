@@ -23,7 +23,7 @@ import app.revanced.util.integrations.Constants.INTEGRATIONS_PATH
 object SettingsBytecodePatch : BytecodePatch(
     setOf(ThemeSetterSystemFingerprint)
 ) {
-    const val SET_THEME =
+    private const val SET_THEME =
         "invoke-static {v0}, $INTEGRATIONS_PATH/utils/ThemeHelper;->setTheme(Ljava/lang/Object;)V"
 
     override fun execute(context: BytecodeContext) {

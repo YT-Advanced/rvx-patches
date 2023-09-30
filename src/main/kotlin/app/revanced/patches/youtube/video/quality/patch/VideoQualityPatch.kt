@@ -54,7 +54,7 @@ object VideoQualityPatch : BytecodePatch(
         VideoQualitySetterFingerprint
     )
 ) {
-    const val INTEGRATIONS_VIDEO_QUALITY_CLASS_DESCRIPTOR =
+    private const val INTEGRATIONS_VIDEO_QUALITY_CLASS_DESCRIPTOR =
         "$VIDEO_PATH/VideoQualityPatch;"
 
     override fun execute(context: BytecodeContext) {

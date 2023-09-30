@@ -38,7 +38,7 @@ object VideoIdPatch : BytecodePatch(
         VideoLengthFingerprint
     )
 ) {
-    const val INTEGRATIONS_CLASS_DESCRIPTOR = "$VIDEO_PATH/VideoInformation;"
+    private const val INTEGRATIONS_CLASS_DESCRIPTOR = "$VIDEO_PATH/VideoInformation;"
 
     private var offset = 0
     private var playerInitInsertIndex = 4

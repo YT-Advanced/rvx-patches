@@ -51,7 +51,7 @@ object RememberShufflePatch : BytecodePatch(
         ShuffleClassReferenceFingerprint
     )
 ) {
-    const val MUSIC_PLAYBACK_CONTROLS_CLASS_DESCRIPTOR =
+    private const val MUSIC_PLAYBACK_CONTROLS_CLASS_DESCRIPTOR =
             "Lcom/google/android/apps/youtube/music/watchpage/MusicPlaybackControls;"
 
     lateinit var SHUFFLE_CLASS: String

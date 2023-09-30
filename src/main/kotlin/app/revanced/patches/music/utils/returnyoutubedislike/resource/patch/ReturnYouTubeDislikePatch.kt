@@ -31,10 +31,10 @@ import org.w3c.dom.Node
 )
 @Suppress("unused")
 object ReturnYouTubeDislikePatch : ResourcePatch {
-    const val YOUTUBE_MUSIC_SETTINGS_PATH = "res/xml/settings_headers.xml"
-    const val SWITCH_PREFERENCE_TAG_NAME =
+    private const val YOUTUBE_MUSIC_SETTINGS_PATH = "res/xml/settings_headers.xml"
+    private const val SWITCH_PREFERENCE_TAG_NAME =
             "com.google.android.apps.youtube.music.ui.preference.SwitchCompatPreference"
-    const val PREFERENCE_CATEGORY_TAG_NAME =
+    private const val PREFERENCE_CATEGORY_TAG_NAME =
             "com.google.android.apps.youtube.music.ui.preference.PreferenceCategoryCompat"
 
     override fun execute(context: ResourceContext) {

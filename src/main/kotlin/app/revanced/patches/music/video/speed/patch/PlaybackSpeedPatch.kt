@@ -38,7 +38,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 object PlaybackSpeedPatch : BytecodePatch(
     setOf(PlaybackSpeedBottomSheetParentFingerprint)
 ) {
-    const val INTEGRATIONS_CLASS_DESCRIPTOR =
+    private const val INTEGRATIONS_CLASS_DESCRIPTOR =
        "$MUSIC_VIDEO_PATH/PlaybackSpeedPatch;"
     override fun execute(context: BytecodeContext) {
 

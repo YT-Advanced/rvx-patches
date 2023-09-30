@@ -19,7 +19,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 object ReturnYouTubeDislikeOldLayoutPatch : BytecodePatch(
     setOf(ButtonTagFingerprint)
 ) {
-    const val INTEGRATIONS_RYD_CLASS_DESCRIPTOR =
+    private const val INTEGRATIONS_RYD_CLASS_DESCRIPTOR =
         "$UTILS_PATH/ReturnYouTubeDislikePatch;"
 
     override fun execute(context: BytecodeContext) {

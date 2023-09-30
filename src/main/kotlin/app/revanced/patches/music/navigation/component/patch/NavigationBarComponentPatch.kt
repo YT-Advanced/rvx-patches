@@ -42,8 +42,8 @@ import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 object NavigationBarComponentPatch : BytecodePatch(
     setOf(TabLayoutTextFingerprint)
 ) {
-    const val FLAG = "android:layout_weight"
-    const val RESOURCE_FILE_PATH = "res/layout/image_with_text_tab.xml"
+    private const val FLAG = "android:layout_weight"
+    private const val RESOURCE_FILE_PATH = "res/layout/image_with_text_tab.xml"
 
     override fun execute(context: BytecodeContext) {
         /**

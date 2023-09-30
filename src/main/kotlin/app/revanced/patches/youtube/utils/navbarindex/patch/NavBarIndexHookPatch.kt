@@ -24,7 +24,7 @@ class NavBarIndexHookPatch : BytecodePatch(
         TopBarButtonFingerprint
     )
 ) {
-    const val INTEGRATIONS_CLASS_DESCRIPTOR =
+    private const val INTEGRATIONS_CLASS_DESCRIPTOR =
         "$UTILS_PATH/NavBarIndexPatch;"
 
     override fun execute(context: BytecodeContext) {

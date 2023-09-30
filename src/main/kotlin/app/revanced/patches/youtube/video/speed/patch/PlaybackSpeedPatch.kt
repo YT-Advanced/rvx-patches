@@ -45,7 +45,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 object PlaybackSpeedPatch : BytecodePatch(
     setOf(NewFlyoutPanelOnClickListenerFingerprint)
 ) {
-    const val INTEGRATIONS_PLAYBACK_SPEED_CLASS_DESCRIPTOR =
+    private const val INTEGRATIONS_PLAYBACK_SPEED_CLASS_DESCRIPTOR =
         "$VIDEO_PATH/PlaybackSpeedPatch;"
 
     override fun execute(context: BytecodeContext) {

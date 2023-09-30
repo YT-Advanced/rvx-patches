@@ -14,7 +14,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 class ReturnYouTubeDislikeShortsPatch : BytecodePatch(
     setOf(ShortsTextViewFingerprint)
 ) {
-    const val INTEGRATIONS_RYD_CLASS_DESCRIPTOR =
+    private const val INTEGRATIONS_RYD_CLASS_DESCRIPTOR =
         "$UTILS_PATH/ReturnYouTubeDislikePatch;"
 
     override fun execute(context: BytecodeContext) {

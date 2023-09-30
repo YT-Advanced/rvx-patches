@@ -39,7 +39,7 @@ import com.android.tools.smali.dexlib2.builder.instruction.BuilderInstruction21c
 object VideoQualityPatch : BytecodePatch(
     setOf(UserQualityChangeFingerprint)
 ) {
-    const val INTEGRATIONS_VIDEO_QUALITY_CLASS_DESCRIPTOR =
+    private const val INTEGRATIONS_VIDEO_QUALITY_CLASS_DESCRIPTOR =
         "$MUSIC_VIDEO_PATH/VideoQualityPatch;"
 
     override fun execute(context: BytecodeContext) {

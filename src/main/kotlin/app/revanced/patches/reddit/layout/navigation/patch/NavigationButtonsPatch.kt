@@ -42,7 +42,7 @@ object NavigationButtonsPatch : BytecodePatch(
     }
 
     companion object {
-        const val INTEGRATIONS_METHOD_DESCRIPTOR =
+        private const val INTEGRATIONS_METHOD_DESCRIPTOR =
             "Lapp/revanced/reddit/patches/NavigationButtonsPatch;" +
                     "->hideNavigationButtons(Landroid/view/ViewGroup;)V"
     }

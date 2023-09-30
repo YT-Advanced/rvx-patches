@@ -54,10 +54,10 @@ object ForceVP9CodecPatch : BytecodePatch(
         Vp9PropsParentFingerprint
     )
 ) {
-    const val INTEGRATIONS_CLASS_DESCRIPTOR =
+    private const val INTEGRATIONS_CLASS_DESCRIPTOR =
        "$MISC_PATH/CodecOverridePatch;"
 
-    const val INTEGRATIONS_CLASS_METHOD_REFERENCE =
+    private const val INTEGRATIONS_CLASS_METHOD_REFERENCE =
        "$INTEGRATIONS_CLASS_DESCRIPTOR->shouldForceVP9(Z)Z"
 
     override fun execute(context: BytecodeContext) {

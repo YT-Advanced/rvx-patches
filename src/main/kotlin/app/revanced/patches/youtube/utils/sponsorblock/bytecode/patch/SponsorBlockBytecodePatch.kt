@@ -52,10 +52,10 @@ object SponsorBlockBytecodePatch : BytecodePatch(
         YouTubeControlsOverlayFingerprint
     )
 ) {
-    const val INTEGRATIONS_BUTTON_CLASS_DESCRIPTOR =
+    private const val INTEGRATIONS_BUTTON_CLASS_DESCRIPTOR =
         "Lapp/revanced/integrations/sponsorblock"
 
-    const val INTEGRATIONS_PLAYER_CONTROLLER_CLASS_DESCRIPTOR =
+    private const val INTEGRATIONS_PLAYER_CONTROLLER_CLASS_DESCRIPTOR =
         "$INTEGRATIONS_BUTTON_CLASS_DESCRIPTOR/SegmentPlaybackController;"
 
     lateinit var insertMethod: MutableMethod

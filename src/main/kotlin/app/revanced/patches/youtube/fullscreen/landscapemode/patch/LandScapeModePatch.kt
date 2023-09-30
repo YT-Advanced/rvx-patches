@@ -42,7 +42,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 object LandScapeModePatch : BytecodePatch(
     setOf(OrientationParentFingerprint)
 ) {
-    const val INTEGRATIONS_CLASS_DESCRIPTOR =
+    private const val INTEGRATIONS_CLASS_DESCRIPTOR =
         "$FULLSCREEN->disableLandScapeMode(Z)Z"
 
     override fun execute(context: BytecodeContext) {

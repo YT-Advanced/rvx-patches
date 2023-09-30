@@ -51,7 +51,7 @@ object SuggestedVideoOverlayPatch : BytecodePatch(
         VideoEndParentFingerprint
     )
 ) {
-    const val INTEGRATIONS_CLASS_DESCRIPTOR =
+    private const val INTEGRATIONS_CLASS_DESCRIPTOR =
         "$PLAYER->hideSuggestedVideoOverlay(Landroid/view/ViewGroup;)V"
 
     override fun execute(context: BytecodeContext) {

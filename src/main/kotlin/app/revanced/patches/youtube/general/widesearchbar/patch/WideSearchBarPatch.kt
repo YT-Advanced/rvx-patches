@@ -46,8 +46,8 @@ object WideSearchBarPatch : BytecodePatch(
         SetToolBarPaddingFingerprint
     )
 ) {
-    const val FLAG = "android:paddingStart"
-    const val TARGET_RESOURCE_PATH = "res/layout/action_bar_ringo_background.xml"
+    private const val FLAG = "android:paddingStart"
+    private const val TARGET_RESOURCE_PATH = "res/layout/action_bar_ringo_background.xml"
 
     override fun execute(context: BytecodeContext) {
 

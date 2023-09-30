@@ -51,7 +51,7 @@ object MinimizedPlaybackPatch : BytecodePatch(
         MinimizedPlaybackSettingsFingerprint
     )
 ) {
-    const val INTEGRATIONS_METHOD_REFERENCE =
+    private const val INTEGRATIONS_METHOD_REFERENCE =
         "$MISC_PATH/MinimizedPlaybackPatch;->isPlaybackNotShort()Z"
 
     override fun execute(context: BytecodeContext) {

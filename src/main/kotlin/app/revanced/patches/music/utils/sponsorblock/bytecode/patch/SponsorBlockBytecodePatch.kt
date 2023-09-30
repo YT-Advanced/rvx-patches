@@ -35,7 +35,7 @@ object SponsorBlockBytecodePatch : BytecodePatch(
         SeekBarConstructorFingerprint
     )
 ) {
-    const val INTEGRATIONS_SEGMENT_PLAYBACK_CONTROLLER_CLASS_DESCRIPTOR =
+    private const val INTEGRATIONS_SEGMENT_PLAYBACK_CONTROLLER_CLASS_DESCRIPTOR =
         "Lapp/revanced/music/sponsorblock/SegmentPlaybackController;"
 
     lateinit var rectangleFieldName: String

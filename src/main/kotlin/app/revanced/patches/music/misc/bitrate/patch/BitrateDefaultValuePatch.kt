@@ -11,7 +11,7 @@ import app.revanced.patcher.patch.annotation.CompatiblePackage
 )
 @Suppress("unused")
 object BitrateDefaultValuePatch : ResourcePatch {
-    const val RESOURCE_FILE_PATH = "res/xml/data_saving_settings.xml"
+    private const val RESOURCE_FILE_PATH = "res/xml/data_saving_settings.xml"
 
     override fun execute(context: ResourceContext) {
         context.xmlEditor[RESOURCE_FILE_PATH].use { editor ->

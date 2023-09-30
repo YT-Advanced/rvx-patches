@@ -36,10 +36,10 @@ class OverrideSpeedHookPatch : BytecodePatch(
         SpeedClassFingerprint
     )
 ) {
-    const val INTEGRATIONS_PLAYBACK_SPEED_CLASS_DESCRIPTOR =
+    private const val INTEGRATIONS_PLAYBACK_SPEED_CLASS_DESCRIPTOR =
         "$VIDEO_PATH/PlaybackSpeedPatch;"
 
-    const val INTEGRATIONS_VIDEO_HELPER_CLASS_DESCRIPTOR =
+    private const val INTEGRATIONS_VIDEO_HELPER_CLASS_DESCRIPTOR =
         "$INTEGRATIONS_PATH/utils/VideoHelpers;"
 
     lateinit var playbackSpeedChangedResult: MethodFingerprintResult

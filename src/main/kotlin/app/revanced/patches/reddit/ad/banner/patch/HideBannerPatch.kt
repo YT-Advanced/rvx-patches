@@ -4,7 +4,7 @@ import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
 
 class HideBannerPatch : ResourcePatch {
-    const val RESOURCE_FILE_PATH = "res/layout/merge_listheader_link_detail.xml"
+    private const val RESOURCE_FILE_PATH = "res/layout/merge_listheader_link_detail.xml"
 
     override fun execute(context: ResourceContext) {
         context.xmlEditor[RESOURCE_FILE_PATH].use {

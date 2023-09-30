@@ -51,17 +51,17 @@ object NavigationButtonsPatch : BytecodePatch(
         PivotBarCreateButtonViewFingerprint
     )
 ) {
-    const val enumHook =
+    private const val enumHook =
         "sput-object v$REGISTER_TEMPLATE_REPLACEMENT, $NAVIGATION" +
                 "->" +
                 "lastPivotTab:Ljava/lang/Enum;"
 
-    const val buttonHook =
+    private const val buttonHook =
         "invoke-static { v$REGISTER_TEMPLATE_REPLACEMENT }, $NAVIGATION" +
                 "->" +
                 "hideNavigationButton(Landroid/view/View;)V"
 
-    const val createButtonHook =
+    private const val createButtonHook =
         "invoke-static { v$REGISTER_TEMPLATE_REPLACEMENT }, $NAVIGATION" +
                 "->" +
                 "hideCreateButton(Landroid/view/View;)V"

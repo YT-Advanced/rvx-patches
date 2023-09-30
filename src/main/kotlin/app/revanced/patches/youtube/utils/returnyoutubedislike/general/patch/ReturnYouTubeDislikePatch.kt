@@ -65,7 +65,7 @@ object ReturnYouTubeDislikePatch : BytecodePatch(
         TextComponentConstructorFingerprint
     )
 ) {
-    const val INTEGRATIONS_RYD_CLASS_DESCRIPTOR =
+    private const val INTEGRATIONS_RYD_CLASS_DESCRIPTOR =
         "$UTILS_PATH/ReturnYouTubeDislikePatch;"
 
     lateinit var conversionContextFieldReference: Reference
