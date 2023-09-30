@@ -15,6 +15,9 @@ import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 object VideoTypeHookPatch : BytecodePatch(
     setOf(VideoTypeParentFingerprint)
 ) {
+    private const val INTEGRATIONS_CLASS_DESCRIPTOR =
+        "$MUSIC_UTILS_PATH/VideoTypeHookPatch;"
+
     override fun execute(context: BytecodeContext) {
 
         VideoTypeParentFingerprint.result?.let { parentResult ->
@@ -39,10 +42,5 @@ object VideoTypeHookPatch : BytecodePatch(
                 }
             } ?: throw VideoTypeFingerprint.exception
         } ?: throw VideoTypeParentFingerprint.exception
-    }
-
-    companion object {
-        private const val INTEGRATIONS_CLASS_DESCRIPTOR =
-            "$MUSIC_UTILS_PATH/VideoTypeHookPatch;"
     }
 }

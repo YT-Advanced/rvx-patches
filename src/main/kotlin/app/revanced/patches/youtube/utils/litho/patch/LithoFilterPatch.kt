@@ -33,8 +33,12 @@ object LithoFilterPatch : BytecodePatch(
         LowLevelByteBufferFingerprint
     )
 ), Closeable {
-    override fun execute(context: BytecodeContext) {
+    internal lateinit var addFilter: (String) -> Unit
+        private set
 
+    private var filterCount = 0
+
+    override fun execute(context: BytecodeContext) {
 
         LowLevelByteBufferFingerprint.result?.mutableMethod?.addInstruction(
             0,
@@ -81,11 +85,4 @@ object LithoFilterPatch : BytecodePatch(
                 const/4 v1, 0x1
                 """
         )
-
-    companion object {
-        internal lateinit var addFilter: (String) -> Unit
-            private set
-
-        private var filterCount = 0
-    }
 }

@@ -10,6 +10,8 @@ import app.revanced.patches.youtube.utils.videocpn.fingerprint.OrganicPlaybackCo
 class VideoCpnPatch : BytecodePatch(
     setOf(OrganicPlaybackContextModelFingerprint)
 ) {
+    private lateinit var insertMethod: MutableMethod
+
     override fun execute(context: BytecodeContext) {
 
         insertMethod = OrganicPlaybackContextModelFingerprint.result?.mutableMethod
@@ -17,17 +19,13 @@ class VideoCpnPatch : BytecodePatch(
 
     }
 
-    companion object {
-        private lateinit var insertMethod: MutableMethod
-
-        fun injectCall(
-            methodDescriptor: String
-        ) {
-            insertMethod.addInstructions(
-                2,
-                "invoke-static {p1,p2}, $methodDescriptor"
-            )
-        }
+    fun injectCall(
+        methodDescriptor: String
+    ) {
+        insertMethod.addInstructions(
+            2,
+            "invoke-static {p1,p2}, $methodDescriptor"
+        )
     }
 }
 

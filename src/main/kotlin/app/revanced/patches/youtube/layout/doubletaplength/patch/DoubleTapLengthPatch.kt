@@ -1,9 +1,7 @@
 package app.revanced.patches.youtube.layout.doubletaplength.patch
 
 import app.revanced.patcher.data.ResourceContext
-import app.revanced.patcher.patch.OptionsContainer
 import app.revanced.patcher.patch.PatchException
-import app.revanced.patcher.patch.PatchOption
 import app.revanced.patcher.patch.ResourcePatch
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
@@ -11,6 +9,7 @@ import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch
 import app.revanced.util.resources.ResourceHelper.addEntryValues
 import app.revanced.util.resources.ResourceUtils
 import app.revanced.util.resources.ResourceUtils.copyResources
+import app.revanced.patcher.patch.options.types.StringPatchOption.Companion.stringPatchOption
 
 @Patch(
     name = "Custom double tap length",
@@ -35,6 +34,13 @@ import app.revanced.util.resources.ResourceUtils.copyResources
 )
 @Suppress("unused")
 object DoubleTapLengthPatch : ResourcePatch {
+    var DoubleTapLengthArrays by stringPatchOption(
+        key = "DoubleTapLengthArrays",
+        default = "3, 5, 10, 15, 20, 30, 60, 120, 180",
+        title = "Double-tap to seek Values",
+        description = "A list of custom double-tap to seek lengths. Be sure to separate them with commas (,)."
+    )
+
     override fun execute(context: ResourceContext) {
         val arrayPath = "res/values-v21/arrays.xml"
         val entriesName = "double_tap_length_entries"
@@ -64,16 +70,5 @@ object DoubleTapLengthPatch : ResourcePatch {
 
         SettingsPatch.updatePatchStatus("custom-double-tap-length")
 
-    }
-
-    companion object : OptionsContainer() {
-        var DoubleTapLengthArrays: String? by option(
-            PatchOption.StringOption(
-                key = "DoubleTapLengthArrays",
-                default = "3, 5, 10, 15, 20, 30, 60, 120, 180",
-                title = "Double-tap to seek Values",
-                description = "A list of custom double-tap to seek lengths. Be sure to separate them with commas (,)."
-            )
-        )
     }
 }

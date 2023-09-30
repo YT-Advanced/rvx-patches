@@ -52,6 +52,15 @@ object SponsorBlockBytecodePatch : BytecodePatch(
         YouTubeControlsOverlayFingerprint
     )
 ) {
+    const val INTEGRATIONS_BUTTON_CLASS_DESCRIPTOR =
+        "Lapp/revanced/integrations/sponsorblock"
+
+    const val INTEGRATIONS_PLAYER_CONTROLLER_CLASS_DESCRIPTOR =
+        "$INTEGRATIONS_BUTTON_CLASS_DESCRIPTOR/SegmentPlaybackController;"
+
+    lateinit var insertMethod: MutableMethod
+    lateinit var insertInstructions: List<BuilderInstruction>
+
     override fun execute(context: BytecodeContext) {
 
         /**
@@ -224,16 +233,5 @@ object SponsorBlockBytecodePatch : BytecodePatch(
 
         context.injectInit("InitializationPatch", "initializeSponsorBlockSettings", true)
 
-    }
-
-    internal companion object {
-        const val INTEGRATIONS_BUTTON_CLASS_DESCRIPTOR =
-            "Lapp/revanced/integrations/sponsorblock"
-
-        const val INTEGRATIONS_PLAYER_CONTROLLER_CLASS_DESCRIPTOR =
-            "$INTEGRATIONS_BUTTON_CLASS_DESCRIPTOR/SegmentPlaybackController;"
-
-        lateinit var insertMethod: MutableMethod
-        lateinit var insertInstructions: List<BuilderInstruction>
     }
 }

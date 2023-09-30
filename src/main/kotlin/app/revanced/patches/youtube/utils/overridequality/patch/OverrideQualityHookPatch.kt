@@ -35,6 +35,15 @@ object OverrideQualityHookPatch : BytecodePatch(
         VideoQualityTextFingerprint
     )
 ) {
+    const val INTEGRATIONS_VIDEO_QUALITY_CLASS_DESCRIPTOR =
+        "$VIDEO_PATH/VideoQualityPatch;"
+
+    const val INTEGRATIONS_VIDEO_HELPER_CLASS_DESCRIPTOR =
+        "$INTEGRATIONS_PATH/utils/VideoHelpers;"
+
+    private lateinit var QUALITY_CLASS: String
+    private lateinit var QUALITY_METHOD: String
+
     override fun execute(context: BytecodeContext) {
 
         VideoQualityListFingerprint.result?.let {
@@ -108,16 +117,5 @@ object OverrideQualityHookPatch : BytecodePatch(
                 )
             }
         } ?: throw VideoQualityTextFingerprint.exception
-    }
-
-    internal companion object {
-        const val INTEGRATIONS_VIDEO_QUALITY_CLASS_DESCRIPTOR =
-            "$VIDEO_PATH/VideoQualityPatch;"
-
-        const val INTEGRATIONS_VIDEO_HELPER_CLASS_DESCRIPTOR =
-            "$INTEGRATIONS_PATH/utils/VideoHelpers;"
-
-        private lateinit var QUALITY_CLASS: String
-        private lateinit var QUALITY_METHOD: String
     }
 }

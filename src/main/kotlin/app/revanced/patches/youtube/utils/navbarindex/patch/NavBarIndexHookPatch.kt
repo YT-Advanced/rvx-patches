@@ -24,6 +24,9 @@ class NavBarIndexHookPatch : BytecodePatch(
         TopBarButtonFingerprint
     )
 ) {
+    const val INTEGRATIONS_CLASS_DESCRIPTOR =
+        "$UTILS_PATH/NavBarIndexPatch;"
+
     override fun execute(context: BytecodeContext) {
 
         OnBackPressedFingerprint.result?.let {
@@ -67,21 +70,16 @@ class NavBarIndexHookPatch : BytecodePatch(
         } ?: throw NavBarBuilderFingerprint.exception
     }
 
-    companion object {
-        const val INTEGRATIONS_CLASS_DESCRIPTOR =
-            "$UTILS_PATH/NavBarIndexPatch;"
-
-        fun MethodFingerprint.injectIndex(index: Int) {
-            result?.let {
-                it.mutableMethod.apply {
-                    addInstructions(
-                        0, """
-                        const/4 v0, 0x$index
-                        invoke-static {v0}, $INTEGRATIONS_CLASS_DESCRIPTOR->setCurrentNavBarIndex(I)V
-                        """
-                    )
-                }
-            } ?: throw exception
-        }
+    fun MethodFingerprint.injectIndex(index: Int) {
+        result?.let {
+            it.mutableMethod.apply {
+                addInstructions(
+                    0, """
+                    const/4 v0, 0x$index
+                    invoke-static {v0}, $INTEGRATIONS_CLASS_DESCRIPTOR->setCurrentNavBarIndex(I)V
+                    """
+                )
+            }
+        } ?: throw exception
     }
 }

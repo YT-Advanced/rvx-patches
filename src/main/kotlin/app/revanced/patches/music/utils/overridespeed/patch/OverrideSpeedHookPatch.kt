@@ -28,6 +28,15 @@ class OverrideSpeedHookPatch : BytecodePatch(
         PlaybackSpeedParentFingerprint
     )
 ) {
+    const val INTEGRATIONS_PLAYBACK_SPEED_CLASS_DESCRIPTOR =
+        "$MUSIC_VIDEO_PATH/PlaybackSpeedPatch;"
+
+    const val INTEGRATIONS_VIDEO_HELPER_CLASS_DESCRIPTOR =
+        "$MUSIC_INTEGRATIONS_PATH/utils/VideoHelpers;"
+
+    private lateinit var SPEED_CLASS: String
+    private lateinit var SPEED_REFERENCE: Reference
+
     override fun execute(context: BytecodeContext) {
 
         PlaybackSpeedParentFingerprint.result?.let { parentResult ->
@@ -99,16 +108,5 @@ class OverrideSpeedHookPatch : BytecodePatch(
 
         } ?: throw PlaybackSpeedPatchFingerprint.exception
 
-    }
-
-    internal companion object {
-        const val INTEGRATIONS_PLAYBACK_SPEED_CLASS_DESCRIPTOR =
-            "$MUSIC_VIDEO_PATH/PlaybackSpeedPatch;"
-
-        const val INTEGRATIONS_VIDEO_HELPER_CLASS_DESCRIPTOR =
-            "$MUSIC_INTEGRATIONS_PATH/utils/VideoHelpers;"
-
-        private lateinit var SPEED_CLASS: String
-        private lateinit var SPEED_REFERENCE: Reference
     }
 }

@@ -24,6 +24,9 @@ object PlayerTypeHookPatch : BytecodePatch(
         YouTubeControlsOverlayFingerprint
     )
 ) {
+    private const val INTEGRATIONS_CLASS_DESCRIPTOR =
+        "$UTILS_PATH/PlayerTypeHookPatch;"
+
     override fun execute(context: BytecodeContext) {
 
         PlayerTypeFingerprint.result?.let {
@@ -56,10 +59,5 @@ object PlayerTypeHookPatch : BytecodePatch(
             } ?: throw VideoStateFingerprint.exception
         } ?: throw YouTubeControlsOverlayFingerprint.exception
 
-    }
-
-    companion object {
-        private const val INTEGRATIONS_CLASS_DESCRIPTOR =
-            "$UTILS_PATH/PlayerTypeHookPatch;"
     }
 }

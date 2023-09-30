@@ -1,9 +1,7 @@
 package app.revanced.patches.youtube.layout.theme.patch
 
 import app.revanced.patcher.data.ResourceContext
-import app.revanced.patcher.patch.OptionsContainer
 import app.revanced.patcher.patch.PatchException
-import app.revanced.patcher.patch.PatchOption
 import app.revanced.patcher.patch.ResourcePatch
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
@@ -11,6 +9,7 @@ import app.revanced.patches.youtube.layout.theme.patch.GeneralThemePatch.Compani
 import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch
 import app.revanced.util.resources.ResourceHelper.updatePatchStatusTheme
 import org.w3c.dom.Element
+import app.revanced.patcher.patch.options.types.StringPatchOption.Companion.stringPatchOption
 
 @Patch(
     name = "Theme",
@@ -38,6 +37,13 @@ import org.w3c.dom.Element
 )
 @Suppress("unused")
 object ThemePatch : ResourcePatch {
+    var darkThemeBackgroundColor by stringPatchOption(
+        key = "darkThemeBackgroundColor",
+        default = "@android:color/black",
+        title = "Background color for the dark theme",
+        description = "The background color of the dark theme. Can be a hex color or a resource reference."
+    )
+
     override fun execute(context: ResourceContext) {
 
         arrayOf("values", "values-v31").forEach { context.setTheme(it) }
@@ -66,16 +72,5 @@ object ThemePatch : ResourcePatch {
                 }
             }
         }
-    }
-
-    companion object : OptionsContainer() {
-        var darkThemeBackgroundColor: String? by option(
-            PatchOption.StringOption(
-                key = "darkThemeBackgroundColor",
-                default = "@android:color/black",
-                title = "Background color for the dark theme",
-                description = "The background color of the dark theme. Can be a hex color or a resource reference."
-            )
-        )
     }
 }

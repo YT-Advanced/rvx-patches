@@ -13,6 +13,12 @@ import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 class LithoThemePatch : BytecodePatch(
     setOf(LithoThemeFingerprint)
 ) {
+    private var offset = 0
+
+    private var insertIndex: Int = 0
+    private var insertRegister: Int = 0
+    private lateinit var insertMethod: MutableMethod
+
     override fun execute(context: BytecodeContext) {
 
         LithoThemeFingerprint.result?.mutableMethod?.let {
@@ -30,25 +36,16 @@ class LithoThemePatch : BytecodePatch(
 
     }
 
-    companion object {
-        private var offset = 0
-
-        private var insertIndex: Int = 0
-        private var insertRegister: Int = 0
-        private lateinit var insertMethod: MutableMethod
-
-
-        fun injectCall(
-            methodDescriptor: String
-        ) {
-            insertMethod.addInstructions(
-                insertIndex + offset, """
-                    invoke-static {v$insertRegister}, $methodDescriptor
-                    move-result v$insertRegister
-                    """
-            )
-            offset += 2
-        }
+    fun injectCall(
+        methodDescriptor: String
+    ) {
+        insertMethod.addInstructions(
+            insertIndex + offset, """
+                invoke-static {v$insertRegister}, $methodDescriptor
+                move-result v$insertRegister
+                """
+        )
+        offset += 2
     }
 }
 

@@ -1,12 +1,11 @@
 package app.revanced.patches.music.layout.branding.name.patch
 
 import app.revanced.patcher.data.ResourceContext
-import app.revanced.patcher.patch.OptionsContainer
 import app.revanced.patcher.patch.PatchException
-import app.revanced.patcher.patch.PatchOption
 import app.revanced.patcher.patch.ResourcePatch
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
+import app.revanced.patcher.patch.options.types.StringPatchOption.Companion.stringPatchOption
 
 @Patch(
     name = "Custom branding Music name",
@@ -25,6 +24,21 @@ import app.revanced.patcher.patch.annotation.CompatiblePackage
 )
 @Suppress("unused")
 object CustomBrandingNamePatch : ResourcePatch {
+
+    private var MusicLongName by stringPatchOption(
+        key = "MusicLongName",
+        default = "ReVanced Extended Music",
+        title = "Application Name of YouTube Music",
+        description = "The name of the YouTube Music it will show on your notification panel."
+    )
+
+    private var MusicShortName by stringPatchOption(
+        key = "MusicShortName",
+        default = "RVX Music",
+        title = "Application Name of YouTube Music",
+        description = "The name of the YouTube Music it will show on your home screen."
+    )
+
     override fun execute(context: ResourceContext) {
 
         val longName = MusicLongName
@@ -49,24 +63,5 @@ object CustomBrandingNamePatch : ResourcePatch {
             }
         }
 
-    }
-
-    companion object : OptionsContainer() {
-        var MusicLongName: String? by option(
-            PatchOption.StringOption(
-                key = "MusicLongName",
-                default = "ReVanced Extended Music",
-                title = "Application Name of YouTube Music",
-                description = "The name of the YouTube Music it will show on your notification panel."
-            )
-        )
-        var MusicShortName: String? by option(
-            PatchOption.StringOption(
-                key = "MusicShortName",
-                default = "RVX Music",
-                title = "Application Name of YouTube Music",
-                description = "The name of the YouTube Music it will show on your home screen."
-            )
-        )
     }
 }

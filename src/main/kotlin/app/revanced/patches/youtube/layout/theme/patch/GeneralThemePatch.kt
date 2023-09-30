@@ -11,6 +11,8 @@ import org.w3c.dom.Element
     dependencies = [LithoThemePatch::class]
 )
 object GeneralThemePatch : ResourcePatch {
+    var isMonetPatchIncluded: Boolean = false
+
     override fun execute(context: ResourceContext) {
 
         LithoThemePatch.injectCall("$UTILS_PATH/LithoThemePatch;->applyLithoTheme(I)I")
@@ -88,9 +90,5 @@ object GeneralThemePatch : ResourcePatch {
             }
         }
 
-    }
-
-    internal companion object {
-        var isMonetPatchIncluded: Boolean = false
     }
 }

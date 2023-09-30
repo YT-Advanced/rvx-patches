@@ -23,6 +23,9 @@ object SettingsBytecodePatch : BytecodePatch(
         SettingsHeadersFragmentFingerprint
     )
 ) {
+    const val INTEGRATIONS_CLASS_DESCRIPTOR =
+        "$MUSIC_INTEGRATIONS_PATH/settingsmenu/SharedPreferenceChangeListener;"
+
     override fun execute(context: BytecodeContext) {
 
         SettingsHeadersFragmentFingerprint.result?.let {
@@ -55,8 +58,5 @@ object SettingsBytecodePatch : BytecodePatch(
 
     }
 
-    companion object {
-        const val INTEGRATIONS_CLASS_DESCRIPTOR =
-            "$MUSIC_INTEGRATIONS_PATH/settingsmenu/SharedPreferenceChangeListener;"
     }
 }

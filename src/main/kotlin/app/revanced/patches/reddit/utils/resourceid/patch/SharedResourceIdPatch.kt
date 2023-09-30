@@ -11,9 +11,7 @@ import app.revanced.util.enum.ResourceType.STRING
     dependencies = [ResourceMappingPatch::class]
 )
 object SharedResourceIdPatch : ResourcePatch {
-    internal companion object {
-        var ScreenShotShareBanner: Long = -1
-    }
+    var ScreenShotShareBanner: Long = -1
 
     override fun execute(context: ResourceContext) {
 

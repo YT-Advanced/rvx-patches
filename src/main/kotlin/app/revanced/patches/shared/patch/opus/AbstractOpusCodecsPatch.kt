@@ -22,6 +22,8 @@ abstract class AbstractOpusCodecsPatch(
         CodecSelectorFingerprint
     )
 ) {
+    lateinit var targetReference: Reference
+
     override fun execute(context: BytecodeContext) {
 
         CodecReferenceFingerprint.result?.mutableMethod?.let {
@@ -60,9 +62,5 @@ abstract class AbstractOpusCodecsPatch(
             }
         } ?: throw CodecSelectorFingerprint.exception
 
-    }
-
-    companion object {
-        lateinit var targetReference: Reference
     }
 }

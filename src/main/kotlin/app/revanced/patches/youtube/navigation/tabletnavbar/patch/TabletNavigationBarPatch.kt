@@ -65,18 +65,16 @@ object TabletNavigationBarPatch : BytecodePatch(
 
     }
 
-    companion object {
-        private fun MethodFingerprintResult.insertHook() {
-            val targetIndex = scanResult.patternScanResult!!.startIndex + 1
-            val register =
-                mutableMethod.getInstruction<OneRegisterInstruction>(targetIndex).registerA
+    private fun MethodFingerprintResult.insertHook() {
+        val targetIndex = scanResult.patternScanResult!!.startIndex + 1
+        val register =
+            mutableMethod.getInstruction<OneRegisterInstruction>(targetIndex).registerA
 
-            mutableMethod.addInstructions(
-                targetIndex + 1, """
-                    invoke-static {v$register}, $NAVIGATION->enableTabletNavBar(Z)Z
-                    move-result v$register
-                    """
-            )
-        }
+        mutableMethod.addInstructions(
+            targetIndex + 1, """
+                invoke-static {v$register}, $NAVIGATION->enableTabletNavBar(Z)Z
+                move-result v$register
+                """
+        )
     }
 }

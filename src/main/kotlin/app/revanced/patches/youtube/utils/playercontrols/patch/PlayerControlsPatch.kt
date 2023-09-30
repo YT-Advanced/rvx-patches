@@ -41,6 +41,18 @@ object PlayerControlsPatch : BytecodePatch(
         YouTubeControlsOverlayFingerprint
     )
 ) {
+    lateinit var controlsLayoutInflateResult: MethodFingerprintResult
+    lateinit var inflateResult: MethodFingerprintResult
+
+    lateinit var playerControlsVisibilityMutableMethod: MutableMethod
+    lateinit var quickSeekVisibleMutableMethod: MutableMethod
+    lateinit var seekEDUVisibleMutableMethod: MutableMethod
+    lateinit var userScrubbingMutableMethod: MutableMethod
+
+    lateinit var fullscreenEngagementSpeedEduVisibleMutableMethod: MutableMethod
+    lateinit var fullscreenEngagementViewVisibleReference: Reference
+    lateinit var speedEDUVisibleReference: Reference
+
     override fun execute(context: BytecodeContext) {
 
         fun MutableMethod.findReference(targetString: String): Reference {
@@ -128,97 +140,83 @@ object PlayerControlsPatch : BytecodePatch(
 
     }
 
-    internal companion object {
-        lateinit var controlsLayoutInflateResult: MethodFingerprintResult
-        lateinit var inflateResult: MethodFingerprintResult
+    private fun injectFullscreenEngagementSpeedEduViewVisibilityCall(
+        reference: Reference,
+        descriptor: String
+    ) {
+        fullscreenEngagementSpeedEduVisibleMutableMethod.apply {
+            for ((index, instruction) in implementation!!.instructions.withIndex()) {
+                if (instruction.opcode != Opcode.IPUT_BOOLEAN) continue
+                if (getInstruction<ReferenceInstruction>(index).reference != reference) continue
 
-        lateinit var playerControlsVisibilityMutableMethod: MutableMethod
-        lateinit var quickSeekVisibleMutableMethod: MutableMethod
-        lateinit var seekEDUVisibleMutableMethod: MutableMethod
-        lateinit var userScrubbingMutableMethod: MutableMethod
-
-        lateinit var fullscreenEngagementSpeedEduVisibleMutableMethod: MutableMethod
-        lateinit var fullscreenEngagementViewVisibleReference: Reference
-        lateinit var speedEDUVisibleReference: Reference
-
-        private fun injectFullscreenEngagementSpeedEduViewVisibilityCall(
-            reference: Reference,
-            descriptor: String
-        ) {
-            fullscreenEngagementSpeedEduVisibleMutableMethod.apply {
-                for ((index, instruction) in implementation!!.instructions.withIndex()) {
-                    if (instruction.opcode != Opcode.IPUT_BOOLEAN) continue
-                    if (getInstruction<ReferenceInstruction>(index).reference != reference) continue
-
-                    val register = getInstruction<TwoRegisterInstruction>(index).registerA
-
-                    addInstruction(
-                        index,
-                        "invoke-static {v$register}, $descriptor->changeVisibilityNegatedImmediate(Z)V"
-                    )
-                    break
-                }
-            }
-        }
-
-        private fun MutableMethod.injectVisibilityCall(
-            descriptor: String,
-            fieldName: String
-        ) {
-            addInstruction(
-                0,
-                "invoke-static {p1}, $descriptor->$fieldName(Z)V"
-            )
-        }
-
-        private fun MethodFingerprintResult.injectCalls(
-            descriptor: String
-        ) {
-            mutableMethod.apply {
-                val endIndex = scanResult.patternScanResult!!.endIndex
-                val viewRegister = getInstruction<OneRegisterInstruction>(endIndex).registerA
+                val register = getInstruction<TwoRegisterInstruction>(index).registerA
 
                 addInstruction(
-                    endIndex + 1,
-                    "invoke-static {v$viewRegister}, $descriptor->initialize(Ljava/lang/Object;)V"
+                    index,
+                    "invoke-static {v$register}, $descriptor->changeVisibilityNegatedImmediate(Z)V"
                 )
+                break
             }
         }
+    }
 
-        fun injectVisibility(descriptor: String) {
-            playerControlsVisibilityMutableMethod.injectVisibilityCall(
-                descriptor,
-                "changeVisibility"
-            )
-            quickSeekVisibleMutableMethod.injectVisibilityCall(
-                descriptor,
-                "changeVisibilityNegatedImmediate"
-            )
-            seekEDUVisibleMutableMethod.injectVisibilityCall(
-                descriptor,
-                "changeVisibilityNegatedImmediate"
-            )
-            userScrubbingMutableMethod.injectVisibilityCall(
-                descriptor,
-                "changeVisibilityNegatedImmediate"
-            )
+    private fun MutableMethod.injectVisibilityCall(
+        descriptor: String,
+        fieldName: String
+    ) {
+        addInstruction(
+            0,
+            "invoke-static {p1}, $descriptor->$fieldName(Z)V"
+        )
+    }
 
-            injectFullscreenEngagementSpeedEduViewVisibilityCall(
-                fullscreenEngagementViewVisibleReference,
-                descriptor
-            )
-            injectFullscreenEngagementSpeedEduViewVisibilityCall(
-                speedEDUVisibleReference,
-                descriptor
+    private fun MethodFingerprintResult.injectCalls(
+        descriptor: String
+    ) {
+        mutableMethod.apply {
+            val endIndex = scanResult.patternScanResult!!.endIndex
+            val viewRegister = getInstruction<OneRegisterInstruction>(endIndex).registerA
+
+            addInstruction(
+                endIndex + 1,
+                "invoke-static {v$viewRegister}, $descriptor->initialize(Ljava/lang/Object;)V"
             )
         }
+    }
 
-        fun initializeSB(descriptor: String) {
-            controlsLayoutInflateResult.injectCalls(descriptor)
-        }
+    fun injectVisibility(descriptor: String) {
+        playerControlsVisibilityMutableMethod.injectVisibilityCall(
+            descriptor,
+            "changeVisibility"
+        )
+        quickSeekVisibleMutableMethod.injectVisibilityCall(
+            descriptor,
+            "changeVisibilityNegatedImmediate"
+        )
+        seekEDUVisibleMutableMethod.injectVisibilityCall(
+            descriptor,
+            "changeVisibilityNegatedImmediate"
+        )
+        userScrubbingMutableMethod.injectVisibilityCall(
+            descriptor,
+            "changeVisibilityNegatedImmediate"
+        )
 
-        fun initializeControl(descriptor: String) {
-            inflateResult.injectCalls(descriptor)
-        }
+        injectFullscreenEngagementSpeedEduViewVisibilityCall(
+            fullscreenEngagementViewVisibleReference,
+            descriptor
+        )
+        injectFullscreenEngagementSpeedEduViewVisibilityCall(
+            speedEDUVisibleReference,
+            descriptor
+        )
+    }
+
+    fun initializeSB(descriptor: String) {
+        controlsLayoutInflateResult.injectCalls(descriptor)
+    }
+
+    fun initializeControl(descriptor: String) {
+        inflateResult.injectCalls(descriptor)
     }
 }

@@ -23,6 +23,9 @@ import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 object PlaceButtonPatch : BytecodePatch(
     setOf(HomePagerScreenFingerprint)
 ) {
+    const val INTEGRATIONS_METHOD_DESCRIPTOR =
+        "Lapp/revanced/reddit/patches/PlaceButtonPatch;" +
+                "->hidePlaceButton(Landroid/view/View;)V"
     override fun execute(context: BytecodeContext) {
 
         HomePagerScreenFingerprint.result?.let {
@@ -41,11 +44,5 @@ object PlaceButtonPatch : BytecodePatch(
 
         updateSettingsStatus("PlaceButton")
 
-    }
-
-    companion object {
-        const val INTEGRATIONS_METHOD_DESCRIPTOR =
-            "Lapp/revanced/reddit/patches/PlaceButtonPatch;" +
-                    "->hidePlaceButton(Landroid/view/View;)V"
     }
 }

@@ -17,26 +17,24 @@ import app.revanced.util.enum.ResourceType.STYLE
     dependencies = [ResourceMappingPatch::class]
 )
 object SharedResourceIdPatch : ResourcePatch {
-    internal companion object {
-        var AccountSwitcherAccessibility: Long = -1
-        var ActionsContainer: Long = -1
-        var ButtonIconPaddingMedium: Long = -1
-        var ChipCloud: Long = -1
-        var ColorGrey: Long = -1
-        var DialogSolid: Long = -1
-        var InlineTimeBarAdBreakMarkerColor: Long = -1
-        var IsTablet: Long = -1
-        var MenuEntry: Long = -1
-        var MusicMenuLikeButtons: Long = -1
-        var NamesInactiveAccountThumbnailSize: Long = -1
-        var PlayerCastMediaRouteButton: Long = -1
-        var PlayerOverlayChip: Long = -1
-        var PrivacyTosFooter: Long = -1
-        var QualityAuto: Long = -1
-        var Text1: Long = -1
-        var ToolTipContentView: Long = -1
-        var TosFooter: Long = -1
-    }
+    var AccountSwitcherAccessibility: Long = -1
+    var ActionsContainer: Long = -1
+    var ButtonIconPaddingMedium: Long = -1
+    var ChipCloud: Long = -1
+    var ColorGrey: Long = -1
+    var DialogSolid: Long = -1
+    var InlineTimeBarAdBreakMarkerColor: Long = -1
+    var IsTablet: Long = -1
+    var MenuEntry: Long = -1
+    var MusicMenuLikeButtons: Long = -1
+    var NamesInactiveAccountThumbnailSize: Long = -1
+    var PlayerCastMediaRouteButton: Long = -1
+    var PlayerOverlayChip: Long = -1
+    var PrivacyTosFooter: Long = -1
+    var QualityAuto: Long = -1
+    var Text1: Long = -1
+    var ToolTipContentView: Long = -1
+    var TosFooter: Long = -1
 
     override fun execute(context: ResourceContext) {
 

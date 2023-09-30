@@ -23,6 +23,9 @@ import app.revanced.util.integrations.Constants.INTEGRATIONS_PATH
 object SettingsBytecodePatch : BytecodePatch(
     setOf(ThemeSetterSystemFingerprint)
 ) {
+    const val SET_THEME =
+        "invoke-static {v0}, $INTEGRATIONS_PATH/utils/ThemeHelper;->setTheme(Ljava/lang/Object;)V"
+
     override fun execute(context: BytecodeContext) {
         // apply the current theme of the settings page
         ThemeSetterSystemFingerprint.result?.let {
@@ -46,10 +49,5 @@ object SettingsBytecodePatch : BytecodePatch(
         context.injectInit("InitializationPatch", "setDeviceInformation", true)
         context.injectInit("InitializationPatch", "initializeReVancedSettings", true)
 
-    }
-
-    companion object {
-        const val SET_THEME =
-            "invoke-static {v0}, $INTEGRATIONS_PATH/utils/ThemeHelper;->setTheme(Ljava/lang/Object;)V"
     }
 }

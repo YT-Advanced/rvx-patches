@@ -103,36 +103,34 @@ object NewSplashAnimationPatch : BytecodePatch(
 
     }
 
-    companion object {
-        fun MutableMethod.inject(
-            index: Int
-        ) {
-            if (getInstruction(index).opcode == Opcode.IF_NE)
-                injectInt(index)
-            else
-                injectBoolean(index)
-        }
+    fun MutableMethod.inject(
+        index: Int
+    ) {
+        if (getInstruction(index).opcode == Opcode.IF_NE)
+            injectInt(index)
+        else
+            injectBoolean(index)
+    }
 
-        private fun MutableMethod.injectBoolean(index: Int) {
-            val register = getInstruction<OneRegisterInstruction>(index).registerA
+    private fun MutableMethod.injectBoolean(index: Int) {
+        val register = getInstruction<OneRegisterInstruction>(index).registerA
 
-            addInstructions(
-                index, """
-                    invoke-static {}, $MISC_PATH/SplashAnimationPatch;->enableNewSplashAnimationBoolean()Z
-                    move-result v$register
-                    """
-            )
-        }
+        addInstructions(
+            index, """
+                invoke-static {}, $MISC_PATH/SplashAnimationPatch;->enableNewSplashAnimationBoolean()Z
+                move-result v$register
+                """
+        )
+    }
 
-        private fun MutableMethod.injectInt(index: Int) {
-            val register = getInstruction<TwoRegisterInstruction>(index).registerA
+    private fun MutableMethod.injectInt(index: Int) {
+        val register = getInstruction<TwoRegisterInstruction>(index).registerA
 
-            addInstructions(
-                index, """
-                    invoke-static {}, $MISC_PATH/SplashAnimationPatch;->enableNewSplashAnimationInt()I
-                    move-result v$register
-                    """
-            )
-        }
+        addInstructions(
+            index, """
+                invoke-static {}, $MISC_PATH/SplashAnimationPatch;->enableNewSplashAnimationInt()I
+                move-result v$register
+                """
+        )
     }
 }
