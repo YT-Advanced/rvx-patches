@@ -11,7 +11,7 @@ import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.music.general.startpage.fingerprints.ColdStartUpFingerprint
 import app.revanced.patches.music.utils.intenthook.patch.IntentHookPatch
 import app.revanced.patches.music.utils.settings.resource.patch.SettingsPatch
-import app.revanced.patches.music.utils.settings.resource.patch.SettingsPatch.Companion.contexts
+import app.revanced.patches.music.utils.settings.resource.patch.SettingsPatch.contexts
 import app.revanced.util.enum.CategoryType
 import app.revanced.util.integrations.Constants.MUSIC_GENERAL
 import app.revanced.util.resources.ResourceUtils.copyXmlNode
