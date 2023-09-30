@@ -57,6 +57,4 @@ object SettingsBytecodePatch : BytecodePatch(
         context.injectInit("InitializationPatch", "initializeReVancedSettings", false)
 
     }
-
-    }
 }

@@ -41,7 +41,7 @@ object VideoInformationPatch : BytecodePatch(
     )
 ) {
     private const val INTEGRATIONS_CLASS_DESCRIPTOR =
-        $MUSIC_VIDEO_PATH/VideoInformation;"
+        "$MUSIC_VIDEO_PATH/VideoInformation;"
 
     private var offset = 0
     private var playerInitInsertIndex = 4
