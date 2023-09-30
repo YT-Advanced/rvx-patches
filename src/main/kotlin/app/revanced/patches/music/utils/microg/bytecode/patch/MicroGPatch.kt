@@ -69,7 +69,7 @@ object MicroGPatch : BytecodePatch(
                 MUSIC_PACKAGE_NAME,
                 musicPackageName
             ),
-            setOf(
+            listOf(
                 ServiceCheckFingerprint,
                 GooglePlayUtilityFingerprint,
                 CastDynamiteModuleFingerprint,
