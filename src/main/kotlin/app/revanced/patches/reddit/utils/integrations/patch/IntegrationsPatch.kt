@@ -1,6 +1,6 @@
 package app.revanced.patches.reddit.utils.integrations.patch
 
-import app.revanced.patcher.patch.annotations.RequiresIntegrations
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.reddit.utils.integrations.fingerprints.InitFingerprint
 import app.revanced.patches.shared.patch.integrations.AbstractIntegrationsPatch
 
