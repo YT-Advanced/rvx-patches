@@ -9,7 +9,6 @@ import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchException
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
-import app.revanced.patcher.patch.annotations.RequiresIntegrations
 import app.revanced.patcher.util.smali.ExternalLabel
 import app.revanced.patches.reddit.ad.banner.patch.HideBannerPatch
 import app.revanced.patches.reddit.ad.comments.patch.HideCommentAdsPatch
