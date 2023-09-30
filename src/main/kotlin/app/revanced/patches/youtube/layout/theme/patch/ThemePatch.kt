@@ -36,7 +36,7 @@ import app.revanced.patcher.patch.options.types.StringPatchOption.Companion.stri
     ]
 )
 @Suppress("unused")
-object ThemePatch : ResourcePatch {
+object ThemePatch : ResourcePatch() {
     var darkThemeBackgroundColor by stringPatchOption(
         key = "darkThemeBackgroundColor",
         default = "@android:color/black",

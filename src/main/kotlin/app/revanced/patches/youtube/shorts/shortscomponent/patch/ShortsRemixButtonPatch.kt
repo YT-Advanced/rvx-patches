@@ -11,7 +11,7 @@ import app.revanced.util.bytecode.getWideLiteralIndex
 import app.revanced.util.integrations.Constants.SHORTS
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 
-class ShortsRemixButtonPatch : BytecodePatch(
+object ShortsRemixButtonPatch : BytecodePatch(
     setOf(ShortsRemixFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {

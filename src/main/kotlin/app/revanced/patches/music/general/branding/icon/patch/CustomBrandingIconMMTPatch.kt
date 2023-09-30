@@ -23,7 +23,7 @@ import app.revanced.util.resources.IconHelper.customIconMusicAdditional
     use = false
 )
 @Suppress("unused")
-object CustomBrandingIconMMTPatch : ResourcePatch {
+object CustomBrandingIconMMTPatch : ResourcePatch() {
     override fun execute(context: ResourceContext) {
 
         context.customIconMusic("mmt")

@@ -31,7 +31,7 @@ import app.revanced.util.resources.ResourceHelper.updatePatchStatusIcon
     use = false
 )
 @Suppress("unused")
-object CustomBrandingIconMMTPatch : ResourcePatch {
+object CustomBrandingIconMMTPatch : ResourcePatch() {
     override fun execute(context: ResourceContext) {
 
         context.customIcon("mmt")

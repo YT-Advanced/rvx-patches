@@ -30,7 +30,7 @@ import app.revanced.util.resources.ResourceHelper.updatePatchStatusIcon
     dependencies = [SettingsPatch::class]
 )
 @Suppress("unused")
-object CustomBrandingIconRevancifyBluePatch : ResourcePatch {
+object CustomBrandingIconRevancifyBluePatch : ResourcePatch() {
     override fun execute(context: ResourceContext) {
 
         context.customIcon("revancify-blue")

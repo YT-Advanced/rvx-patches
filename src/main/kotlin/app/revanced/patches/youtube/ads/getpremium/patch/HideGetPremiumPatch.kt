@@ -10,7 +10,7 @@ import app.revanced.patches.youtube.ads.getpremium.fingerprints.CompactYpcOfferM
 import app.revanced.util.integrations.Constants.PATCHES_PATH
 import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
 
-class HideGetPremiumPatch : BytecodePatch(
+object HideGetPremiumPatch : BytecodePatch(
     setOf(CompactYpcOfferModuleViewFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {

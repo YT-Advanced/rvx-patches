@@ -23,7 +23,7 @@ import app.revanced.util.resources.ResourceHelper.addTranslations
     dependencies = [SettingsPatch::class]
 )
 @Suppress("unused")
-object TranslationsPatch : ResourcePatch {
+object TranslationsPatch : ResourcePatch() {
     // Language list
     val LANGUAGE_LIST = arrayOf(
         "az-rAZ",

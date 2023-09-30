@@ -20,7 +20,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 
-class ShortsSubscriptionsButtonPatch : BytecodePatch(
+object ShortsSubscriptionsButtonPatch : BytecodePatch(
     setOf(
         ShortsSubscriptionsFingerprint,
         ShortsSubscriptionsTabletParentFingerprint

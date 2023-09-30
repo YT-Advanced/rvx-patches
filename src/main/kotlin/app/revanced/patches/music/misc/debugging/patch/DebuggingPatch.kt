@@ -24,7 +24,7 @@ import app.revanced.util.enum.CategoryType
     use = false
 )
 @Suppress("unused")
-object DebuggingPatch : ResourcePatch {
+object DebuggingPatch : ResourcePatch() {
     override fun execute(context: ResourceContext) {
 
         SettingsPatch.addMusicPreference(

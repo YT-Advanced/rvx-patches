@@ -34,7 +34,7 @@ import app.revanced.patcher.patch.options.types.StringPatchOption.Companion.stri
     ]
 )
 @Suppress("unused")
-object CustomBrandingNamePatch : ResourcePatch {
+object CustomBrandingNamePatch : ResourcePatch() {
     var YouTubeAppName by stringPatchOption(
             key = "YouTubeAppName",
             default = "ReVanced Extended",

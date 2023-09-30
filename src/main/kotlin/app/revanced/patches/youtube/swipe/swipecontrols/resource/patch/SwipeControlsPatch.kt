@@ -36,7 +36,7 @@ import app.revanced.util.resources.ResourceUtils.copyResources
     ]
 )
 @Suppress("unused")
-object SwipeControlsPatch : ResourcePatch {
+object SwipeControlsPatch : ResourcePatch() {
     override fun execute(context: ResourceContext) {
 
         /**

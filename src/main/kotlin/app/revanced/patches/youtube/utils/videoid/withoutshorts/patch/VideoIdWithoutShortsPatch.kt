@@ -11,7 +11,7 @@ import app.revanced.util.integrations.Constants.VIDEO_PATH
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 
-class VideoIdWithoutShortsPatch : BytecodePatch(
+object VideoIdWithoutShortsPatch : BytecodePatch(
     setOf(VideoIdWithoutShortsFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {

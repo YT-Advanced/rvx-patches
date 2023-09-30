@@ -22,7 +22,7 @@ import app.revanced.util.resources.IconHelper.customIconMusic
     use = false
 )
 @Suppress("unused")
-object CustomBrandingIconRevancifyRedPatch : ResourcePatch {
+object CustomBrandingIconRevancifyRedPatch : ResourcePatch() {
     override fun execute(context: ResourceContext) {
 
         context.customIconMusic("revancify-red")

@@ -29,7 +29,7 @@ import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch
     use = false
 )
 @Suppress("unused")
-object DoubleTapOverlayBackgroundPatch : ResourcePatch {
+object DoubleTapOverlayBackgroundPatch : ResourcePatch() {
     private const val RESOURCE_FILE_PATH = "res/layout/quick_seek_overlay.xml"
 
     override fun execute(context: ResourceContext) {

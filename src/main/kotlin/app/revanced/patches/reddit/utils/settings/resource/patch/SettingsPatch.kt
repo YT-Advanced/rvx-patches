@@ -19,7 +19,7 @@ import kotlin.io.path.exists
     ]
 )
 @Suppress("unused")
-object SettingsPatch : ResourcePatch {
+object SettingsPatch : ResourcePatch() {
     override fun execute(context: ResourceContext) {
 
         /**

@@ -31,7 +31,7 @@ import org.w3c.dom.Element
     use = false
 )
 @Suppress("unused")
-object PlayerButtonBackgroundPatch : ResourcePatch {
+object PlayerButtonBackgroundPatch : ResourcePatch() {
 
     override fun execute(context: ResourceContext) {
         context.xmlEditor["res/drawable/player_button_circle_background.xml"].use { editor ->

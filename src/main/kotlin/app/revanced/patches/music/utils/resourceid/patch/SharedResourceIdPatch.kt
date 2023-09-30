@@ -16,7 +16,7 @@ import app.revanced.util.enum.ResourceType.STYLE
 @Patch(
     dependencies = [ResourceMappingPatch::class]
 )
-object SharedResourceIdPatch : ResourcePatch {
+object SharedResourceIdPatch : ResourcePatch() {
     var AccountSwitcherAccessibility: Long = -1
     var ActionsContainer: Long = -1
     var ButtonIconPaddingMedium: Long = -1

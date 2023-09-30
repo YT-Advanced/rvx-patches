@@ -15,7 +15,7 @@ import kotlin.io.path.exists
     use = false
 )
 @Suppress("unused")
-object AddSplashAnimationPatch : ResourcePatch {
+object AddSplashAnimationPatch : ResourcePatch() {
     override fun execute(context: ResourceContext) {
 
         val resDirectory = context["res"]

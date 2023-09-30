@@ -29,7 +29,7 @@ import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch
     use = false
 )
 @Suppress("unused")
-object DebuggingPatch : ResourcePatch {
+object DebuggingPatch : ResourcePatch() {
     override fun execute(context: ResourceContext) {
 
         /**

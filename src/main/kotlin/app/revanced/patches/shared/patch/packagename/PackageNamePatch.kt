@@ -14,7 +14,7 @@ import app.revanced.patcher.patch.options.types.StringPatchOption.Companion.stri
         CompatiblePackage("com.google.android.apps.youtube.music")
     ]
 )
-object PackageNamePatch : ResourcePatch {
+object PackageNamePatch : ResourcePatch() {
     override fun execute(context: ResourceContext) {
     }
 

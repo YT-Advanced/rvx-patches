@@ -8,7 +8,7 @@ import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patches.youtube.utils.fix.swiperefresh.fingerprint.SwipeRefreshLayoutFingerprint
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 
-class SwipeRefreshPatch : BytecodePatch(
+object SwipeRefreshPatch : BytecodePatch(
     setOf(SwipeRefreshLayoutFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {

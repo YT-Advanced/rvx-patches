@@ -7,7 +7,7 @@ import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod
 import app.revanced.patches.youtube.utils.videocpn.fingerprint.OrganicPlaybackContextModelFingerprint
 
-class VideoCpnPatch : BytecodePatch(
+object VideoCpnPatch : BytecodePatch(
     setOf(OrganicPlaybackContextModelFingerprint)
 ) {
     private lateinit var insertMethod: MutableMethod

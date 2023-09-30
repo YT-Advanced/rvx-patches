@@ -10,7 +10,7 @@ import app.revanced.patcher.patch.annotation.CompatiblePackage
     description = "Set the audio quality to \"Always High\" when you first install the app."
 )
 @Suppress("unused")
-object BitrateDefaultValuePatch : ResourcePatch {
+object BitrateDefaultValuePatch : ResourcePatch() {
     private const val RESOURCE_FILE_PATH = "res/xml/data_saving_settings.xml"
 
     override fun execute(context: ResourceContext) {

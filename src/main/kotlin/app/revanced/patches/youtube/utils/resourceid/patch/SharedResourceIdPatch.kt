@@ -16,7 +16,7 @@ import app.revanced.util.enum.ResourceType.STRING
 @Patch(
     dependencies = [ResourceMappingPatch::class]
 )
-object SharedResourceIdPatch : ResourcePatch {
+object SharedResourceIdPatch : ResourcePatch() {
     var AccountSwitcherAccessibility: Long = -1
     var AccessibilityCaptionsButtonName: Long = -1
     var ActionBarRingo: Long = -1

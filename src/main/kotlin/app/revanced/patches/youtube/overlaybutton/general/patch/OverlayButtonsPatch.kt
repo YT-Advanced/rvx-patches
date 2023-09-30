@@ -50,7 +50,7 @@ import org.w3c.dom.Element
     ]
 )
 @Suppress("unused")
-object OverlayButtonsPatch : ResourcePatch {
+object OverlayButtonsPatch : ResourcePatch() {
     override fun execute(context: ResourceContext) {
 
         /**

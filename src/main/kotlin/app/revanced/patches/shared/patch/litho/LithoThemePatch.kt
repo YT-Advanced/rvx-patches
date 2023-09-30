@@ -10,7 +10,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 
-class LithoThemePatch : BytecodePatch(
+object LithoThemePatch : BytecodePatch(
     setOf(LithoThemeFingerprint)
 ) {
     private var offset = 0

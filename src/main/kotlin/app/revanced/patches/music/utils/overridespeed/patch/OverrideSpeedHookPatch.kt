@@ -22,7 +22,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.reference.Reference
 import com.android.tools.smali.dexlib2.immutable.ImmutableField
 
-class OverrideSpeedHookPatch : BytecodePatch(
+object OverrideSpeedHookPatch : BytecodePatch(
     setOf(
         PlaybackSpeedPatchFingerprint,
         PlaybackSpeedParentFingerprint

@@ -42,7 +42,7 @@ import app.revanced.util.resources.ResourceHelper.setMicroG
     ]
 )
 @Suppress("unused")
-object MicroGPatch : ResourcePatch {
+object MicroGPatch : ResourcePatch() {
     override fun execute(context: ResourceContext) {
 
         val packageName = PackageNamePatch.YouTubePackageName

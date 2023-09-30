@@ -32,7 +32,7 @@ import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch
     ]
 )
 @Suppress("unused")
-object HideCollapseButtonPatch : ResourcePatch {
+object HideCollapseButtonPatch : ResourcePatch() {
     override fun execute(context: ResourceContext) {
 
         /**

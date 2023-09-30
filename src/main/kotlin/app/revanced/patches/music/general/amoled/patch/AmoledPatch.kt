@@ -24,7 +24,7 @@ import org.w3c.dom.Element
     dependencies = [LithoThemePatch::class]
 )
 @Suppress("unused")
-object AmoledPatch : ResourcePatch {
+object AmoledPatch : ResourcePatch() {
     override fun execute(context: ResourceContext) {
 
         injectCall("$MUSIC_UTILS_PATH/LithoThemePatch;->applyLithoTheme(I)I")

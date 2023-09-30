@@ -10,7 +10,7 @@ import app.revanced.util.enum.ResourceType.STRING
 @Patch(
     dependencies = [ResourceMappingPatch::class]
 )
-object SharedResourceIdPatch : ResourcePatch {
+object SharedResourceIdPatch : ResourcePatch() {
     var ScreenShotShareBanner: Long = -1
 
     override fun execute(context: ResourceContext) {

@@ -4,7 +4,7 @@ import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
 import kotlin.io.path.exists
 
-class RemoveElementsPatch : ResourcePatch {
+object RemoveElementsPatch : ResourcePatch() {
     // Language list
     val LANGUAGE_LIST = arrayOf(
         "values",

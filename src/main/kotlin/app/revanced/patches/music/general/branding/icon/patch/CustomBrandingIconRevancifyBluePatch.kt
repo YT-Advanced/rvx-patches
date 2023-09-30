@@ -21,7 +21,7 @@ import app.revanced.util.resources.IconHelper.customIconMusic
     ],
 )
 @Suppress("unused")
-object CustomBrandingIconRevancifyBluePatch : ResourcePatch {
+object CustomBrandingIconRevancifyBluePatch : ResourcePatch() {
     override fun execute(context: ResourceContext) {
 
         context.customIconMusic("revancify-blue")

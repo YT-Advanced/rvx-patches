@@ -9,7 +9,7 @@ import app.revanced.patcher.util.smali.ExternalLabel
 import app.revanced.patches.youtube.swipe.hdrbrightness.fingerprints.HDRBrightnessFingerprint
 import app.revanced.util.integrations.Constants.SWIPE_PATH
 
-class HDRBrightnessPatch : BytecodePatch(
+object HDRBrightnessPatch : BytecodePatch(
     setOf(HDRBrightnessFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {

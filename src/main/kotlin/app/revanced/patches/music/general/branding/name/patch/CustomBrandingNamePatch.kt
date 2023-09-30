@@ -23,7 +23,7 @@ import app.revanced.patcher.patch.options.types.StringPatchOption.Companion.stri
     dependencies = [RemoveElementsPatch::class]
 )
 @Suppress("unused")
-object CustomBrandingNamePatch : ResourcePatch {
+object CustomBrandingNamePatch : ResourcePatch() {
 
     private var MusicLongName by stringPatchOption(
         key = "MusicLongName",

@@ -11,7 +11,7 @@ import app.revanced.util.integrations.Constants.UTILS_PATH
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 
-class ReturnYouTubeDislikeShortsPatch : BytecodePatch(
+object ReturnYouTubeDislikeShortsPatch : BytecodePatch(
     setOf(ShortsTextViewFingerprint)
 ) {
     private const val INTEGRATIONS_RYD_CLASS_DESCRIPTOR =

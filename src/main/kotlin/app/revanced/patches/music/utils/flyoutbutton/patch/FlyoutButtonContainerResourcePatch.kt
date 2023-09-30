@@ -5,7 +5,7 @@ import app.revanced.patcher.patch.ResourcePatch
 import app.revanced.util.resources.ResourceUtils
 import app.revanced.util.resources.ResourceUtils.copyResources
 
-class FlyoutButtonContainerResourcePatch : ResourcePatch {
+object FlyoutButtonContainerResourcePatch : ResourcePatch() {
     override fun execute(context: ResourceContext) {
 
         /**

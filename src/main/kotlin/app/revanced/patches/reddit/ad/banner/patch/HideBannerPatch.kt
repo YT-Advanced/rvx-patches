@@ -3,7 +3,7 @@ package app.revanced.patches.reddit.ad.banner.patch
 import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
 
-class HideBannerPatch : ResourcePatch {
+object HideBannerPatch : ResourcePatch() {
     private const val RESOURCE_FILE_PATH = "res/layout/merge_listheader_link_detail.xml"
 
     override fun execute(context: ResourceContext) {

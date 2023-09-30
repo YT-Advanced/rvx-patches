@@ -33,7 +33,7 @@ import app.revanced.util.integrations.Constants.PATCHES_PATH
     ]
 )
 @Suppress("unused")
-object ButtonContainerPatch : ResourcePatch {
+object ButtonContainerPatch : ResourcePatch() {
     override fun execute(context: ResourceContext) {
 
         LithoFilterPatch.addFilter("$PATCHES_PATH/ads/ButtonsFilter;")

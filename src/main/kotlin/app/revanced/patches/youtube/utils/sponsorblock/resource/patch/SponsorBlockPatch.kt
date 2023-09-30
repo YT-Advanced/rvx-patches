@@ -35,7 +35,7 @@ import app.revanced.util.resources.ResourceUtils.copyXmlNode
     ]
 )
 @Suppress("unused")
-object SponsorBlockPatch : ResourcePatch {
+object SponsorBlockPatch : ResourcePatch() {
 
     override fun execute(context: ResourceContext) {
         /**

@@ -38,7 +38,7 @@ import app.revanced.util.resources.ResourceUtils.copyXmlNode
     use = false
 )
 @Suppress("unused")
-object MaterialYouPatch : ResourcePatch {
+object MaterialYouPatch : ResourcePatch() {
     override fun execute(context: ResourceContext) {
 
         arrayOf(

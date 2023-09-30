@@ -13,7 +13,7 @@ import app.revanced.patches.reddit.utils.settings.bytecode.fingerprints.Settings
 import app.revanced.util.bytecode.getStringIndex
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 
-class SettingsBytecodePatch : BytecodePatch(
+object SettingsBytecodePatch : BytecodePatch(
     setOf(
         AcknowledgementsLabelBuilderFingerprint,
         OssLicensesMenuActivityOnCreateFingerprint,

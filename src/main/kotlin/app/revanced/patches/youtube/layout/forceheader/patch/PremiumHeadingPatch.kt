@@ -33,7 +33,7 @@ import kotlin.io.path.exists
     use = false
 )
 @Suppress("unused")
-object PremiumHeadingPatch : ResourcePatch {
+object PremiumHeadingPatch : ResourcePatch() {
     override fun execute(context: ResourceContext) {
         val resDirectory = context["res"]
         if (!resDirectory.isDirectory)

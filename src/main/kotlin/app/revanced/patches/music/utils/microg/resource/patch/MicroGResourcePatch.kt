@@ -15,7 +15,7 @@ import app.revanced.util.resources.MusicResourceHelper.setMicroG
 @Patch(
     dependencies = [PackageNamePatch::class]
 )
-object MicroGResourcePatch : ResourcePatch {
+object MicroGResourcePatch : ResourcePatch() {
     override fun execute(context: ResourceContext) {
         val packageName = PackageNamePatch.MusicPackageName
             ?: throw PatchException("Invalid package name.")

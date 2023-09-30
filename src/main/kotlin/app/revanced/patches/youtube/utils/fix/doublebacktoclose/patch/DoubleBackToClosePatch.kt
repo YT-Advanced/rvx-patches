@@ -12,7 +12,7 @@ import app.revanced.patches.youtube.utils.fix.doublebacktoclose.fingerprint.Scro
 import app.revanced.patches.youtube.utils.fix.doublebacktoclose.fingerprint.ScrollTopParentFingerprint
 import app.revanced.util.integrations.Constants.UTILS_PATH
 
-class DoubleBackToClosePatch : BytecodePatch(
+object DoubleBackToClosePatch : BytecodePatch(
     setOf(
         OnBackPressedFingerprint,
         ScrollPositionFingerprint,

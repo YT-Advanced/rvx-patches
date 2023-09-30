@@ -28,7 +28,7 @@ import app.revanced.util.integrations.Constants.MUSIC_ADS_PATH
     ]
 )
 @Suppress("unused")
-object CustomFilterPatch : ResourcePatch {
+object CustomFilterPatch : ResourcePatch() {
     private const val FILTER_CLASS_DESCRIPTOR =
         "$MUSIC_ADS_PATH/CustomFilter;"
 

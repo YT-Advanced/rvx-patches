@@ -45,7 +45,7 @@ import org.w3c.dom.Element
     ]
 )
 @Suppress("unused")
-object GeneralAdsPatch : ResourcePatch {
+object GeneralAdsPatch : ResourcePatch() {
     private val resourceFileNames = arrayOf(
         "promoted_",
         "promotion_",

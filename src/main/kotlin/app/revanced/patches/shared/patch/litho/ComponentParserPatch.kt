@@ -17,7 +17,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 import kotlin.properties.Delegates
 
-class ComponentParserPatch : BytecodePatch(
+object ComponentParserPatch : BytecodePatch(
     setOf(
         EmptyComponentBuilderFingerprint,
         IdentifierFingerprint

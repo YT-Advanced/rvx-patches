@@ -16,7 +16,7 @@ import app.revanced.util.integrations.Constants.SHORTS
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
 
-class ShortsToolBarPatch : BytecodePatch(
+object ShortsToolBarPatch : BytecodePatch(
     setOf(
         SetToolBarPaddingFingerprint,
         ShortsCommentFingerprint

@@ -33,7 +33,7 @@ import app.revanced.patcher.patch.options.types.StringPatchOption.Companion.stri
     dependencies = [SettingsPatch::class]
 )
 @Suppress("unused")
-object DoubleTapLengthPatch : ResourcePatch {
+object DoubleTapLengthPatch : ResourcePatch() {
     var DoubleTapLengthArrays by stringPatchOption(
         key = "DoubleTapLengthArrays",
         default = "3, 5, 10, 15, 20, 30, 60, 120, 180",

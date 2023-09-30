@@ -35,7 +35,7 @@ import app.revanced.util.integrations.Constants.PATCHES_PATH
     ]
 )
 @Suppress("unused")
-object CommentComponentPatch : ResourcePatch {
+object CommentComponentPatch : ResourcePatch() {
     override fun execute(context: ResourceContext) {
         LithoFilterPatch.addFilter("$PATCHES_PATH/ads/CommentsFilter;")
         LithoFilterPatch.addFilter("$PATCHES_PATH/ads/CommentsPreviewDotsFilter;")

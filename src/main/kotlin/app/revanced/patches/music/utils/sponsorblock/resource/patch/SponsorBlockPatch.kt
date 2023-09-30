@@ -30,7 +30,7 @@ import app.revanced.util.resources.ResourceUtils.copyResources
     ]
 )
 @Suppress("unused")
-object SponsorBlockPatch : ResourcePatch {
+object SponsorBlockPatch : ResourcePatch() {
     override fun execute(context: ResourceContext) {
 
         /**

@@ -30,7 +30,7 @@ import org.w3c.dom.Node
     ]
 )
 @Suppress("unused")
-object ReturnYouTubeDislikePatch : ResourcePatch {
+object ReturnYouTubeDislikePatch : ResourcePatch() {
     private const val YOUTUBE_MUSIC_SETTINGS_PATH = "res/xml/settings_headers.xml"
     private const val SWITCH_PREFERENCE_TAG_NAME =
             "com.google.android.apps.youtube.music.ui.preference.SwitchCompatPreference"

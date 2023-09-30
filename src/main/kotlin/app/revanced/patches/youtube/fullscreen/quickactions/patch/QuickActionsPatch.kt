@@ -35,7 +35,7 @@ import app.revanced.util.integrations.Constants.PATCHES_PATH
     ]
 )
 @Suppress("unused")
-object QuickActionsPatch : ResourcePatch {
+object QuickActionsPatch : ResourcePatch() {
     override fun execute(context: ResourceContext) {
         LithoFilterPatch.addFilter("$PATCHES_PATH/ads/QuickActionFilter;")
 

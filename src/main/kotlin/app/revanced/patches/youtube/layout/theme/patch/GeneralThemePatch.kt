@@ -10,7 +10,7 @@ import org.w3c.dom.Element
 @Patch(
     dependencies = [LithoThemePatch::class]
 )
-object GeneralThemePatch : ResourcePatch {
+object GeneralThemePatch : ResourcePatch() {
     var isMonetPatchIncluded: Boolean = false
 
     override fun execute(context: ResourceContext) {
