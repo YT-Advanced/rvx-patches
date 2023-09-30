@@ -7,7 +7,7 @@ import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch
-import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.Companion.DislikeButton
+import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.DislikeButton
 import app.revanced.patches.youtube.utils.returnyoutubedislike.oldlayout.fingerprints.ButtonTagFingerprint
 import app.revanced.util.bytecode.getWideLiteralIndex
 import app.revanced.util.integrations.Constants.UTILS_PATH

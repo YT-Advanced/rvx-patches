@@ -15,7 +15,7 @@ import app.revanced.patches.music.misc.premium.fingerprints.HideGetPremiumFinger
 import app.revanced.patches.music.misc.premium.fingerprints.MembershipSettingsFingerprint
 import app.revanced.patches.music.misc.premium.fingerprints.MembershipSettingsParentFingerprint
 import app.revanced.patches.music.utils.resourceid.patch.SharedResourceIdPatch
-import app.revanced.patches.music.utils.resourceid.patch.SharedResourceIdPatch.Companion.PrivacyTosFooter
+import app.revanced.patches.music.utils.resourceid.patch.SharedResourceIdPatch.PrivacyTosFooter
 import app.revanced.util.bytecode.getWideLiteralIndex
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction

@@ -11,7 +11,7 @@ import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.music.player.replace.fingerprints.CastButtonContainerFingerprint
 import app.revanced.patches.music.player.replace.fingerprints.PlaybackStartDescriptorFingerprint
 import app.revanced.patches.music.utils.resourceid.patch.SharedResourceIdPatch
-import app.revanced.patches.music.utils.resourceid.patch.SharedResourceIdPatch.Companion.PlayerCastMediaRouteButton
+import app.revanced.patches.music.utils.resourceid.patch.SharedResourceIdPatch.PlayerCastMediaRouteButton
 import app.revanced.patches.music.utils.settings.resource.patch.SettingsPatch
 import app.revanced.patches.music.utils.settings.resource.patch.SettingsPatch.Companion.contexts
 import app.revanced.patches.music.utils.videotype.patch.VideoTypeHookPatch

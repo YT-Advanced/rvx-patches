@@ -8,7 +8,7 @@ import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch
-import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.Companion.WordMarkHeader
+import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.WordMarkHeader
 import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch
 import app.revanced.util.bytecode.getWideLiteralIndex
 import app.revanced.util.bytecode.isWideLiteralExists

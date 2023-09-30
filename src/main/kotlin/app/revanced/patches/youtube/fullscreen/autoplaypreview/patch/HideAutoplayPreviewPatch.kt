@@ -10,8 +10,8 @@ import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.util.smali.ExternalLabel
 import app.revanced.patches.youtube.utils.fingerprints.LayoutConstructorFingerprint
 import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch
-import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.Companion.AutoNavPreviewStub
-import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.Companion.AutoNavToggle
+import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.AutoNavPreviewStub
+import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.AutoNavToggle
 import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch
 import app.revanced.util.bytecode.getStringIndex
 import app.revanced.util.bytecode.getWideLiteralIndex

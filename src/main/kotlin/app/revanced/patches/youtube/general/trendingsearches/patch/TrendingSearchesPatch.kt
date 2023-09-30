@@ -9,9 +9,9 @@ import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.youtube.general.trendingsearches.fingerprints.SearchBarEntryFingerprint
 import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch
-import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.Companion.YtOutlineArrowTimeBlack
-import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.Companion.YtOutlineFireBlack
-import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.Companion.YtOutlineSearchBlack
+import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.YtOutlineArrowTimeBlack
+import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.YtOutlineFireBlack
+import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.YtOutlineSearchBlack
 import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch
 import app.revanced.util.bytecode.getWideLiteralIndex
 import app.revanced.util.integrations.Constants.GENERAL

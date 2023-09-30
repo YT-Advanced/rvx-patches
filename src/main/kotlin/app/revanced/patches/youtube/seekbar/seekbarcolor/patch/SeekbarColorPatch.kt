@@ -14,9 +14,9 @@ import app.revanced.patches.youtube.seekbar.seekbarcolor.fingerprints.ControlsOv
 import app.revanced.patches.youtube.seekbar.seekbarcolor.fingerprints.ShortsSeekbarColorFingerprint
 import app.revanced.patches.youtube.utils.fingerprints.PlayerSeekbarColorFingerprint
 import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch
-import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.Companion.InlineTimeBarColorizedBarPlayedColorDark
-import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.Companion.InlineTimeBarPlayedNotHighlightedColor
-import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.Companion.ReelTimeBarPlayedColor
+import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.InlineTimeBarColorizedBarPlayedColorDark
+import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.InlineTimeBarPlayedNotHighlightedColor
+import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.ReelTimeBarPlayedColor
 import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch
 import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch.Companion.contexts
 import app.revanced.util.bytecode.getWideLiteralIndex

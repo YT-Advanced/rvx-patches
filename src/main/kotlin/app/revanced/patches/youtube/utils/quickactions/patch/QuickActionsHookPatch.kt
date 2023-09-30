@@ -8,7 +8,7 @@ import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.youtube.utils.quickactions.fingerprints.QuickActionsElementFingerprint
 import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch
-import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.Companion.QuickActionsElementContainer
+import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.QuickActionsElementContainer
 import app.revanced.util.integrations.Constants.FULLSCREEN
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction

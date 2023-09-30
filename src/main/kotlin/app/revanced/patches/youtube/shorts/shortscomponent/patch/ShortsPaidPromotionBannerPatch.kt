@@ -7,8 +7,8 @@ import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod
 import app.revanced.patches.youtube.shorts.shortscomponent.fingerprints.ShortsPaidPromotionFingerprint
-import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.Companion.ReelPlayerBadge
-import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.Companion.ReelPlayerBadge2
+import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.ReelPlayerBadge
+import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.ReelPlayerBadge2
 import app.revanced.util.bytecode.getWideLiteralIndex
 import app.revanced.util.integrations.Constants.SHORTS
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction

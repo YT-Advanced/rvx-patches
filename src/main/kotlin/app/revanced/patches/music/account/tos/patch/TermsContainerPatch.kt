@@ -11,7 +11,7 @@ import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.music.account.tos.fingerprints.TermsOfServiceFingerprint
 import app.revanced.patches.music.utils.resourceid.patch.SharedResourceIdPatch
-import app.revanced.patches.music.utils.resourceid.patch.SharedResourceIdPatch.Companion.TosFooter
+import app.revanced.patches.music.utils.resourceid.patch.SharedResourceIdPatch.TosFooter
 import app.revanced.patches.music.utils.settings.resource.patch.SettingsPatch
 import app.revanced.util.bytecode.getWideLiteralIndex
 import app.revanced.util.enum.CategoryType

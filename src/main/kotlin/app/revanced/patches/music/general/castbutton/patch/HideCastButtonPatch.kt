@@ -12,7 +12,7 @@ import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.music.general.castbutton.fingerprints.MediaRouteButtonFingerprint
 import app.revanced.patches.music.general.castbutton.fingerprints.PlayerOverlayChipFingerprint
 import app.revanced.patches.music.utils.resourceid.patch.SharedResourceIdPatch
-import app.revanced.patches.music.utils.resourceid.patch.SharedResourceIdPatch.Companion.PlayerOverlayChip
+import app.revanced.patches.music.utils.resourceid.patch.SharedResourceIdPatch.PlayerOverlayChip
 import app.revanced.patches.music.utils.settings.resource.patch.SettingsPatch
 import app.revanced.util.bytecode.getWideLiteralIndex
 import app.revanced.util.enum.CategoryType

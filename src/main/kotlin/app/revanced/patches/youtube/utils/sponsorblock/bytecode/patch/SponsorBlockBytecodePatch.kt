@@ -17,8 +17,8 @@ import app.revanced.patches.youtube.utils.fingerprints.YouTubeControlsOverlayFin
 import app.revanced.patches.youtube.utils.overridespeed.patch.OverrideSpeedHookPatch
 import app.revanced.patches.youtube.utils.playercontrols.patch.PlayerControlsPatch
 import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch
-import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.Companion.InsetOverlayViewLayout
-import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.Companion.TotalTime
+import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.InsetOverlayViewLayout
+import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.TotalTime
 import app.revanced.patches.youtube.utils.sponsorblock.bytecode.fingerprints.RectangleFieldInvalidatorFingerprint
 import app.revanced.patches.youtube.utils.sponsorblock.bytecode.fingerprints.SegmentPlaybackControllerFingerprint
 import app.revanced.patches.youtube.utils.videoid.general.patch.VideoIdPatch

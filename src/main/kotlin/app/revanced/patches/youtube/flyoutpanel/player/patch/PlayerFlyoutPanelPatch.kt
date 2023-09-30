@@ -13,7 +13,7 @@ import app.revanced.patches.youtube.flyoutpanel.player.fingerprints.CaptionsBott
 import app.revanced.patches.youtube.utils.fingerprints.QualityMenuViewInflateFingerprint
 import app.revanced.patches.youtube.utils.litho.patch.LithoFilterPatch
 import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch
-import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.Companion.BottomSheetFooterText
+import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.BottomSheetFooterText
 import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch
 import app.revanced.util.bytecode.getWideLiteralIndex
 import app.revanced.util.integrations.Constants.FLYOUT_PANEL

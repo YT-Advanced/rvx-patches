@@ -14,7 +14,7 @@ import app.revanced.patches.youtube.utils.overridequality.fingerprints.VideoQual
 import app.revanced.patches.youtube.utils.overridequality.fingerprints.VideoQualityPatchFingerprint
 import app.revanced.patches.youtube.utils.overridequality.fingerprints.VideoQualityTextFingerprint
 import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch
-import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.Companion.QualityAuto
+import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.QualityAuto
 import app.revanced.util.bytecode.getWideLiteralIndex
 import app.revanced.util.integrations.Constants.INTEGRATIONS_PATH
 import app.revanced.util.integrations.Constants.VIDEO_PATH

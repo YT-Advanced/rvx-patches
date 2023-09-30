@@ -16,7 +16,7 @@ import app.revanced.patches.youtube.fullscreen.fullscreenpanels.fingerprints.Ful
 import app.revanced.patches.youtube.utils.fingerprints.LayoutConstructorFingerprint
 import app.revanced.patches.youtube.utils.quickactions.patch.QuickActionsHookPatch
 import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch
-import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.Companion.FullScreenEngagementPanel
+import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.FullScreenEngagementPanel
 import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch
 import app.revanced.util.bytecode.getNarrowLiteralIndex
 import app.revanced.util.bytecode.getWideLiteralIndex

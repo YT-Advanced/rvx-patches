@@ -13,7 +13,7 @@ import app.revanced.patches.youtube.player.suggestedvideooverlay.fingerprints.Co
 import app.revanced.patches.youtube.utils.fingerprints.VideoEndFingerprint
 import app.revanced.patches.youtube.utils.fingerprints.VideoEndParentFingerprint
 import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch
-import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.Companion.CoreContainer
+import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.CoreContainer
 import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch
 import app.revanced.util.bytecode.getWideLiteralIndex
 import app.revanced.util.integrations.Constants.PLAYER
