@@ -180,8 +180,6 @@ object VideoInformationPatch : BytecodePatch(
         injectCall("$INTEGRATIONS_CLASS_DESCRIPTOR->setVideoId(Ljava/lang/String;)V")
     }
 
-    companion object {
-
     /**
      * Adds an invoke-static instruction, called with the new id when the video changes
      * @param methodDescriptor which method to call. Params have to be `Ljava/lang/String;`
