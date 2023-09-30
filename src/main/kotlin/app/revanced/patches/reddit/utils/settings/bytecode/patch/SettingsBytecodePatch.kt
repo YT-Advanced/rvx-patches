@@ -14,7 +14,7 @@ import app.revanced.util.bytecode.getStringIndex
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 
 class SettingsBytecodePatch : BytecodePatch(
-    listOf(
+    setOf(
         AcknowledgementsLabelBuilderFingerprint,
         OssLicensesMenuActivityOnCreateFingerprint,
         SettingsStatusLoadFingerprint

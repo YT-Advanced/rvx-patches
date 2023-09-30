@@ -1,8 +1,6 @@
 package app.revanced.patches.music.player.oldstyleminiplayer.patch
 
 import app.revanced.extensions.exception
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
@@ -10,22 +8,33 @@ import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint.Companion.
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotations.DependsOn
 import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.music.player.oldstyleminiplayer.fingerprints.NextButtonVisibilityFingerprint
 import app.revanced.patches.music.player.oldstyleminiplayer.fingerprints.SwipeToCloseFingerprint
-import app.revanced.patches.music.utils.annotations.MusicCompatibility
 import app.revanced.patches.music.utils.fingerprints.PlayerColorFingerprint
 import app.revanced.patches.music.utils.settings.resource.patch.SettingsPatch
 import app.revanced.util.enum.CategoryType
 import app.revanced.util.integrations.Constants.MUSIC_PLAYER
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 
-@Patch
-@Name("Enable old style miniplayer")
-@Description("Return the miniplayers to old style.")
-@DependsOn([SettingsPatch::class])
-@MusicCompatibility
-class OldStyleMiniPlayerPatch : BytecodePatch(
-    listOf(
+@Patch(
+    name = "Enable old style miniplayer",
+    description = "Return the miniplayers to old style.",
+    compatiblePackages = [
+        CompatiblePackage(
+            "com.google.android.apps.youtube.music",
+            [
+                "6.15.52",
+                "6.20.51",
+                "6.21.51"
+            ]
+        )
+    ]
+    dependencies = [SettingsPatch::class]
+)
+@Suppress("unused")
+object OldStyleMiniPlayerPatch : BytecodePatch(
+    setOf(
         PlayerColorFingerprint,
         SwipeToCloseFingerprint
     )

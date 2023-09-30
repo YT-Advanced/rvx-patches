@@ -12,7 +12,7 @@ import app.revanced.util.integrations.Constants.SHORTS
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 
 class ShortsRemixButtonPatch : BytecodePatch(
-    listOf(ShortsRemixFingerprint)
+    setOf(ShortsRemixFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {
         ShortsRemixFingerprint.result?.let {

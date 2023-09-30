@@ -1,23 +1,22 @@
 package app.revanced.patches.music.misc.tastebuilder.patch
 
 import app.revanced.extensions.exception
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.music.misc.tastebuilder.fingerprints.TasteBuilderConstructorFingerprint
-import app.revanced.patches.music.utils.annotations.MusicCompatibility
 import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
 
-@Patch
-@Name("Hide taste builder")
-@Description("Hides the \"Tell us which artists you like\" card from homepage.")
-@MusicCompatibility
-class TasteBuilderPatch : BytecodePatch(
-    listOf(TasteBuilderConstructorFingerprint)
+@Patch(
+    name = "Hide taste builder",
+    description = "Hides the \"Tell us which artists you like\" card from homepage."
+)
+@Suppress("unused")
+object TasteBuilderPatch : BytecodePatch(
+    setOf(TasteBuilderConstructorFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {
         TasteBuilderConstructorFingerprint.result?.let {

@@ -1,7 +1,5 @@
 package app.revanced.patches.music.layout.branding.name.patch
 
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.OptionsContainer
 import app.revanced.patcher.patch.PatchException
@@ -9,14 +7,25 @@ import app.revanced.patcher.patch.PatchOption
 import app.revanced.patcher.patch.ResourcePatch
 import app.revanced.patcher.patch.annotations.DependsOn
 import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.music.utils.annotations.MusicCompatibility
+import app.revanced.patcher.patch.annotation.CompatiblePackage
 
-@Patch
-@Name("Custom branding Music name")
-@Description("Rename the YouTube Music app to the name specified in options.json.")
-@DependsOn([RemoveElementsPatch::class])
-@MusicCompatibility
-class CustomBrandingNamePatch : ResourcePatch {
+@Patch(
+    name = "Custom branding Music name",
+    description = "Rename the YouTube Music app to the name specified in options.json.",
+    compatiblePackages = [
+        CompatiblePackage(
+            "com.google.android.apps.youtube.music",
+            [
+                "6.15.52",
+                "6.20.51",
+                "6.21.51"
+            ]
+        )
+    ]
+    dependencies = [RemoveElementsPatch::class]
+)
+@Suppress("unused")
+object CustomBrandingNamePatch : ResourcePatch {
     override fun execute(context: ResourceContext) {
 
         val longName = MusicLongName

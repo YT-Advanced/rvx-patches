@@ -2,15 +2,13 @@ package app.revanced.patches.youtube.ads.general.resource.patch
 
 import app.revanced.extensions.doRecursively
 import app.revanced.extensions.startsWithAny
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
 import app.revanced.patcher.patch.annotations.DependsOn
 import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.youtube.ads.general.bytecode.patch.GeneralAdsBytecodePatch
 import app.revanced.patches.youtube.ads.getpremium.patch.HideGetPremiumPatch
-import app.revanced.patches.youtube.utils.annotations.YouTubeCompatibility
 import app.revanced.patches.youtube.utils.fix.doublebacktoclose.patch.DoubleBackToClosePatch
 import app.revanced.patches.youtube.utils.fix.swiperefresh.patch.SwipeRefreshPatch
 import app.revanced.patches.youtube.utils.litho.patch.LithoFilterPatch
@@ -19,11 +17,26 @@ import app.revanced.util.integrations.Constants.PATCHES_PATH
 import app.revanced.util.resources.ResourceUtils.copyXmlNode
 import org.w3c.dom.Element
 
-@Patch
-@Name("Hide general ads")
-@Description("Hides general ads.")
-@DependsOn(
-    [
+@Patch(
+    name = "Hide general ads",
+    description = "Hides general ads.",
+    compatiblePackages = [
+        CompatiblePackage(
+            "com.google.android.youtube",
+            [
+                "18.22.37",
+                "18.23.36",
+                "18.24.37",
+                "18.25.40",
+                "18.27.36",
+                "18.29.38",
+                "18.30.37",
+                "18.31.40",
+                "18.32.39"
+            ]
+        )
+    ]
+    dependencies = [
         DoubleBackToClosePatch::class,
         GeneralAdsBytecodePatch::class,
         HideGetPremiumPatch::class,
@@ -32,8 +45,8 @@ import org.w3c.dom.Element
         SwipeRefreshPatch::class
     ]
 )
-@YouTubeCompatibility
-class GeneralAdsPatch : ResourcePatch {
+@Suppress("unused")
+object GeneralAdsPatch : ResourcePatch {
     private val resourceFileNames = arrayOf(
         "promoted_",
         "promotion_",

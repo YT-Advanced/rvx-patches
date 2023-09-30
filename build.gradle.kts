@@ -2,6 +2,7 @@
 
 plugins {
     kotlin("jvm") version "1.9.10"
+    alias(libs.plugins.ksp)
 }
 
 group = "app.revanced"
@@ -29,13 +30,16 @@ repositories {
 }
 
 dependencies {
-    implementation("app.revanced:revanced-patcher:14.2.2")
-    implementation("com.android.tools.smali:smali:3.0.3")
+    implementation(libs.revanced.patcher)
+    implementation(libs.smali)
+    implementation(libs.revanced.patch.annotation.processor)
+    // TODO: Required because build fails without it. Find a way to remove this dependency.
+    implementation(libs.guava)
+    implementation(libs.gson)
+    // A dependency to the Android library unfortunately fails the build, which is why this is required.
+    compileOnly(project("dummy"))
 
-    // Required for meta
-    implementation("com.google.code.gson:gson:2.10.1")
-    // Required for FlexVer-Java
-    implementation("com.unascribed:flexver-java:1.1.1")
+    ksp(libs.revanced.patch.annotation.processor)
 }
 
 tasks {
@@ -48,7 +52,7 @@ tasks {
                 System.getenv("ANDROID_HOME") ?: throw GradleException("ANDROID_HOME not found")
             val d8 = "${androidHome}/build-tools/34.0.0/d8"
             val input = configurations.archives.get().allArtifacts.files.files.first().absolutePath
-            val work = File("${buildDir}/libs")
+            val work = layout.buildDirectory.dir("libs").get().asFile
 
             exec {
                 workingDir = work

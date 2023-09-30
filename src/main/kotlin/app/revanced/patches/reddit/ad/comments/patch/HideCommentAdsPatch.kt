@@ -10,7 +10,7 @@ import app.revanced.patcher.util.smali.ExternalLabel
 import app.revanced.patches.reddit.ad.comments.fingerprints.HideCommentAdsFingerprint
 
 class HideCommentAdsPatch : BytecodePatch(
-    listOf(HideCommentAdsFingerprint)
+    setOf(HideCommentAdsFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {
         HideCommentAdsFingerprint.result?.let {

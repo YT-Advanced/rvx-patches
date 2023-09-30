@@ -26,9 +26,10 @@ import com.android.tools.smali.dexlib2.immutable.ImmutableMethod
 import com.android.tools.smali.dexlib2.immutable.ImmutableMethodParameter
 import com.android.tools.smali.dexlib2.util.MethodUtil
 
-@DependsOn([PlayerTypeHookPatch::class])
+    dependencies = [PlayerTypeHookPatch::class]
+)
 class VideoIdPatch : BytecodePatch(
-    listOf(
+    setOf(
         PlayerControllerSetTimeReferenceFingerprint,
         PlayerInitFingerprint,
         SeekFingerprint,
@@ -50,7 +51,7 @@ class VideoIdPatch : BytecodePatch(
                     val seekHelperMethod = ImmutableMethod(
                         definingClass,
                         "seekTo",
-                        listOf(ImmutableMethodParameter("J", annotations, "time")),
+                        setOf(ImmutableMethodParameter("J", annotations, "time")),
                         "Z",
                         AccessFlags.PUBLIC or AccessFlags.FINAL,
                         annotations, null,

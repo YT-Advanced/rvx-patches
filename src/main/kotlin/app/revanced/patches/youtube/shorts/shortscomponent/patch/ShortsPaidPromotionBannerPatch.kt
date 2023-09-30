@@ -14,7 +14,7 @@ import app.revanced.util.integrations.Constants.SHORTS
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 
 class ShortsPaidPromotionBannerPatch : BytecodePatch(
-    listOf(ShortsPaidPromotionFingerprint)
+    setOf(ShortsPaidPromotionFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {
         ShortsPaidPromotionFingerprint.result?.let {

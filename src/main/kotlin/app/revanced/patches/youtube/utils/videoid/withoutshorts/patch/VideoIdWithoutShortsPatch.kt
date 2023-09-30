@@ -12,7 +12,7 @@ import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 
 class VideoIdWithoutShortsPatch : BytecodePatch(
-    listOf(VideoIdWithoutShortsFingerprint)
+    setOf(VideoIdWithoutShortsFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {
 

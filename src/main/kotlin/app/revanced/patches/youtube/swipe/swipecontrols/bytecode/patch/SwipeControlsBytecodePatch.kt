@@ -13,9 +13,10 @@ import app.revanced.patches.youtube.utils.playertype.patch.PlayerTypeHookPatch
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.immutable.ImmutableMethod
 
-@DependsOn([PlayerTypeHookPatch::class])
+    dependencies = [PlayerTypeHookPatch::class]
+)
 class SwipeControlsBytecodePatch : BytecodePatch(
-    listOf(
+    setOf(
         SwipeControlsHostActivityFingerprint,
         WatchWhileActivityFingerprint
     )

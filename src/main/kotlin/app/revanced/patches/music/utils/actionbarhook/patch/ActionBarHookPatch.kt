@@ -13,9 +13,10 @@ import app.revanced.patches.music.utils.resourceid.patch.SharedResourceIdPatch
 import app.revanced.util.integrations.Constants.MUSIC_ACTIONBAR
 import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
 
-@DependsOn([SharedResourceIdPatch::class])
+    dependencies = [SharedResourceIdPatch::class]
+)
 class ActionBarHookPatch : BytecodePatch(
-    listOf(ActionsBarParentFingerprint)
+    setOf(ActionsBarParentFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {
 

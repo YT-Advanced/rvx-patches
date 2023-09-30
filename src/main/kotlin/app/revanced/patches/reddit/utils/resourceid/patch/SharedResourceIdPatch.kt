@@ -7,7 +7,8 @@ import app.revanced.patches.shared.patch.mapping.ResourceMappingPatch
 import app.revanced.util.enum.ResourceType
 import app.revanced.util.enum.ResourceType.STRING
 
-@DependsOn([ResourceMappingPatch::class])
+    dependencies = [ResourceMappingPatch::class]
+)
 class SharedResourceIdPatch : ResourcePatch {
     internal companion object {
         var ScreenShotShareBanner: Long = -1

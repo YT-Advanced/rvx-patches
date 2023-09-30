@@ -10,7 +10,7 @@ import app.revanced.patches.youtube.overlaybutton.downloadbuttonhook.fingerprint
 import app.revanced.util.integrations.Constants.UTILS_PATH
 
 class DownloadButtonHookPatch : BytecodePatch(
-    listOf(DownloadActionsFingerprint)
+    setOf(DownloadActionsFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {
         DownloadActionsFingerprint.result?.let {

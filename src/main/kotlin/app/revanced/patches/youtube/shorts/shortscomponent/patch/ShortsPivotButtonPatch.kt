@@ -19,7 +19,7 @@ import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 
 class ShortsPivotButtonPatch : BytecodePatch(
-    listOf(
+    setOf(
         ShortsPivotFingerprint,
         ShortsPivotLegacyFingerprint
     )

@@ -14,7 +14,7 @@ import app.revanced.util.integrations.Constants.INTEGRATIONS_PATH
 @RequiresIntegrations
 class IntegrationsPatch : AbstractIntegrationsPatch(
     "$INTEGRATIONS_PATH/utils/ReVancedUtils;",
-    listOf(
+    setOf(
         ApplicationInitFingerprint,
         StandalonePlayerActivityFingerprint,
         RemoteEmbeddedPlayerFingerprint,

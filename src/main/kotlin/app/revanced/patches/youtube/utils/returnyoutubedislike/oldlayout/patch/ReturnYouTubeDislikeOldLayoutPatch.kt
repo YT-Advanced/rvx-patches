@@ -13,9 +13,10 @@ import app.revanced.util.bytecode.getWideLiteralIndex
 import app.revanced.util.integrations.Constants.UTILS_PATH
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 
-@DependsOn([SharedResourceIdPatch::class])
+    dependencies = [SharedResourceIdPatch::class]
+)
 class ReturnYouTubeDislikeOldLayoutPatch : BytecodePatch(
-    listOf(ButtonTagFingerprint)
+    setOf(ButtonTagFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {
 

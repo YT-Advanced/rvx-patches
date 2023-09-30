@@ -19,14 +19,13 @@ import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
 
-@DependsOn(
-    [
+    dependencies = [
         SharedResourceIdPatch::class,
         VideoInformationPatch::class
     ]
 )
 class ReturnYouTubeDislikeBytecodePatch : BytecodePatch(
-    listOf(
+    setOf(
         DislikeFingerprint,
         LikeFingerprint,
         RemoveLikeFingerprint,
@@ -34,7 +33,7 @@ class ReturnYouTubeDislikeBytecodePatch : BytecodePatch(
     )
 ) {
     override fun execute(context: BytecodeContext) {
-        listOf(
+        setOf(
             LikeFingerprint.toPatch(Vote.LIKE),
             DislikeFingerprint.toPatch(Vote.DISLIKE),
             RemoveLikeFingerprint.toPatch(Vote.REMOVE_LIKE)

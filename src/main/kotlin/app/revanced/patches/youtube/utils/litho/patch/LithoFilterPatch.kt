@@ -10,7 +10,6 @@ import app.revanced.patcher.patch.annotations.DependsOn
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod
 import app.revanced.patches.shared.patch.litho.ComponentParserPatch
 import app.revanced.patches.shared.patch.litho.ComponentParserPatch.Companion.generalHook
-import app.revanced.patches.youtube.utils.annotations.YouTubeCompatibility
 import app.revanced.patches.youtube.utils.litho.fingerprints.GeneralByteBufferFingerprint
 import app.revanced.patches.youtube.utils.litho.fingerprints.LithoFilterFingerprint
 import app.revanced.patches.youtube.utils.litho.fingerprints.LowLevelByteBufferFingerprint
@@ -19,16 +18,15 @@ import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch
 import app.revanced.util.integrations.Constants.ADS_PATH
 import java.io.Closeable
 
-@DependsOn(
-    [
+    dependencies = [
         ComponentParserPatch::class,
         PlayerTypeHookPatch::class,
         SettingsPatch::class
     ]
 )
-@YouTubeCompatibility
-class LithoFilterPatch : BytecodePatch(
-    listOf(
+@Suppress("unused")
+object LithoFilterPatch : BytecodePatch(
+    setOf(
         GeneralByteBufferFingerprint,
         LithoFilterFingerprint,
         LowLevelByteBufferFingerprint

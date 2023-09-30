@@ -1,8 +1,6 @@
 package app.revanced.patches.music.general.castbutton.patch
 
 import app.revanced.extensions.exception
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
@@ -11,9 +9,9 @@ import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchException
 import app.revanced.patcher.patch.annotations.DependsOn
 import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.music.general.castbutton.fingerprints.MediaRouteButtonFingerprint
 import app.revanced.patches.music.general.castbutton.fingerprints.PlayerOverlayChipFingerprint
-import app.revanced.patches.music.utils.annotations.MusicCompatibility
 import app.revanced.patches.music.utils.resourceid.patch.SharedResourceIdPatch
 import app.revanced.patches.music.utils.resourceid.patch.SharedResourceIdPatch.Companion.PlayerOverlayChip
 import app.revanced.patches.music.utils.settings.resource.patch.SettingsPatch
@@ -22,18 +20,27 @@ import app.revanced.util.enum.CategoryType
 import app.revanced.util.integrations.Constants.MUSIC_GENERAL
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 
-@Patch
-@Name("Hide cast button")
-@Description("Hides the cast button.")
-@DependsOn(
-    [
+@Patch(
+    name = "Hide cast button",
+    description = "Hides the cast button.",
+    compatiblePackages = [
+        CompatiblePackage(
+            "com.google.android.apps.youtube.music",
+            [
+                "6.15.52",
+                "6.20.51",
+                "6.21.51"
+            ]
+        )
+    ]
+    dependencies = [
         SettingsPatch::class,
         SharedResourceIdPatch::class
     ]
 )
-@MusicCompatibility
-class HideCastButtonPatch : BytecodePatch(
-    listOf(
+@Suppress("unused")
+object HideCastButtonPatch : BytecodePatch(
+    setOf(
         MediaRouteButtonFingerprint,
         PlayerOverlayChipFingerprint
     )

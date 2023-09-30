@@ -1,21 +1,20 @@
 package app.revanced.patches.music.utils.fix.androidauto.patch
 
 import app.revanced.extensions.exception
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.music.utils.annotations.MusicCompatibility
+import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.music.utils.fix.androidauto.fingerprints.CertificateCheckFingerprint
 
-@Patch
-@Name("Certificate spoof")
-@Description("Spoofs the YouTube Music certificate for Android Auto.")
-@MusicCompatibility
-class AndroidAutoCertificatePatch : BytecodePatch(
-    listOf(CertificateCheckFingerprint)
+@Patch(
+    name = "Certificate spoof",
+    description = "Spoofs the YouTube Music certificate for Android Auto."
+)
+@Suppress("unused")
+object AndroidAutoCertificatePatch : BytecodePatch(
+    setOf(CertificateCheckFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {
 

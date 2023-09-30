@@ -1,12 +1,10 @@
 package app.revanced.patches.music.utils.sponsorblock.resource.patch
 
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
 import app.revanced.patcher.patch.annotations.DependsOn
 import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.music.utils.annotations.MusicCompatibility
+import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.music.utils.settings.resource.patch.SettingsPatch
 import app.revanced.patches.music.utils.sponsorblock.bytecode.patch.SponsorBlockBytecodePatch
 import app.revanced.util.resources.MusicResourceHelper
@@ -14,17 +12,26 @@ import app.revanced.util.resources.MusicResourceHelper.hookPreference
 import app.revanced.util.resources.ResourceUtils
 import app.revanced.util.resources.ResourceUtils.copyResources
 
-@Patch
-@Name("SponsorBlock")
-@Description("Integrates SponsorBlock which allows skipping video segments such as sponsored content.")
-@DependsOn(
-    [
+@Patch(
+    name = "SponsorBlock",
+    description = "Integrates SponsorBlock which allows skipping video segments such as sponsored content.",
+    compatiblePackages = [
+        CompatiblePackage(
+            "com.google.android.apps.youtube.music",
+            [
+                "6.15.52",
+                "6.20.51",
+                "6.21.51"
+            ]
+        )
+    ]
+    dependencies = [
         SettingsPatch::class,
         SponsorBlockBytecodePatch::class
     ]
 )
-@MusicCompatibility
-class SponsorBlockPatch : ResourcePatch {
+@Suppress("unused")
+object SponsorBlockPatch : ResourcePatch {
     override fun execute(context: ResourceContext) {
 
         /**

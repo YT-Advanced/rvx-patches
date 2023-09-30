@@ -11,7 +11,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 
 class LithoThemePatch : BytecodePatch(
-    listOf(LithoThemeFingerprint)
+    setOf(LithoThemeFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {
 

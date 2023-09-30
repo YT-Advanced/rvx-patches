@@ -18,7 +18,7 @@ import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 import kotlin.properties.Delegates
 
 class ComponentParserPatch : BytecodePatch(
-    listOf(
+    setOf(
         EmptyComponentBuilderFingerprint,
         IdentifierFingerprint
     )

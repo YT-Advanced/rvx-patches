@@ -13,7 +13,8 @@ import app.revanced.util.bytecode.isWideLiteralExists
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
 
-@DependsOn([SharedResourceIdPatch::class])
+    dependencies = [SharedResourceIdPatch::class]
+)
 @Suppress("LABEL_NAME_CLASH")
 class GeneralAdsBytecodePatch : BytecodePatch() {
     override fun execute(context: BytecodeContext) {

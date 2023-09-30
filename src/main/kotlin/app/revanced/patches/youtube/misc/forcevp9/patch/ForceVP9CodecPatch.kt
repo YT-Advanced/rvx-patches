@@ -1,8 +1,6 @@
 package app.revanced.patches.youtube.misc.forcevp9.patch
 
 import app.revanced.extensions.exception
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
@@ -12,6 +10,7 @@ import app.revanced.patcher.fingerprint.method.impl.MethodFingerprintResult
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotations.DependsOn
 import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod
 import app.revanced.patches.youtube.misc.forcevp9.fingerprints.VideoCapabilitiesFingerprint
 import app.revanced.patches.youtube.misc.forcevp9.fingerprints.VideoCapabilitiesParentFingerprint
@@ -19,7 +18,6 @@ import app.revanced.patches.youtube.misc.forcevp9.fingerprints.Vp9PrimaryFingerp
 import app.revanced.patches.youtube.misc.forcevp9.fingerprints.Vp9PropsFingerprint
 import app.revanced.patches.youtube.misc.forcevp9.fingerprints.Vp9PropsParentFingerprint
 import app.revanced.patches.youtube.misc.forcevp9.fingerprints.Vp9SecondaryFingerprint
-import app.revanced.patches.youtube.utils.annotations.YouTubeCompatibility
 import app.revanced.patches.youtube.utils.fingerprints.LayoutSwitchFingerprint
 import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch
 import app.revanced.util.integrations.Constants.MISC_PATH
@@ -28,13 +26,30 @@ import com.android.tools.smali.dexlib2.dexbacked.reference.DexBackedFieldReferen
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 
-@Patch
-@Name("Force VP9 codec")
-@Description("Forces the VP9 codec for videos.")
-@DependsOn([SettingsPatch::class])
-@YouTubeCompatibility
-class ForceVP9CodecPatch : BytecodePatch(
-    listOf(
+@Patch(
+    name = "Force VP9 codec",
+    description = "Forces the VP9 codec for videos.",
+    compatiblePackages = [
+        CompatiblePackage(
+            "com.google.android.youtube",
+            [
+                "18.22.37",
+                "18.23.36",
+                "18.24.37",
+                "18.25.40",
+                "18.27.36",
+                "18.29.38",
+                "18.30.37",
+                "18.31.40",
+                "18.32.39"
+            ]
+        )
+    ]
+    dependencies = [SettingsPatch::class]
+)
+@Suppress("unused")
+object ForceVP9CodecPatch : BytecodePatch(
+    setOf(
         LayoutSwitchFingerprint,
         VideoCapabilitiesParentFingerprint,
         Vp9PropsParentFingerprint

@@ -1,7 +1,5 @@
 package app.revanced.patches.youtube.layout.doubletaplength.patch
 
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.OptionsContainer
 import app.revanced.patcher.patch.PatchException
@@ -9,18 +7,35 @@ import app.revanced.patcher.patch.PatchOption
 import app.revanced.patcher.patch.ResourcePatch
 import app.revanced.patcher.patch.annotations.DependsOn
 import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.youtube.utils.annotations.YouTubeCompatibility
+import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch
 import app.revanced.util.resources.ResourceHelper.addEntryValues
 import app.revanced.util.resources.ResourceUtils
 import app.revanced.util.resources.ResourceUtils.copyResources
 
-@Patch
-@Name("Custom double tap length")
-@Description("Add 'double-tap to seek' value.")
-@DependsOn([SettingsPatch::class])
-@YouTubeCompatibility
-class DoubleTapLengthPatch : ResourcePatch {
+@Patch(
+    name = "Custom double tap length",
+    description = "Add 'double-tap to seek' value.",
+    compatiblePackages = [
+        CompatiblePackage(
+            "com.google.android.youtube",
+            [
+                "18.22.37",
+                "18.23.36",
+                "18.24.37",
+                "18.25.40",
+                "18.27.36",
+                "18.29.38",
+                "18.30.37",
+                "18.31.40",
+                "18.32.39"
+            ]
+        )
+    ]
+    dependencies = [SettingsPatch::class]
+)
+@Suppress("unused")
+object DoubleTapLengthPatch : ResourcePatch {
     override fun execute(context: ResourceContext) {
         val arrayPath = "res/values-v21/arrays.xml"
         val entriesName = "double_tap_length_entries"

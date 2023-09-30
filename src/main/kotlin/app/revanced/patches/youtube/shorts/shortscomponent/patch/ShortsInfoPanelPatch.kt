@@ -12,7 +12,7 @@ import app.revanced.util.integrations.Constants.SHORTS
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 
 class ShortsInfoPanelPatch : BytecodePatch(
-    listOf(ShortsInfoPanelFingerprint)
+    setOf(ShortsInfoPanelFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {
         ShortsInfoPanelFingerprint.result?.let {

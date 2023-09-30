@@ -1,21 +1,21 @@
 package app.revanced.patches.youtube.layout.splashanimation.patch
 
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
 import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.youtube.utils.annotations.YouTubeCompatibility
+import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.util.resources.ResourceUtils
 import app.revanced.util.resources.ResourceUtils.copyResources
 import app.revanced.util.resources.ResourceUtils.copyXmlNode
 import kotlin.io.path.exists
 
-@Patch(false)
-@Name("Add splash animation")
-@Description("Adds splash animation, which was removed in YT v18.19.36+. This patch cannot be used with 'custom-branding-icon' patch")
-@YouTubeCompatibility
-class AddSplashAnimationPatch : ResourcePatch {
+@Patch(
+    name = "Add splash animation",
+    description = "Adds splash animation, which was removed in YT v18.19.36+. This patch cannot be used with 'custom-branding-icon' patch",
+    use = false
+)
+@Suppress("unused")
+object AddSplashAnimationPatch : ResourcePatch {
     override fun execute(context: ResourceContext) {
 
         val resDirectory = context["res"]

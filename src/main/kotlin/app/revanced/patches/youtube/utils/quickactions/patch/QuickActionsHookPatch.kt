@@ -14,9 +14,10 @@ import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.WideLiteralInstruction
 
-@DependsOn([SharedResourceIdPatch::class])
+    dependencies = [SharedResourceIdPatch::class]
+)
 class QuickActionsHookPatch : BytecodePatch(
-    listOf(QuickActionsElementFingerprint)
+    setOf(QuickActionsElementFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {
 

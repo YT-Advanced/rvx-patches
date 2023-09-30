@@ -1,8 +1,6 @@
 package app.revanced.patches.youtube.general.autocaptions.patch
 
 import app.revanced.extensions.exception
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
@@ -11,36 +9,51 @@ import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotations.DependsOn
 import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.util.smali.ExternalLabel
 import app.revanced.patches.shared.fingerprints.captions.SubtitleTrackFingerprint
 import app.revanced.patches.youtube.general.autocaptions.fingerprints.StartVideoInformerFingerprint
-import app.revanced.patches.youtube.utils.annotations.YouTubeCompatibility
 import app.revanced.patches.youtube.utils.fingerprints.SubtitleButtonControllerFingerprint
 import app.revanced.patches.youtube.utils.playertype.patch.PlayerTypeHookPatch
 import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch
 import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch
 import app.revanced.util.integrations.Constants.GENERAL
 
-@Patch
-@Name("Disable auto captions")
-@Description("Disables forced auto captions.")
-@DependsOn(
-    [
+@Patch(
+    name = "Disable auto captions",
+    description = "Disables forced auto captions.",
+    compatiblePackages = [
+        CompatiblePackage(
+            "com.google.android.youtube",
+            [
+                "18.22.37",
+                "18.23.36",
+                "18.24.37",
+                "18.25.40",
+                "18.27.36",
+                "18.29.38",
+                "18.30.37",
+                "18.31.40",
+                "18.32.39"
+            ]
+        )
+    ]
+    dependencies = [
         PlayerTypeHookPatch::class,
         SettingsPatch::class,
         SharedResourceIdPatch::class
     ]
 )
-@YouTubeCompatibility
-class AutoCaptionsPatch : BytecodePatch(
-    listOf(
+@Suppress("unused")
+object AutoCaptionsPatch : BytecodePatch(
+    setOf(
         StartVideoInformerFingerprint,
         SubtitleButtonControllerFingerprint,
         SubtitleTrackFingerprint
     )
 ) {
     override fun execute(context: BytecodeContext) {
-        listOf(
+        setOf(
             StartVideoInformerFingerprint.toPatch(Status.DISABLED),
             SubtitleButtonControllerFingerprint.toPatch(Status.ENABLED)
         ).forEach { (fingerprint, status) ->

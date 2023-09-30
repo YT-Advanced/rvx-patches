@@ -1,8 +1,6 @@
 package app.revanced.patches.music.navigation.component.patch
 
 import app.revanced.extensions.exception
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
@@ -10,8 +8,8 @@ import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchException
 import app.revanced.patcher.patch.annotations.DependsOn
 import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.music.navigation.component.fingerprints.TabLayoutTextFingerprint
-import app.revanced.patches.music.utils.annotations.MusicCompatibility
 import app.revanced.patches.music.utils.resourceid.patch.SharedResourceIdPatch
 import app.revanced.patches.music.utils.settings.resource.patch.SettingsPatch
 import app.revanced.util.bytecode.getWideLiteralIndex
@@ -23,18 +21,27 @@ import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 
-@Patch
-@Name("Hide navigation bar component")
-@Description("Hides navigation bar components.")
-@DependsOn(
-    [
+@Patch(
+    name = "Hide navigation bar component",
+    description = "Hides navigation bar components.",
+    compatiblePackages = [
+        CompatiblePackage(
+            "com.google.android.apps.youtube.music",
+            [
+                "6.15.52",
+                "6.20.51",
+                "6.21.51"
+            ]
+        )
+    ]
+    dependencies = [
         SettingsPatch::class,
         SharedResourceIdPatch::class
     ]
 )
-@MusicCompatibility
-class NavigationBarComponentPatch : BytecodePatch(
-    listOf(TabLayoutTextFingerprint)
+@Suppress("unused")
+object NavigationBarComponentPatch : BytecodePatch(
+    setOf(TabLayoutTextFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {
         /**

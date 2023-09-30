@@ -1,11 +1,9 @@
 package app.revanced.patches.music.utils.settings.resource.patch
 
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.annotations.DependsOn
 import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.music.utils.annotations.MusicCompatibility
+import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.music.utils.settings.bytecode.patch.SettingsBytecodePatch
 import app.revanced.patches.shared.patch.settings.AbstractSettingsResourcePatch
 import app.revanced.util.enum.CategoryType
@@ -26,12 +24,23 @@ import java.io.Closeable
 import java.io.File
 import java.nio.file.Paths
 
-@Patch
-@Name("Settings")
-@Description("Adds settings for ReVanced to YouTube Music.")
-@DependsOn([SettingsBytecodePatch::class])
-@MusicCompatibility
-class SettingsPatch : AbstractSettingsResourcePatch(
+@Patch(
+    name = "Settings",
+    description = "Adds settings for ReVanced to YouTube Music.",
+    compatiblePackages = [
+        CompatiblePackage(
+            "com.google.android.apps.youtube.music",
+            [
+                "6.15.52",
+                "6.20.51",
+                "6.21.51"
+            ]
+        )
+    ]
+    dependencies = [SettingsBytecodePatch::class]
+)
+@Suppress("unused")
+object SettingsPatch : AbstractSettingsResourcePatch(
     "music/settings",
     "music/settings/host",
     false

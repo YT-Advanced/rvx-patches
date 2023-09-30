@@ -18,7 +18,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 
 class NavBarIndexHookPatch : BytecodePatch(
-    listOf(
+    setOf(
         NavBarBuilderFingerprint,
         OnBackPressedFingerprint,
         TopBarButtonFingerprint

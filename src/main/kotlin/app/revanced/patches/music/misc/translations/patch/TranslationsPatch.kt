@@ -1,21 +1,30 @@
 package app.revanced.patches.music.misc.translations.patch
 
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
 import app.revanced.patcher.patch.annotations.DependsOn
 import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.music.utils.annotations.MusicCompatibility
+import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.music.utils.settings.resource.patch.SettingsPatch
 import app.revanced.util.resources.ResourceHelper.addTranslations
 
-@Patch
-@Name("Translations")
-@Description("Add Crowdin translations for YouTube Music.")
-@DependsOn([SettingsPatch::class])
-@MusicCompatibility
-class TranslationsPatch : ResourcePatch {
+@Patch(
+    name = "Translations",
+    description = "Add Crowdin translations for YouTube Music.",
+    compatiblePackages = [
+        CompatiblePackage(
+            "com.google.android.apps.youtube.music",
+            [
+                "6.15.52",
+                "6.20.51",
+                "6.21.51"
+            ]
+        )
+    ]
+    dependencies = [SettingsPatch::class]
+)
+@Suppress("unused")
+object TranslationsPatch : ResourcePatch {
     override fun execute(context: ResourceContext) {
 
         context.addTranslations("music", LANGUAGE_LIST)

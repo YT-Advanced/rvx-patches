@@ -1,12 +1,10 @@
 package app.revanced.patches.music.utils.returnyoutubedislike.resource.patch
 
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
 import app.revanced.patcher.patch.annotations.DependsOn
 import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.music.utils.annotations.MusicCompatibility
+import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.music.utils.returnyoutubedislike.bytecode.patch.ReturnYouTubeDislikeBytecodePatch
 import app.revanced.patches.music.utils.settings.resource.patch.SettingsPatch
 import app.revanced.util.resources.MusicResourceHelper.RETURN_YOUTUBE_DISLIKE_SETTINGS_KEY
@@ -14,17 +12,26 @@ import app.revanced.util.resources.MusicResourceHelper.addReVancedMusicPreferenc
 import org.w3c.dom.Element
 import org.w3c.dom.Node
 
-@Patch
-@Name("Return YouTube Dislike")
-@Description("Shows the dislike count of videos using the Return YouTube Dislike API.")
-@DependsOn(
-    [
+@Patch(
+    name = "Return YouTube Dislike",
+    description = "Shows the dislike count of videos using the Return YouTube Dislike API.",
+    compatiblePackages = [
+        CompatiblePackage(
+            "com.google.android.apps.youtube.music",
+            [
+                "6.15.52",
+                "6.20.51",
+                "6.21.51"
+            ]
+        )
+    ]
+    dependencies = [
         ReturnYouTubeDislikeBytecodePatch::class,
         SettingsPatch::class
     ]
 )
-@MusicCompatibility
-class ReturnYouTubeDislikePatch : ResourcePatch {
+@Suppress("unused")
+object ReturnYouTubeDislikePatch : ResourcePatch {
     override fun execute(context: ResourceContext) {
 
         context.addReVancedMusicPreference(RETURN_YOUTUBE_DISLIKE_SETTINGS_KEY)

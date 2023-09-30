@@ -17,7 +17,7 @@ import com.android.tools.smali.dexlib2.iface.reference.Reference
 abstract class AbstractOpusCodecsPatch(
     private val descriptor: String
 ) : BytecodePatch(
-    listOf(
+    setOf(
         CodecReferenceFingerprint,
         CodecSelectorFingerprint
     )

@@ -1,8 +1,6 @@
 package app.revanced.patches.youtube.seekbar.append.patch
 
 import app.revanced.extensions.exception
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
@@ -11,7 +9,7 @@ import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchException
 import app.revanced.patcher.patch.annotations.DependsOn
 import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.youtube.utils.annotations.YouTubeCompatibility
+import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.youtube.utils.fingerprints.TotalTimeFingerprint
 import app.revanced.patches.youtube.utils.overridequality.patch.OverrideQualityHookPatch
 import app.revanced.patches.youtube.utils.overridespeed.patch.OverrideSpeedHookPatch
@@ -22,20 +20,35 @@ import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
 
-@Patch
-@Name("Append time stamps information")
-@Description("Add the current video quality or playback speed in brackets next to the current time.")
-@DependsOn(
-    [
+@Patch(
+    name = "Append time stamps information",
+    description = "Add the current video quality or playback speed in brackets next to the current time.",
+    compatiblePackages = [
+        CompatiblePackage(
+            "com.google.android.youtube",
+            [
+                "18.22.37",
+                "18.23.36",
+                "18.24.37",
+                "18.25.40",
+                "18.27.36",
+                "18.29.38",
+                "18.30.37",
+                "18.31.40",
+                "18.32.39"
+            ]
+        )
+    ]
+    dependencies = [
         OverrideQualityHookPatch::class,
         OverrideSpeedHookPatch::class,
         SettingsPatch::class,
         SharedResourceIdPatch::class
     ]
 )
-@YouTubeCompatibility
-class AppendTimeStampInformationPatch : BytecodePatch(
-    listOf(TotalTimeFingerprint)
+@Suppress("unused")
+object AppendTimeStampInformationPatch : BytecodePatch(
+    setOf(TotalTimeFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {
         TotalTimeFingerprint.result?.let {

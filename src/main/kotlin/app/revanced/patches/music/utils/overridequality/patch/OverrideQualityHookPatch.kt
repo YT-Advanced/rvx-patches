@@ -19,9 +19,10 @@ import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 import com.android.tools.smali.dexlib2.immutable.ImmutableField
 import com.android.tools.smali.dexlib2.util.MethodUtil
 
-@DependsOn([SharedResourceIdPatch::class])
+    dependencies = [SharedResourceIdPatch::class]
+)
 class OverrideQualityHookPatch : BytecodePatch(
-    listOf(
+    setOf(
         VideoQualityListFingerprint,
         VideoQualityPatchFingerprint
     )

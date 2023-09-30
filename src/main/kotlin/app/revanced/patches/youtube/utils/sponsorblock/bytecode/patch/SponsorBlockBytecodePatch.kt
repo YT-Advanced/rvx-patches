@@ -35,8 +35,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
 import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 
-@DependsOn(
-    [
+    dependencies = [
         OverrideSpeedHookPatch::class,
         PlayerControlsPatch::class,
         SharedResourceIdPatch::class,
@@ -45,7 +44,7 @@ import com.android.tools.smali.dexlib2.iface.reference.MethodReference
     ]
 )
 class SponsorBlockBytecodePatch : BytecodePatch(
-    listOf(
+    setOf(
         SeekbarFingerprint,
         SegmentPlaybackControllerFingerprint,
         TotalTimeFingerprint,

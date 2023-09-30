@@ -14,7 +14,7 @@ import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 
 class ShortsLikeButtonPatch : BytecodePatch(
-    listOf(ShortsLikeFingerprint)
+    setOf(ShortsLikeFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {
         ShortsLikeFingerprint.result?.let {

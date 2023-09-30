@@ -1,31 +1,45 @@
 package app.revanced.patches.youtube.layout.materialyou.patch
 
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
 import app.revanced.patcher.patch.annotations.DependsOn
 import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.youtube.layout.theme.patch.GeneralThemePatch
 import app.revanced.patches.youtube.layout.theme.patch.GeneralThemePatch.Companion.isMonetPatchIncluded
-import app.revanced.patches.youtube.utils.annotations.YouTubeCompatibility
 import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch
 import app.revanced.util.resources.ResourceHelper.updatePatchStatusTheme
 import app.revanced.util.resources.ResourceUtils
 import app.revanced.util.resources.ResourceUtils.copyResources
 import app.revanced.util.resources.ResourceUtils.copyXmlNode
 
-@Patch(false)
-@Name("MaterialYou")
-@Description("Enables MaterialYou theme for Android 12+")
-@DependsOn(
-    [
+@Patch(
+    name = "MaterialYou",
+    description = "Enables MaterialYou theme for Android 12+",
+    compatiblePackages = [
+        CompatiblePackage(
+            "com.google.android.youtube",
+            [
+                "18.22.37",
+                "18.23.36",
+                "18.24.37",
+                "18.25.40",
+                "18.27.36",
+                "18.29.38",
+                "18.30.37",
+                "18.31.40",
+                "18.32.39"
+            ]
+        )
+    ]
+    dependencies = [
         GeneralThemePatch::class,
         SettingsPatch::class
-    ]
+    ],
+    use = false
 )
-@YouTubeCompatibility
-class MaterialYouPatch : ResourcePatch {
+@Suppress("unused")
+object MaterialYouPatch : ResourcePatch {
     override fun execute(context: ResourceContext) {
 
         arrayOf(

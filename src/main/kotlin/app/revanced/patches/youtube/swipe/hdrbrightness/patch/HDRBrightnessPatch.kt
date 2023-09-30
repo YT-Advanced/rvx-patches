@@ -10,7 +10,7 @@ import app.revanced.patches.youtube.swipe.hdrbrightness.fingerprints.HDRBrightne
 import app.revanced.util.integrations.Constants.SWIPE_PATH
 
 class HDRBrightnessPatch : BytecodePatch(
-    listOf(HDRBrightnessFingerprint)
+    setOf(HDRBrightnessFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {
 

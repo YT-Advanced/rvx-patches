@@ -22,14 +22,13 @@ import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
 import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 
-@DependsOn(
-    [
+    dependencies = [
         SharedResourceIdPatch::class,
         VideoInformationPatch::class
     ]
 )
 class SponsorBlockBytecodePatch : BytecodePatch(
-    listOf(
+    setOf(
         MusicPlaybackControlsTimeBarDrawFingerprint,
         MusicPlaybackControlsTimeBarOnMeasureFingerprint,
         SeekBarConstructorFingerprint

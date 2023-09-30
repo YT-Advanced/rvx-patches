@@ -1,16 +1,14 @@
 package app.revanced.patches.youtube.general.trendingsearches.patch
 
 import app.revanced.extensions.exception
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotations.DependsOn
 import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.youtube.general.trendingsearches.fingerprints.SearchBarEntryFingerprint
-import app.revanced.patches.youtube.utils.annotations.YouTubeCompatibility
 import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch
 import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.Companion.YtOutlineArrowTimeBlack
 import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.Companion.YtOutlineFireBlack
@@ -21,18 +19,33 @@ import app.revanced.util.integrations.Constants.GENERAL
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
 
-@Patch
-@Name("Hide trending searches")
-@Description("Hide trending searches in the search bar.")
-@DependsOn(
-    [
+@Patch(
+    name = "Hide trending searches",
+    description = "Hide trending searches in the search bar.",
+    compatiblePackages = [
+        CompatiblePackage(
+            "com.google.android.youtube",
+            [
+                "18.22.37",
+                "18.23.36",
+                "18.24.37",
+                "18.25.40",
+                "18.27.36",
+                "18.29.38",
+                "18.30.37",
+                "18.31.40",
+                "18.32.39"
+            ]
+        )
+    ]
+    dependencies = [
         SettingsPatch::class,
         SharedResourceIdPatch::class
     ]
 )
-@YouTubeCompatibility
-class TrendingSearchesPatch : BytecodePatch(
-    listOf(SearchBarEntryFingerprint)
+@Suppress("unused")
+object TrendingSearchesPatch : BytecodePatch(
+    setOf(SearchBarEntryFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {
 

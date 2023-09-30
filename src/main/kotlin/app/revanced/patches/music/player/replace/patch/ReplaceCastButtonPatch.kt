@@ -1,8 +1,6 @@
 package app.revanced.patches.music.player.replace.patch
 
 import app.revanced.extensions.exception
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
@@ -10,9 +8,9 @@ import app.revanced.patcher.extensions.InstructionExtensions.removeInstruction
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotations.DependsOn
 import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.music.player.replace.fingerprints.CastButtonContainerFingerprint
 import app.revanced.patches.music.player.replace.fingerprints.PlaybackStartDescriptorFingerprint
-import app.revanced.patches.music.utils.annotations.MusicCompatibility
 import app.revanced.patches.music.utils.resourceid.patch.SharedResourceIdPatch
 import app.revanced.patches.music.utils.resourceid.patch.SharedResourceIdPatch.Companion.PlayerCastMediaRouteButton
 import app.revanced.patches.music.utils.settings.resource.patch.SettingsPatch
@@ -31,19 +29,29 @@ import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 
-@Patch(false)
-@Name("Replace cast button")
-@Description("Replace the cast button in the player with the open music button.")
-@DependsOn(
-    [
+@Patch(
+    name = "Replace cast button",
+    description = "Replace the cast button in the player with the open music button.",
+    compatiblePackages = [
+        CompatiblePackage(
+            "com.google.android.apps.youtube.music",
+            [
+                "6.15.52",
+                "6.20.51",
+                "6.21.51"
+            ]
+        )
+    ]
+    dependencies = [
         SettingsPatch::class,
         SharedResourceIdPatch::class,
         VideoTypeHookPatch::class
-    ]
+    ],
+    use = false
 )
-@MusicCompatibility
-class ReplaceCastButtonPatch : BytecodePatch(
-    listOf(
+@Suppress("unused")
+object ReplaceCastButtonPatch : BytecodePatch(
+    setOf(
         CastButtonContainerFingerprint,
         PlaybackStartDescriptorFingerprint
     )

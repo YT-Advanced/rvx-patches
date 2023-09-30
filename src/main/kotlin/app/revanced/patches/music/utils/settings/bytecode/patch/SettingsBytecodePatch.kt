@@ -14,9 +14,10 @@ import app.revanced.util.integrations.Constants.MUSIC_INTEGRATIONS_PATH
 import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 
-@DependsOn([IntegrationsPatch::class])
+    dependencies = [IntegrationsPatch::class]
+)
 class SettingsBytecodePatch : BytecodePatch(
-    listOf(
+    setOf(
         PreferenceFingerprint,
         SettingsHeadersFragmentFingerprint
     )

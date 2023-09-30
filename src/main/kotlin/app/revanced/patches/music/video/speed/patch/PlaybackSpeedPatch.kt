@@ -1,8 +1,6 @@
 package app.revanced.patches.music.video.speed.patch
 
 import app.revanced.extensions.exception
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
@@ -10,7 +8,7 @@ import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint.Companion.
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotations.DependsOn
 import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.music.utils.annotations.MusicCompatibility
+import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.music.utils.overridespeed.patch.OverrideSpeedHookPatch
 import app.revanced.patches.music.utils.settings.resource.patch.SettingsPatch
 import app.revanced.patches.music.video.speed.fingerprints.PlaybackSpeedBottomSheetFingerprint
@@ -19,18 +17,27 @@ import app.revanced.util.enum.CategoryType
 import app.revanced.util.integrations.Constants.MUSIC_VIDEO_PATH
 import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 
-@Patch
-@Name("Remember playback speed")
-@Description("Save the playback speed value whenever you change the playback speed.")
-@DependsOn(
-    [
+@Patch(
+    name = "Remember playback speed",
+    description = "Save the playback speed value whenever you change the playback speed.",
+    compatiblePackages = [
+        CompatiblePackage(
+            "com.google.android.apps.youtube.music",
+            [
+                "6.15.52",
+                "6.20.51",
+                "6.21.51"
+            ]
+        )
+    ]
+    dependencies = [
         OverrideSpeedHookPatch::class,
         SettingsPatch::class
     ]
 )
-@MusicCompatibility
-class PlaybackSpeedPatch : BytecodePatch(
-    listOf(PlaybackSpeedBottomSheetParentFingerprint)
+@Suppress("unused")
+object PlaybackSpeedPatch : BytecodePatch(
+    setOf(PlaybackSpeedBottomSheetParentFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {
 

@@ -1,28 +1,28 @@
 package app.revanced.patches.reddit.layout.place.patch
 
 import app.revanced.extensions.exception
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotations.DependsOn
 import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.reddit.layout.place.fingerprints.HomePagerScreenFingerprint
-import app.revanced.patches.reddit.utils.annotations.RedditCompatibility
 import app.revanced.patches.reddit.utils.settings.bytecode.patch.SettingsBytecodePatch.Companion.updateSettingsStatus
 import app.revanced.patches.reddit.utils.settings.resource.patch.SettingsPatch
 import app.revanced.util.bytecode.getStringIndex
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 
-@Patch
-@Name("Hide place button")
-@Description("Hide r/place button in toolbar.")
-@DependsOn([SettingsPatch::class])
-@RedditCompatibility
-class PlaceButtonPatch : BytecodePatch(
-    listOf(HomePagerScreenFingerprint)
+@Patch(
+    name = "Hide place button",
+    compatiblePackages = [CompatiblePackage("com.reddit.frontpage")]
+    description = "Hide r/place button in toolbar.",
+    dependencies = [SettingsPatch::class]
+)
+@Suppress("unused")
+object PlaceButtonPatch : BytecodePatch(
+    setOf(HomePagerScreenFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {
 

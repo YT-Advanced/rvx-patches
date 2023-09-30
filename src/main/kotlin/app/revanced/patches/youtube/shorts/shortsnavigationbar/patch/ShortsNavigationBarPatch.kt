@@ -16,7 +16,7 @@ import app.revanced.util.integrations.Constants.SHORTS
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 
 class ShortsNavigationBarPatch : BytecodePatch(
-    listOf(
+    setOf(
         BottomNavigationBarFingerprint,
         PivotBarCreateButtonViewFingerprint,
         RenderBottomNavigationBarFingerprint

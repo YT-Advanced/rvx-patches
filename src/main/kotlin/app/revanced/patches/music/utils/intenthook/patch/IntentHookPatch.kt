@@ -11,9 +11,10 @@ import app.revanced.patches.music.utils.intenthook.fingerprints.FullStackTraceAc
 import app.revanced.patches.music.utils.settings.resource.patch.SettingsPatch
 import app.revanced.util.integrations.Constants.MUSIC_INTEGRATIONS_PATH
 
-@DependsOn([SettingsPatch::class])
+    dependencies = [SettingsPatch::class]
+)
 class IntentHookPatch : BytecodePatch(
-    listOf(FullStackTraceActivityFingerprint)
+    setOf(FullStackTraceActivityFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {
 

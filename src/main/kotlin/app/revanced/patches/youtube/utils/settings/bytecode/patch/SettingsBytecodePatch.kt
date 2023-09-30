@@ -13,15 +13,14 @@ import app.revanced.patches.youtube.utils.settings.bytecode.fingerprints.ThemeSe
 import app.revanced.util.bytecode.BytecodeHelper.injectInit
 import app.revanced.util.integrations.Constants.INTEGRATIONS_PATH
 
-@DependsOn(
-    [
+    dependencies = [
         IntegrationsPatch::class,
         ResourceMappingPatch::class,
         SharedResourceIdPatch::class
     ]
 )
 class SettingsBytecodePatch : BytecodePatch(
-    listOf(ThemeSetterSystemFingerprint)
+    setOf(ThemeSetterSystemFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {
         // apply the current theme of the settings page

@@ -17,15 +17,14 @@ import app.revanced.patches.youtube.utils.microg.shared.Constants.PACKAGE_NAME
 import app.revanced.util.bytecode.BytecodeHelper.injectInit
 import app.revanced.util.microg.MicroGBytecodeHelper
 
-@DependsOn(
-    [
+    dependencies = [
         ClientSpoofPatch::class,
         PackageNamePatch::class,
         SpoofPlayerParameterPatch::class
     ]
 )
 class MicroGBytecodePatch : BytecodePatch(
-    listOf(
+    setOf(
         CastContextFetchFingerprint,
         CastDynamiteModuleFingerprint,
         CastDynamiteModuleV2Fingerprint,
@@ -55,7 +54,7 @@ class MicroGBytecodePatch : BytecodePatch(
                 PACKAGE_NAME,
                 packageName
             ),
-            listOf(
+            setOf(
                 ServiceCheckFingerprint,
                 GooglePlayUtilityFingerprint,
                 CastDynamiteModuleFingerprint,

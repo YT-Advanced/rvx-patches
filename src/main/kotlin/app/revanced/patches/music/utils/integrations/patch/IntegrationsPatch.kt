@@ -8,5 +8,5 @@ import app.revanced.util.integrations.Constants.MUSIC_INTEGRATIONS_PATH
 @RequiresIntegrations
 class IntegrationsPatch : AbstractIntegrationsPatch(
     "$MUSIC_INTEGRATIONS_PATH/utils/ReVancedUtils;",
-    listOf(InitFingerprint),
+    setOf(InitFingerprint),
 )

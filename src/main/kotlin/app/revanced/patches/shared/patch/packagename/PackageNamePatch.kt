@@ -1,17 +1,16 @@
 package app.revanced.patches.shared.patch.packagename
 
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.OptionsContainer
 import app.revanced.patcher.patch.PatchOption
 import app.revanced.patcher.patch.ResourcePatch
 import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.shared.annotation.RVXCompatibility
 
-@Patch
-@Name("Custom package name")
-@Description("Specifies the package name for YouTube and YT Music in the MicroG build.")
+@Patch(
+    name = "Custom package name",
+    description = "Specifies the package name for YouTube and YT Music in the MicroG build.")
 @RVXCompatibility
 class PackageNamePatch : ResourcePatch {
     override fun execute(context: ResourceContext) {

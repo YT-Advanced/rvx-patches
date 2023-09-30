@@ -12,7 +12,7 @@ import app.revanced.util.integrations.Constants.SHORTS
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 
 class ShortsCommentButtonPatch : BytecodePatch(
-    listOf(ShortsCommentFingerprint)
+    setOf(ShortsCommentFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {
         ShortsCommentFingerprint.result?.let {

@@ -30,7 +30,7 @@ import com.android.tools.smali.dexlib2.immutable.ImmutableMethodImplementation
 import com.android.tools.smali.dexlib2.immutable.ImmutableMethodParameter
 
 class OverrideSpeedHookPatch : BytecodePatch(
-    listOf(
+    setOf(
         PlaybackSpeedPatchFingerprint,
         PlaybackSpeedParentFingerprint,
         SpeedClassFingerprint
@@ -63,7 +63,7 @@ class OverrideSpeedHookPatch : BytecodePatch(
                         ImmutableMethod(
                             parentMutableClass.type,
                             "overrideSpeed",
-                            listOf(ImmutableMethodParameter("F", annotations, null)),
+                            setOf(ImmutableMethodParameter("F", annotations, null)),
                             "V",
                             AccessFlags.PUBLIC or AccessFlags.PUBLIC,
                             annotations,

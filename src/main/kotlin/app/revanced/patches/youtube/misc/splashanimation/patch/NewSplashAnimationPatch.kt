@@ -1,7 +1,5 @@
 package app.revanced.patches.youtube.misc.splashanimation.patch
 
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
@@ -9,10 +7,10 @@ import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchException
 import app.revanced.patcher.patch.annotations.DependsOn
 import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod
 import app.revanced.patches.youtube.misc.splashanimation.fingerprints.WatchWhileActivityWithInFlagsFingerprint
 import app.revanced.patches.youtube.misc.splashanimation.fingerprints.WatchWhileActivityWithOutFlagsFingerprint
-import app.revanced.patches.youtube.utils.annotations.YouTubeCompatibility
 import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch
 import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch.Companion.DarkSplashAnimation
 import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch
@@ -23,18 +21,33 @@ import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
 
-@Patch
-@Name("Enable new splash animation")
-@Description("Enables a new type of splash animation.")
-@DependsOn(
-    [
+@Patch(
+    name = "Enable new splash animation",
+    description = "Enables a new type of splash animation.",
+    compatiblePackages = [
+        CompatiblePackage(
+            "com.google.android.youtube",
+            [
+                "18.22.37",
+                "18.23.36",
+                "18.24.37",
+                "18.25.40",
+                "18.27.36",
+                "18.29.38",
+                "18.30.37",
+                "18.31.40",
+                "18.32.39"
+            ]
+        )
+    ]
+    dependencies = [
         SettingsPatch::class,
         SharedResourceIdPatch::class
     ]
 )
-@YouTubeCompatibility
-class NewSplashAnimationPatch : BytecodePatch(
-    listOf(
+@Suppress("unused")
+object NewSplashAnimationPatch : BytecodePatch(
+    setOf(
         WatchWhileActivityWithInFlagsFingerprint,
         WatchWhileActivityWithOutFlagsFingerprint
     )

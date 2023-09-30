@@ -1,22 +1,31 @@
 package app.revanced.patches.music.general.amoled.patch
 
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
 import app.revanced.patcher.patch.annotations.DependsOn
 import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.music.utils.annotations.MusicCompatibility
+import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.shared.patch.litho.LithoThemePatch
 import app.revanced.util.integrations.Constants.MUSIC_UTILS_PATH
 import org.w3c.dom.Element
 
-@Patch
-@Name("Amoled")
-@Description("Applies pure black theme on some components.")
-@DependsOn([LithoThemePatch::class])
-@MusicCompatibility
-class AmoledPatch : ResourcePatch {
+@Patch(
+    name = "Amoled",
+    description = "Applies pure black theme on some components.",
+    compatiblePackages = [
+        CompatiblePackage(
+            "com.google.android.apps.youtube.music",
+            [
+                "6.15.52",
+                "6.20.51",
+                "6.21.51"
+            ]
+        )
+    ]
+    dependencies = [LithoThemePatch::class]
+)
+@Suppress("unused")
+object AmoledPatch : ResourcePatch {
     override fun execute(context: ResourceContext) {
 
         LithoThemePatch.injectCall("$MUSIC_UTILS_PATH/LithoThemePatch;->applyLithoTheme(I)I")

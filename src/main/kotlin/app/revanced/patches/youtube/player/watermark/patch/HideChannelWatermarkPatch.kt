@@ -1,8 +1,6 @@
 package app.revanced.patches.youtube.player.watermark.patch
 
 import app.revanced.extensions.exception
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
@@ -11,20 +9,37 @@ import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint.Companion.
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotations.DependsOn
 import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.youtube.player.watermark.fingerprints.HideWatermarkFingerprint
 import app.revanced.patches.youtube.player.watermark.fingerprints.HideWatermarkParentFingerprint
-import app.revanced.patches.youtube.utils.annotations.YouTubeCompatibility
 import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch
 import app.revanced.util.integrations.Constants.PLAYER
 import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
 
-@Patch
-@Name("Hide channel watermark")
-@Description("Hides creator's watermarks on videos.")
-@DependsOn([SettingsPatch::class])
-@YouTubeCompatibility
-class HideChannelWatermarkBytecodePatch : BytecodePatch(
-    listOf(HideWatermarkParentFingerprint)
+@Patch(
+    name = "Hide channel watermark",
+    description = "Hides creator's watermarks on videos.",
+    compatiblePackages = [
+        CompatiblePackage(
+            "com.google.android.youtube",
+            [
+                "18.22.37",
+                "18.23.36",
+                "18.24.37",
+                "18.25.40",
+                "18.27.36",
+                "18.29.38",
+                "18.30.37",
+                "18.31.40",
+                "18.32.39"
+            ]
+        )
+    ]
+    dependencies = [SettingsPatch::class]
+)
+@Suppress("unused")
+object HideChannelWatermarkBytecodePatch : BytecodePatch(
+    setOf(HideWatermarkParentFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {
 

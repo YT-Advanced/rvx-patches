@@ -7,7 +7,8 @@ import app.revanced.patches.shared.patch.litho.LithoThemePatch
 import app.revanced.util.integrations.Constants.UTILS_PATH
 import org.w3c.dom.Element
 
-@DependsOn([LithoThemePatch::class])
+    dependencies = [LithoThemePatch::class]
+)
 class GeneralThemePatch : ResourcePatch {
     override fun execute(context: ResourceContext) {
 

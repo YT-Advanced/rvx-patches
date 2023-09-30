@@ -19,9 +19,10 @@ import app.revanced.util.integrations.Constants.VIDEO_PATH
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.immutable.ImmutableField
 
-@DependsOn([LithoFilterPatch::class])
+    dependencies = [LithoFilterPatch::class]
+)
 class OldSpeedLayoutPatch : BytecodePatch(
-    listOf(
+    setOf(
         CustomPlaybackSpeedIntegrationsFingerprint,
         PlaybackRateBottomSheetClassFingerprint,
         PlaybackRateBottomSheetBuilderFingerprint,

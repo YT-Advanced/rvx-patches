@@ -1,28 +1,26 @@
 package app.revanced.patches.reddit.utils.settings.resource.patch
 
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.PatchException
 import app.revanced.patcher.patch.ResourcePatch
 import app.revanced.patcher.patch.annotations.DependsOn
 import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.reddit.utils.annotations.RedditCompatibility
+import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.reddit.utils.integrations.patch.IntegrationsPatch
 import app.revanced.patches.reddit.utils.settings.bytecode.patch.SettingsBytecodePatch
 import kotlin.io.path.exists
 
-@Patch
-@Name("Reddit settings")
-@Description("Adds ReVanced settings to Reddit.")
-@DependsOn(
-    [
+@Patch(
+    name = "Reddit settings",
+    compatiblePackages = [CompatiblePackage("com.reddit.frontpage")]
+    description = "Adds ReVanced settings to Reddit.",
+    dependencies = [
         IntegrationsPatch::class,
         SettingsBytecodePatch::class
     ]
 )
-@RedditCompatibility
-class SettingsPatch : ResourcePatch {
+@Suppress("unused")
+object SettingsPatch : ResourcePatch {
     override fun execute(context: ResourceContext) {
 
         /**

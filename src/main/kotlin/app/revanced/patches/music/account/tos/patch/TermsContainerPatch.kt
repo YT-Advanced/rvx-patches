@@ -1,8 +1,6 @@
 package app.revanced.patches.music.account.tos.patch
 
 import app.revanced.extensions.exception
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
@@ -11,8 +9,8 @@ import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchException
 import app.revanced.patcher.patch.annotations.DependsOn
 import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.music.account.tos.fingerprints.TermsOfServiceFingerprint
-import app.revanced.patches.music.utils.annotations.MusicCompatibility
 import app.revanced.patches.music.utils.resourceid.patch.SharedResourceIdPatch
 import app.revanced.patches.music.utils.resourceid.patch.SharedResourceIdPatch.Companion.TosFooter
 import app.revanced.patches.music.utils.settings.resource.patch.SettingsPatch
@@ -23,18 +21,27 @@ import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
 
-@Patch
-@Name("Hide terms container")
-@Description("Hides terms of service container at the account menu.")
-@DependsOn(
-    [
+@Patch(
+    name = "Hide terms container",
+    description = "Hides terms of service container at the account menu.",
+    compatiblePackages = [
+        CompatiblePackage(
+            "com.google.android.apps.youtube.music",
+            [
+                "6.15.52",
+                "6.20.51",
+                "6.21.51"
+            ]
+        )
+    ]
+    dependencies = [
         SettingsPatch::class,
         SharedResourceIdPatch::class
     ]
 )
-@MusicCompatibility
-class TermsContainerPatch : BytecodePatch(
-    listOf(TermsOfServiceFingerprint)
+@Suppress("unused")
+object TermsContainerPatch : BytecodePatch(
+    setOf(TermsOfServiceFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {
 

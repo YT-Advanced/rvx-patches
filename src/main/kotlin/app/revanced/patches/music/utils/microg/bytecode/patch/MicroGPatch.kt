@@ -1,13 +1,11 @@
 package app.revanced.patches.music.utils.microg.bytecode.patch
 
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchException
 import app.revanced.patcher.patch.annotations.DependsOn
 import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.music.utils.annotations.MusicCompatibility
+import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.music.utils.fix.clientspoof.patch.ClientSpoofMusicPatch
 import app.revanced.patches.music.utils.microg.bytecode.fingerprints.CastContextFetchFingerprint
 import app.revanced.patches.music.utils.microg.bytecode.fingerprints.CastDynamiteModuleFingerprint
@@ -21,19 +19,18 @@ import app.revanced.patches.music.utils.microg.shared.Constants.YOUTUBE_PACKAGE_
 import app.revanced.patches.shared.patch.packagename.PackageNamePatch
 import app.revanced.util.microg.MicroGBytecodeHelper
 
-@Patch
-@DependsOn(
-    [
+@Patch(
+    name = "MicroG support",
+    description = "Allows ReVanced Music to run without root and under a different package name with MicroG.",
+    dependencies = [
         ClientSpoofMusicPatch::class,
         MicroGResourcePatch::class,
         PackageNamePatch::class
     ]
 )
-@Name("MicroG support")
-@Description("Allows ReVanced Music to run without root and under a different package name with MicroG.")
-@MusicCompatibility
-class MicroGPatch : BytecodePatch(
-    listOf(
+@Suppress("unused")
+object MicroGPatch : BytecodePatch(
+    setOf(
         ServiceCheckFingerprint,
         GooglePlayUtilityFingerprint,
         CastDynamiteModuleFingerprint,
@@ -73,7 +70,7 @@ class MicroGPatch : BytecodePatch(
                 MUSIC_PACKAGE_NAME,
                 musicPackageName
             ),
-            listOf(
+            setOf(
                 ServiceCheckFingerprint,
                 GooglePlayUtilityFingerprint,
                 CastDynamiteModuleFingerprint,

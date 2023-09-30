@@ -1,15 +1,13 @@
 package app.revanced.patches.youtube.overlaybutton.general.patch
 
 import app.revanced.extensions.doRecursively
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
 import app.revanced.patcher.patch.annotations.DependsOn
 import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.youtube.overlaybutton.alwaysrepeat.patch.AlwaysRepeatPatch
 import app.revanced.patches.youtube.overlaybutton.downloadbuttonhook.patch.DownloadButtonHookPatch
-import app.revanced.patches.youtube.utils.annotations.YouTubeCompatibility
 import app.revanced.patches.youtube.utils.overridespeed.patch.OverrideSpeedHookPatch
 import app.revanced.patches.youtube.utils.playerbutton.patch.PlayerButtonHookPatch
 import app.revanced.patches.youtube.utils.playercontrols.patch.PlayerControlsPatch
@@ -22,11 +20,26 @@ import app.revanced.util.resources.ResourceUtils.copyResources
 import app.revanced.util.resources.ResourceUtils.copyXmlNode
 import org.w3c.dom.Element
 
-@Patch
-@Name("Overlay buttons")
-@Description("Add overlay buttons to the player.")
-@DependsOn(
-    [
+@Patch(
+    name = "Overlay buttons",
+    description = "Add overlay buttons to the player.",
+    compatiblePackages = [
+        CompatiblePackage(
+            "com.google.android.youtube",
+            [
+                "18.22.37",
+                "18.23.36",
+                "18.24.37",
+                "18.25.40",
+                "18.27.36",
+                "18.29.38",
+                "18.30.37",
+                "18.31.40",
+                "18.32.39"
+            ]
+        )
+    ]
+    dependencies = [
         AlwaysRepeatPatch::class,
         DownloadButtonHookPatch::class,
         OverrideSpeedHookPatch::class,
@@ -37,8 +50,8 @@ import org.w3c.dom.Element
         VideoIdPatch::class
     ]
 )
-@YouTubeCompatibility
-class OverlayButtonsPatch : ResourcePatch {
+@Suppress("unused")
+object OverlayButtonsPatch : ResourcePatch {
     override fun execute(context: ResourceContext) {
 
         /**

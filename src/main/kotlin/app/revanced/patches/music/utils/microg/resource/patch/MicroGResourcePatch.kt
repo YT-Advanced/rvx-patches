@@ -12,7 +12,8 @@ import app.revanced.util.microg.MicroGManifestHelper.addSpoofingMetadata
 import app.revanced.util.microg.MicroGResourceHelper.patchManifest
 import app.revanced.util.resources.MusicResourceHelper.setMicroG
 
-@DependsOn([PackageNamePatch::class])
+    dependencies = [PackageNamePatch::class]
+)
 class MicroGResourcePatch : ResourcePatch {
     override fun execute(context: ResourceContext) {
         val packageName = PackageNamePatch.MusicPackageName

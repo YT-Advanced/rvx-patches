@@ -1,21 +1,36 @@
 package app.revanced.patches.youtube.misc.translations.patch
 
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
 import app.revanced.patcher.patch.annotations.DependsOn
 import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.youtube.utils.annotations.YouTubeCompatibility
+import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch
 import app.revanced.util.resources.ResourceHelper.addTranslations
 
-@Patch
-@Name("Translations")
-@Description("Add Crowdin translations for YouTube.")
-@DependsOn([SettingsPatch::class])
-@YouTubeCompatibility
-class TranslationsPatch : ResourcePatch {
+@Patch(
+    name = "Translations",
+    description = "Add Crowdin translations for YouTube.",
+    compatiblePackages = [
+        CompatiblePackage(
+            "com.google.android.youtube",
+            [
+                "18.22.37",
+                "18.23.36",
+                "18.24.37",
+                "18.25.40",
+                "18.27.36",
+                "18.29.38",
+                "18.30.37",
+                "18.31.40",
+                "18.32.39"
+            ]
+        )
+    ]
+    dependencies = [SettingsPatch::class]
+)
+@Suppress("unused")
+object TranslationsPatch : ResourcePatch {
     override fun execute(context: ResourceContext) {
 
         context.addTranslations("youtube", LANGUAGE_LIST)

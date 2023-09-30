@@ -13,7 +13,7 @@ import app.revanced.util.integrations.Constants.MUSIC_UTILS_PATH
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 
 class VideoTypeHookPatch : BytecodePatch(
-    listOf(VideoTypeParentFingerprint)
+    setOf(VideoTypeParentFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {
 

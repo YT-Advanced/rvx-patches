@@ -1,17 +1,15 @@
 package app.revanced.patches.music.flyoutpanel.hide.patch
 
 import app.revanced.extensions.exception
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotations.DependsOn
 import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.util.smali.ExternalLabel
 import app.revanced.patches.music.flyoutpanel.utils.EnumUtils.getEnumIndex
-import app.revanced.patches.music.utils.annotations.MusicCompatibility
 import app.revanced.patches.music.utils.fingerprints.MenuItemFingerprint
 import app.revanced.patches.music.utils.flyoutbutton.patch.FlyoutButtonContainerResourcePatch
 import app.revanced.patches.music.utils.settings.resource.patch.SettingsPatch
@@ -22,18 +20,27 @@ import com.android.tools.smali.dexlib2.iface.instruction.Instruction
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
 
-@Patch
-@Name("Hide flyout panel")
-@Description("Hides flyout panel components.")
-@DependsOn(
-    [
+@Patch(
+    name = "Hide flyout panel",
+    description = "Hides flyout panel components.",
+    compatiblePackages = [
+        CompatiblePackage(
+            "com.google.android.apps.youtube.music",
+            [
+                "6.15.52",
+                "6.20.51",
+                "6.21.51"
+            ]
+        )
+    ]
+    dependencies = [
         FlyoutButtonContainerResourcePatch::class,
         SettingsPatch::class
     ]
 )
-@MusicCompatibility
-class FlyoutPanelPatch : BytecodePatch(
-    listOf(MenuItemFingerprint)
+@Suppress("unused")
+object FlyoutPanelPatch : BytecodePatch(
+    setOf(MenuItemFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {
         MenuItemFingerprint.result?.let {

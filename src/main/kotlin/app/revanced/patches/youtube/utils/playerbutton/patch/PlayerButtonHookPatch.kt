@@ -14,9 +14,10 @@ import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.builder.instruction.BuilderInstruction21c
 import com.android.tools.smali.dexlib2.builder.instruction.BuilderInstruction35c
 
-@DependsOn([SharedResourceIdPatch::class])
+    dependencies = [SharedResourceIdPatch::class]
+)
 class PlayerButtonHookPatch : BytecodePatch(
-    listOf(LiveChatFingerprint)
+    setOf(LiveChatFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {
 

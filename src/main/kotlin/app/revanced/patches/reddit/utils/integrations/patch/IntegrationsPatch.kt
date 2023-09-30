@@ -7,5 +7,5 @@ import app.revanced.patches.shared.patch.integrations.AbstractIntegrationsPatch
 @RequiresIntegrations
 class IntegrationsPatch : AbstractIntegrationsPatch(
     "Lapp/revanced/reddit/utils/ReVancedUtils;",
-    listOf(InitFingerprint),
+    setOf(InitFingerprint),
 )

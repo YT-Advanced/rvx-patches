@@ -29,9 +29,10 @@ import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
 import com.android.tools.smali.dexlib2.iface.reference.Reference
 
-@DependsOn([SharedResourceIdPatch::class])
+    dependencies = [SharedResourceIdPatch::class]
+)
 class PlayerControlsPatch : BytecodePatch(
-    listOf(
+    setOf(
         BottomControlsInflateFingerprint,
         ControlsLayoutInflateFingerprint,
         FullscreenEngagementSpeedEduVisibleParentFingerprint,

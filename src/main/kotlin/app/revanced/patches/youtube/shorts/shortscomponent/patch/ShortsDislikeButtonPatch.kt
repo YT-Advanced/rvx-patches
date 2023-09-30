@@ -14,7 +14,7 @@ import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 
 class ShortsDislikeButtonPatch : BytecodePatch(
-    listOf(ShortsDislikeFingerprint)
+    setOf(ShortsDislikeFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {
         ShortsDislikeFingerprint.result?.let {

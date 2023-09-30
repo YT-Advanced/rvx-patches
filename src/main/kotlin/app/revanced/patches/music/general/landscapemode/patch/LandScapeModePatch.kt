@@ -1,32 +1,39 @@
 package app.revanced.patches.music.general.landscapemode.patch
 
 import app.revanced.extensions.exception
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotations.DependsOn
 import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.music.general.landscapemode.fingerprints.TabletIdentifierFingerprint
-import app.revanced.patches.music.utils.annotations.MusicCompatibility
 import app.revanced.patches.music.utils.resourceid.patch.SharedResourceIdPatch
 import app.revanced.patches.music.utils.settings.resource.patch.SettingsPatch
 import app.revanced.util.enum.CategoryType
 import app.revanced.util.integrations.Constants.MUSIC_GENERAL
 
-@Patch
-@Name("Enable landscape mode")
-@Description("Enables entry into landscape mode by screen rotation on the phone.")
-@DependsOn(
-    [
+@Patch(
+    name = "Enable landscape mode",
+    description = "Enables entry into landscape mode by screen rotation on the phone.",
+    compatiblePackages = [
+        CompatiblePackage(
+            "com.google.android.apps.youtube.music",
+            [
+                "6.15.52",
+                "6.20.51",
+                "6.21.51"
+            ]
+        )
+    ]
+    dependencies = [
         SettingsPatch::class,
         SharedResourceIdPatch::class
     ]
 )
-@MusicCompatibility
-class LandScapeModePatch : BytecodePatch(
-    listOf(TabletIdentifierFingerprint)
+@Suppress("unused")
+object LandScapeModePatch : BytecodePatch(
+    setOf(TabletIdentifierFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {
         TabletIdentifierFingerprint.result?.let {

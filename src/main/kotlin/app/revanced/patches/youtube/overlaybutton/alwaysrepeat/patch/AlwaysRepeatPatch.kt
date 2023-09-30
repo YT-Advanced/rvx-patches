@@ -17,7 +17,7 @@ import app.revanced.util.integrations.Constants.VIDEO_PATH
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 
 class AlwaysRepeatPatch : BytecodePatch(
-    listOf(
+    setOf(
         AutoNavInformerFingerprint,
         VideoEndParentFingerprint
     )

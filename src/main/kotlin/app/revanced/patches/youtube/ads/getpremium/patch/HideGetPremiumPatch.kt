@@ -11,7 +11,7 @@ import app.revanced.util.integrations.Constants.PATCHES_PATH
 import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
 
 class HideGetPremiumPatch : BytecodePatch(
-    listOf(CompactYpcOfferModuleViewFingerprint)
+    setOf(CompactYpcOfferModuleViewFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {
 

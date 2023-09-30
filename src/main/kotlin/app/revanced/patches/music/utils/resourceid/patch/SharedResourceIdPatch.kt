@@ -13,7 +13,8 @@ import app.revanced.util.enum.ResourceType.LAYOUT
 import app.revanced.util.enum.ResourceType.STRING
 import app.revanced.util.enum.ResourceType.STYLE
 
-@DependsOn([ResourceMappingPatch::class])
+    dependencies = [ResourceMappingPatch::class]
+)
 class SharedResourceIdPatch : ResourcePatch {
     internal companion object {
         var AccountSwitcherAccessibility: Long = -1
