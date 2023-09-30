@@ -5,8 +5,7 @@ import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.util.smali.ExternalLabel
 import app.revanced.patches.reddit.layout.screenshotpopup.fingerprints.ScreenshotTakenBannerFingerprint
@@ -16,7 +15,7 @@ import app.revanced.patches.reddit.utils.settings.resource.patch.SettingsPatch
 
 @Patch(
     name = "Disable screenshot popup",
-    compatiblePackages = [CompatiblePackage("com.reddit.frontpage")]
+    compatiblePackages = [CompatiblePackage("com.reddit.frontpage")],
     description = "Disables the popup that shows up when taking a screenshot.",
     dependencies = [
         SettingsPatch::class,
@@ -27,6 +26,10 @@ import app.revanced.patches.reddit.utils.settings.resource.patch.SettingsPatch
 object ScreenshotPopupPatch : BytecodePatch(
     setOf(ScreenshotTakenBannerFingerprint)
 ) {
+    private const val INTEGRATIONS_METHOD_DESCRIPTOR =
+        "Lapp/revanced/reddit/patches/ScreenshotPopupPatch;" +
+            "->disableScreenshotPopup()Z"
+
     override fun execute(context: BytecodeContext) {
 
         ScreenshotTakenBannerFingerprint.result?.let {
@@ -44,11 +47,5 @@ object ScreenshotPopupPatch : BytecodePatch(
 
         updateSettingsStatus("ScreenshotPopup")
 
-    }
-
-    private companion object {
-        private const val INTEGRATIONS_METHOD_DESCRIPTOR =
-            "Lapp/revanced/reddit/patches/ScreenshotPopupPatch;" +
-                    "->disableScreenshotPopup()Z"
     }
 }

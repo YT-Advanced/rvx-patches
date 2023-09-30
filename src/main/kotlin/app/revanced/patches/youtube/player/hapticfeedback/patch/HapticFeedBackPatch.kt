@@ -6,8 +6,7 @@ import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWith
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod
 import app.revanced.patcher.util.smali.ExternalLabel
@@ -37,7 +36,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
                 "18.32.39"
             ]
         )
-    ]
+    ],
     dependencies = [SettingsPatch::class]
 )
 @Suppress("unused")
@@ -72,37 +71,35 @@ object HapticFeedBackPatch : BytecodePatch(
 
     }
 
-    private companion object {
-        fun MethodFingerprint.injectHook(methodName: String) {
-            result?.let {
-                it.mutableMethod.apply {
-                    var index = 0
-                    var register = 0
+    fun MethodFingerprint.injectHook(methodName: String) {
+        result?.let {
+            it.mutableMethod.apply {
+                var index = 0
+                var register = 0
 
-                    if (this.name == "run") {
-                        index = it.scanResult.patternScanResult!!.startIndex
-                        register = getInstruction<OneRegisterInstruction>(index).registerA
-                    }
-
-                    injectHook(index, register, methodName)
+                if (this.name == "run") {
+                    index = it.scanResult.patternScanResult!!.startIndex
+                    register = getInstruction<OneRegisterInstruction>(index).registerA
                 }
-            } ?: throw exception
-        }
 
-        fun MutableMethod.injectHook(
-            index: Int,
-            register: Int,
-            name: String
-        ) {
-            addInstructionsWithLabels(
-                index, """
-                    invoke-static {}, $PLAYER->$name()Z
-                    move-result v$register
-                    if-eqz v$register, :vibrate
-                    return-void
-                    """, ExternalLabel("vibrate", getInstruction(index))
-            )
-        }
+                injectHook(index, register, methodName)
+            }
+        } ?: throw exception
+    }
+
+    fun MutableMethod.injectHook(
+        index: Int,
+        register: Int,
+        name: String
+    ) {
+        addInstructionsWithLabels(
+            index, """
+                invoke-static {}, $PLAYER->$name()Z
+                move-result v$register
+                if-eqz v$register, :vibrate
+                return-void
+                """, ExternalLabel("vibrate", getInstruction(index))
+        )
     }
 }
 

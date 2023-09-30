@@ -7,8 +7,7 @@ import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint.Companion.resolve
 import app.revanced.patcher.fingerprint.method.impl.MethodFingerprintResult
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.youtube.fullscreen.landscapemode.fingerprints.OrientationParentFingerprint
 import app.revanced.patches.youtube.fullscreen.landscapemode.fingerprints.OrientationPrimaryFingerprint
@@ -35,7 +34,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
                 "18.32.39"
             ]
         )
-    ]
+    ],
     dependencies = [SettingsPatch::class],
     use = false
 )
@@ -43,6 +42,9 @@ import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 object LandScapeModePatch : BytecodePatch(
     setOf(OrientationParentFingerprint)
 ) {
+    const val INTEGRATIONS_CLASS_DESCRIPTOR =
+        "$FULLSCREEN->disableLandScapeMode(Z)Z"
+
     override fun execute(context: BytecodeContext) {
         OrientationParentFingerprint.result?.classDef?.let { classDef ->
             arrayOf(
@@ -68,22 +70,17 @@ object LandScapeModePatch : BytecodePatch(
 
     }
 
-    private companion object {
-        const val INTEGRATIONS_CLASS_DESCRIPTOR =
-            "$FULLSCREEN->disableLandScapeMode(Z)Z"
+    fun MethodFingerprintResult.injectOverride() {
+        mutableMethod.apply {
+            val index = scanResult.patternScanResult!!.endIndex
+            val register = getInstruction<OneRegisterInstruction>(index).registerA
 
-        fun MethodFingerprintResult.injectOverride() {
-            mutableMethod.apply {
-                val index = scanResult.patternScanResult!!.endIndex
-                val register = getInstruction<OneRegisterInstruction>(index).registerA
-
-                addInstructions(
-                    index + 1, """
-                        invoke-static {v$register}, $INTEGRATIONS_CLASS_DESCRIPTOR
-                        move-result v$register
-                        """
-                )
-            }
+            addInstructions(
+                index + 1, """
+                    invoke-static {v$register}, $INTEGRATIONS_CLASS_DESCRIPTOR
+                    move-result v$register
+                    """
+            )
         }
     }
 }

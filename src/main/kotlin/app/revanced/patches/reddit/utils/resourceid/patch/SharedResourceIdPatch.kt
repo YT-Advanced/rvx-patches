@@ -2,14 +2,15 @@ package app.revanced.patches.reddit.utils.resourceid.patch
 
 import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
-import app.revanced.patcher.patch.annotations.DependsOn
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.shared.patch.mapping.ResourceMappingPatch
 import app.revanced.util.enum.ResourceType
 import app.revanced.util.enum.ResourceType.STRING
 
+@Patch(
     dependencies = [ResourceMappingPatch::class]
 )
-class SharedResourceIdPatch : ResourcePatch {
+object SharedResourceIdPatch : ResourcePatch {
     internal companion object {
         var ScreenShotShareBanner: Long = -1
     }

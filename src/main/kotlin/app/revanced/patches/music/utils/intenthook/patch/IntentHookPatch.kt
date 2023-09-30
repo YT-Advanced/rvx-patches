@@ -5,15 +5,16 @@ import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.annotations.DependsOn
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.util.smali.ExternalLabel
 import app.revanced.patches.music.utils.intenthook.fingerprints.FullStackTraceActivityFingerprint
 import app.revanced.patches.music.utils.settings.resource.patch.SettingsPatch
 import app.revanced.util.integrations.Constants.MUSIC_INTEGRATIONS_PATH
 
+@Patch(
     dependencies = [SettingsPatch::class]
 )
-class IntentHookPatch : BytecodePatch(
+object IntentHookPatch : BytecodePatch(
     setOf(FullStackTraceActivityFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {

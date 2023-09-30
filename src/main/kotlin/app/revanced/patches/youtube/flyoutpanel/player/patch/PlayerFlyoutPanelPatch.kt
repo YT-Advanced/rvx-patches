@@ -6,8 +6,7 @@ import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.youtube.flyoutpanel.player.fingerprints.AdvancedQualityBottomSheetFingerprint
 import app.revanced.patches.youtube.flyoutpanel.player.fingerprints.CaptionsBottomSheetFingerprint
@@ -39,7 +38,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
                 "18.32.39"
             ]
         )
-    ]
+    ],
     dependencies = [
         LithoFilterPatch::class,
         SettingsPatch::class,
@@ -81,20 +80,18 @@ object PlayerFlyoutPanelPatch : BytecodePatch(
 
     }
 
-    private companion object {
-        fun MethodFingerprint.injectCall(descriptor: String) {
-            result?.let {
-                it.mutableMethod.apply {
-                    val insertIndex = getWideLiteralIndex(BottomSheetFooterText) + 3
-                    val insertRegister =
-                        getInstruction<OneRegisterInstruction>(insertIndex).registerA
+    fun MethodFingerprint.injectCall(descriptor: String) {
+        result?.let {
+            it.mutableMethod.apply {
+                val insertIndex = getWideLiteralIndex(BottomSheetFooterText) + 3
+                val insertRegister =
+                    getInstruction<OneRegisterInstruction>(insertIndex).registerA
 
-                    addInstruction(
-                        insertIndex,
-                        "invoke-static {v$insertRegister}, $FLYOUT_PANEL->$descriptor(Landroid/view/View;)V"
-                    )
-                }
-            } ?: throw exception
-        }
+                addInstruction(
+                    insertIndex,
+                    "invoke-static {v$insertRegister}, $FLYOUT_PANEL->$descriptor(Landroid/view/View;)V"
+                )
+            }
+        } ?: throw exception
     }
 }

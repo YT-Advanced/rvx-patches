@@ -9,8 +9,7 @@ import app.revanced.patcher.extensions.InstructionExtensions.replaceInstruction
 import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint
 import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint.Companion.resolve
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.youtube.utils.returnyoutubedislike.general.fingerprints.DislikeFingerprint
 import app.revanced.patches.youtube.utils.returnyoutubedislike.general.fingerprints.LikeFingerprint
@@ -49,7 +48,7 @@ import com.android.tools.smali.dexlib2.iface.reference.Reference
                 "18.32.39"
             ]
         )
-    ]
+    ],
     dependencies = [
         ReturnYouTubeDislikeOldLayoutPatch::class,
         ReturnYouTubeDislikeShortsPatch::class,
@@ -66,6 +65,12 @@ object ReturnYouTubeDislikePatch : BytecodePatch(
         TextComponentConstructorFingerprint
     )
 ) {
+    const val INTEGRATIONS_RYD_CLASS_DESCRIPTOR =
+        "$UTILS_PATH/ReturnYouTubeDislikePatch;"
+
+    lateinit var conversionContextFieldReference: Reference
+    var tmpRegister: Int = 12
+
     override fun execute(context: BytecodeContext) {
         setOf(
             LikeFingerprint.toPatch(Vote.LIKE),
@@ -190,14 +195,6 @@ object ReturnYouTubeDislikePatch : BytecodePatch(
 
         SettingsPatch.updatePatchStatus("return-youtube-dislike")
 
-    }
-
-    private companion object {
-        const val INTEGRATIONS_RYD_CLASS_DESCRIPTOR =
-            "$UTILS_PATH/ReturnYouTubeDislikePatch;"
-
-        lateinit var conversionContextFieldReference: Reference
-        var tmpRegister: Int = 12
     }
 
     private fun MethodFingerprint.toPatch(voteKind: Vote) = VotePatch(this, voteKind)

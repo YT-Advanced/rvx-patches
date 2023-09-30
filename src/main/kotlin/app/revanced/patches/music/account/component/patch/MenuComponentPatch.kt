@@ -6,8 +6,7 @@ import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchException
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod
 import app.revanced.patches.music.account.component.fingerprints.MenuEntryFingerprint
@@ -31,7 +30,7 @@ import com.android.tools.smali.dexlib2.iface.reference.MethodReference
                 "6.21.51"
             ]
         )
-    ]
+    ],
     dependencies = [
         SettingsPatch::class,
         SharedResourceIdPatch::class
@@ -76,13 +75,11 @@ object MenuComponentPatch : BytecodePatch(
         )
     }
 
-    private companion object {
-        fun MutableMethod.targetIndex(descriptor: String): Int {
+    fun MutableMethod.targetIndex(descriptor: String): Int {
             return implementation?.let {
-                it.instructions.indexOfFirst { instruction ->
-                    ((instruction as? ReferenceInstruction)?.reference as? MethodReference)?.name == descriptor
-                }
-            } ?: throw PatchException("No Method Implementation found!")
-        }
+            it.instructions.indexOfFirst { instruction ->
+                ((instruction as? ReferenceInstruction)?.reference as? MethodReference)?.name == descriptor
+            }
+        } ?: throw PatchException("No Method Implementation found!")
     }
 }

@@ -6,8 +6,7 @@ import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint.Companion.resolve
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.youtube.alternativethumbnails.general.fingerprints.CronetURLRequestCallbackOnResponseStartedFingerprint
 import app.revanced.patches.youtube.alternativethumbnails.general.fingerprints.CronetURLRequestCallbackOnSucceededFingerprint
@@ -36,7 +35,7 @@ import app.revanced.util.resources.ResourceUtils.copyXmlNode
                 "18.32.39"
             ]
         )
-    ]
+    ],
     dependencies = [SettingsPatch::class]
 )
 @Suppress("unused")

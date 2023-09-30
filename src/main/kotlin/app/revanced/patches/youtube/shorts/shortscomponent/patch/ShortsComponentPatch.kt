@@ -2,8 +2,7 @@ package app.revanced.patches.youtube.shorts.shortscomponent.patch
 
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.youtube.shorts.shortsnavigationbar.patch.ShortsNavigationBarPatch
 import app.revanced.patches.youtube.utils.litho.patch.LithoFilterPatch
@@ -30,7 +29,7 @@ import app.revanced.util.integrations.Constants.PATCHES_PATH
                 "18.32.39"
             ]
         )
-    ]
+    ],
     dependencies = [
         LithoFilterPatch::class,
         NavBarIndexHookPatch::class,

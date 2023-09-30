@@ -8,7 +8,7 @@ import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.extensions.or
 import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint.Companion.resolve
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.annotations.DependsOn
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod.Companion.toMutable
 import app.revanced.patches.youtube.utils.playertype.patch.PlayerTypeHookPatch
@@ -26,9 +26,10 @@ import com.android.tools.smali.dexlib2.immutable.ImmutableMethod
 import com.android.tools.smali.dexlib2.immutable.ImmutableMethodParameter
 import com.android.tools.smali.dexlib2.util.MethodUtil
 
+@Patch(
     dependencies = [PlayerTypeHookPatch::class]
 )
-class VideoIdPatch : BytecodePatch(
+object VideoIdPatch : BytecodePatch(
     setOf(
         PlayerControllerSetTimeReferenceFingerprint,
         PlayerInitFingerprint,

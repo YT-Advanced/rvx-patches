@@ -7,8 +7,7 @@ import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint.Companion.resolve
 import app.revanced.patcher.fingerprint.method.impl.MethodFingerprintResult
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod
 import app.revanced.patches.youtube.general.tabletminiplayer.fingerprints.MiniPlayerDimensionsCalculatorFingerprint
@@ -40,7 +39,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
                 "18.32.39"
             ]
         )
-    ]
+    ],
     dependencies = [
         SettingsPatch::class,
         SharedResourceIdPatch::class
@@ -98,42 +97,40 @@ object TabletMiniPlayerPatch : BytecodePatch(
     }
 
     // helper methods
-    private companion object {
-        fun MethodFingerprintResult.addProxyCall(): Triple<MutableMethod, Int, Int> {
-            val (method, scanIndex, parameterRegister) = this.unwrap()
-            method.insertOverride(scanIndex, parameterRegister)
+    fun MethodFingerprintResult.addProxyCall(): Triple<MutableMethod, Int, Int> {
+        val (method, scanIndex, parameterRegister) = this.unwrap()
+        method.insertOverride(scanIndex, parameterRegister)
 
-            return Triple(method, scanIndex, parameterRegister)
-        }
+        return Triple(method, scanIndex, parameterRegister)
+    }
 
-        fun MutableMethod.insertOverride(index: Int, overrideRegister: Int) {
-            this.addInstructions(
-                index,
+    fun MutableMethod.insertOverride(index: Int, overrideRegister: Int) {
+        this.addInstructions(
+            index,
+            """
+                invoke-static {v$overrideRegister}, $GENERAL->enableTabletMiniPlayer(Z)Z
+                move-result v$overrideRegister
                 """
-                    invoke-static {v$overrideRegister}, $GENERAL->enableTabletMiniPlayer(Z)Z
-                    move-result v$overrideRegister
-                    """
-            )
-        }
+        )
+    }
 
-        fun MutableMethod.instructionProxyCall() {
-            val insertInstructions = this.implementation!!.instructions
-            for ((index, instruction) in insertInstructions.withIndex()) {
-                if (instruction.opcode != Opcode.RETURN) continue
-                val parameterRegister = this.getInstruction<OneRegisterInstruction>(index).registerA
-                this.insertOverride(index, parameterRegister)
-                this.insertOverride(insertInstructions.size - 1, parameterRegister)
-                break
-            }
+    fun MutableMethod.instructionProxyCall() {
+        val insertInstructions = this.implementation!!.instructions
+        for ((index, instruction) in insertInstructions.withIndex()) {
+            if (instruction.opcode != Opcode.RETURN) continue
+            val parameterRegister = this.getInstruction<OneRegisterInstruction>(index).registerA
+            this.insertOverride(index, parameterRegister)
+            this.insertOverride(insertInstructions.size - 1, parameterRegister)
+            break
         }
+    }
 
-        fun MethodFingerprintResult.unwrap(): Triple<MutableMethod, Int, Int> {
-            val scanIndex = this.scanResult.patternScanResult!!.endIndex
-            val method = this.mutableMethod
-            val parameterRegister =
-                method.getInstruction<OneRegisterInstruction>(scanIndex).registerA
+    fun MethodFingerprintResult.unwrap(): Triple<MutableMethod, Int, Int> {
+        val scanIndex = this.scanResult.patternScanResult!!.endIndex
+        val method = this.mutableMethod
+        val parameterRegister =
+            method.getInstruction<OneRegisterInstruction>(scanIndex).registerA
 
-            return Triple(method, scanIndex, parameterRegister)
-        }
+        return Triple(method, scanIndex, parameterRegister)
     }
 }

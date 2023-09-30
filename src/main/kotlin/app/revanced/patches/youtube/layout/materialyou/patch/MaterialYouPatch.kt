@@ -2,8 +2,7 @@ package app.revanced.patches.youtube.layout.materialyou.patch
 
 import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.youtube.layout.theme.patch.GeneralThemePatch
 import app.revanced.patches.youtube.layout.theme.patch.GeneralThemePatch.Companion.isMonetPatchIncluded
@@ -31,7 +30,7 @@ import app.revanced.util.resources.ResourceUtils.copyXmlNode
                 "18.32.39"
             ]
         )
-    ]
+    ],
     dependencies = [
         GeneralThemePatch::class,
         SettingsPatch::class

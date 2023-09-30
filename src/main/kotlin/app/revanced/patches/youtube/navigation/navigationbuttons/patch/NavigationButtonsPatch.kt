@@ -6,8 +6,7 @@ import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint.Companion.resolve
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.youtube.navigation.navigationbuttons.fingerprints.AutoMotiveFingerprint
 import app.revanced.patches.youtube.navigation.navigationbuttons.fingerprints.PivotBarEnumFingerprint
@@ -39,7 +38,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
                 "18.32.39"
             ]
         )
-    ]
+    ],
     dependencies = [
         SettingsPatch::class,
         SharedResourceIdPatch::class
@@ -52,6 +51,21 @@ object NavigationButtonsPatch : BytecodePatch(
         PivotBarCreateButtonViewFingerprint
     )
 ) {
+    const val enumHook =
+        "sput-object v$REGISTER_TEMPLATE_REPLACEMENT, $NAVIGATION" +
+                "->" +
+                "lastPivotTab:Ljava/lang/Enum;"
+
+    const val buttonHook =
+        "invoke-static { v$REGISTER_TEMPLATE_REPLACEMENT }, $NAVIGATION" +
+                "->" +
+                "hideNavigationButton(Landroid/view/View;)V"
+
+    const val createButtonHook =
+        "invoke-static { v$REGISTER_TEMPLATE_REPLACEMENT }, $NAVIGATION" +
+                "->" +
+                "hideCreateButton(Landroid/view/View;)V"
+
     override fun execute(context: BytecodeContext) {
 
         PivotBarCreateButtonViewFingerprint.result?.let { parentResult ->
@@ -134,20 +148,4 @@ object NavigationButtonsPatch : BytecodePatch(
 
     }
 
-    private companion object {
-        const val enumHook =
-            "sput-object v$REGISTER_TEMPLATE_REPLACEMENT, $NAVIGATION" +
-                    "->" +
-                    "lastPivotTab:Ljava/lang/Enum;"
-
-        const val buttonHook =
-            "invoke-static { v$REGISTER_TEMPLATE_REPLACEMENT }, $NAVIGATION" +
-                    "->" +
-                    "hideNavigationButton(Landroid/view/View;)V"
-
-        const val createButtonHook =
-            "invoke-static { v$REGISTER_TEMPLATE_REPLACEMENT }, $NAVIGATION" +
-                    "->" +
-                    "hideCreateButton(Landroid/view/View;)V"
-    }
 }

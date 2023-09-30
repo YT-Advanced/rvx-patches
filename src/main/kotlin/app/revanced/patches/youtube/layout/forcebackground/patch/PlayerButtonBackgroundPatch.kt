@@ -3,8 +3,7 @@ package app.revanced.patches.youtube.layout.forcebackground.patch
 import app.revanced.extensions.doRecursively
 import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch
 import org.w3c.dom.Element
@@ -27,7 +26,7 @@ import org.w3c.dom.Element
                 "18.32.39"
             ]
         )
-    ]
+    ],
     dependencies = [SettingsPatch::class],
     use = false
 )

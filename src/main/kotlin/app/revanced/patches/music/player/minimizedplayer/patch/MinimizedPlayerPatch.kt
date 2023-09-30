@@ -4,8 +4,7 @@ import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.music.player.minimizedplayer.fingerprints.MinimizedPlayerFingerprint
 import app.revanced.patches.music.utils.settings.resource.patch.SettingsPatch
@@ -25,7 +24,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
                 "6.21.51"
             ]
         )
-    ]
+    ],
     dependencies = [SettingsPatch::class]
 )
 @Suppress("unused")

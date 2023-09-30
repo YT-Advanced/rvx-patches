@@ -5,8 +5,7 @@ import app.revanced.patcher.patch.OptionsContainer
 import app.revanced.patcher.patch.PatchException
 import app.revanced.patcher.patch.PatchOption
 import app.revanced.patcher.patch.ResourcePatch
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 
 @Patch(
@@ -21,7 +20,7 @@ import app.revanced.patcher.patch.annotation.CompatiblePackage
                 "6.21.51"
             ]
         )
-    ]
+    ],
     dependencies = [RemoveElementsPatch::class]
 )
 @Suppress("unused")

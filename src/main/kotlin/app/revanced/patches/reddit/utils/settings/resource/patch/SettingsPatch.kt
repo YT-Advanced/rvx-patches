@@ -3,8 +3,7 @@ package app.revanced.patches.reddit.utils.settings.resource.patch
 import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.PatchException
 import app.revanced.patcher.patch.ResourcePatch
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.reddit.utils.integrations.patch.IntegrationsPatch
 import app.revanced.patches.reddit.utils.settings.bytecode.patch.SettingsBytecodePatch
@@ -12,7 +11,7 @@ import kotlin.io.path.exists
 
 @Patch(
     name = "Reddit settings",
-    compatiblePackages = [CompatiblePackage("com.reddit.frontpage")]
+    compatiblePackages = [CompatiblePackage("com.reddit.frontpage")],
     description = "Adds ReVanced settings to Reddit.",
     dependencies = [
         IntegrationsPatch::class,

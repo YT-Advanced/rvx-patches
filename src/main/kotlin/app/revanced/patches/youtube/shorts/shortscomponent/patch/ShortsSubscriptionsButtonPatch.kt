@@ -26,6 +26,8 @@ class ShortsSubscriptionsButtonPatch : BytecodePatch(
         ShortsSubscriptionsTabletParentFingerprint
     )
 ) {
+    private lateinit var subscriptionFieldReference: FieldReference
+
     override fun execute(context: BytecodeContext) {
         ShortsSubscriptionsFingerprint.result?.let {
             it.mutableMethod.apply {
@@ -77,9 +79,5 @@ class ShortsSubscriptionsButtonPatch : BytecodePatch(
             }
         }
 
-    }
-
-    private companion object {
-        private lateinit var subscriptionFieldReference: FieldReference
     }
 }

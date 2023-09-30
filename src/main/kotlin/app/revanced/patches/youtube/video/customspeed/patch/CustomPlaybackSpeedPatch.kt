@@ -1,8 +1,7 @@
 package app.revanced.patches.youtube.video.customspeed.patch
 
 import app.revanced.patcher.data.BytecodeContext
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.shared.patch.customspeed.AbstractCustomPlaybackSpeedPatch
 import app.revanced.patches.youtube.flyoutpanel.oldspeedlayout.patch.OldSpeedLayoutPatch
@@ -27,7 +26,7 @@ import app.revanced.util.integrations.Constants.VIDEO_PATH
                 "18.32.39"
             ]
         )
-    ]
+    ],
     dependencies = [
         OldSpeedLayoutPatch::class,
         SettingsPatch::class

@@ -36,9 +36,6 @@ dependencies {
     // TODO: Required because build fails without it. Find a way to remove this dependency.
     implementation(libs.guava)
     implementation(libs.gson)
-    // A dependency to the Android library unfortunately fails the build, which is why this is required.
-    compileOnly(project("dummy"))
-
     ksp(libs.revanced.patch.annotation.processor)
 }
 

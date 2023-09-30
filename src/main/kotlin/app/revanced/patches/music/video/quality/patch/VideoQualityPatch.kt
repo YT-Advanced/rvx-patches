@@ -6,8 +6,7 @@ import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchException
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.music.utils.overridequality.patch.OverrideQualityHookPatch
 import app.revanced.patches.music.utils.settings.resource.patch.SettingsPatch
@@ -29,7 +28,7 @@ import com.android.tools.smali.dexlib2.builder.instruction.BuilderInstruction21c
                 "6.21.51"
             ]
         )
-    ]
+    ],
     dependencies = [
         OverrideQualityHookPatch::class,
         SettingsPatch::class,
@@ -40,6 +39,9 @@ import com.android.tools.smali.dexlib2.builder.instruction.BuilderInstruction21c
 object VideoQualityPatch : BytecodePatch(
     setOf(UserQualityChangeFingerprint)
 ) {
+    const val INTEGRATIONS_VIDEO_QUALITY_CLASS_DESCRIPTOR =
+        "$MUSIC_VIDEO_PATH/VideoQualityPatch;"
+
     override fun execute(context: BytecodeContext) {
 
         UserQualityChangeFingerprint.result?.let {
@@ -74,10 +76,5 @@ object VideoQualityPatch : BytecodePatch(
             "true"
         )
 
-    }
-
-    private companion object {
-        const val INTEGRATIONS_VIDEO_QUALITY_CLASS_DESCRIPTOR =
-            "$MUSIC_VIDEO_PATH/VideoQualityPatch;"
     }
 }

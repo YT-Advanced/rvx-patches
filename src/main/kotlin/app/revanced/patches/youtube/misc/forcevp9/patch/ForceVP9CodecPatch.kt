@@ -8,8 +8,7 @@ import app.revanced.patcher.extensions.InstructionExtensions.removeInstruction
 import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint.Companion.resolve
 import app.revanced.patcher.fingerprint.method.impl.MethodFingerprintResult
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod
 import app.revanced.patches.youtube.misc.forcevp9.fingerprints.VideoCapabilitiesFingerprint
@@ -44,7 +43,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
                 "18.32.39"
             ]
         )
-    ]
+    ],
     dependencies = [SettingsPatch::class]
 )
 @Suppress("unused")
@@ -55,6 +54,12 @@ object ForceVP9CodecPatch : BytecodePatch(
         Vp9PropsParentFingerprint
     )
 ) {
+    const val INTEGRATIONS_CLASS_DESCRIPTOR =
+       "$MISC_PATH/CodecOverridePatch;"
+
+    const val INTEGRATIONS_CLASS_METHOD_REFERENCE =
+       "$INTEGRATIONS_CLASS_DESCRIPTOR->shouldForceVP9(Z)Z"
+
     override fun execute(context: BytecodeContext) {
 
         LayoutSwitchFingerprint.result?.classDef?.let { classDef ->
@@ -123,68 +128,59 @@ object ForceVP9CodecPatch : BytecodePatch(
 
     }
 
-    private companion object {
-        const val INTEGRATIONS_CLASS_DESCRIPTOR =
-            "$MISC_PATH/CodecOverridePatch;"
+    fun MethodFingerprintResult.injectOverride() {
+        mutableMethod.apply {
+            val startIndex = scanResult.patternScanResult!!.startIndex
+            val endIndex = scanResult.patternScanResult!!.endIndex
 
-        const val INTEGRATIONS_CLASS_METHOD_REFERENCE =
-            "$INTEGRATIONS_CLASS_DESCRIPTOR->shouldForceVP9(Z)Z"
+            val startRegister = getInstruction<OneRegisterInstruction>(startIndex).registerA
+            val endRegister = getInstruction<OneRegisterInstruction>(endIndex).registerA
 
-        fun MethodFingerprintResult.injectOverride() {
-            mutableMethod.apply {
-                val startIndex = scanResult.patternScanResult!!.startIndex
-                val endIndex = scanResult.patternScanResult!!.endIndex
-
-                val startRegister = getInstruction<OneRegisterInstruction>(startIndex).registerA
-                val endRegister = getInstruction<OneRegisterInstruction>(endIndex).registerA
-
-                hookOverride(endIndex + 1, endRegister)
-                removeInstruction(endIndex)
-                hookOverride(startIndex + 1, startRegister)
-                removeInstruction(startIndex)
-            }
-        }
-
-        fun MutableMethod.hookOverride(
-            index: Int,
-            register: Int
-        ) {
-            addInstructions(
-                index, """
-                    invoke-static {v$register}, $INTEGRATIONS_CLASS_METHOD_REFERENCE
-                    move-result v$register
-                    return v$register
-                    """
-            )
-        }
-
-        fun MutableMethod.hookProps(
-            fieldName: String,
-            descriptor: String
-        ) {
-            val targetString = "Landroid/os/Build;->" +
-                    fieldName +
-                    ":Ljava/lang/String;"
-
-            for ((index, instruction) in implementation!!.instructions.withIndex()) {
-                if (instruction.opcode != Opcode.SGET_OBJECT) continue
-
-                val indexString =
-                    ((instruction as? ReferenceInstruction)?.reference as? DexBackedFieldReference).toString()
-
-                if (indexString != targetString) continue
-
-                val register = getInstruction<OneRegisterInstruction>(index).registerA
-
-                addInstructions(
-                    index + 1, """
-                        invoke-static {v$register}, $INTEGRATIONS_CLASS_DESCRIPTOR->$descriptor(Ljava/lang/String;)Ljava/lang/String;
-                        move-result-object v$register
-                        """
-                )
-                break
-            }
+            hookOverride(endIndex + 1, endRegister)
+            removeInstruction(endIndex)
+            hookOverride(startIndex + 1, startRegister)
+            removeInstruction(startIndex)
         }
     }
 
+    fun MutableMethod.hookOverride(
+        index: Int,
+        register: Int
+    ) {
+        addInstructions(
+            index, """
+                invoke-static {v$register}, $INTEGRATIONS_CLASS_METHOD_REFERENCE
+                move-result v$register
+                return v$register
+                """
+        )
+    }
+
+    fun MutableMethod.hookProps(
+        fieldName: String,
+        descriptor: String
+    ) {
+        val targetString = "Landroid/os/Build;->" +
+                fieldName +
+                ":Ljava/lang/String;"
+
+        for ((index, instruction) in implementation!!.instructions.withIndex()) {
+            if (instruction.opcode != Opcode.SGET_OBJECT) continue
+
+            val indexString =
+                ((instruction as? ReferenceInstruction)?.reference as? DexBackedFieldReference).toString()
+
+            if (indexString != targetString) continue
+
+            val register = getInstruction<OneRegisterInstruction>(index).registerA
+
+            addInstructions(
+                index + 1, """
+                    invoke-static {v$register}, $INTEGRATIONS_CLASS_DESCRIPTOR->$descriptor(Ljava/lang/String;)Ljava/lang/String;
+                    move-result-object v$register
+                    """
+            )
+            break
+        }
+    }
 }

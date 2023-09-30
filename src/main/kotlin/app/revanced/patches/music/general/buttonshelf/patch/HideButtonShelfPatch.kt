@@ -2,8 +2,7 @@ package app.revanced.patches.music.general.buttonshelf.patch
 
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.music.utils.litho.patch.LithoFilterPatch
 import app.revanced.patches.music.utils.settings.resource.patch.SettingsPatch
@@ -22,7 +21,7 @@ import app.revanced.util.integrations.Constants.MUSIC_ADS_PATH
                 "6.21.51"
             ]
         )
-    ]
+    ],
     dependencies = [
         LithoFilterPatch::class,
         SettingsPatch::class
@@ -30,6 +29,9 @@ import app.revanced.util.integrations.Constants.MUSIC_ADS_PATH
 )
 @Suppress("unused")
 object HideButtonShelfPatch : BytecodePatch() {
+    private const val FILTER_CLASS_DESCRIPTOR =
+        "$MUSIC_ADS_PATH/ButtonShelfFilter;"
+
     override fun execute(context: BytecodeContext) {
 
         SettingsPatch.addMusicPreference(
@@ -40,10 +42,5 @@ object HideButtonShelfPatch : BytecodePatch() {
 
         LithoFilterPatch.addFilter(FILTER_CLASS_DESCRIPTOR)
 
-    }
-
-    private companion object {
-        private const val FILTER_CLASS_DESCRIPTOR =
-            "$MUSIC_ADS_PATH/ButtonShelfFilter;"
     }
 }

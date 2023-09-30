@@ -1,7 +1,7 @@
 [versions]
 revanced-patcher = "15.0.1"
 revanced-patch-annotation-processor = "15.0.1"
-ksp = "1.9.0-1.0.11"
+ksp = "1.9.10-1.0.13"
 smali = "3.0.3"
 guava = "32.1.2-jre"
 gson = "2.10.1"

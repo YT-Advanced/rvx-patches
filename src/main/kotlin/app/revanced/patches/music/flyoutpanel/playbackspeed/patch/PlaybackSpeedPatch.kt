@@ -6,8 +6,7 @@ import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchException
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.music.flyoutpanel.playbackspeed.fingerprints.FlyoutPanelLikeButtonFingerprint
 import app.revanced.patches.music.utils.flyoutbutton.patch.FlyoutButtonContainerResourcePatch
@@ -32,7 +31,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
                 "6.21.51"
             ]
         )
-    ]
+    ],
     dependencies = [
         FlyoutButtonContainerResourcePatch::class,
         OverrideSpeedHookPatch::class,

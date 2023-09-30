@@ -10,8 +10,7 @@ import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWith
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.extensions.or
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.util.proxy.mutableTypes.MutableField.Companion.toMutable
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod
@@ -42,7 +41,7 @@ import com.android.tools.smali.dexlib2.util.MethodUtil
                 "6.21.51"
             ]
         )
-    ]
+    ],
     dependencies = [SettingsPatch::class]
 )
 @Suppress("unused")
@@ -52,6 +51,17 @@ object RememberShufflePatch : BytecodePatch(
         ShuffleClassReferenceFingerprint
     )
 ) {
+    const val MUSIC_PLAYBACK_CONTROLS_CLASS_DESCRIPTOR =
+            "Lcom/google/android/apps/youtube/music/watchpage/MusicPlaybackControls;"
+
+    lateinit var SHUFFLE_CLASS: String
+    lateinit var imageViewReference: Reference
+    lateinit var shuffleStateLabel: String
+
+    fun MutableMethod.descriptor(index: Int): Reference {
+        return getInstruction<ReferenceInstruction>(index).reference
+    }
+
     override fun execute(context: BytecodeContext) {
 
         ShuffleClassReferenceFingerprint.result?.let {
@@ -172,18 +182,5 @@ object RememberShufflePatch : BytecodePatch(
             "true"
         )
 
-    }
-
-    private companion object {
-        const val MUSIC_PLAYBACK_CONTROLS_CLASS_DESCRIPTOR =
-            "Lcom/google/android/apps/youtube/music/watchpage/MusicPlaybackControls;"
-
-        lateinit var SHUFFLE_CLASS: String
-        lateinit var imageViewReference: Reference
-        lateinit var shuffleStateLabel: String
-
-        fun MutableMethod.descriptor(index: Int): Reference {
-            return getInstruction<ReferenceInstruction>(index).reference
-        }
     }
 }

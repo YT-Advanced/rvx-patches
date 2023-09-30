@@ -2,14 +2,15 @@ package app.revanced.patches.youtube.layout.theme.patch
 
 import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
-import app.revanced.patcher.patch.annotations.DependsOn
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.shared.patch.litho.LithoThemePatch
 import app.revanced.util.integrations.Constants.UTILS_PATH
 import org.w3c.dom.Element
 
+@Patch(
     dependencies = [LithoThemePatch::class]
 )
-class GeneralThemePatch : ResourcePatch {
+object GeneralThemePatch : ResourcePatch {
     override fun execute(context: ResourceContext) {
 
         LithoThemePatch.injectCall("$UTILS_PATH/LithoThemePatch;->applyLithoTheme(I)I")

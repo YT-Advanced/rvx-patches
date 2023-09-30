@@ -6,8 +6,7 @@ import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchException
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod
 import app.revanced.patches.shared.patch.litho.LithoThemePatch
@@ -44,7 +43,7 @@ import org.w3c.dom.Element
                 "18.32.39"
             ]
         )
-    ]
+    ],
     dependencies = [
         LithoThemePatch::class,
         SettingsPatch::class,
@@ -117,16 +116,14 @@ object SeekbarColorPatch : BytecodePatch(
 
     }
 
-    private companion object {
-        fun MutableMethod.hook(insertIndex: Int) {
-            val insertRegister = getInstruction<OneRegisterInstruction>(insertIndex).registerA
+    fun MutableMethod.hook(insertIndex: Int) {
+        val insertRegister = getInstruction<OneRegisterInstruction>(insertIndex).registerA
 
-            addInstructions(
-                insertIndex + 1, """
-                    invoke-static {v$insertRegister}, $SEEKBAR->overrideSeekbarColor(I)I
-                    move-result v$insertRegister
-                    """
-            )
-        }
+        addInstructions(
+            insertIndex + 1, """
+                invoke-static {v$insertRegister}, $SEEKBAR->overrideSeekbarColor(I)I
+                move-result v$insertRegister
+                """
+        )
     }
 }

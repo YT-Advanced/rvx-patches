@@ -2,7 +2,7 @@ package app.revanced.patches.youtube.utils.resourceid.patch
 
 import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
-import app.revanced.patcher.patch.annotations.DependsOn
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.shared.patch.mapping.ResourceMappingPatch
 import app.revanced.util.enum.ResourceType
 import app.revanced.util.enum.ResourceType.ATTR
@@ -13,9 +13,10 @@ import app.revanced.util.enum.ResourceType.ID
 import app.revanced.util.enum.ResourceType.LAYOUT
 import app.revanced.util.enum.ResourceType.STRING
 
+@Patch(
     dependencies = [ResourceMappingPatch::class]
 )
-class SharedResourceIdPatch : ResourcePatch {
+object SharedResourceIdPatch : ResourcePatch {
     internal companion object {
         var AccountSwitcherAccessibility: Long = -1
         var AccessibilityCaptionsButtonName: Long = -1

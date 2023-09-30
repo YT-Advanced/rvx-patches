@@ -6,8 +6,7 @@ import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchException
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.music.navigation.component.fingerprints.TabLayoutTextFingerprint
 import app.revanced.patches.music.utils.resourceid.patch.SharedResourceIdPatch
@@ -33,7 +32,7 @@ import com.android.tools.smali.dexlib2.iface.reference.MethodReference
                 "6.21.51"
             ]
         )
-    ]
+    ],
     dependencies = [
         SettingsPatch::class,
         SharedResourceIdPatch::class
@@ -43,6 +42,9 @@ import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 object NavigationBarComponentPatch : BytecodePatch(
     setOf(TabLayoutTextFingerprint)
 ) {
+    const val FLAG = "android:layout_weight"
+    const val RESOURCE_FILE_PATH = "res/layout/image_with_text_tab.xml"
+
     override fun execute(context: BytecodeContext) {
         /**
          * Hide navigation labels
@@ -140,10 +142,5 @@ object NavigationBarComponentPatch : BytecodePatch(
             "revanced_hide_upgrade_button",
             "true"
         )
-    }
-
-    private companion object {
-        const val FLAG = "android:layout_weight"
-        const val RESOURCE_FILE_PATH = "res/layout/image_with_text_tab.xml"
     }
 }

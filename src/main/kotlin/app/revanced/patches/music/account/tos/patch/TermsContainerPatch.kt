@@ -7,8 +7,7 @@ import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchException
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.music.account.tos.fingerprints.TermsOfServiceFingerprint
 import app.revanced.patches.music.utils.resourceid.patch.SharedResourceIdPatch
@@ -33,7 +32,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
                 "6.21.51"
             ]
         )
-    ]
+    ],
     dependencies = [
         SettingsPatch::class,
         SharedResourceIdPatch::class

@@ -2,8 +2,7 @@ package app.revanced.patches.music.general.amoled.patch
 
 import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.shared.patch.litho.LithoThemePatch
 import app.revanced.util.integrations.Constants.MUSIC_UTILS_PATH
@@ -21,7 +20,7 @@ import org.w3c.dom.Element
                 "6.21.51"
             ]
         )
-    ]
+    ],
     dependencies = [LithoThemePatch::class]
 )
 @Suppress("unused")

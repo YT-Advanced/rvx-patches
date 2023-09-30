@@ -8,7 +8,7 @@ import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.replaceInstruction
 import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint.Companion.resolve
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.annotations.DependsOn
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod
 import app.revanced.patches.youtube.utils.fingerprints.SeekbarFingerprint
 import app.revanced.patches.youtube.utils.fingerprints.SeekbarOnDrawFingerprint
@@ -35,6 +35,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
 import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 
+@Patch(
     dependencies = [
         OverrideSpeedHookPatch::class,
         PlayerControlsPatch::class,
@@ -43,7 +44,7 @@ import com.android.tools.smali.dexlib2.iface.reference.MethodReference
         VideoIdWithoutShortsPatch::class
     ]
 )
-class SponsorBlockBytecodePatch : BytecodePatch(
+object SponsorBlockBytecodePatch : BytecodePatch(
     setOf(
         SeekbarFingerprint,
         SegmentPlaybackControllerFingerprint,

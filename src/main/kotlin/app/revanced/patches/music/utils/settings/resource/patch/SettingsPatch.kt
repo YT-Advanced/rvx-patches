@@ -1,8 +1,7 @@
 package app.revanced.patches.music.utils.settings.resource.patch
 
 import app.revanced.patcher.data.ResourceContext
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.music.utils.settings.bytecode.patch.SettingsBytecodePatch
 import app.revanced.patches.shared.patch.settings.AbstractSettingsResourcePatch
@@ -36,7 +35,7 @@ import java.nio.file.Paths
                 "6.21.51"
             ]
         )
-    ]
+    ],
     dependencies = [SettingsBytecodePatch::class]
 )
 @Suppress("unused")

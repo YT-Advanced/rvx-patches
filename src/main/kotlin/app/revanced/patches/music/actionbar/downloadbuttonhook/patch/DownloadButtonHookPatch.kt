@@ -2,8 +2,7 @@ package app.revanced.patches.music.actionbar.downloadbuttonhook.patch
 
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.music.utils.actionbarhook.patch.ActionBarHookPatch
 import app.revanced.patches.music.utils.intenthook.patch.IntentHookPatch
@@ -23,7 +22,7 @@ import app.revanced.util.enum.CategoryType
                 "6.21.51"
             ]
         )
-    ]
+    ],
     dependencies = [
         ActionBarHookPatch::class,
         IntentHookPatch::class,

@@ -7,8 +7,7 @@ import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWith
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchException
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotations.RequiresIntegrations
 import app.revanced.patcher.util.smali.ExternalLabel
@@ -25,7 +24,7 @@ import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 
 @Patch(
     name = "Hide ads",
-    compatiblePackages = [CompatiblePackage("com.reddit.frontpage")]
+    compatiblePackages = [CompatiblePackage("com.reddit.frontpage")],
     description = "Hides ads from the Reddit.",
     dependencies = [
         HideBannerPatch::class,
@@ -33,13 +32,21 @@ import com.android.tools.smali.dexlib2.iface.reference.FieldReference
         SettingsPatch::class
     ]
 )
-@RequiresIntegrations
+@Patch(requiresIntegrations = true)
 object HideAdsPatch : BytecodePatch(
     setOf(
         AdPostFingerprint,
         NewAdPostFingerprint
     )
 ) {
+    private const val INTEGRATIONS_OLD_METHOD_DESCRIPTOR =
+        "Lapp/revanced/reddit/patches/GeneralAdsPatch;" +
+                "->hideOldPostAds(Ljava/util/List;)Ljava/util/List;"
+
+    private const val INTEGRATIONS_NEW_METHOD_DESCRIPTOR =
+        "Lapp/revanced/reddit/patches/GeneralAdsPatch;" +
+                "->hideNewPostAds()Z"
+
     override fun execute(context: BytecodeContext) {
         // region Filter promoted ads (does not work in popular or latest feed)
 
@@ -90,15 +97,5 @@ object HideAdsPatch : BytecodePatch(
 
         updateSettingsStatus("GeneralAds")
 
-    }
-
-    private companion object {
-        private const val INTEGRATIONS_OLD_METHOD_DESCRIPTOR =
-            "Lapp/revanced/reddit/patches/GeneralAdsPatch;" +
-                    "->hideOldPostAds(Ljava/util/List;)Ljava/util/List;"
-
-        private const val INTEGRATIONS_NEW_METHOD_DESCRIPTOR =
-            "Lapp/revanced/reddit/patches/GeneralAdsPatch;" +
-                    "->hideNewPostAds()Z"
     }
 }

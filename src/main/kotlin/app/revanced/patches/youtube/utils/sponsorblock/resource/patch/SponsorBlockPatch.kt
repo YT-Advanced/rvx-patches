@@ -2,8 +2,7 @@ package app.revanced.patches.youtube.utils.sponsorblock.resource.patch
 
 import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch
 import app.revanced.patches.youtube.utils.sponsorblock.bytecode.patch.SponsorBlockBytecodePatch
@@ -29,7 +28,7 @@ import app.revanced.util.resources.ResourceUtils.copyXmlNode
                 "18.32.39"
             ]
         )
-    ]
+    ],
     dependencies = [
         SettingsPatch::class,
         SponsorBlockBytecodePatch::class

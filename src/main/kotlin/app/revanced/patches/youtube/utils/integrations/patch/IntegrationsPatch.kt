@@ -11,8 +11,8 @@ import app.revanced.patches.youtube.utils.integrations.fingerprints.RemoteEmbedd
 import app.revanced.patches.youtube.utils.integrations.fingerprints.StandalonePlayerActivityFingerprint
 import app.revanced.util.integrations.Constants.INTEGRATIONS_PATH
 
-@RequiresIntegrations
-class IntegrationsPatch : AbstractIntegrationsPatch(
+@Patch(requiresIntegrations = true)
+object IntegrationsPatch : AbstractIntegrationsPatch(
     "$INTEGRATIONS_PATH/utils/ReVancedUtils;",
     setOf(
         ApplicationInitFingerprint,

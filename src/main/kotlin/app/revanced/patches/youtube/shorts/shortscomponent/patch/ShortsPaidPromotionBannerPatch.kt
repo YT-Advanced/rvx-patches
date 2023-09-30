@@ -34,16 +34,14 @@ class ShortsPaidPromotionBannerPatch : BytecodePatch(
 
     }
 
-    private companion object {
-        fun MutableMethod.insertHook(insertIndex: Int) {
-            val insertRegister = getInstruction<OneRegisterInstruction>(insertIndex).registerA
+    fun MutableMethod.insertHook(insertIndex: Int) {
+        val insertRegister = getInstruction<OneRegisterInstruction>(insertIndex).registerA
 
-            addInstructions(
-                insertIndex + 1, """
-                    invoke-static {v$insertRegister}, $SHORTS->hideShortsPlayerPaidPromotionBanner(Landroid/view/ViewStub;)Landroid/view/ViewStub;
-                    move-result-object v$insertRegister
-                    """
-            )
-        }
+        addInstructions(
+            insertIndex + 1, """
+                invoke-static {v$insertRegister}, $SHORTS->hideShortsPlayerPaidPromotionBanner(Landroid/view/ViewStub;)Landroid/view/ViewStub;
+                move-result-object v$insertRegister
+                """
+        )
     }
 }

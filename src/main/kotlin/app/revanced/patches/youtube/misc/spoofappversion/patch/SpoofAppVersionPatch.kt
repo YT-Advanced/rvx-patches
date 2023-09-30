@@ -1,8 +1,7 @@
 package app.revanced.patches.youtube.misc.spoofappversion.patch
 
 import app.revanced.patcher.data.BytecodeContext
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.shared.patch.versionspoof.AbstractVersionSpoofPatch
 import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch
@@ -28,7 +27,7 @@ import app.revanced.util.resources.ResourceUtils.copyXmlNode
                 "18.32.39"
             ]
         )
-    ]
+    ],
     dependencies = [SettingsPatch::class]
 )
 @Suppress("unused")

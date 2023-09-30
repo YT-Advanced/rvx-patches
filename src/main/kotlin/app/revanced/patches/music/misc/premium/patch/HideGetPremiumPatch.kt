@@ -7,8 +7,7 @@ import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint.Companion.resolve
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod
 import app.revanced.patches.music.misc.premium.fingerprints.AccountMenuFooterFingerprint
@@ -36,7 +35,7 @@ import com.android.tools.smali.dexlib2.iface.reference.Reference
                 "6.21.51"
             ]
         )
-    ]
+    ],
     dependencies = [SharedResourceIdPatch::class]
 )
 @Suppress("unused")
@@ -47,6 +46,8 @@ object HideGetPremiumPatch : BytecodePatch(
         MembershipSettingsParentFingerprint
     )
 ) {
+    lateinit var targetReference: Reference
+
     override fun execute(context: BytecodeContext) {
 
         HideGetPremiumFingerprint.result?.let {
@@ -112,9 +113,5 @@ object HideGetPremiumPatch : BytecodePatch(
             } ?: throw MembershipSettingsFingerprint.exception
         } ?: throw MembershipSettingsParentFingerprint.exception
 
-    }
-
-    private companion object {
-        lateinit var targetReference: Reference
     }
 }

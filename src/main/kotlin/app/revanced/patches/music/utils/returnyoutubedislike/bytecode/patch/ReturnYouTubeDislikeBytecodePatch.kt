@@ -6,8 +6,8 @@ import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint
 import app.revanced.patcher.patch.BytecodePatch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.PatchException
-import app.revanced.patcher.patch.annotations.DependsOn
 import app.revanced.patches.music.utils.resourceid.patch.SharedResourceIdPatch
 import app.revanced.patches.music.utils.returnyoutubedislike.bytecode.fingerprints.DislikeFingerprint
 import app.revanced.patches.music.utils.returnyoutubedislike.bytecode.fingerprints.LikeFingerprint
@@ -19,12 +19,13 @@ import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
 
+@Patch(
     dependencies = [
         SharedResourceIdPatch::class,
         VideoInformationPatch::class
     ]
 )
-class ReturnYouTubeDislikeBytecodePatch : BytecodePatch(
+object ReturnYouTubeDislikeBytecodePatch : BytecodePatch(
     setOf(
         DislikeFingerprint,
         LikeFingerprint,
@@ -32,6 +33,9 @@ class ReturnYouTubeDislikeBytecodePatch : BytecodePatch(
         TextComponentFingerprint
     )
 ) {
+    const val INTEGRATIONS_RYD_CLASS_DESCRIPTOR =
+        "$MUSIC_UTILS_PATH/ReturnYouTubeDislikePatch;"
+
     override fun execute(context: BytecodeContext) {
         setOf(
             LikeFingerprint.toPatch(Vote.LIKE),
@@ -78,11 +82,6 @@ class ReturnYouTubeDislikeBytecodePatch : BytecodePatch(
 
         VideoInformationPatch.injectCall("$INTEGRATIONS_RYD_CLASS_DESCRIPTOR->newVideoLoaded(Ljava/lang/String;)V")
 
-    }
-
-    private companion object {
-        const val INTEGRATIONS_RYD_CLASS_DESCRIPTOR =
-            "$MUSIC_UTILS_PATH/ReturnYouTubeDislikePatch;"
     }
 
     private fun MethodFingerprint.toPatch(voteKind: Vote) = VotePatch(this, voteKind)

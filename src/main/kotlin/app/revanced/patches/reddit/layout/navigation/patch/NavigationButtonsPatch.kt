@@ -5,8 +5,7 @@ import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.reddit.layout.navigation.fingerprints.BottomNavScreenFingerprint
 import app.revanced.patches.reddit.utils.settings.bytecode.patch.SettingsBytecodePatch.Companion.updateSettingsStatus
@@ -15,7 +14,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 
 @Patch(
     name = "Hide navigation buttons",
-    compatiblePackages = [CompatiblePackage("com.reddit.frontpage")]
+    compatiblePackages = [CompatiblePackage("com.reddit.frontpage")],
     description = "Hide buttons at navigation bar.",
     dependencies = [SettingsPatch::class]
 )

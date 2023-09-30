@@ -5,8 +5,7 @@ import app.revanced.patcher.patch.OptionsContainer
 import app.revanced.patcher.patch.PatchException
 import app.revanced.patcher.patch.PatchOption
 import app.revanced.patcher.patch.ResourcePatch
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch
 import app.revanced.util.resources.ResourceHelper.updatePatchStatusLabel
@@ -29,7 +28,7 @@ import app.revanced.util.resources.ResourceHelper.updatePatchStatusLabel
                 "18.32.39"
             ]
         )
-    ]
+    ],
     dependencies = [
         RemoveElementsPatch::class,
         SettingsPatch::class

@@ -2,7 +2,7 @@ package app.revanced.patches.music.misc.bitrate.patch
 
 import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 
 @Patch(
@@ -11,6 +11,8 @@ import app.revanced.patcher.patch.annotation.CompatiblePackage
 )
 @Suppress("unused")
 object BitrateDefaultValuePatch : ResourcePatch {
+    const val RESOURCE_FILE_PATH = "res/xml/data_saving_settings.xml"
+
     override fun execute(context: ResourceContext) {
         context.xmlEditor[RESOURCE_FILE_PATH].use { editor ->
             editor.file.getElementsByTagName("com.google.android.apps.youtube.music.ui.preference.PreferenceCategoryCompat")
@@ -31,9 +33,5 @@ object BitrateDefaultValuePatch : ResourcePatch {
                 }
         }
 
-    }
-
-    private companion object {
-        const val RESOURCE_FILE_PATH = "res/xml/data_saving_settings.xml"
     }
 }

@@ -6,8 +6,7 @@ import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWith
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.removeInstruction
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod
 import app.revanced.patcher.util.smali.ExternalLabel
@@ -32,13 +31,18 @@ import kotlin.properties.Delegates
                 "6.21.51"
             ]
         )
-    ]
+    ],
     dependencies = [SettingsPatch::class]
 )
 @Suppress("unused")
 object ColorMatchPlayerPatch : BytecodePatch(
     setOf(PlayerColorFingerprint)
 ) {
+    var relativeIndex by Delegates.notNull<Int>()
+    fun MutableMethod.descriptor(index: Int): String {
+        return getInstruction<ReferenceInstruction>(relativeIndex + index).reference.toString()
+    }
+
     override fun execute(context: BytecodeContext) {
 
         PlayerColorFingerprint.result?.let {
@@ -82,13 +86,5 @@ object ColorMatchPlayerPatch : BytecodePatch(
             "true"
         )
 
-    }
-
-    private companion object {
-        var relativeIndex by Delegates.notNull<Int>()
-
-        fun MutableMethod.descriptor(index: Int): String {
-            return getInstruction<ReferenceInstruction>(relativeIndex + index).reference.toString()
-        }
     }
 }

@@ -6,8 +6,7 @@ import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.youtube.general.categorybar.fingerprints.FilterBarHeightFingerprint
 import app.revanced.patches.youtube.general.categorybar.fingerprints.RelatedChipCloudFingerprint
@@ -36,7 +35,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
                 "18.32.39"
             ]
         )
-    ]
+    ],
     dependencies = [
         SettingsPatch::class,
         SharedResourceIdPatch::class
@@ -85,22 +84,20 @@ object CategoryBarPatch : BytecodePatch(
 
     }
 
-    private companion object {
-        private fun <RegisterInstruction : OneRegisterInstruction> MethodFingerprint.patch(
-            insertIndexOffset: Int = 0,
-            hookRegisterOffset: Int = 0,
-            instructions: (Int) -> String
-        ) =
-            result?.let {
-                it.mutableMethod.apply {
-                    val endIndex = it.scanResult.patternScanResult!!.endIndex
+    private fun <RegisterInstruction : OneRegisterInstruction> MethodFingerprint.patch(
+        insertIndexOffset: Int = 0,
+        hookRegisterOffset: Int = 0,
+        instructions: (Int) -> String
+    ) =
+        result?.let {
+            it.mutableMethod.apply {
+                val endIndex = it.scanResult.patternScanResult!!.endIndex
 
-                    val insertIndex = endIndex + insertIndexOffset
-                    val register =
-                        getInstruction<RegisterInstruction>(endIndex + hookRegisterOffset).registerA
+                val insertIndex = endIndex + insertIndexOffset
+                val register =
+                    getInstruction<RegisterInstruction>(endIndex + hookRegisterOffset).registerA
 
-                    addInstructions(insertIndex, instructions(register))
-                }
-            } ?: throw exception
-    }
+                addInstructions(insertIndex, instructions(register))
+            }
+        } ?: throw exception
 }

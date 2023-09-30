@@ -6,8 +6,7 @@ import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWith
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint.Companion.resolve
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod
 import app.revanced.patcher.util.smali.ExternalLabel
@@ -45,7 +44,7 @@ import com.android.tools.smali.dexlib2.iface.reference.MethodReference
                 "18.32.39"
             ]
         )
-    ]
+    ],
     dependencies = [
         SettingsPatch::class,
         SharedResourceIdPatch::class
@@ -58,6 +57,8 @@ object HideFilmstripOverlayPatch : BytecodePatch(
         YouTubeControlsOverlayFingerprint
     )
 ) {
+    var fixComponent: String = ""
+
     override fun execute(context: BytecodeContext) {
 
         FilmStripOverlayParentFingerprint.result?.classDef?.let { classDef ->
@@ -163,27 +164,24 @@ object HideFilmstripOverlayPatch : BytecodePatch(
 
     }
 
-    private companion object {
-        var fixComponent: String = ""
 
-        fun MutableMethod.injectHook() {
-            addInstructionsWithLabels(
-                0, """
-                    invoke-static {}, $PLAYER->hideFilmstripOverlay()Z
-                    move-result v0
-                    if-eqz v0, :shown
-                    const/4 v0, 0x0
-                    return v0
-                    """, ExternalLabel("shown", getInstruction(0))
-            )
-        }
+    fun MutableMethod.injectHook() {
+        addInstructionsWithLabels(
+            0, """
+                invoke-static {}, $PLAYER->hideFilmstripOverlay()Z
+                move-result v0
+                if-eqz v0, :shown
+                const/4 v0, 0x0
+                return v0
+                """, ExternalLabel("shown", getInstruction(0))
+        )
+    }
 
-        fun MutableMethod.getIndex(methodName: String): Int {
-            return implementation!!.instructions.indexOfFirst { instruction ->
-                if (instruction.opcode != Opcode.INVOKE_VIRTUAL) return@indexOfFirst false
+    fun MutableMethod.getIndex(methodName: String): Int {
+        return implementation!!.instructions.indexOfFirst { instruction ->
+            if (instruction.opcode != Opcode.INVOKE_VIRTUAL) return@indexOfFirst false
 
-                return@indexOfFirst ((instruction as Instruction35c).reference as MethodReference).name == methodName
-            }
+            return@indexOfFirst ((instruction as Instruction35c).reference as MethodReference).name == methodName
         }
     }
 }

@@ -3,8 +3,7 @@ package app.revanced.patches.youtube.utils.microg.resource.patch
 import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.PatchException
 import app.revanced.patcher.patch.ResourcePatch
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.shared.patch.packagename.PackageNamePatch
 import app.revanced.patches.youtube.utils.microg.bytecode.patch.MicroGBytecodePatch
@@ -35,7 +34,7 @@ import app.revanced.util.resources.ResourceHelper.setMicroG
                 "18.32.39"
             ]
         )
-    ]
+    ],
     dependencies = [
         PackageNamePatch::class,
         SettingsPatch::class,

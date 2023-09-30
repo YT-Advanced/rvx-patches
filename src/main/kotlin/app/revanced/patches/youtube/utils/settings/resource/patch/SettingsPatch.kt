@@ -1,8 +1,7 @@
 package app.revanced.patches.youtube.utils.settings.resource.patch
 
 import app.revanced.patcher.data.ResourceContext
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.shared.patch.settings.AbstractSettingsResourcePatch
 import app.revanced.patches.youtube.utils.integrations.patch.IntegrationsPatch
@@ -40,7 +39,7 @@ import java.util.concurrent.TimeUnit
                 "18.32.39"
             ]
         )
-    ]
+    ],
     dependencies = [
         IntegrationsPatch::class,
         SharedResourceIdPatch::class,

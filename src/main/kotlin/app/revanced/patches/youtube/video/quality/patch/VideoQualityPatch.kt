@@ -7,8 +7,7 @@ import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint.Companion.resolve
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchException
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.youtube.utils.fingerprints.NewFlyoutPanelOnClickListenerFingerprint
 import app.revanced.patches.youtube.utils.overridequality.patch.OverrideQualityHookPatch
@@ -40,7 +39,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
                 "18.32.39"
             ]
         )
-    ]
+    ],
     dependencies = [
         OverrideQualityHookPatch::class,
         VideoIdPatch::class,
@@ -55,6 +54,9 @@ object VideoQualityPatch : BytecodePatch(
         VideoQualitySetterFingerprint
     )
 ) {
+    const val INTEGRATIONS_VIDEO_QUALITY_CLASS_DESCRIPTOR =
+        "$VIDEO_PATH/VideoQualityPatch;"
+
     override fun execute(context: BytecodeContext) {
 
         NewFlyoutPanelOnClickListenerFingerprint.result?.let { parentResult ->
@@ -111,10 +113,5 @@ object VideoQualityPatch : BytecodePatch(
 
         SettingsPatch.updatePatchStatus("default-video-quality")
 
-    }
-
-    private companion object {
-        const val INTEGRATIONS_VIDEO_QUALITY_CLASS_DESCRIPTOR =
-            "$VIDEO_PATH/VideoQualityPatch;"
     }
 }

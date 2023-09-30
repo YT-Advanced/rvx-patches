@@ -2,8 +2,7 @@ package app.revanced.patches.youtube.layout.doubletapbackground.patch
 
 import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch
 
@@ -25,12 +24,14 @@ import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch
                 "18.32.39"
             ]
         )
-    ]
+    ],
     dependencies = [SettingsPatch::class],
     use = false
 )
 @Suppress("unused")
 object DoubleTapOverlayBackgroundPatch : ResourcePatch {
+    const val RESOURCE_FILE_PATH = "res/layout/quick_seek_overlay.xml"
+
     override fun execute(context: ResourceContext) {
         context.xmlEditor[RESOURCE_FILE_PATH].use {
             it.file.getElementsByTagName("merge").item(0).childNodes.apply {
@@ -60,9 +61,5 @@ object DoubleTapOverlayBackgroundPatch : ResourcePatch {
 
         SettingsPatch.updatePatchStatus("hide-double-tap-overlay-filter")
 
-    }
-
-    private companion object {
-        const val RESOURCE_FILE_PATH = "res/layout/quick_seek_overlay.xml"
     }
 }

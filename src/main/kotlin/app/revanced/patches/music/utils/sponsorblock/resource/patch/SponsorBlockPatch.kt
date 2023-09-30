@@ -2,8 +2,7 @@ package app.revanced.patches.music.utils.sponsorblock.resource.patch
 
 import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.music.utils.settings.resource.patch.SettingsPatch
 import app.revanced.patches.music.utils.sponsorblock.bytecode.patch.SponsorBlockBytecodePatch
@@ -24,7 +23,7 @@ import app.revanced.util.resources.ResourceUtils.copyResources
                 "6.21.51"
             ]
         )
-    ]
+    ],
     dependencies = [
         SettingsPatch::class,
         SponsorBlockBytecodePatch::class

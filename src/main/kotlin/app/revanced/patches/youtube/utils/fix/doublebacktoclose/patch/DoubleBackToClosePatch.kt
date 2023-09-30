@@ -19,6 +19,9 @@ class DoubleBackToClosePatch : BytecodePatch(
         ScrollTopParentFingerprint
     )
 ) {
+    const val INTEGRATIONS_CLASS_DESCRIPTOR =
+        "$UTILS_PATH/DoubleBackToClosePatch;"
+
     override fun execute(context: BytecodeContext) {
 
         /**
@@ -65,18 +68,13 @@ class DoubleBackToClosePatch : BytecodePatch(
 
     }
 
-    private companion object {
-        const val INTEGRATIONS_CLASS_DESCRIPTOR =
-            "$UTILS_PATH/DoubleBackToClosePatch;"
-
-        fun MutableMethod.injectScrollView(
-            index: Int,
-            descriptor: String
-        ) {
-            addInstruction(
-                index,
-                "invoke-static {}, $INTEGRATIONS_CLASS_DESCRIPTOR->$descriptor()V"
-            )
-        }
+    fun MutableMethod.injectScrollView(
+        index: Int,
+        descriptor: String
+    ) {
+        addInstruction(
+            index,
+            "invoke-static {}, $INTEGRATIONS_CLASS_DESCRIPTOR->$descriptor()V"
+        )
     }
 }

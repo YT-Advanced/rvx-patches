@@ -2,8 +2,7 @@ package app.revanced.patches.youtube.misc.translations.patch
 
 import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.youtube.utils.settings.resource.patch.SettingsPatch
 import app.revanced.util.resources.ResourceHelper.addTranslations
@@ -26,43 +25,43 @@ import app.revanced.util.resources.ResourceHelper.addTranslations
                 "18.32.39"
             ]
         )
-    ]
+    ],
     dependencies = [SettingsPatch::class]
 )
 @Suppress("unused")
 object TranslationsPatch : ResourcePatch {
+    // Language list
+    val LANGUAGE_LIST = arrayOf(
+        "ar",
+        "bg-rBG",
+        "bn",
+        "de-rDE",
+        "el-rGR",
+        "es-rES",
+        "fi-rFI",
+        "fr-rFR",
+        "hu-rHU",
+        "id-rID",
+        "in",
+        "it-rIT",
+        "ja-rJP",
+        "ko-rKR",
+        "pl-rPL",
+        "pt-rBR",
+        "ru-rRU",
+        "tr-rTR",
+        "uk-rUA",
+        "vi-rVN",
+        "zh-rCN",
+        "zh-rTW"
+    )
+
+    // Add Translation
     override fun execute(context: ResourceContext) {
 
         context.addTranslations("youtube", LANGUAGE_LIST)
 
         SettingsPatch.updatePatchStatus("translations")
 
-    }
-
-    private companion object {
-        val LANGUAGE_LIST = arrayOf(
-            "ar",
-            "bg-rBG",
-            "bn",
-            "de-rDE",
-            "el-rGR",
-            "es-rES",
-            "fi-rFI",
-            "fr-rFR",
-            "hu-rHU",
-            "id-rID",
-            "in",
-            "it-rIT",
-            "ja-rJP",
-            "ko-rKR",
-            "pl-rPL",
-            "pt-rBR",
-            "ru-rRU",
-            "tr-rTR",
-            "uk-rUA",
-            "vi-rVN",
-            "zh-rCN",
-            "zh-rTW"
-        )
     }
 }

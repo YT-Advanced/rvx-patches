@@ -6,7 +6,7 @@ import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.annotations.DependsOn
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.youtube.utils.playerbutton.fingerprints.LiveChatFingerprint
 import app.revanced.patches.youtube.utils.resourceid.patch.SharedResourceIdPatch
 import app.revanced.util.integrations.Constants.PLAYER
@@ -14,9 +14,10 @@ import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.builder.instruction.BuilderInstruction21c
 import com.android.tools.smali.dexlib2.builder.instruction.BuilderInstruction35c
 
+@Patch(
     dependencies = [SharedResourceIdPatch::class]
 )
-class PlayerButtonHookPatch : BytecodePatch(
+object PlayerButtonHookPatch : BytecodePatch(
     setOf(LiveChatFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {

@@ -5,8 +5,7 @@ import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod
 import app.revanced.patches.youtube.general.widesearchbar.fingerprints.SetActionBarRingoFingerprint
@@ -34,7 +33,7 @@ import app.revanced.util.integrations.Constants.GENERAL
                 "18.32.39"
             ]
         )
-    ]
+    ],
     dependencies = [
         SettingsPatch::class,
         SharedResourceIdPatch::class
@@ -47,6 +46,9 @@ object WideSearchBarPatch : BytecodePatch(
         SetToolBarPaddingFingerprint
     )
 ) {
+    const val FLAG = "android:paddingStart"
+    const val TARGET_RESOURCE_PATH = "res/layout/action_bar_ringo_background.xml"
+
     override fun execute(context: BytecodeContext) {
 
         arrayOf(
@@ -85,24 +87,20 @@ object WideSearchBarPatch : BytecodePatch(
 
     }
 
-    private companion object {
-        const val FLAG = "android:paddingStart"
-        const val TARGET_RESOURCE_PATH = "res/layout/action_bar_ringo_background.xml"
-
-        fun MethodFingerprint.injectHook(context: BytecodeContext) {
-            result?.let {
-                (context
-                    .toMethodWalker(it.method)
-                    .nextMethod(it.scanResult.patternScanResult!!.endIndex, true)
-                    .getMethod() as MutableMethod).apply {
-                    addInstructions(
-                        implementation!!.instructions.size - 1, """
-                            invoke-static {}, $GENERAL->enableWideSearchBar()Z
-                            move-result p0
-                            """
-                    )
-                }
-            } ?: throw exception
-        }
+    fun MethodFingerprint.injectHook(context: BytecodeContext) {
+        result?.let {
+            (context
+                .toMethodWalker(it.method)
+                .nextMethod(it.scanResult.patternScanResult!!.endIndex, true)
+                .getMethod() as MutableMethod).apply {
+                addInstructions(
+                    implementation!!.instructions.size - 1, """
+                        invoke-static {}, $GENERAL->enableWideSearchBar()Z
+                        move-result p0
+                        """
+                )
+            }
+        } ?: throw exception
     }
+
 }

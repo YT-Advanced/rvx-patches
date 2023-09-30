@@ -4,13 +4,13 @@ import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.reddit.layout.premiumicon.fingerprints.PremiumIconFingerprint
 
 @Patch(
     name = "Premium icon",
-    compatiblePackages = [CompatiblePackage("com.reddit.frontpage")]
+    compatiblePackages = [CompatiblePackage("com.reddit.frontpage")],
     description = "Unlocks premium icons."
 )
 @Suppress("unused")

@@ -7,8 +7,7 @@ import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWith
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.util.smali.ExternalLabel
 import app.revanced.patches.shared.fingerprints.captions.SubtitleTrackFingerprint
@@ -37,7 +36,7 @@ import app.revanced.util.integrations.Constants.GENERAL
                 "18.32.39"
             ]
         )
-    ]
+    ],
     dependencies = [
         PlayerTypeHookPatch::class,
         SettingsPatch::class,

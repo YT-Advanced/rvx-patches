@@ -4,15 +4,18 @@ import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.OptionsContainer
 import app.revanced.patcher.patch.PatchOption
 import app.revanced.patcher.patch.ResourcePatch
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
-import app.revanced.patches.shared.annotation.RVXCompatibility
 
 @Patch(
     name = "Custom package name",
-    description = "Specifies the package name for YouTube and YT Music in the MicroG build.")
-@RVXCompatibility
-class PackageNamePatch : ResourcePatch {
+    description = "Specifies the package name for YouTube and YT Music in the MicroG build.",
+    compatiblePackages = [
+        CompatiblePackage("com.google.android.youtube"),
+        CompatiblePackage("com.google.android.apps.youtube.music")
+    ]
+)
+object PackageNamePatch : ResourcePatch {
     override fun execute(context: ResourceContext) {
     }
 

@@ -1,8 +1,7 @@
 package app.revanced.patches.music.misc.codecs.patch
 
 import app.revanced.patcher.data.BytecodeContext
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patches.music.utils.settings.resource.patch.SettingsPatch
 import app.revanced.patches.shared.patch.opus.AbstractOpusCodecsPatch
@@ -21,7 +20,7 @@ import app.revanced.util.integrations.Constants.MUSIC_MISC_PATH
                 "6.21.51"
             ]
         )
-    ]
+    ],
     dependencies = [SettingsPatch::class]
 )
 @Suppress("unused")

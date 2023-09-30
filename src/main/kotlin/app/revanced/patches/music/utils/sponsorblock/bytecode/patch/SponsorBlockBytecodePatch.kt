@@ -7,7 +7,7 @@ import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint.Companion.resolve
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.annotations.DependsOn
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.music.utils.fingerprints.SeekBarConstructorFingerprint
 import app.revanced.patches.music.utils.resourceid.patch.SharedResourceIdPatch
 import app.revanced.patches.music.utils.sponsorblock.bytecode.fingerprints.MusicPlaybackControlsTimeBarDrawFingerprint
@@ -22,18 +22,24 @@ import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
 import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 
+@Patch(
     dependencies = [
         SharedResourceIdPatch::class,
         VideoInformationPatch::class
     ]
 )
-class SponsorBlockBytecodePatch : BytecodePatch(
+object SponsorBlockBytecodePatch : BytecodePatch(
     setOf(
         MusicPlaybackControlsTimeBarDrawFingerprint,
         MusicPlaybackControlsTimeBarOnMeasureFingerprint,
         SeekBarConstructorFingerprint
     )
 ) {
+    const val INTEGRATIONS_SEGMENT_PLAYBACK_CONTROLLER_CLASS_DESCRIPTOR =
+        "Lapp/revanced/music/sponsorblock/SegmentPlaybackController;"
+
+    lateinit var rectangleFieldName: String
+
     override fun execute(context: BytecodeContext) {
 
         /**
@@ -164,12 +170,5 @@ class SponsorBlockBytecodePatch : BytecodePatch(
          * Set current video id
          */
         VideoInformationPatch.injectCall("$INTEGRATIONS_SEGMENT_PLAYBACK_CONTROLLER_CLASS_DESCRIPTOR->setCurrentVideoId(Ljava/lang/String;)V")
-    }
-
-    private companion object {
-        const val INTEGRATIONS_SEGMENT_PLAYBACK_CONTROLLER_CLASS_DESCRIPTOR =
-            "Lapp/revanced/music/sponsorblock/SegmentPlaybackController;"
-
-        lateinit var rectangleFieldName: String
     }
 }

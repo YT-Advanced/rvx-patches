@@ -7,8 +7,8 @@ import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.extensions.or
 import app.revanced.patcher.patch.BytecodePatch
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.PatchException
-import app.revanced.patcher.patch.annotations.DependsOn
 import app.revanced.patcher.util.proxy.mutableTypes.MutableField.Companion.toMutable
 import app.revanced.patches.music.utils.overridequality.fingerprints.VideoQualityListFingerprint
 import app.revanced.patches.music.utils.overridequality.fingerprints.VideoQualityPatchFingerprint
@@ -19,9 +19,10 @@ import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 import com.android.tools.smali.dexlib2.immutable.ImmutableField
 import com.android.tools.smali.dexlib2.util.MethodUtil
 
+@Patch(
     dependencies = [SharedResourceIdPatch::class]
 )
-class OverrideQualityHookPatch : BytecodePatch(
+object OverrideQualityHookPatch : BytecodePatch(
     setOf(
         VideoQualityListFingerprint,
         VideoQualityPatchFingerprint
