@@ -1,6 +1,6 @@
 package app.revanced.patches.youtube.utils.integrations.patch
 
-import app.revanced.patcher.patch.annotations.RequiresIntegrations
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.shared.patch.integrations.AbstractIntegrationsPatch
 import app.revanced.patches.youtube.utils.integrations.fingerprints.APIPlayerServiceFingerprint
 import app.revanced.patches.youtube.utils.integrations.fingerprints.ApplicationInitFingerprint
