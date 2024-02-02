@@ -72,7 +72,7 @@ object HideCastButtonPatch : BytecodePatch(
         SettingsPatch.addMusicPreference(
             CategoryType.GENERAL,
             "revanced_hide_cast_button",
-            "true"
+            "false"
         )
 
     }

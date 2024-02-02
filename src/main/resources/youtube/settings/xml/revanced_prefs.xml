@@ -220,7 +220,7 @@
         <SwitchPreference android:title="@string/revanced_hide_auto_player_popup_panels_title" android:key="revanced_hide_auto_player_popup_panels" android:defaultValue="true" android:summaryOn="@string/revanced_hide_auto_player_popup_panels_summary_on" android:summaryOff="@string/revanced_hide_auto_player_popup_panels_summary_off" />SETTINGS: HIDE_AUTO_PLAYER_POPUP_PANELS -->
 
         <!-- SETTINGS: HIDE_CAST_BUTTON
-        <SwitchPreference android:title="@string/revanced_hide_cast_button_title" android:key="revanced_hide_cast_button" android:defaultValue="true" android:summaryOn="@string/revanced_hide_cast_button_summary_on" android:summaryOff="@string/revanced_hide_cast_button_summary_off" />SETTINGS: HIDE_CAST_BUTTON -->
+        <SwitchPreference android:title="@string/revanced_hide_cast_button_title" android:key="revanced_hide_cast_button" android:defaultValue="false" android:summaryOn="@string/revanced_hide_cast_button_summary_on" android:summaryOff="@string/revanced_hide_cast_button_summary_off" />SETTINGS: HIDE_CAST_BUTTON -->
 
         <!-- SETTINGS: HIDE_CATEGORY_BAR
         <SwitchPreference android:title="@string/revanced_hide_category_bar_in_feed_title" android:key="revanced_hide_category_bar_in_feed" android:defaultValue="false" android:summaryOn="@string/revanced_hide_category_bar_summary_on" android:summaryOff="@string/revanced_hide_category_bar_summary_off" />
