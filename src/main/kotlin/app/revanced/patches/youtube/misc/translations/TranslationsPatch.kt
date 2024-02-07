@@ -48,28 +48,7 @@ import app.revanced.patches.youtube.utils.settings.SettingsPatch
 object TranslationsPatch : AbstractTranslationsPatch(
     "youtube",
     arrayOf(
-        "ar",
-        "bg-rBG",
-        "bn",
-        "de-rDE",
-        "el-rGR",
-        "es-rES",
-        "fi-rFI",
-        "fr-rFR",
-        "hu-rHU",
-        "id-rID",
-        "in",
-        "it-rIT",
-        "ja-rJP",
-        "ko-rKR",
-        "pl-rPL",
-        "pt-rBR",
-        "ru-rRU",
-        "tr-rTR",
-        "uk-rUA",
-        "vi-rVN",
-        "zh-rCN",
-        "zh-rTW"
+        "ru-rRU"
     )
 ) {
     override fun execute(context: ResourceContext) {
