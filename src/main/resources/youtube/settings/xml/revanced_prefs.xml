@@ -645,7 +645,7 @@
         <Preference android:title=" " android:selectable="false" android:summary="@string/pref_about_category" />
         <PreferenceScreen android:title="@string/revanced_patches_information"  android:summary="@string/revanced_patches_information_summary" >
             <Preference android:title=" " android:selectable="false" android:summary="@string/revanced_tool_used" />
-            <Preference android:title="ReVanced Patches" android:selectable="false" android:summary="2.220.3" />
+            <Preference android:title="ReVanced Patches" android:selectable="false" android:summary="2.223.0" />
             <Preference android:title="ReVanced Integrations" android:selectable="false" android:summary="" />
 
             <Preference android:title=" " android:selectable="false" android:summary="@string/revanced_ads" />
@@ -772,7 +772,7 @@
 
             <Preference android:title=" " android:selectable="false" android:summary="@string/revanced_others" />
             <Preference android:title="Custom double tap length" android:summary="@string/revanced_patches_excluded" android:selectable="false"/>
-            <Preference android:title="Custom branding heading" android:summary="@string/revanced_header_default" android:selectable="false"/> <!-- #C# Change "Header" -->
+            <Preference android:title="Custom branding heading" android:summary="@string/revanced_header_default" android:selectable="false"/>
             <Preference android:title="Disable pip notification" android:summary="@string/revanced_patches_excluded" android:selectable="false"/>
             <Preference android:title="Hide animated button background" android:summary="@string/revanced_patches_excluded" android:selectable="false"/>
             <Preference android:title="Hide double tap overlay filter" android:summary="@string/revanced_patches_excluded" android:selectable="false"/>

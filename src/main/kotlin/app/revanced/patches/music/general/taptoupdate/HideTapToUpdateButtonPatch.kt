@@ -38,6 +38,7 @@ object HideTapToUpdateButtonPatch : BytecodePatch(
                         invoke-static {}, $GENERAL->hideTapToUpdateButton()Z
                         move-result v0
                         if-eqz v0, :show
+                        return v0
                         return-void
                         """, ExternalLabel("show", getInstruction(0))
                 )
