@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="about_author">Мод от CaM/7oCe6e</string>
     <string name="accessibility_settings_edu_opt_in_text">Включить специальные возможности для видеоплеера?</string>
     <string name="accessibility_settings_edu_opt_out_text">Управление изменено, поскольку служба специальных возможностей включена</string>
     <string name="microg_not_installed_notice">Пожалуйста, установите MicroG</string>
