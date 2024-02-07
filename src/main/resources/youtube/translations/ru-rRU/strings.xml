@@ -1034,6 +1034,7 @@
     <string name="revanced_whitelisting_speed">Скорость видео</string>
     <string name="revanced_whitelisting_speed_button">Скорость</string>
     <string name="revanced_whitelisting_title">Белый список каналов:</string>
-    <string name="revanced_hide_suggested_video_overlay_auto_play_summary">Когда вы закончите видео, автоматически запустится следующее.</string>
+    <string name="revanced_hide_suggested_video_overlay_auto_play_summary">Когда вы закончите просмотр видео,
+автоматически запустится следующее.</string>
     <string name="revanced_hide_suggested_video_overlay_auto_play_title">Авто-воспроизведение след. видео</string>
 </resources>
