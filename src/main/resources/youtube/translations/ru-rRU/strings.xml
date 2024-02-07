@@ -1016,4 +1016,24 @@
     <string name="sb_about">Об интеграции</string>
     <string name="sb_reset">Сбросить</string>
     <string name="sb_about_api_sum">Данные предоставлены SponsorBlock API. Нажмите здесь, чтобы узнать больше и увидеть опцию загрузки для других платформ.</string>
+    <string name="revanced_overlay_button_whitelisting_summary">Нажмите, чтобы запустить добавление канала в \"Белый список каналов\".</string>
+    <string name="revanced_overlay_button_whitelisting_title">Показывать кнопку \"Белого списка\"</string>
+    <string name="revanced_hide_home_feed_membership_video_summary">Скрыть видео с тегом «Только для спонсоров» в главной ленте</string>
+    <string name="revanced_hide_home_feed_membership_video_title">Скрыть видео для спонсоров в главной ленте</string>
+    <string name="revanced_whitelisting_add_failed" formatted="false">Не удалось добавить канал %s в белый список %s.</string>
+    <string name="revanced_whitelisting_added" formatted="false">Канал %s добавлен в белый список %s.</string>
+    <string name="revanced_whitelisting_channel_name">Название канала</string>
+    <string name="revanced_whitelisting_empty">Каналов в белом списке нет.</string>
+    <string name="revanced_whitelisting_excluded">Не добавлен в белый список</string>
+    <string name="revanced_whitelisting_fetch_failed">Не удалось получить сведения о канале, получено сообщение %d.</string>
+    <string name="revanced_whitelisting_included">Добавлен в белый список</string>
+    <string name="revanced_whitelisting_reboot">Перезагрузитесь, чтобы применить настройки \"Белого списка каналов\".</string>
+    <string name="revanced_whitelisting_remove_failed" formatted="false">Не удалось удалить канал %s из белого списка %s.</string>
+    <string name="revanced_whitelisting_removed" formatted="false">Канал %s удален из белого списка %s.</string>
+    <string name="revanced_whitelisting_settings_summary">Проверить или удалить список каналов, добавленных в белый список</string>
+    <string name="revanced_whitelisting_speed">Скорость видео</string>
+    <string name="revanced_whitelisting_speed_button">Скорость</string>
+    <string name="revanced_whitelisting_title">Белый список каналов:</string>
+    <string name="revanced_hide_suggested_video_overlay_auto_play_summary">Когда вы закончите видео, автоматически запустится следующее.</string>
+    <string name="revanced_hide_suggested_video_overlay_auto_play_title">Авто-воспроизведение след. видео</string>
 </resources>
