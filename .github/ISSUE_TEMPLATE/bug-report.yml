@@ -6,11 +6,11 @@ body:
   - type: markdown
     attributes:
       value: |
-        # ReVanced Extended bug report
+        # ReX bug report
 
         Before creating a new bug report, please keep the following in mind:
 
-        - **Do not submit a duplicate bug report**: You can review existing bug reports [here](https://github.com/inotia00/ReVanced_Extended/labels/Bug%20report).
+        - **Do not submit a duplicate bug report**: You can review existing bug reports [here](https://github.com/YT-Advanced/ReX-patches/labels/Bug%20report).
         - **Check if this issue reproduces in unpatched apps as well**: Most bugs can also be reproduced in unpatched apps.
   - type: dropdown
     attributes:
@@ -36,7 +36,7 @@ body:
     attributes:
       label: Application
       description: Write down the application and version where the issue occurs.
-      placeholder: e.g. YouTube v18.45.43
+      placeholder: e.g. YouTube v19.02.39
     validations:
       required: true
   - type: textarea
