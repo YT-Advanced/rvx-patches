@@ -68,7 +68,28 @@ object ShortsOverlayButtonsPatch : ResourcePatch() {
 
     override fun execute(context: ResourceContext) {
 
-        if (OutlineIcon == true) {
+        val commonResources = arrayOf(
+            ResourceGroup(
+                "drawable",
+                "ic_right_comment_32c.xml",
+                "ic_right_dislike_off_32c.xml",
+                "ic_right_like_off_32c.xml",
+                "ic_right_share_32c.xml"
+            ),
+            ResourceGroup(
+                "drawable-xxhdpi",
+                "ic_remix_filled_white_24.webp", // for older versions only
+                "ic_remix_filled_white_shadowed.webp",
+                "ic_right_comment_shadowed.webp",
+                "ic_right_dislike_off_shadowed.webp",
+                "ic_right_dislike_on_shadowed.webp",
+                "ic_right_like_off_shadowed.webp",
+                "ic_right_like_on_shadowed.webp",
+                "ic_right_share_shadowed.webp"
+            )
+        )
+
+        if (OutlineIcon == true || OutlineCircleIcon == true) {
             arrayOf(
                 "xxxhdpi",
                 "xxhdpi",
@@ -85,71 +106,14 @@ object ShortsOverlayButtonsPatch : ResourcePatch() {
                     )
                 )
             }
+        }
 
-            arrayOf(
-                // Shorts outline icons for older versions of YouTube
-                ResourceGroup(
-                    "drawable",
-                    "ic_right_comment_32c.xml",
-                    "ic_right_dislike_off_32c.xml",
-                    "ic_right_like_off_32c.xml",
-                    "ic_right_share_32c.xml"
-                ),
-
-                ResourceGroup(
-                    "drawable-xxhdpi",
-                    "ic_remix_filled_white_24.webp", // for older versions only
-                    "ic_remix_filled_white_shadowed.webp",
-                    "ic_right_comment_shadowed.webp",
-                    "ic_right_dislike_off_shadowed.webp",
-                    "ic_right_dislike_on_shadowed.webp",
-                    "ic_right_like_off_shadowed.webp",
-                    "ic_right_like_on_shadowed.webp",
-                    "ic_right_share_shadowed.webp"
-                )
-            ).forEach { resourceGroup ->
+        if (OutlineIcon == true) {
+            commonResources.forEach { resourceGroup ->
                 context.copyResources("youtube/shorts/outline", resourceGroup)
             }
         } else if (OutlineCircleIcon == true) {
-            arrayOf(
-                "xxxhdpi",
-                "xxhdpi",
-                "xhdpi",
-                "hdpi",
-                "mdpi"
-            ).forEach { dpi ->
-                context.copyResources(
-                    "youtube/shorts/outline",
-                    ResourceGroup(
-                        "drawable-$dpi",
-                        "ic_right_dislike_on_32c.webp",
-                        "ic_right_like_on_32c.webp"
-                    )
-                )
-            }
-
-            arrayOf(
-                // Shorts outline icons for older versions of YouTube (not circled)
-                ResourceGroup(
-                    "drawable",
-                    "ic_right_comment_32c.xml",
-                    "ic_right_dislike_off_32c.xml",
-                    "ic_right_like_off_32c.xml",
-                    "ic_right_share_32c.xml"
-                ),
-
-                ResourceGroup(
-                    "drawable-xxhdpi",
-                    "ic_remix_filled_white_24.webp", // for older versions only
-                    "ic_remix_filled_white_shadowed.webp",
-                    "ic_right_comment_shadowed.webp",
-                    "ic_right_dislike_off_shadowed.webp",
-                    "ic_right_dislike_on_shadowed.webp",
-                    "ic_right_like_off_shadowed.webp",
-                    "ic_right_like_on_shadowed.webp",
-                    "ic_right_share_shadowed.webp"
-                )
-            ).forEach { resourceGroup ->
+            commonResources.forEach { resourceGroup ->
                 context.copyResources("youtube/shorts/outlinecircle", resourceGroup)
             }
         } else {
