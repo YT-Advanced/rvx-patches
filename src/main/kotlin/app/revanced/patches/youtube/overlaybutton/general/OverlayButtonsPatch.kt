@@ -127,6 +127,11 @@ object OverlayButtonsPatch : ResourcePatch() {
         if (OutlineIcon == true) {
             arrayOf(
                 ResourceGroup(
+                    "drawable",
+                    "yt_outline_screen_vertical_vd_theme_24.xml",
+                ),
+
+                ResourceGroup(
                     "drawable-xxhdpi",
                     "ic_fullscreen_vertical_button.png",
                     "quantum_ic_fullscreen_exit_grey600_24.png",
