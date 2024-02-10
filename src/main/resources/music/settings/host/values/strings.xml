@@ -61,9 +61,7 @@ Known issues:
     <string name="revanced_enable_old_player_background_summary">Returns the player background to the old style.</string>
     <string name="revanced_enable_old_player_background_title">Enable old player background</string>
     <string name="revanced_enable_old_player_layout_summary">"Returns the player layout to the old style.
-Some features may not work properly in the old player layout.
-        
-WARNING: Do not hide like and dislike buttons while this is enabled."</string>
+Some features may not work properly in the old player layout."</string>
     <string name="revanced_enable_old_player_layout_title">Enable old player layout</string>
     <string name="revanced_enable_old_style_library_shelf_summary">Returns the library tab to the old style. (Experimental)</string>
     <string name="revanced_enable_old_style_library_shelf_title">Enable old style library shelf</string>
@@ -105,7 +103,7 @@ WARNING: Do not hide like and dislike buttons while this is enabled."</string>
     <string name="revanced_hide_action_button_download_title">Hide download button</string>
     <string name="revanced_hide_action_button_label_summary">Hides labels in action buttons.</string>
     <string name="revanced_hide_action_button_label_title">Hide action button labels</string>
-    <string name="revanced_hide_action_button_like_dislike_summary">Hides the like and dislike buttons.</string>
+    <string name="revanced_hide_action_button_like_dislike_summary">Hides the like and dislike buttons. It does not work in the old player layout.</string>
     <string name="revanced_hide_action_button_like_dislike_title">Hide like and dislike buttons</string>
     <string name="revanced_hide_action_button_radio_summary">Hides start radio button.</string>
     <string name="revanced_hide_action_button_radio_title">Hide radio button</string>
@@ -136,7 +134,7 @@ WARNING: Do not hide like and dislike buttons while this is enabled."</string>
     <string name="revanced_hide_flyout_panel_go_to_episode_title">Hide go to episode menu</string>
     <string name="revanced_hide_flyout_panel_go_to_podcast_title">Hide go to podcast menu</string>
     <string name="revanced_hide_flyout_panel_help_title">Hide help &amp; feedback menu</string>
-    <string name="revanced_hide_flyout_panel_like_dislike_title">Hide like and dislike buttons</string>
+    <string name="revanced_hide_flyout_panel_like_dislike_title">Hide like and dislike button</string>
     <string name="revanced_hide_flyout_panel_play_next_title">Hide play next menu</string>
     <string name="revanced_hide_flyout_panel_quality_title">Hide quality menu</string>
     <string name="revanced_hide_flyout_panel_remove_from_library_title">Hide remove from library menu</string>
