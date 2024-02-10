@@ -75,7 +75,7 @@ import org.w3c.dom.Element
 object OverlayButtonsPatch : ResourcePatch() {
     private val OutlineIcon by booleanPatchOption(
         key = "OutlineIcon",
-        default = false,
+        default = true,
         title = "Outline icons",
         description = "Apply the outline icon",
         required = true
