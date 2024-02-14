@@ -398,7 +398,7 @@
         <Preference android:title=" " android:selectable="false" android:summary="@string/pref_about_category" />
         <PreferenceScreen android:title="@string/revanced_patches_information"  android:summary="@string/revanced_patches_information_summary" >
             <Preference android:title=" " android:selectable="false" android:summary="@string/revanced_tool_used" />
-            <Preference android:title="ReVanced Patches" android:selectable="false" android:summary="2.220.4" />
+            <Preference android:title="ReVanced Patches" android:selectable="false" android:summary="2.220.6" />
             <Preference android:title="ReVanced Integrations" android:selectable="false" android:summary="" />
 
             <Preference android:title=" " android:selectable="false" android:summary="@string/revanced_ads" />
@@ -527,6 +527,7 @@
             <Preference android:title="Header" android:summary="@string/revanced_header_default" android:selectable="false"/>
             <Preference android:title="Hide animated button background" android:summary="@string/revanced_patches_excluded" android:selectable="false"/>
             <Preference android:title="Hide double tap overlay filter" android:summary="@string/revanced_patches_excluded" android:selectable="false"/>
+            <Preference android:title="Hide double tap to like animations" android:summary="@string/revanced_patches_excluded" android:selectable="false"/>
             <Preference android:title="Hide tooltip content" android:summary="@string/revanced_patches_excluded" android:selectable="false"/>
             <Preference android:title="Hide voice search button" android:summary="@string/revanced_patches_excluded" android:selectable="false"/>
             <Preference android:title="Icon" android:summary="@string/revanced_icon_default" android:selectable="false"/>

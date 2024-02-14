@@ -57,9 +57,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
                 "18.48.39",
                 "18.49.37",
                 "19.01.34",
-                "19.02.39",
-                "19.03.36",
-                "19.04.37"
+                "19.02.39"
             ]
         )
     ]
@@ -99,7 +97,7 @@ object VideoQualityPatch : BytecodePatch(
                 )
             } ?: throw PatchException("Failed to find onItemClick method")
         } ?: throw VideoQualitySetterFingerprint.exception
-
+        VideoIdWithoutShortsPatch.injectCall("$INTEGRATIONS_VIDEO_QUALITY_CLASS_DESCRIPTOR->initialize(Ljava/lang/String;)V")
         VideoIdWithoutShortsPatch.injectCall("$INTEGRATIONS_RELOAD_VIDEO_CLASS_DESCRIPTOR->setVideoId(Ljava/lang/String;)V")
 
         /**

@@ -80,9 +80,9 @@
     <string name="revanced_comments_title">Σχόλια</string>
     <string name="revanced_custom_filter_strings_summary">Ρύθμιση των στοιχείων που θα φιλτραριστούν με βάση τα ονόματά τους, διαχωρισμένα σε γραμμές.</string>
     <string name="revanced_custom_filter_strings_title">Επεξεργασία προσαρμοσμένου φίλτρου</string>
-    <string name="revanced_custom_filter_toast_invalid_characters" formated="false">Invalid custom filter (must be ASCII only): %s</string>
+    <string name="revanced_custom_filter_toast_invalid_characters" formated="false">Μη έγκυρο προσαρμοσμένο φίλτρο (πρέπει να είναι μόνο χαρακτήρες ASCII): %s</string>
     <string name="revanced_custom_filter_toast_invalid_syntax" formated="false">Μη έγκυρο προσαρμοσμένο φίλτρο: %s</string>
-    <string name="revanced_custom_filter_toast_reset">επαναφέρετε το προσαρμοσμένο φίλτρο στις προεπιλογές.</string>
+    <string name="revanced_custom_filter_toast_reset">Επαναφορά προεπιλεγμένου προσαρμοσμένου φίλτρου</string>
     <string name="revanced_custom_filter_summary_off">Το προσαρμοσμένο φίλτρο χρήστη είναι απενεργοποιημένο.</string>
     <string name="revanced_custom_filter_summary_on">Το προσαρμοσμένο φίλτρο χρήστη είναι απενεργοποιημένο.</string>
     <string name="revanced_custom_filter_title">Προσαρμοσμένο φίλτρο χρήστη</string>
@@ -90,8 +90,8 @@
     <string name="revanced_custom_playback_speeds_summary">Προσθέστε ή αλλάξτε τις διαθέσιμες προσαρμοσμένες ταχύτητες βίντεο</string>
     <string name="revanced_custom_playback_speeds_title">Επεξεργασία ταχυτήτων βίντεο</string>
     <string name="revanced_custom_playback_speeds_warning" formatted="false">Οι τιμές ταχύτητας δεν μπορούν να είναι μεγαλύτερες από %sx. Έγινε επαναφορά στις προεπιλεγμένες ταχύτητες.</string>
-    <string name="revanced_custom_playback_speed_panel_type_summary_off">Εμφανίζεται αναδυόμενο μενού παλιού στυλ.</string>
-    <string name="revanced_custom_playback_speed_panel_type_summary_on">Εμφανίζεται προσαρμοσμένο παράθυρο.</string>
+    <string name="revanced_custom_playback_speed_panel_type_summary_off">Αναδυόμενο μενού παλιού στυλ.</string>
+    <string name="revanced_custom_playback_speed_panel_type_summary_on">Προσαρμοσμένο παράθυρο.</string>
     <string name="revanced_custom_playback_speed_panel_type_title">Τύπος μενού προσαρμοσμένης ταχύτητας βίντεο</string>
     <string name="revanced_custom_player_overlay_opacity_summary">Τιμή αδιαφάνειας μεταξύ 0-100, όπου το 0 είναι διαφανές.</string>
     <string name="revanced_custom_player_overlay_opacity_title">Αλλαγή αδιαφάνειας φόντου αναπαραγωγέα</string>
@@ -111,16 +111,19 @@
     <string name="revanced_disable_auto_captions_summary_off">Οι υποχρεωτικοί αυτόματοι υπότιτλοι εμφανίζονται.</string>
     <string name="revanced_disable_auto_captions_summary_on">Οι υποχρεωτικοί αυτόματοι υπότιτλοι είναι απενεργοποιημένοι.</string>
     <string name="revanced_disable_auto_captions_title">Απόκρυψη αυτόματων υπότιτλων</string>
+    <string name="revanced_disable_rolling_number_animations_summary_off">Η κίνηση κυλιόμενων αριθμών είναι ενεργοποιημένη.</string>
+    <string name="revanced_disable_rolling_number_animations_summary_on">Η κίνηση κυλιόμενων αριθμών είναι απενεργοποιημένη.</string>
+    <string name="revanced_disable_rolling_number_animations_title">Απενεργοποίηση κίνησης κυλιόμενων αριθμών</string>
     <string name="revanced_disable_default_playback_speed_live_summary_off">Η προεπιλεγμένη ταχύτητα βίντεο εφαρμόζεται σε ζωντανές μεταδόσεις.</string>
     <string name="revanced_disable_default_playback_speed_live_summary_on">Η προεπιλεγμένη ταχύτητα βίντεο δεν εφαρμόζεται σε ζωντανές μεταδόσεις.</string>
     <string name="revanced_disable_default_playback_speed_live_title">Απενεργοποίηση ταχύτητας βίντεο σε ζωντανή μετάδοση</string>
     <string name="revanced_disable_haptic_feedback_summary_off">Η απόκριση δόνησης είναι ενεργοποιημένη.</string>
     <string name="revanced_disable_haptic_feedback_summary_on">Η απόκριση δόνησης είναι απενεργοποιημένη.</string>
-    <string name="revanced_disable_haptic_feedback_chapters_title">Απενεργοποίηση απόκρισης δόνησης κεφαλαίων</string>
-    <string name="revanced_disable_haptic_feedback_scrubbing_title">Απενεργοποίηση απόκρισης δόνησης στο σύρσιμο</string>
-    <string name="revanced_disable_haptic_feedback_seek_title">Απενεργοποίηση απόκρισης δόνησης στην ακριβή αναζήτηση</string>
-    <string name="revanced_disable_haptic_feedback_seek_undo_title">Απενεργοποίηση απόκρισης δόνησης κατά το «αφήστε για ακύρωση»</string>
-    <string name="revanced_disable_haptic_feedback_zoom_title">Απενεργοποίηση απόκρισης δόνησης ζουμ</string>
+    <string name="revanced_disable_haptic_feedback_chapters_title">Απόκριση δόνησης κεφαλαίων</string>
+    <string name="revanced_disable_haptic_feedback_scrubbing_title">Απόκριση δόνησης στο σύρσιμο</string>
+    <string name="revanced_disable_haptic_feedback_seek_title">Απόκριση δόνησης στην ακριβή αναζήτηση</string>
+    <string name="revanced_disable_haptic_feedback_seek_undo_title">Απόκριση δόνησης στο «Αφήστε για ακύρωση»</string>
+    <string name="revanced_disable_haptic_feedback_zoom_title">Απόκριση δόνησης χειρονομίας ζουμ</string>
     <string name="revanced_disable_hdr_auto_brightness_summary_off">Η αυτόματη φωτεινότητα HDR είναι ενεργοποιημένη.</string>
     <string name="revanced_disable_hdr_auto_brightness_summary_on">Η αυτόματη φωτεινότητα HDR είναι απενεργοποιημένη.</string>
     <string name="revanced_disable_hdr_auto_brightness_title">Απενεργοποίηση αυτόματης φωτεινότητας HDR</string>
@@ -170,7 +173,7 @@
     <string name="revanced_enable_external_browser_title">Εξωτερικό πρόγραμμα περιήγησης</string>
     <string name="revanced_enable_gradient_loading_screen_summary_off">Η διαβαθμισμένη οθόνη φόρτωσης είναι απενεργοποιημένη.</string>
     <string name="revanced_enable_gradient_loading_screen_summary_on">Η διαβαθμισμένη οθόνη φόρτωσης είναι ενεργοποιημένη.</string>
-    <string name="revanced_enable_gradient_loading_screen_title">Ενεργοποίηση διαβαθμισμένης οθόνης φόρτωσης</string>
+    <string name="revanced_enable_gradient_loading_screen_title">Διαβαθμισμένη οθόνη φόρτωσης</string>
     <string name="revanced_enable_language_switch_summary_off">Η αλλαγή γλώσσας είναι απενεργοποιημένη.</string>
     <string name="revanced_enable_language_switch_summary_on">Η αλλαγή γλώσσας είναι ενεργοποιημένη.</string>
     <string name="revanced_enable_language_switch_title">Ενεργοποίηση αλλαγής γλώσσας</string>
@@ -208,7 +211,7 @@
     <string name="revanced_enable_swipe_brightness_summary_off">Η αλλαγή φωτεινότητας με χειρονομία σάρωσης είναι απενεργοποιημένη.</string>
     <string name="revanced_enable_swipe_brightness_summary_on">Η αλλαγή φωτεινότητας με χειρονομία σάρωσης είναι ενεργοποιημένη.</string>
     <string name="revanced_enable_swipe_brightness_title">Έλεγχος σάρωσης για Φωτεινότητα</string>
-    <string name="revanced_enable_swipe_haptic_feedback_summary_off">Η απόκριση δόνησης είναι απενεργοποιημένη.</string>
+    <string name="revanced_enable_swipe_haptic_feedback_summary_off">Η απόκριση δόνησης απενεργοποιήθηκε.</string>
     <string name="revanced_enable_swipe_haptic_feedback_summary_on">Η απόκριση δόνησης είναι ενεργοποιημένη.</string>
     <string name="revanced_enable_swipe_haptic_feedback_title">Απόκριση δόνησης</string>
     <string name="revanced_enable_swipe_press_to_engage_summary_off">Αγγίξτε για να ενεργοποιήσετε τις χειρονομίες σάρωσης.</string>
@@ -273,7 +276,7 @@
     <string name="revanced_force_fullscreen_title">Εξαναγκασμός πλήρης οθόνης πάντα</string>
     <string name="revanced_fullscreen">Λειτουργία πλήρους οθόνης</string>
     <string name="revanced_general">Γενικά</string>
-    <string name="revanced_haptic_feedback_title">Απόκριση δόνησης</string>
+    <string name="revanced_haptic_feedback_title">Απενεργοποίηση απόκρισης δόνησης</string>
     <string name="revanced_hide_account_menu_filter_strings_title">Επεξεργασία φίλτρου στοιχείων μενού λογαριασμού</string>
     <string name="revanced_hide_account_menu_summary">"Απόκρυψη στοιχείων του μενού λογαριασμό και της καρτέλας «Εσείς»
 Κάποια στοιχεία ενδέχεται να μην αποκρύπτονται."</string>
@@ -289,7 +292,7 @@
     <string name="revanced_hide_autoplay_button_title">Απόκρυψη κουμπιού αυτόματης αναπαραγωγής</string>
     <string name="revanced_hide_autoplay_preview_summary_off">Η προεπισκόπηση αυτόματης αναπαραγωγής επόμενου βίντεο εμφανίζεται.</string>
     <string name="revanced_hide_autoplay_preview_summary_on">Η προεπισκόπηση αυτόματης αναπαραγωγής επόμενου βίντεο είναι κρυμμένη.</string>
-    <string name="revanced_hide_autoplay_preview_title">Απόκρυψη προεπισκόπησης αυτόματης αναπαραγωγής</string>
+    <string name="revanced_hide_autoplay_preview_title">Απόκρυψη προεπισκόπησης επόμενου βίντεο</string>
     <string name="revanced_hide_auto_player_popup_panels_summary_off">Τα αυτόματα αναδυόμενα παράθυρα του αναπαραγωγέα εμφανίζονται.</string>
     <string name="revanced_hide_auto_player_popup_panels_summary_on">Τα αυτόματα αναδυόμενα παράθυρα του αναπαραγωγέα είναι κρυμμένα.</string>
     <string name="revanced_hide_auto_player_popup_panels_title">Απόκρυψη αυτόματων αναδυόμενων παραθύρων του αναπαραγωγέα</string>
@@ -408,7 +411,7 @@
     <string name="revanced_hide_end_screen_overlay_title">Απόκρυψη τελικής οθόνης</string>
     <string name="revanced_hide_expandable_chip_summary_off">Τα επεκτάσιμα τσιπ εμφανίζονται.</string>
     <string name="revanced_hide_expandable_chip_summary_on">Τα επεκτάσιμα τσιπ είναι κρυμμένα.</string>
-    <string name="revanced_hide_expandable_chip_title">Απόκρυψη επεκτάσιμου τσιπ κάτω από τα βίντεο</string>
+    <string name="revanced_hide_expandable_chip_title">Απόκρυψη επεκτάσιμων τσιπ κάτω από τα βίντεο</string>
     <string name="revanced_hide_feed_flyout_panel_filter_strings_title">Αλλαγή φιλτραρίσματος των αναδυόμενων μενού στη ροή</string>
     <string name="revanced_hide_feed_flyout_panel_summary_off">Το φιλτάρισμα αναδυόμενων μενού στη ροή είναι απενεργοποιημένο.</string>
     <string name="revanced_hide_feed_flyout_panel_summary_on">Το φιλτάρισμα αναδυόμενων μενού στη ροή είναι ενεργοποιημένο.</string>
@@ -521,9 +524,9 @@
     <string name="revanced_hide_player_flyout_panel_help_summary_off">Το μενού «Βοήθεια &amp; σχόλια» εμφανίζεται.</string>
     <string name="revanced_hide_player_flyout_panel_help_summary_on">Το μενού «Βοήθεια &amp; σχόλια» είναι κρυμμένο.</string>
     <string name="revanced_hide_player_flyout_panel_help_title">Απόκρυψη μενού «Βοήθεια &amp; σχόλια»</string>
-    <string name="revanced_hide_player_flyout_panel_listen_with_youtube_music_summary_off">Το μενού «Αναπαραγωγή στο YouTube Music» εμφανίζεται.</string>
-    <string name="revanced_hide_player_flyout_panel_listen_with_youtube_music_summary_on">Το μενού «Αναπαραγωγή στο YouTube Music» είναι κρυμμένο.</string>
-    <string name="revanced_hide_player_flyout_panel_listen_with_youtube_music_title">Απόκρυψη μενού «Αναπαραγωγή στο YouTube Music»</string>
+    <string name="revanced_hide_player_flyout_panel_listen_with_youtube_music_summary_off">Το μενού «Ακρόαση με YouTube Music» εμφανίζεται.</string>
+    <string name="revanced_hide_player_flyout_panel_listen_with_youtube_music_summary_on">Το μενού «Ακρόαση με YouTube Music» είναι κρυμμένο.</string>
+    <string name="revanced_hide_player_flyout_panel_listen_with_youtube_music_title">Απόκρυψη μενού «Ακρόαση με YouTube Music»</string>
     <string name="revanced_hide_player_flyout_panel_lock_screen_summary_off">Το μενού «Οθόνη κλειδώματος» εμφανίζεται.</string>
     <string name="revanced_hide_player_flyout_panel_lock_screen_summary_on">Το μενού «Οθόνη κλειδώματος» είναι κρυμμένο.</string>
     <string name="revanced_hide_player_flyout_panel_lock_screen_title">Απόκρυψη μενού «Οθόνη κλειδώματος»</string>
@@ -545,9 +548,9 @@
     <string name="revanced_hide_player_flyout_panel_report_summary_off">Το μενού «Αναφορά» εμφανίζεται.</string>
     <string name="revanced_hide_player_flyout_panel_report_summary_on">Το μενού «Αναφορά» είναι κρυμμένο.</string>
     <string name="revanced_hide_player_flyout_panel_report_title">Απόκρυψη μενού «Αναφορά»</string>
-    <string name="revanced_hide_player_flyout_panel_stable_volume_summary_off">Το μενού «Σταθερό επίπεδο έντασης ήχου» εμφανίζεται.</string>
-    <string name="revanced_hide_player_flyout_panel_stable_volume_summary_on">Το μενού «Σταθερό επίπεδο έντασης ήχου» είναι κρυμμένο.</string>
-    <string name="revanced_hide_player_flyout_panel_stable_volume_title">Απόκρυψη μενού «Σταθερό επίπεδο έντασης ήχου»</string>
+    <string name="revanced_hide_player_flyout_panel_stable_volume_summary_off">Το μενού «Σταθερή ένταση» εμφανίζεται.</string>
+    <string name="revanced_hide_player_flyout_panel_stable_volume_summary_on">Το μενού «Σταθερή ένταση» είναι κρυμμένο.</string>
+    <string name="revanced_hide_player_flyout_panel_stable_volume_title">Απόκρυψη μενού «Σταθερή ένταση»</string>
     <string name="revanced_hide_player_flyout_panel_stats_for_nerds_summary_off">Το μενού «Στατιστικά για σπασίκλες» εμφανίζεται.</string>
     <string name="revanced_hide_player_flyout_panel_stats_for_nerds_summary_on">Το μενού «Στατιστικά για σπασίκλες» είναι κρυμμένο.</string>
     <string name="revanced_hide_player_flyout_panel_stats_for_nerds_title">Απόκρυψη μενού «Στατιστικά για σπασίκλες»</string>
@@ -652,6 +655,8 @@
     <string name="revanced_hide_suggested_actions_title">Απόκρυψη προτεινόμενων ενεργειών</string>
     <string name="revanced_hide_suggested_video_overlay_summary">Απόκρυψη του προτεινόμενου βίντεο για την επόμενη αναπαραγωγή.</string>
     <string name="revanced_hide_suggested_video_overlay_title">Απόκρυψη προτεινόμενου βίντεο</string>
+    <string name="revanced_hide_suggested_video_overlay_auto_play_summary">Όταν τελειώνει ένα βίντεο, το επόμενο θα αναπαράγεται αυτόματα.</string>
+    <string name="revanced_hide_suggested_video_overlay_auto_play_title">Αυτόματη αναπαραγωγή επόμενου βίντεο</string>
     <string name="revanced_hide_suggestions_shelf_method_summary_off">"Προσδιορισμός του ραφιού προτάσεων μέσω του αναγνωριστικό περιήγησης.
 
 Γνωστά θέματα:
@@ -692,6 +697,8 @@
     <string name="revanced_hide_video_ads_summary_off">Οι διαφημίσεις βίντεο εμφανίζονται.</string>
     <string name="revanced_hide_video_ads_summary_on">Οι διαφημίσεις βίντεο είναι κρυμμένες.</string>
     <string name="revanced_hide_video_ads_title">Απόκρυψη διαφημίσεων βίντεο</string>
+    <string name="revanced_hide_home_feed_membership_video_summary">Απόκρυψη των βίντεο με ετικέτα «Μόνο για συνδρομητές» στην αρχική ροή</string>
+    <string name="revanced_hide_home_feed_membership_video_title">Απόκρυψη βίντεο συνδρομητών στην αρχική ροή</string>
     <string name="revanced_hide_video_with_gray_description_summary">"Απόκρυψη των βίντεο με γκρι περιγραφή από τα αποτελέσματα αναζήτησης.
 Τα βίντεο με γκρι περιγραφή περιλαμβάνουν βίντεο που δεν σχετίζονται με τους όρους αναζήτησης."</string>
     <string name="revanced_hide_video_with_gray_description_title">Απόκρυψη βίντεο με γκρι περιγραφή</string>
@@ -719,8 +726,8 @@
     <string name="revanced_navigation">Γραμμή πλοήγησης</string>
     <string name="revanced_others">Άλλα</string>
     <string name="revanced_overlay_button">Προσθήκη κουμπιών στον αναπαραγωγέα βίντεο</string>
-    <string name="revanced_overlay_button_always_repeat_summary">"Πατήστε για ενεργοποίηση ή απενεργοποίηση της λειτουργίας συνεχής επανάληψης.
-Πατήστε παρατεταμένα για άμεση παύση μετά την επανάληψη βίντεο."</string>
+    <string name="revanced_overlay_button_always_repeat_summary">"Πατήστε για ενεργοποίηση συνεχής επανάληψης.
+Πατήστε παρατεταμένα για ενεργοποίηση παύσης αμέσως μετά την επανάληψη."</string>
     <string name="revanced_overlay_button_always_repeat_title">Κουμπί αυτόματης επανάληψης βίντεο</string>
     <string name="revanced_overlay_button_copy_video_url_summary">"Πατήστε για να αντιγράψετε τον σύνδεσμο βίντεο.
 Πατήστε παρατεταμένα για να αντιγράψετε τον σύνδεσμο βίντεο με χρονική σήμανση."</string>
@@ -733,7 +740,25 @@
     <string name="revanced_overlay_button_speed_dialog_reset">Έγινε επαναφορά της ταχύτητας βίντεο (1.0x).</string>
     <string name="revanced_overlay_button_speed_dialog_summary">"Πατήστε για να ανοίξετε το μενού αλλαγής ταχύτητας βίντεο.
 Πατήστε παρατεταμένα για επαναφορά ταχύτητας βίντεο σε 1.0x."</string>
+    <string name="revanced_overlay_button_whitelisting_summary">Πατήστε για ξεκινήσετε την προσθήκη του καναλιού στη λίστα επιτρεπόμενων καναλιών.</string>
+    <string name="revanced_overlay_button_whitelisting_title">Κουμπί λίστας επιτρεπόμενων</string>
     <string name="revanced_overlay_button_speed_dialog_title">Κουμπί αλλαγής ταχύτητας βίντεο</string>
+    <string name="revanced_whitelisting_added" formatted="false">Το κανάλι %s προστέθηκε στη λίστα επιτρεπόμενων %s</string>
+    <string name="revanced_whitelisting_add_failed" formatted="false">Αδυναμία προσθήκης καναλιού %s στην λίστα επιτρεπόμενων %s</string>
+    <string name="revanced_whitelisting_channel_name">Όνομα Καναλιού</string>
+    <string name="revanced_whitelisting_empty">Δεν υπάρχουν κανάλια στην λίστα επιτρεπόμενων</string>
+    <string name="revanced_whitelisting_excluded">Δεν προστέθηκε στη λίστα επιτρεπόμενων</string>
+    <string name="revanced_whitelisting_fetch_failed" formated="false">Αδυναμία ανάκτησης πληροφοριών καναλιού, κωδικός σφάλματος: %d</string>
+    <string name="revanced_whitelisting_included">Προστέθηκε στη λίστα επιτρεπόμενων</string>
+    <string name="revanced_whitelisting_reboot">Κάντε επανεκκίνηση για να εφαρμόσετε τις ρυθμίσεις της λίστας επιτρεπόμενων καναλιών</string>
+    <string name="revanced_whitelisting_removed" formatted="false">Το κανάλι %s καταργήθηκε από τη λίστα επιτρεπόμενων %s</string>
+    <string name="revanced_whitelisting_remove_failed" formatted="false">Αδυναμία αφαίρεσης καναλιού %s από την λίστα επιτρεπόμενων %s</string>
+    <string name="revanced_whitelisting_settings_summary">Ελέγξτε ή αφαιρέστε τη λίστα των καναλιών που έχουν προστεθεί στη λίστα επιτρεπόμενων</string>
+    <string name="revanced_whitelisting_speed">Ταχύτητα αναπαραγωγής</string>
+    <string name="revanced_whitelisting_speed_button">Ταχύτητα</string>
+    <string name="revanced_whitelisting_sponsorblock">SponsorBlock</string>
+    <string name="revanced_whitelisting_sponsorblock_button">SB</string>
+    <string name="revanced_whitelisting_title">Λίστα επιτρεπόμενων καναλιών</string>
     <string name="revanced_patches_information">Πληροφορίες Τροποποιήσεων</string>
     <string name="revanced_patches_information_summary">Πληροφορίες σχετικά με τις εφαρμοσμένες τροποποιήσεις.</string>
     <string name="revanced_playback_speed_normal">Κανονική</string>
@@ -803,9 +828,11 @@
 
 Αυτό θα αλλάξει την εμφάνιση της εφαρμογής, αλλά ενδέχεται να προκύψουν άγνωστες παρενέργειες.
 Εάν αργότερα απενεργοποιηθεί, η παλιά εμφάνιση μπορεί να παραμείνει μέχρι να διαγραφούν τα δεδομένα της εφαρμογής."</string>
+    <string name="revanced_spoof_app_version_target_entry_16_08_35">16.08.35 - Επαναφορά της καρτέλας «Εξερεύνηση»</string>
     <string name="revanced_spoof_app_version_target_entry_17_08_35">17.08.35 - Επαναφορά της παλιάς εμφάνισης</string>
     <string name="revanced_spoof_app_version_target_entry_17_41_37">17.41.37 - Επαναφορά ραφιού λίστας αναπαραγωγής παλιού στυλ</string>
     <string name="revanced_spoof_app_version_target_entry_18_05_40">18.05.40 - Επαναφορά κουτιού εισαγωγής σχολίων παλιού στυλ</string>
+    <string name="revanced_spoof_app_version_target_entry_18_09_39">18.09.39 - Επαναφορά καρτέλας «Βιβλιοθήκη» παλιού στυλ (απενεργοποίηση καρτέλας «Εσείς»)</string>
     <string name="revanced_spoof_app_version_target_entry_18_17_43">18.17.43 - Επαναφορά αναδυόμενου πίνακα του αναπαραγωγέα παλιού στυλ</string>
     <string name="revanced_spoof_app_version_target_entry_18_33_40">18.33.40 - Επαναφορά μπάρας δράσης Shorts παλιού στυλ</string>
     <string name="revanced_spoof_app_version_target_entry_18_38_45">18.38.45 - Επαναφορά της παλιάς συμπεριφοράς προεπιλεγμένης ποιότητας βίντεο</string>
@@ -846,9 +873,8 @@
     <string name="revanced_swipe_overlay_timeout_title">Χρονικό όριο φίλτρου σάρωσης</string>
     <string name="revanced_switching_create_notification_summary">"Εναλλαγή των θέσεων του κουμπιού «Δημιουργία» και του κουμπιού «Ειδοποιήσεις» παραποιώντας τις πληροφορίες συσκευής.
 
-• Όταν ενεργοποιηθεί αυτή η ρύθμιση, μπορεί να μη δουλέψει μέχρι να κάνετε επανεκκίνηση της συσκευής σας.
-• Πρέπει να απενεργοποιήσετε αυτή τη ρύθμιση για να γίνουν ορατές οι διαφημίσεις βίντεο."</string>
-    <string name="revanced_switching_create_notification_title">Εναλλαγή κουμπιού «Δημιουργία» με το κουμπί «Ειδοποιήσεις»</string>
+• Όταν ενεργοποιηθεί αυτή η ρύθμιση, μπορεί να μη δουλέψει μέχρι να κάνετε επανεκκίνηση της συσκευής σας."</string>
+    <string name="revanced_switching_create_notification_title">Εναλλαγή «Δημιουργία» με «Ειδοποιήσεις»</string>
     <string name="revanced_tool_used">Χρησιμοποιούμενο εργαλείο</string>
     <string name="revanced_video">Βίντεο</string>
     <string name="pref_app_language_dialog_message">&lt;b&gt;%1$s&lt;/b&gt;&lt;br&gt;&lt;br&gt;Αυτό θα αλλάξει τη γλώσσα που χρησιμοποιείται στο YouTube, συμπεριλαμβανομένων κουμπιών, κειμένου και διαλόγων, αλλά δε θα αλλάξει τη γλώσσα των ρυθμίσεων ReVanced Extended.</string>
