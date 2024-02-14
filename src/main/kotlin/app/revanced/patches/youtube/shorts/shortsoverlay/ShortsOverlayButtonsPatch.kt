@@ -1,4 +1,4 @@
-package app.revanced.patches.youtube.shorts.outlinebutton
+package app.revanced.patches.youtube.shorts.shortsoverlay
 
 import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
@@ -58,7 +58,7 @@ object ShortsOverlayButtonsPatch : ResourcePatch() {
 
     private val OutlineCircleIcon by booleanPatchOption(
         key = "OutlineCircleIcon",
-        default = true,
+        default = false,
         title = "Outline circled icons",
         description = "Apply the outline circled icon",
         required = true
