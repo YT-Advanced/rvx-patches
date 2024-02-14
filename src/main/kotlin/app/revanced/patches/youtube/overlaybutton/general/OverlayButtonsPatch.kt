@@ -64,9 +64,7 @@ import org.w3c.dom.Element
                 "18.48.39",
                 "18.49.37",
                 "19.01.34",
-                "19.02.39",
-                "19.03.36",
-                "19.04.37"
+                "19.02.39"
             ]
         )
     ]
@@ -75,7 +73,7 @@ import org.w3c.dom.Element
 object OverlayButtonsPatch : ResourcePatch() {
     private val OutlineIcon by booleanPatchOption(
         key = "OutlineIcon",
-        default = false,
+        default = true,
         title = "Outline icons",
         description = "Apply the outline icon",
         required = true
@@ -126,6 +124,11 @@ object OverlayButtonsPatch : ResourcePatch() {
 
         if (OutlineIcon == true) {
             arrayOf(
+                ResourceGroup(
+                    "drawable",
+                    "yt_outline_screen_vertical_vd_theme_24.xml",
+                ),
+
                 ResourceGroup(
                     "drawable-xxhdpi",
                     "ic_fullscreen_vertical_button.png",

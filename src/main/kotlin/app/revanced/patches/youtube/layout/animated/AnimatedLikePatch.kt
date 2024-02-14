@@ -1,15 +1,16 @@
-package app.revanced.patches.youtube.misc.codec.audio
+package app.revanced.patches.youtube.layout.animated
 
-import app.revanced.patcher.data.BytecodeContext
+import app.revanced.patcher.data.ResourceContext
+import app.revanced.patcher.patch.ResourcePatch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
-import app.revanced.patches.shared.patch.opus.AbstractOpusCodecsPatch
-import app.revanced.patches.youtube.utils.integrations.Constants.MISC_PATH
 import app.revanced.patches.youtube.utils.settings.SettingsPatch
+import app.revanced.util.ResourceGroup
+import app.revanced.util.copyResources
 
 @Patch(
-    name = "Force opus codec",
-    description = "Adds an option to force the opus audio codec instead of the mp4a audio codec.",
+    name = "Hide double tap to like animations",
+    description = "Hides the like animations when double tap the screen in the Shorts player.",
     dependencies = [SettingsPatch::class],
     compatiblePackages = [
         CompatiblePackage(
@@ -41,26 +42,23 @@ import app.revanced.patches.youtube.utils.settings.SettingsPatch
                 "19.02.39"
             ]
         )
-    ]
+    ],
+    use = false
 )
 @Suppress("unused")
-object ForceOpusCodecPatch : AbstractOpusCodecsPatch(
-    "$MISC_PATH/CodecOverridePatch;->shouldForceOpus()Z"
-) {
-    override fun execute(context: BytecodeContext) {
-        super.execute(context)
-
+object AnimatedLikePatch : ResourcePatch() {
+    override fun execute(context: ResourceContext) {
         /**
-         * Add settings
+         * Copy json
          */
-        SettingsPatch.addPreference(
-            arrayOf(
-                "SETTINGS: EXPERIMENTAL_FLAGS",
-                "SETTINGS: ENABLE_OPUS_CODEC"
+        context.copyResources(
+            "youtube/animated",
+            ResourceGroup(
+                "raw",
+                "like_tap_feedback.json"
             )
         )
 
-        SettingsPatch.updatePatchStatus("Force opus codec")
-
+        SettingsPatch.updatePatchStatus("Hide double tap to like animations")
     }
 }
