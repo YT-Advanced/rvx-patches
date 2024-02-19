@@ -740,9 +740,11 @@ Tap and hold to copy video timestamp."</string>
     <string name="revanced_overlay_button_speed_dialog_reset">Playback speed reseted (1.0x).</string>
     <string name="revanced_overlay_button_speed_dialog_summary">"Tap to open speed dialog.
 Tap and hold to set playback speed to 1.0x."</string>
+    <string name="revanced_overlay_button_speed_dialog_title">Show speed dialog button</string>
     <string name="revanced_overlay_button_whitelisting_summary">Tap to launch add channel into Channel Whitelist.</string>
     <string name="revanced_overlay_button_whitelisting_title">Show whitelisting button</string>
-    <string name="revanced_overlay_button_speed_dialog_title">Show speed dialog button</string>
+    <string name="revanced_overlay_button_playlist_summary">Tap to play all videos from channel from current video to newest. Tap and hold to undo.</string>
+    <string name="revanced_overlay_button_playlist_title">Show Play All From Channel button</string>
     <string name="revanced_whitelisting_added" formatted="false">Channel %s was added to the %s whitelist</string>
     <string name="revanced_whitelisting_add_failed" formatted="false">Failed to add channel %s to the %s whitelist</string>
     <string name="revanced_whitelisting_channel_name">Channel Name</string>
