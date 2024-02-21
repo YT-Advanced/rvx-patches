@@ -5,6 +5,7 @@ import app.revanced.patcher.patch.ResourcePatch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.patch.options.PatchOption.PatchExtensions.booleanPatchOption
+import app.revanced.patches.youtube.misc.openlinksdirectly.OpenLinksDirectlyPatch
 import app.revanced.patches.youtube.overlaybutton.alwaysrepeat.AlwaysRepeatPatch
 import app.revanced.patches.youtube.overlaybutton.download.hook.DownloadButtonHookPatch
 import app.revanced.patches.youtube.overlaybutton.download.pip.DisablePiPPatch
@@ -29,6 +30,7 @@ import org.w3c.dom.Element
         AlwaysRepeatPatch::class,
         DisablePiPPatch::class,
         DownloadButtonHookPatch::class,
+        OpenLinksDirectlyPatch::class,
         OverrideSpeedHookPatch::class,
         PlayerButtonHookPatch::class,
         PlayerControlsPatch::class,
@@ -97,7 +99,8 @@ object OverlayButtonsPatch : ResourcePatch() {
             "CopyVideoUrlTimestamp",
             "ExternalDownload",
             "SpeedDialog",
-            "Whitelists"
+            "Whitelists",
+            "PlaylistFromChannelVideos"
         ).forEach { patch ->
             PlayerControlsPatch.initializeControl("$OVERLAY_BUTTONS_PATH/$patch;")
             PlayerControlsPatch.injectVisibility("$OVERLAY_BUTTONS_PATH/$patch;")
@@ -136,6 +139,7 @@ object OverlayButtonsPatch : ResourcePatch() {
                     "quantum_ic_fullscreen_exit_white_24.png",
                     "quantum_ic_fullscreen_grey600_24.png",
                     "quantum_ic_fullscreen_white_24.png",
+                    "revanced_channel_playlist.png",
                     "revanced_copy_icon.png",
                     "revanced_copy_icon_with_time.png",
                     "revanced_download_icon.png",
@@ -160,6 +164,7 @@ object OverlayButtonsPatch : ResourcePatch() {
                     "quantum_ic_fullscreen_exit_white_24.png",
                     "quantum_ic_fullscreen_grey600_24.png",
                     "quantum_ic_fullscreen_white_24.png",
+                    "revanced_channel_playlist.png",
                     "revanced_copy_icon.png",
                     "revanced_copy_icon_with_time.png",
                     "revanced_download_icon.png",
