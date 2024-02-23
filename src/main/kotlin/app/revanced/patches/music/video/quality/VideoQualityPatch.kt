@@ -1,6 +1,5 @@
 package app.revanced.patches.music.video.quality
 
-import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
@@ -8,33 +7,24 @@ import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchException
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
+import app.revanced.patches.music.utils.integrations.Constants.VIDEO_PATH
 import app.revanced.patches.music.utils.overridequality.OverrideQualityHookPatch
+import app.revanced.patches.music.utils.settings.CategoryType
 import app.revanced.patches.music.utils.settings.SettingsPatch
-import app.revanced.patches.music.video.information.VideoInformationPatch
 import app.revanced.patches.music.video.quality.fingerprints.UserQualityChangeFingerprint
-import app.revanced.util.enum.CategoryType
-import app.revanced.util.integrations.Constants.MUSIC_VIDEO_PATH
+import app.revanced.patches.music.video.videoid.VideoIdPatch
+import app.revanced.util.exception
 import com.android.tools.smali.dexlib2.builder.instruction.BuilderInstruction21c
 
 @Patch(
     name = "Remember video quality",
-    description = "Save the video quality value whenever you change the video quality.",
+    description = "Adds an option to remember the last video quality selected.",
     dependencies = [
         OverrideQualityHookPatch::class,
         SettingsPatch::class,
-        VideoInformationPatch::class
+        VideoIdPatch::class
     ],
-    compatiblePackages = [
-        CompatiblePackage(
-            "com.google.android.apps.youtube.music",
-            [
-                "6.15.52",
-                "6.20.51",
-                "6.22.51",
-                "6.23.54"
-            ]
-        )
-    ]
+    compatiblePackages = [CompatiblePackage("com.google.android.apps.youtube.music")]
 )
 @Suppress("unused")
 object VideoQualityPatch : BytecodePatch(
@@ -66,7 +56,7 @@ object VideoQualityPatch : BytecodePatch(
             }
         } ?: throw UserQualityChangeFingerprint.exception
 
-        VideoInformationPatch.injectCall("$INTEGRATIONS_VIDEO_QUALITY_CLASS_DESCRIPTOR->newVideoStarted(Ljava/lang/String;)V")
+        VideoIdPatch.hookVideoId("$INTEGRATIONS_VIDEO_QUALITY_CLASS_DESCRIPTOR->newVideoStarted(Ljava/lang/String;)V")
 
         SettingsPatch.addMusicPreference(
             CategoryType.VIDEO,
@@ -77,5 +67,5 @@ object VideoQualityPatch : BytecodePatch(
     }
 
     private const val INTEGRATIONS_VIDEO_QUALITY_CLASS_DESCRIPTOR =
-        "$MUSIC_VIDEO_PATH/VideoQualityPatch;"
+        "$VIDEO_PATH/VideoQualityPatch;"
 }

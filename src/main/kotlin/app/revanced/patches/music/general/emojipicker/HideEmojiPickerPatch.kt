@@ -4,32 +4,22 @@ import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
+import app.revanced.patches.music.utils.integrations.Constants.COMPONENTS_PATH
 import app.revanced.patches.music.utils.litho.LithoFilterPatch
+import app.revanced.patches.music.utils.settings.CategoryType
 import app.revanced.patches.music.utils.settings.SettingsPatch
-import app.revanced.util.enum.CategoryType
-import app.revanced.util.integrations.Constants.MUSIC_ADS_PATH
 
 @Patch(
-    name = "Hide emoji picker",
-    description = "Hides emoji picker at the comments box.",
+    name = "Hide emoji picker and time stamp",
+    description = "Adds an option to hide the emoji picker and time stamp when typing comments.",
     dependencies = [
         LithoFilterPatch::class,
         SettingsPatch::class
     ],
-    compatiblePackages = [
-        CompatiblePackage(
-            "com.google.android.apps.youtube.music",
-            [
-                "6.15.52",
-                "6.20.51",
-                "6.22.51",
-                "6.23.54"
-            ]
-        )
-    ]
+    compatiblePackages = [CompatiblePackage("com.google.android.apps.youtube.music")]
 )
 @Suppress("unused")
-object HideEmojiPickerPatch : BytecodePatch() {
+object HideEmojiPickerPatch : BytecodePatch(emptySet()) {
     override fun execute(context: BytecodeContext) {
 
         SettingsPatch.addMusicPreference(
@@ -43,5 +33,5 @@ object HideEmojiPickerPatch : BytecodePatch() {
     }
 
     private const val FILTER_CLASS_DESCRIPTOR =
-        "$MUSIC_ADS_PATH/EmojiPickerFilter;"
+        "$COMPONENTS_PATH/EmojiPickerFilter;"
 }

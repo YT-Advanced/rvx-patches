@@ -1,6 +1,5 @@
 package app.revanced.patches.music.general.tooltip
 
-import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.patch.BytecodePatch
@@ -8,22 +7,13 @@ import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.music.general.tooltip.fingerprints.TooltipContentViewFingerprint
 import app.revanced.patches.music.utils.resourceid.SharedResourceIdPatch
+import app.revanced.util.exception
 
 @Patch(
     name = "Hide tooltip content",
-    description = "Hides the tooltip box that appears on first install.",
+    description = "Hides the tooltip box that appears when opening the app for the first time.",
     dependencies = [SharedResourceIdPatch::class],
-    compatiblePackages = [
-        CompatiblePackage(
-            "com.google.android.apps.youtube.music",
-            [
-                "6.15.52",
-                "6.20.51",
-                "6.22.51",
-                "6.23.54"
-            ]
-        )
-    ]
+    compatiblePackages = [CompatiblePackage("com.google.android.apps.youtube.music")]
 )
 @Suppress("unused")
 object TooltipContentViewPatch : BytecodePatch(

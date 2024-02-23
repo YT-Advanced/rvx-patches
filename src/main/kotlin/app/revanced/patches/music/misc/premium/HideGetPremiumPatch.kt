@@ -1,11 +1,9 @@
 package app.revanced.patches.music.misc.premium
 
-import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
-import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint.Companion.resolve
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
@@ -16,7 +14,8 @@ import app.revanced.patches.music.misc.premium.fingerprints.MembershipSettingsFi
 import app.revanced.patches.music.misc.premium.fingerprints.MembershipSettingsParentFingerprint
 import app.revanced.patches.music.utils.resourceid.SharedResourceIdPatch
 import app.revanced.patches.music.utils.resourceid.SharedResourceIdPatch.PrivacyTosFooter
-import app.revanced.util.bytecode.getWideLiteralIndex
+import app.revanced.util.exception
+import app.revanced.util.getWideLiteralInstructionIndex
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
@@ -25,19 +24,9 @@ import com.android.tools.smali.dexlib2.iface.reference.Reference
 
 @Patch(
     name = "Hide get premium",
-    description = "Hides \"Get Premium\" label from the account menu or settings.",
+    description = "Hides the \"Get Music Premium\" label from the account menu and settings.",
     dependencies = [SharedResourceIdPatch::class],
-    compatiblePackages = [
-        CompatiblePackage(
-            "com.google.android.apps.youtube.music",
-            [
-                "6.15.52",
-                "6.20.51",
-                "6.22.51",
-                "6.23.54"
-            ]
-        )
-    ]
+    compatiblePackages = [CompatiblePackage("com.google.android.apps.youtube.music")]
 )
 @Suppress("unused")
 object HideGetPremiumPatch : BytecodePatch(
@@ -64,7 +53,7 @@ object HideGetPremiumPatch : BytecodePatch(
 
         AccountMenuFooterFingerprint.result?.let {
             it.mutableMethod.apply {
-                val targetIndex = getWideLiteralIndex(PrivacyTosFooter) + 4
+                val targetIndex = getWideLiteralInstructionIndex(PrivacyTosFooter) + 4
                 targetReference = getInstruction<ReferenceInstruction>(targetIndex + 1).reference
 
                 with(

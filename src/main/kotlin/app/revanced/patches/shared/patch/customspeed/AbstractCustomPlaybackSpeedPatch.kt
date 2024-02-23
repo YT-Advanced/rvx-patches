@@ -1,15 +1,14 @@
 package app.revanced.patches.shared.patch.customspeed
 
-import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.replaceInstruction
-import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint.Companion.resolve
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patches.shared.fingerprints.customspeed.SpeedArrayGeneratorFingerprint
 import app.revanced.patches.shared.fingerprints.customspeed.SpeedLimiterFallBackFingerprint
 import app.revanced.patches.shared.fingerprints.customspeed.SpeedLimiterFingerprint
+import app.revanced.util.exception
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.NarrowLiteralInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction

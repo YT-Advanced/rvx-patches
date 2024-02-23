@@ -7,18 +7,8 @@ import app.revanced.patcher.patch.annotation.Patch
 
 @Patch(
     name = "Bitrate default value",
-    description = "Set the audio quality to \"Always High\" when you first install the app.",
-    compatiblePackages = [
-        CompatiblePackage(
-            "com.google.android.apps.youtube.music",
-            [
-                "6.15.52",
-                "6.20.51",
-                "6.22.51",
-                "6.23.54"
-            ]
-        )
-    ]
+    description = "Sets the audio quality to \"Always High\" when you first install the app.",
+    compatiblePackages = [CompatiblePackage("com.google.android.apps.youtube.music")]
 )
 @Suppress("unused")
 object BitrateDefaultValuePatch : ResourcePatch() {

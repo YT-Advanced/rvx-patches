@@ -1,23 +1,24 @@
 package app.revanced.patches.youtube.player.endscreencards
 
-import app.revanced.extensions.exception
-import app.revanced.extensions.injectHideCall
 import app.revanced.patcher.data.BytecodeContext
+import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
-import app.revanced.patcher.fingerprint.method.impl.MethodFingerprintResult
+import app.revanced.patcher.fingerprint.MethodFingerprint
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.youtube.player.endscreencards.fingerprints.LayoutCircleFingerprint
 import app.revanced.patches.youtube.player.endscreencards.fingerprints.LayoutIconFingerprint
 import app.revanced.patches.youtube.player.endscreencards.fingerprints.LayoutVideoFingerprint
+import app.revanced.patches.youtube.utils.integrations.Constants.PLAYER
 import app.revanced.patches.youtube.utils.resourceid.SharedResourceIdPatch
 import app.revanced.patches.youtube.utils.settings.SettingsPatch
+import app.revanced.util.exception
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 
 @Patch(
     name = "Hide end screen cards",
-    description = "Hides the suggested video cards at the end of a video in fullscreen.",
+    description = "Adds an option to hide suggested video cards at the end of the video in the video player.",
     dependencies = [
         SettingsPatch::class,
         SharedResourceIdPatch::class,
@@ -26,7 +27,6 @@ import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
         CompatiblePackage(
             "com.google.android.youtube",
             [
-                "18.24.37",
                 "18.25.40",
                 "18.27.36",
                 "18.29.38",
@@ -40,7 +40,17 @@ import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
                 "18.37.36",
                 "18.38.44",
                 "18.39.41",
-                "18.40.34"
+                "18.40.34",
+                "18.41.39",
+                "18.42.41",
+                "18.43.45",
+                "18.44.41",
+                "18.45.43",
+                "18.46.45",
+                "18.48.39",
+                "18.49.37",
+                "19.01.34",
+                "19.02.39"
             ]
         )
     ]
@@ -54,27 +64,25 @@ object HideEndScreenCardsPatch : BytecodePatch(
     )
 ) {
     override fun execute(context: BytecodeContext) {
+        fun MethodFingerprint.injectHideCall() {
+            result?.let {
+                it.mutableMethod.apply {
+                    val insertIndex = it.scanResult.patternScanResult!!.endIndex
+                    val viewRegister = getInstruction<OneRegisterInstruction>(insertIndex).registerA
 
-        fun MethodFingerprintResult.injectHideCalls() {
-            val index = scanResult.patternScanResult!!.endIndex
-            mutableMethod.apply {
-                val register = this.getInstruction<OneRegisterInstruction>(index).registerA
-                implementation!!.injectHideCall(
-                    index + 1,
-                    register,
-                    "layout/PlayerPatch",
-                    "hideEndScreenCards"
-                )
-            }
+                    addInstruction(
+                        insertIndex + 1,
+                        "invoke-static { v$viewRegister }, $PLAYER->hideEndScreenCards(Landroid/view/View;)V"
+                    )
+                }
+            } ?: throw exception
         }
 
         listOf(
             LayoutCircleFingerprint,
             LayoutIconFingerprint,
             LayoutVideoFingerprint
-        ).forEach {
-            it.result?.injectHideCalls() ?: throw it.exception
-        }
+        ).forEach(MethodFingerprint::injectHideCall)
 
         /**
          * Add settings

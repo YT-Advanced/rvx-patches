@@ -6,6 +6,9 @@ import app.revanced.patcher.patch.PatchException
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.music.utils.fix.clientspoof.ClientSpoofPatch
+import app.revanced.patches.music.utils.fix.fileprovider.FileProviderPatch
+import app.revanced.patches.music.utils.mainactivity.MainActivityResolvePatch
+import app.revanced.patches.music.utils.mainactivity.MainActivityResolvePatch.injectInit
 import app.revanced.patches.music.utils.microg.Constants.MUSIC_PACKAGE_NAME
 import app.revanced.patches.music.utils.microg.Constants.YOUTUBE_PACKAGE_NAME
 import app.revanced.patches.music.utils.microg.fingerprints.CastContextFetchFingerprint
@@ -14,28 +17,20 @@ import app.revanced.patches.music.utils.microg.fingerprints.CastDynamiteModuleV2
 import app.revanced.patches.music.utils.microg.fingerprints.GooglePlayUtilityFingerprint
 import app.revanced.patches.music.utils.microg.fingerprints.PrimeFingerprint
 import app.revanced.patches.music.utils.microg.fingerprints.ServiceCheckFingerprint
+import app.revanced.patches.shared.patch.microg.MicroGBytecodeHelper
 import app.revanced.patches.shared.patch.packagename.PackageNamePatch
-import app.revanced.util.microg.MicroGBytecodeHelper
 
 @Patch(
     name = "MicroG support",
-    description = "Allows ReVanced Extended Music to run without root and under a different package name with MicroG.",
+    description = "Allows YouTube Music to run without root and under a different package name with MicroG.",
     dependencies = [
         ClientSpoofPatch::class,
+        MainActivityResolvePatch::class,
         MicroGResourcePatch::class,
-        PackageNamePatch::class
+        PackageNamePatch::class,
+        FileProviderPatch::class
     ],
-    compatiblePackages = [
-        CompatiblePackage(
-            "com.google.android.apps.youtube.music",
-            [
-                "6.15.52",
-                "6.20.51",
-                "6.22.51",
-                "6.23.54"
-            ]
-        )
-    ]
+    compatiblePackages = [CompatiblePackage("com.google.android.apps.youtube.music")]
 )
 @Suppress("unused")
 object MicroGPatch : BytecodePatch(
@@ -56,10 +51,10 @@ object MicroGPatch : BytecodePatch(
     // - "com.google.android.gms.phenotype.UPDATE",
     // - "com.google.android.gms.phenotype",
     override fun execute(context: BytecodeContext) {
-        val youtubePackageName = PackageNamePatch.YouTubePackageName
+        val youtubePackageName = PackageNamePatch.PackageNameYouTube
             ?: throw PatchException("Invalid package name.")
 
-        val musicPackageName = PackageNamePatch.MusicPackageName
+        val musicPackageName = PackageNamePatch.PackageNameYouTubeMusic
             ?: throw PatchException("Invalid package name.")
 
         if (youtubePackageName == YOUTUBE_PACKAGE_NAME || musicPackageName == MUSIC_PACKAGE_NAME)
@@ -87,6 +82,8 @@ object MicroGPatch : BytecodePatch(
                 CastContextFetchFingerprint
             )
         )
+
+        injectInit("MicroGPatch", "checkAvailability")
 
     }
 }

@@ -4,13 +4,13 @@ import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
+import app.revanced.patches.youtube.utils.integrations.Constants.COMPONENTS_PATH
 import app.revanced.patches.youtube.utils.litho.LithoFilterPatch
 import app.revanced.patches.youtube.utils.settings.SettingsPatch
-import app.revanced.util.integrations.Constants.PATCHES_PATH
 
 @Patch(
     name = "Hide layout components",
-    description = "Hides general layout components.",
+    description = "Adds options to hide general layout components.",
     dependencies = [
         LithoFilterPatch::class,
         SettingsPatch::class
@@ -19,7 +19,6 @@ import app.revanced.util.integrations.Constants.PATCHES_PATH
         CompatiblePackage(
             "com.google.android.youtube",
             [
-                "18.24.37",
                 "18.25.40",
                 "18.27.36",
                 "18.29.38",
@@ -33,18 +32,27 @@ import app.revanced.util.integrations.Constants.PATCHES_PATH
                 "18.37.36",
                 "18.38.44",
                 "18.39.41",
-                "18.40.34"
+                "18.40.34",
+                "18.41.39",
+                "18.42.41",
+                "18.43.45",
+                "18.44.41",
+                "18.45.43",
+                "18.46.45",
+                "18.48.39",
+                "18.49.37",
+                "19.01.34",
+                "19.02.39"
             ]
         )
     ]
 )
 @Suppress("unused")
-object LayoutComponentsPatch : BytecodePatch() {
+object LayoutComponentsPatch : BytecodePatch(emptySet()) {
     override fun execute(context: BytecodeContext) {
-        LithoFilterPatch.addFilter("$PATCHES_PATH/ads/BrowseStoreButtonFilter;")
-        LithoFilterPatch.addFilter("$PATCHES_PATH/ads/CommunityPostFilter;")
-        LithoFilterPatch.addFilter("$PATCHES_PATH/ads/LayoutComponentsFilter;")
-        LithoFilterPatch.addFilter("$PATCHES_PATH/ads/LayoutComponentsUniversalFilter;")
+        LithoFilterPatch.addFilter("$COMPONENTS_PATH/CustomFilter;")
+        LithoFilterPatch.addFilter("$COMPONENTS_PATH/ChannelBarFilter;")
+        LithoFilterPatch.addFilter("$COMPONENTS_PATH/LayoutComponentsFilter;")
 
         /**
          * Add settings
@@ -55,6 +63,7 @@ object LayoutComponentsPatch : BytecodePatch() {
                 "PREFERENCE: GENERAL_SETTINGS",
                 "PREFERENCE: PLAYER_SETTINGS",
 
+                "SETTINGS: GENERAL_EXPERIMENTAL_FLAGS",
                 "SETTINGS: HIDE_AUDIO_TRACK_BUTTON",
                 "SETTINGS: HIDE_CHANNEL_BAR_BUTTON",
                 "SETTINGS: HIDE_LAYOUT_COMPONENTS"

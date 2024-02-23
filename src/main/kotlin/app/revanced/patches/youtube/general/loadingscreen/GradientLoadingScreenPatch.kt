@@ -1,6 +1,5 @@
 package app.revanced.patches.youtube.general.loadingscreen
 
-import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
@@ -9,20 +8,20 @@ import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.youtube.general.loadingscreen.fingerprints.GradientLoadingScreenPrimaryFingerprint
 import app.revanced.patches.youtube.general.loadingscreen.fingerprints.GradientLoadingScreenSecondaryFingerprint
+import app.revanced.patches.youtube.utils.integrations.Constants.GENERAL
 import app.revanced.patches.youtube.utils.settings.SettingsPatch
-import app.revanced.util.bytecode.getWide32LiteralIndex
-import app.revanced.util.integrations.Constants.GENERAL
+import app.revanced.util.exception
+import app.revanced.util.getWideLiteralInstructionIndex
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 
 @Patch(
     name = "Enable gradient loading screen",
-    description = "Enables gradient loading screen.",
+    description = "Adds an option to enable gradient loading screen.",
     dependencies = [SettingsPatch::class],
     compatiblePackages = [
         CompatiblePackage(
             "com.google.android.youtube",
             [
-                "18.24.37",
                 "18.25.40",
                 "18.27.36",
                 "18.29.38",
@@ -36,7 +35,17 @@ import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
                 "18.37.36",
                 "18.38.44",
                 "18.39.41",
-                "18.40.34"
+                "18.40.34",
+                "18.41.39",
+                "18.42.41",
+                "18.43.45",
+                "18.44.41",
+                "18.45.43",
+                "18.46.45",
+                "18.48.39",
+                "18.49.37",
+                "19.01.34",
+                "19.02.39"
             ]
         )
     ]
@@ -55,7 +64,7 @@ object GradientLoadingScreenPatch : BytecodePatch(
          */
         GradientLoadingScreenSecondaryFingerprint.result?.let {
             it.mutableMethod.apply {
-                val targetIndex = getWide32LiteralIndex(45418917) + 2
+                val targetIndex = getWideLiteralInstructionIndex(45418917) + 2
                 val targetRegister = getInstruction<OneRegisterInstruction>(targetIndex).registerA
 
                 addInstructions(
@@ -69,7 +78,7 @@ object GradientLoadingScreenPatch : BytecodePatch(
 
         GradientLoadingScreenPrimaryFingerprint.result?.let {
             it.mutableMethod.apply {
-                val targetIndex = getWide32LiteralIndex(45412406) + 2
+                val targetIndex = getWideLiteralInstructionIndex(45412406) + 2
                 val targetRegister = getInstruction<OneRegisterInstruction>(targetIndex).registerA
 
                 addInstructions(

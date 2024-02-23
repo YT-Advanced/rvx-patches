@@ -4,13 +4,13 @@ import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
+import app.revanced.patches.youtube.utils.integrations.Constants.COMPONENTS_PATH
 import app.revanced.patches.youtube.utils.litho.LithoFilterPatch
 import app.revanced.patches.youtube.utils.settings.SettingsPatch
-import app.revanced.util.integrations.Constants.PATCHES_PATH
 
 @Patch(
     name = "Hide button container",
-    description = "Adds the options to hide action buttons under a video.",
+    description = "Adds options to hide action buttons below the video player.",
     dependencies = [
         LithoFilterPatch::class,
         SettingsPatch::class
@@ -19,7 +19,6 @@ import app.revanced.util.integrations.Constants.PATCHES_PATH
         CompatiblePackage(
             "com.google.android.youtube",
             [
-                "18.24.37",
                 "18.25.40",
                 "18.27.36",
                 "18.29.38",
@@ -33,16 +32,26 @@ import app.revanced.util.integrations.Constants.PATCHES_PATH
                 "18.37.36",
                 "18.38.44",
                 "18.39.41",
-                "18.40.34"
+                "18.40.34",
+                "18.41.39",
+                "18.42.41",
+                "18.43.45",
+                "18.44.41",
+                "18.45.43",
+                "18.46.45",
+                "18.48.39",
+                "18.49.37",
+                "19.01.34",
+                "19.02.39"
             ]
         )
     ]
 )
 @Suppress("unused")
-object ButtonContainerPatch : BytecodePatch() {
+object ButtonContainerPatch : BytecodePatch(emptySet()) {
     override fun execute(context: BytecodeContext) {
 
-        LithoFilterPatch.addFilter("$PATCHES_PATH/ads/ButtonsFilter;")
+        LithoFilterPatch.addFilter("$COMPONENTS_PATH/ButtonsFilter;")
 
         /**
          * Add settings

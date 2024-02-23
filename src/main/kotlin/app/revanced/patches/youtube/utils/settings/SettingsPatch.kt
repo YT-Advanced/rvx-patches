@@ -7,17 +7,14 @@ import app.revanced.patches.shared.patch.mapping.ResourceMappingPatch
 import app.revanced.patches.shared.patch.settings.AbstractSettingsResourcePatch
 import app.revanced.patches.youtube.utils.integrations.IntegrationsPatch
 import app.revanced.patches.youtube.utils.resourceid.SharedResourceIdPatch
-import app.revanced.util.resources.IconHelper.YOUTUBE_LAUNCHER_ICON_ARRAY
-import app.revanced.util.resources.IconHelper.copyFiles
-import app.revanced.util.resources.IconHelper.makeDirectoryAndCopyFiles
-import app.revanced.util.resources.ResourceHelper.addPreference
-import app.revanced.util.resources.ResourceHelper.addReVancedPreference
-import app.revanced.util.resources.ResourceHelper.updatePatchStatus
-import app.revanced.util.resources.ResourceUtils
-import app.revanced.util.resources.ResourceUtils.copyResources
+import app.revanced.patches.youtube.utils.settings.ResourceUtils.addPreference
+import app.revanced.patches.youtube.utils.settings.ResourceUtils.addReVancedPreference
+import app.revanced.patches.youtube.utils.settings.ResourceUtils.updatePatchStatus
+import app.revanced.patches.youtube.utils.settings.ResourceUtils.updatePatchStatusSettings
+import app.revanced.util.ResourceGroup
+import app.revanced.util.copyResources
 import org.w3c.dom.Element
-import java.io.File
-import java.nio.file.Paths
+import java.io.Closeable
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
@@ -34,7 +31,6 @@ import java.util.concurrent.TimeUnit
         CompatiblePackage(
             "com.google.android.youtube",
             [
-                "18.24.37",
                 "18.25.40",
                 "18.27.36",
                 "18.29.38",
@@ -48,7 +44,17 @@ import java.util.concurrent.TimeUnit
                 "18.37.36",
                 "18.38.44",
                 "18.39.41",
-                "18.40.34"
+                "18.40.34",
+                "18.41.39",
+                "18.42.41",
+                "18.43.45",
+                "18.44.41",
+                "18.45.43",
+                "18.46.45",
+                "18.48.39",
+                "18.49.37",
+                "19.01.34",
+                "19.02.39"
             ]
         )
     ],
@@ -56,17 +62,12 @@ import java.util.concurrent.TimeUnit
 )
 @Suppress("unused")
 object SettingsPatch : AbstractSettingsResourcePatch(
-    "youtube/settings",
-    "youtube/settings/host",
-    true
-) {
+    "youtube/settings"
+), Closeable {
     override fun execute(context: ResourceContext) {
         super.execute(context)
         contexts = context
 
-        /**
-         * Check if YouTube version is higher than v18.28.xx
-         */
         val resourceXmlFile = context["res/values/integers.xml"].readBytes()
 
         for (threadIndex in 0 until THREAD_COUNT) {
@@ -90,8 +91,12 @@ object SettingsPatch : AbstractSettingsResourcePatch(
 
                         val playServicesVersion = node.textContent.toInt()
 
-                        upward1828 = playServicesVersion >= 232900000
-                        upward1834 = playServicesVersion >= 233502000
+                        upward1828 = 232900000 <= playServicesVersion
+                        upward1831 = 233200000 <= playServicesVersion
+                        upward1834 = 233502000 <= playServicesVersion
+                        upward1839 = 234002000 <= playServicesVersion
+                        upward1841 = 234200000 <= playServicesVersion
+                        upward1843 = 234400000 <= playServicesVersion
 
                         break
                     }
@@ -109,13 +114,11 @@ object SettingsPatch : AbstractSettingsResourcePatch(
         context["res/values-v21"].mkdirs()
 
         arrayOf(
-            ResourceUtils.ResourceGroup(
+            ResourceGroup(
                 "layout",
-                "revanced_settings_toolbar.xml",
-                "revanced_settings_with_toolbar.xml",
-                "revanced_settings_with_toolbar_layout.xml"
+                "revanced_settings_with_toolbar.xml"
             ),
-            ResourceUtils.ResourceGroup(
+            ResourceGroup(
                 "values-v21",
                 "strings.xml"
             )
@@ -152,46 +155,6 @@ object SettingsPatch : AbstractSettingsResourcePatch(
             }
         }
 
-        /**
-         * If ad services config exists, disable it
-         */
-        context.xmlEditor["AndroidManifest.xml"].use { editor ->
-            val tags = editor.file.getElementsByTagName("property")
-            List(tags.length) { tags.item(it) as Element }
-                .filter { it.getAttribute("android:name").contains("AD_SERVICES_CONFIG") }
-                .forEach { it.parentNode.removeChild(it) }
-        }
-
-        /**
-         * If a custom branding icon path exists, merge it
-         */
-        val iconPath = "branding"
-        val targetDirectory = Paths.get("").toAbsolutePath().toString() + "/$iconPath"
-
-        if (File(targetDirectory).exists()) {
-            fun copyResources(resourceGroups: List<ResourceUtils.ResourceGroup>) {
-                try {
-                    context.copyFiles(resourceGroups, iconPath)
-                } catch (_: Exception) {
-                    context.makeDirectoryAndCopyFiles(resourceGroups, iconPath)
-                }
-            }
-
-            val iconResourceFileNames =
-                YOUTUBE_LAUNCHER_ICON_ARRAY
-                    .map { "$it.png" }
-                    .toTypedArray()
-
-            fun createGroup(directory: String) = ResourceUtils.ResourceGroup(
-                directory, *iconResourceFileNames
-            )
-
-            arrayOf("xxxhdpi", "xxhdpi", "xhdpi", "hdpi", "mdpi")
-                .map { "mipmap-$it" }
-                .map(::createGroup)
-                .let(::copyResources)
-        }
-
     }
 
     private val THREAD_COUNT = Runtime.getRuntime().availableProcessors()
@@ -199,7 +162,11 @@ object SettingsPatch : AbstractSettingsResourcePatch(
 
     internal lateinit var contexts: ResourceContext
     internal var upward1828: Boolean = false
+    internal var upward1831: Boolean = false
     internal var upward1834: Boolean = false
+    internal var upward1839: Boolean = false
+    internal var upward1841: Boolean = false
+    internal var upward1843: Boolean = false
 
     internal fun addPreference(settingArray: Array<String>) {
         contexts.addPreference(settingArray)
@@ -211,5 +178,31 @@ object SettingsPatch : AbstractSettingsResourcePatch(
 
     internal fun updatePatchStatus(patchTitle: String) {
         contexts.updatePatchStatus(patchTitle)
+    }
+
+    override fun close() {
+        SettingsBytecodePatch.contexts.classes.forEach { classDef ->
+            if (classDef.sourceFile != "BuildConfig.java")
+                return@forEach
+
+            classDef.fields.forEach { field ->
+                if (field.name == "VERSION_NAME") {
+                    contexts.updatePatchStatusSettings(
+                        "ReVanced Integrations",
+                        field.initialValue.toString().trim()
+                    )
+                }
+            }
+        }
+
+        contexts["res/xml/revanced_prefs.xml"].apply {
+            writeText(
+                readText()
+                    .replace(
+                        "&quot;",
+                        ""
+                    )
+            )
+        }
     }
 }

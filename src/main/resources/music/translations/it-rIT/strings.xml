@@ -23,7 +23,6 @@
     <string name="revanced_enable_black_navigation_bar_title">Abilita la barra di navigazione nera</string>
     <string name="revanced_enable_color_match_player_summary">Allinea il colore del lettore a schermo intero con quello in secondo piano.</string>
     <string name="revanced_enable_color_match_player_title">Abilita l\'abbinamento di colore dei Riproduttori</string>
-    <string name="revanced_enable_compact_dialog_summary">Abilita la finestra di dialogo compatta sul telefono.</string>
     <string name="revanced_enable_compact_dialog_title">Abilita dialogo compatto</string>
     <string name="revanced_enable_debug_logging_summary">Stampa il registro di debug.</string>
     <string name="revanced_enable_debug_logging_title">Abilita la registrazione del debug</string>
@@ -43,15 +42,12 @@
     <string name="revanced_enable_save_playback_speed_title">Abilita la velocità di riproduzione del salvataggio</string>
     <string name="revanced_enable_save_video_quality_summary">Salva il valore della qualità video ogni volta che viene modificata.</string>
     <string name="revanced_enable_save_video_quality_title">Abilita il salvataggio della qualità video</string>
-    <string name="revanced_enable_sleep_timer_summary">Aggiungi il timer di spegnimento al menu a comparsa.</string>
-    <string name="revanced_enable_sleep_timer_title">Abilita il timer di spegnimento</string>
     <string name="revanced_enable_zen_mode_summary">Aggiunge una sfumatura grigia al riproduttore video per ridurre l\'affaticamento degli occhi.</string>
     <string name="revanced_enable_zen_mode_title">Abilita la modalità zen</string>
     <string name="revanced_extended_settings_import">Importa</string>
     <string name="revanced_extended_settings_import_copy">Copia</string>
     <string name="revanced_extended_settings_import_export_summary">Importa o esporta le impostazioni come testo.</string>
     <string name="revanced_extended_settings_import_export_title">Importa/Esporta</string>
-    <string name="revanced_extended_settings_import_failure_parse">Importazione non riuscita: %s</string>
     <string name="revanced_extended_settings_import_reset">Ripristino impostazioni ai valori predefiniti</string>
     <string name="revanced_extended_settings_import_success">Impostazioni %d importate</string>
     <string name="revanced_external_downloader_not_installed_warning" formatted="false">%s non è installato. Installalo.</string>
@@ -62,10 +58,6 @@
     <string name="revanced_hide_account_menu_empty_component_title">Nascondi componente vuoto</string>
     <string name="revanced_hide_account_menu_summary">Nascondi gli elementi del menu dell\'account.</string>
     <string name="revanced_hide_account_menu_title">Nascondi il menu dell\'account</string>
-    <string name="revanced_hide_action_bar_label_summary">Nascondi le etichette nella barra delle azioni.</string>
-    <string name="revanced_hide_action_bar_label_title">Nascondi le etichette della barra delle azioni</string>
-    <string name="revanced_hide_action_bar_radio_summary">Nasconde il pulsante di opzione di avvio.</string>
-    <string name="revanced_hide_action_bar_radio_title">Nascondi pulsante Radio</string>
     <string name="revanced_hide_button_shelf_summary">Nasconde lo scaffale dei pulsanti dalla home page e da Explorer.</string>
     <string name="revanced_hide_button_shelf_title">Nasconde lo scaffale dei pulsanti</string>
     <string name="revanced_hide_carousel_shelf_summary">Nasconde lo scaffale del carosello dalla home page e da Explorer.</string>
@@ -83,10 +75,6 @@
     <string name="revanced_hide_terms_container_title">Nascondi contenitore termini</string>
     <string name="revanced_hide_upgrade_button_summary">Nasconde il pulsante di aggiornamento.</string>
     <string name="revanced_hide_upgrade_button_title">Nascondi il pulsante di aggiornamento</string>
-    <string name="revanced_hook_action_bar_download_summary">Sostituisce il pulsante di download offline con un pulsante di download esterno.</string>
-    <string name="revanced_hook_action_bar_download_title">Pulsante di download agganciato</string>
-    <string name="revanced_reboot_first_run">Riavvia per caricare normalmente il layout</string>
-    <string name="revanced_reboot_message">Aggiorna e riavvia</string>
     <string name="revanced_replace_flyout_panel_dismiss_queue_continue_watch_summary">Durante la visione su YouTube, continua a guardare dall\'ora corrente.</string>
     <string name="revanced_replace_flyout_panel_dismiss_queue_continue_watch_title">Continua a guardare</string>
     <string name="revanced_replace_flyout_panel_dismiss_queue_summary">Sostituisce il menù \"Ignora coda\" per guardare su YouTube.</string>
@@ -105,18 +93,8 @@
     <string name="revanced_ryd_enabled_summary">Mostra il numero di \"Non mi piace\" dei video.</string>
     <string name="revanced_ryd_failure_client_rate_limit_requested">\"Non mi piace\" non disponibile (limite API client raggiunto)</string>
     <string name="revanced_ryd_video_likes_hidden_by_video_owner">Nascosto</string>
-    <string name="revanced_save_playback_speed">Modifica della velocità predefinita in:</string>
-    <string name="revanced_save_video_quality_mobile">Modifica della qualità dei dati mobili predefinita in:</string>
     <string name="revanced_save_video_quality_none">Impossibile impostare la qualità desiderata</string>
-    <string name="revanced_save_video_quality_wifi">Modifica della qualità Wi-Fi predefinita in:</string>
     <string name="revanced_spoof_app_version_title">Versione dell\'app falsificata</string>
-    <string name="revanced_start_page_entry_chart">Grafico</string>
-    <string name="revanced_start_page_entry_explore">Esplora</string>
-    <string name="revanced_start_page_entry_home">Home</string>
-    <string name="revanced_start_page_entry_library">Libreria</string>
-    <string name="revanced_start_page_entry_subscription">Sottoscrizione</string>
-    <string name="revanced_start_page_summary">Imposta la pagina iniziale.</string>
-    <string name="revanced_start_page_title">Pagina iniziale</string>
     <string name="sb_enabled">Abilita il blocco sponsor</string>
     <string name="sb_enabled_sum">SponsorBlock è un sistema di crowdsourcing per saltare parti fastidiose dei video di YouTube.</string>
     <string name="sb_toast_on_skip">Mostra una notifica toast quando si salta automaticamente</string>

@@ -1,6 +1,5 @@
 package app.revanced.patches.reddit.layout.navigation
 
-import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
@@ -10,11 +9,12 @@ import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.reddit.layout.navigation.fingerprints.BottomNavScreenFingerprint
 import app.revanced.patches.reddit.utils.settings.SettingsBytecodePatch.updateSettingsStatus
 import app.revanced.patches.reddit.utils.settings.SettingsPatch
+import app.revanced.util.exception
 import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 
 @Patch(
     name = "Hide navigation buttons",
-    description = "Hide buttons at navigation bar.",
+    description = "Adds options to hide buttons in the navigation bar.",
     dependencies = [SettingsPatch::class],
     compatiblePackages = [CompatiblePackage("com.reddit.frontpage")]
 )
@@ -23,7 +23,7 @@ object NavigationButtonsPatch : BytecodePatch(
     setOf(BottomNavScreenFingerprint)
 ) {
     private const val INTEGRATIONS_METHOD_DESCRIPTOR =
-        "Lapp/revanced/reddit/patches/NavigationButtonsPatch;" +
+        "Lapp/revanced/integrations/reddit/patches/NavigationButtonsPatch;" +
                 "->hideNavigationButtons(Landroid/view/ViewGroup;)V"
 
     override fun execute(context: BytecodeContext) {

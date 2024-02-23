@@ -4,47 +4,47 @@ import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.shared.patch.mapping.ResourceMappingPatch
-import app.revanced.util.enum.ResourceType
-import app.revanced.util.enum.ResourceType.ATTR
-import app.revanced.util.enum.ResourceType.COLOR
-import app.revanced.util.enum.ResourceType.DIMEN
-import app.revanced.util.enum.ResourceType.DRAWABLE
-import app.revanced.util.enum.ResourceType.ID
-import app.revanced.util.enum.ResourceType.LAYOUT
-import app.revanced.util.enum.ResourceType.STRING
+import app.revanced.patches.shared.patch.mapping.ResourceType
+import app.revanced.patches.shared.patch.mapping.ResourceType.COLOR
+import app.revanced.patches.shared.patch.mapping.ResourceType.DIMEN
+import app.revanced.patches.shared.patch.mapping.ResourceType.DRAWABLE
+import app.revanced.patches.shared.patch.mapping.ResourceType.ID
+import app.revanced.patches.shared.patch.mapping.ResourceType.LAYOUT
+import app.revanced.patches.shared.patch.mapping.ResourceType.STRING
 
 @Patch(dependencies = [ResourceMappingPatch::class])
 object SharedResourceIdPatch : ResourcePatch() {
     var AccountSwitcherAccessibility: Long = -1
-    var AccessibilityCaptionsButtonName: Long = -1
     var ActionBarRingo: Long = -1
     var AdAttribution: Long = -1
     var Appearance: Long = -1
     var AppRelatedEndScreenResults: Long = -1
     var AutoNavPreviewStub: Long = -1
     var AutoNavToggle: Long = -1
-    var AvatarImageWithTextTab: Long = -1
     var BackgroundCategory: Long = -1
     var Bar: Long = -1
     var BarContainerHeight: Long = -1
-    var BottomPanelOverlayText: Long = -1
     var BottomSheetFooterText: Long = -1
     var BottomUiContainerStub: Long = -1
     var ChannelListSubMenu: Long = -1
     var CompactLink: Long = -1
+    var CompactListItem: Long = -1
     var ControlsLayoutStub: Long = -1
     var CoreContainer: Long = -1
     var DarkSplashAnimation: Long = -1
     var DislikeButton: Long = -1
     var DonationCompanion: Long = -1
     var EasySeekEduContainer: Long = -1
+    var EditSettingsAction: Long = -1
     var EndScreenElementLayoutCircle: Long = -1
     var EndScreenElementLayoutIcon: Long = -1
     var EndScreenElementLayoutVideo: Long = -1
+    var EmojiPickerIcon: Long = -1
     var ExpandButtonDown: Long = -1
     var Fab: Long = -1
     var FilterBarHeight: Long = -1
     var FloatyBarTopMargin: Long = -1
+    var FullScreenEngagementOverlay: Long = -1
     var FullScreenEngagementPanel: Long = -1
     var HorizontalCardList: Long = -1
     var ImageOnlyTab: Long = -1
@@ -75,16 +75,16 @@ object SharedResourceIdPatch : ResourcePatch() {
     var Scrubbing: Long = -1
     var SeekUndoEduOverlayStub: Long = -1
     var SettingsBooleanTimeRangeDialog: Long = -1
-    var SpeedOverlayText: Long = -1
     var SubtitleMenuSettingsFooterInfo: Long = -1
     var SuggestedAction: Long = -1
-    var ToolBarPaddingHome: Long = -1
+    var TabsBarTextTabView: Long = -1
     var ToolTipContentView: Long = -1
     var TotalTime: Long = -1
+    var TouchArea: Long = -1
     var VideoQualityBottomSheet: Long = -1
     var VideoZoomIndicatorLayout: Long = -1
-    var WordMarkHeader: Long = -1
     var YoutubeControlsOverlay: Long = -1
+    var YoutubeControlsOverlaySubtitleButton: Long = -1
     var YtOutlineArrowTimeBlack: Long = -1
     var YtOutlineFireBlack: Long = -1
     var YtOutlineSearchBlack: Long = -1
@@ -97,35 +97,36 @@ object SharedResourceIdPatch : ResourcePatch() {
             ?: -1
 
         AccountSwitcherAccessibility = find(STRING, "account_switcher_accessibility_label")
-        AccessibilityCaptionsButtonName = find(STRING, "accessibility_captions_button_name")
         ActionBarRingo = find(LAYOUT, "action_bar_ringo")
         AdAttribution = find(ID, "ad_attribution")
         Appearance = find(STRING, "app_theme_appearance_dark")
         AppRelatedEndScreenResults = find(LAYOUT, "app_related_endscreen_results")
         AutoNavPreviewStub = find(ID, "autonav_preview_stub")
         AutoNavToggle = find(ID, "autonav_toggle")
-        AvatarImageWithTextTab = find(LAYOUT, "avatar_image_with_text_tab")
         BackgroundCategory = find(STRING, "pref_background_and_offline_category")
         Bar = find(LAYOUT, "bar")
         BarContainerHeight = find(DIMEN, "bar_container_height")
-        BottomPanelOverlayText = find(ID, "bottom_panel_overlay_text")
         BottomSheetFooterText = find(ID, "bottom_sheet_footer_text")
         BottomUiContainerStub = find(ID, "bottom_ui_container_stub")
         ChannelListSubMenu = find(LAYOUT, "channel_list_sub_menu")
         CompactLink = find(LAYOUT, "compact_link")
+        CompactListItem = find(LAYOUT, "compact_list_item")
         ControlsLayoutStub = find(ID, "controls_layout_stub")
         CoreContainer = find(ID, "core_container")
         DarkSplashAnimation = find(ID, "dark_splash_animation")
         DislikeButton = find(ID, "dislike_button")
         DonationCompanion = find(LAYOUT, "donation_companion")
         EasySeekEduContainer = find(ID, "easy_seek_edu_container")
+        EditSettingsAction = find(STRING, "edit_settings_action")
         EndScreenElementLayoutCircle = find(LAYOUT, "endscreen_element_layout_circle")
         EndScreenElementLayoutIcon = find(LAYOUT, "endscreen_element_layout_icon")
         EndScreenElementLayoutVideo = find(LAYOUT, "endscreen_element_layout_video")
+        EmojiPickerIcon = find(ID, "emoji_picker_icon")
         ExpandButtonDown = find(LAYOUT, "expand_button_down")
         Fab = find(ID, "fab")
         FilterBarHeight = find(DIMEN, "filter_bar_height")
         FloatyBarTopMargin = find(DIMEN, "floaty_bar_button_top_margin")
+        FullScreenEngagementOverlay = find(LAYOUT, "fullscreen_engagement_overlay")
         FullScreenEngagementPanel = find(ID, "fullscreen_engagement_panel_holder")
         HorizontalCardList = find(LAYOUT, "horizontal_card_list")
         ImageOnlyTab = find(LAYOUT, "image_only_tab")
@@ -158,16 +159,16 @@ object SharedResourceIdPatch : ResourcePatch() {
         Scrubbing = find(DIMEN, "vertical_touch_offset_to_enter_fine_scrubbing")
         SeekUndoEduOverlayStub = find(ID, "seek_undo_edu_overlay_stub")
         SettingsBooleanTimeRangeDialog = find(LAYOUT, "setting_boolean_time_range_dialog")
-        SpeedOverlayText = find(ID, "speedmaster_edu_text")
         SubtitleMenuSettingsFooterInfo = find(STRING, "subtitle_menu_settings_footer_info")
         SuggestedAction = find(LAYOUT, "suggested_action")
-        ToolBarPaddingHome = find(DIMEN, "toolbar_padding_home_action_up")
+        TabsBarTextTabView = find(ID, "tabs_bar_text_tab_view")
         ToolTipContentView = find(LAYOUT, "tooltip_content_view")
         TotalTime = find(STRING, "total_time")
+        TouchArea = find(ID, "touch_area")
         VideoQualityBottomSheet = find(LAYOUT, "video_quality_bottom_sheet_list_fragment_title")
         VideoZoomIndicatorLayout = find(ID, "video_zoom_indicator_layout")
-        WordMarkHeader = find(ATTR, "ytWordmarkHeader")
         YoutubeControlsOverlay = find(ID, "youtube_controls_overlay")
+        YoutubeControlsOverlaySubtitleButton = find(LAYOUT, "youtube_controls_overlay_subtitle_button")
         YtOutlineArrowTimeBlack = find(DRAWABLE, "yt_outline_arrow_time_black_24")
         YtOutlineFireBlack = find(DRAWABLE, "yt_outline_fire_black_24")
         YtOutlineSearchBlack = find(DRAWABLE, "yt_outline_search_black_24")

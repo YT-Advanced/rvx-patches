@@ -1,6 +1,5 @@
 package app.revanced.patches.youtube.utils.returnyoutubedislike.shorts
 
-import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
@@ -10,11 +9,13 @@ import app.revanced.patcher.extensions.InstructionExtensions.removeInstruction
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.util.smali.ExternalLabel
+import app.revanced.patches.youtube.utils.integrations.Constants.UTILS_PATH
 import app.revanced.patches.youtube.utils.returnyoutubedislike.shorts.fingerprints.IncognitoFingerprint
 import app.revanced.patches.youtube.utils.returnyoutubedislike.shorts.fingerprints.ShortsTextViewFingerprint
 import app.revanced.patches.youtube.utils.returnyoutubedislike.shorts.fingerprints.TextComponentSpecFingerprint
 import app.revanced.patches.youtube.utils.settings.SettingsPatch
-import app.revanced.util.integrations.Constants.UTILS_PATH
+import app.revanced.util.exception
+import app.revanced.util.getTargetIndexReversed
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
@@ -28,26 +29,31 @@ object ReturnYouTubeDislikeShortsPatch : BytecodePatch(
         TextComponentSpecFingerprint
     )
 ) {
+    private const val INTEGRATIONS_RYD_CLASS_DESCRIPTOR =
+        "$UTILS_PATH/ReturnYouTubeDislikePatch;"
+
     override fun execute(context: BytecodeContext) {
         ShortsTextViewFingerprint.result?.let {
             it.mutableMethod.apply {
-                val patternResult = it.scanResult.patternScanResult!!
+                val startIndex = it.scanResult.patternScanResult!!.startIndex
 
-                val isDisLikesBooleanIndex =
-                    implementation!!.instructions.indexOfFirst { instruction ->
-                        instruction.opcode == Opcode.IGET_BOOLEAN
-                    }
+                val isDisLikesBooleanIndex = getTargetIndexReversed(startIndex, Opcode.IGET_BOOLEAN)
+                val textViewFieldIndex = getTargetIndexReversed(startIndex, Opcode.IGET_OBJECT)
+
                 // If the field is true, the TextView is for a dislike button.
                 val isDisLikesBooleanReference =
                     getInstruction<ReferenceInstruction>(isDisLikesBooleanIndex).reference
 
                 val textViewFieldReference = // Like/Dislike button TextView field
-                    getInstruction<ReferenceInstruction>(patternResult.endIndex).reference
+                    getInstruction<ReferenceInstruction>(textViewFieldIndex).reference
 
                 // Check if the hooked TextView object is that of the dislike button.
                 // If RYD is disabled, or the TextView object is not that of the dislike button, the execution flow is not interrupted.
                 // Otherwise, the TextView object is modified, and the execution flow is interrupted to prevent it from being changed afterward.
-                val insertIndex = patternResult.startIndex + 6
+                val insertIndex = implementation!!.instructions.indexOfFirst { instruction ->
+                    instruction.opcode == Opcode.CHECK_CAST
+                } + 1
+
                 addInstructionsWithLabels(
                     insertIndex, """
                     # Check, if the TextView is for a dislike button
@@ -99,7 +105,4 @@ object ReturnYouTubeDislikeShortsPatch : BytecodePatch(
             } ?: throw IncognitoFingerprint.exception
         }
     }
-
-    private const val INTEGRATIONS_RYD_CLASS_DESCRIPTOR =
-        "$UTILS_PATH/ReturnYouTubeDislikePatch;"
 }

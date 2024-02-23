@@ -1,7 +1,7 @@
 package app.revanced.patches.music.utils.videotype.fingerprint
 
 import app.revanced.patcher.extensions.or
-import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint
+import app.revanced.patcher.fingerprint.MethodFingerprint
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
 
@@ -16,7 +16,6 @@ object VideoTypeFingerprint : MethodFingerprint(
         Opcode.IF_NEZ,
         Opcode.SGET_OBJECT,
         Opcode.GOTO,
-        Opcode.SGET_OBJECT,
-        Opcode.RETURN_OBJECT
+        Opcode.SGET_OBJECT
     )
 )

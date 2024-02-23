@@ -1,6 +1,6 @@
 ## 🧩 ReVanced Patches
 
-ReVanced Extended Patches.
+ReX Patches.
 
 ## 📋 List of patches in this repository
 
@@ -16,12 +16,11 @@ Example:
 [
   {
     "name": "Default video quality",
-    "description": "Adds ability to set default video quality settings.",
+    "description": "Adds an option to set the default video quality.",
     "compatiblePackages":[
       {
         "name":"com.google.android.youtube",
         "versions":[
-          "18.24.37",
           "18.25.40",
           "18.27.36",
           "18.29.38",
@@ -35,7 +34,17 @@ Example:
           "18.37.36",
           "18.38.44",
           "18.39.41",
-          "18.40.34"
+          "18.40.34",
+          "18.41.39",
+          "18.42.41",
+          "18.43.45",
+          "18.44.41",
+          "18.45.43",
+          "18.46.45",
+          "18.48.39",
+          "18.49.37",
+          "19.01.34",
+          "19.02.39"
         ]
       }
     ],
@@ -45,15 +54,12 @@ Example:
   },
   {
     "name": "Remember video quality",
-    "description": "Save the video quality value whenever you change the video quality.",
+    "description": "Adds an option to remember the last video quality selected.",
     "compatiblePackages": [
       {
         "name": "com.google.android.apps.youtube.music",
         "versions": [
-          "6.15.52",
-          "6.20.51",
-          "6.22.51",
-          "6.23.54"
+          "6.21.52+"
         ]
       }
     ],

@@ -4,10 +4,11 @@ import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
+import app.revanced.patcher.patch.options.PatchOption.PatchExtensions.booleanPatchOption
 import app.revanced.patches.youtube.utils.settings.SettingsPatch
-import app.revanced.util.resources.ResourceUtils
-import app.revanced.util.resources.ResourceUtils.copyResources
-import app.revanced.util.resources.ResourceUtils.copyXmlNode
+import app.revanced.util.ResourceGroup
+import app.revanced.util.copyResources
+import app.revanced.util.copyXmlNode
 
 @Patch(
     name = "SponsorBlock",
@@ -20,7 +21,6 @@ import app.revanced.util.resources.ResourceUtils.copyXmlNode
         CompatiblePackage(
             "com.google.android.youtube",
             [
-                "18.24.37",
                 "18.25.40",
                 "18.27.36",
                 "18.29.38",
@@ -34,82 +34,122 @@ import app.revanced.util.resources.ResourceUtils.copyXmlNode
                 "18.37.36",
                 "18.38.44",
                 "18.39.41",
-                "18.40.34"
+                "18.40.34",
+                "18.41.39",
+                "18.42.41",
+                "18.43.45",
+                "18.44.41",
+                "18.45.43",
+                "18.46.45",
+                "18.48.39",
+                "18.49.37",
+                "19.01.34",
+                "19.02.39"
             ]
         )
     ]
 )
 @Suppress("unused")
 object SponsorBlockPatch : ResourcePatch() {
+    private val OutlineIcon by booleanPatchOption(
+        key = "OutlineIcon",
+        default = false,
+        title = "Outline icons",
+        description = "Apply the outline icon",
+        required = true
+    )
 
     override fun execute(context: ResourceContext) {
         /**
          * merge SponsorBlock drawables to main drawables
          */
-
         arrayOf(
-            ResourceUtils.ResourceGroup(
+            ResourceGroup(
                 "layout",
                 "inline_sponsor_overlay.xml",
-                "new_segment.xml",
                 "skip_sponsor_button.xml"
-            ),
-            ResourceUtils.ResourceGroup(
-                // required resource for back button, because when the base APK is used, this resource will not exist
-                "drawable",
-                "ic_sb_adjust.xml",
-                "ic_sb_compare.xml",
-                "ic_sb_edit.xml",
-                "ic_sb_logo.xml",
-                "ic_sb_publish.xml",
-                "ic_sb_voting.xml"
             )
         ).forEach { resourceGroup ->
-            context.copyResources("youtube/sponsorblock", resourceGroup)
+            context.copyResources("youtube/sponsorblock/shared", resourceGroup)
+        }
+
+        if (OutlineIcon == true) {
+            arrayOf(
+                ResourceGroup(
+                    "layout",
+                    "new_segment.xml"
+                ),
+                ResourceGroup(
+                    "drawable",
+                    "ic_sb_adjust.xml",
+                    "ic_sb_backward.xml",
+                    "ic_sb_compare.xml",
+                    "ic_sb_edit.xml",
+                    "ic_sb_forward.xml",
+                    "ic_sb_logo.xml",
+                    "ic_sb_publish.xml",
+                    "ic_sb_voting.xml",
+                    "ns_bg.xml"
+                )
+            ).forEach { resourceGroup ->
+                context.copyResources("youtube/sponsorblock/outline", resourceGroup)
+            }
+        } else {
+            arrayOf(
+                ResourceGroup(
+                    "layout",
+                    "new_segment.xml"
+                ),
+                ResourceGroup(
+                    "drawable",
+                    "ic_sb_adjust.xml",
+                    "ic_sb_compare.xml",
+                    "ic_sb_edit.xml",
+                    "ic_sb_logo.xml",
+                    "ic_sb_publish.xml",
+                    "ic_sb_voting.xml"
+                )
+            ).forEach { resourceGroup ->
+                context.copyResources("youtube/sponsorblock/default", resourceGroup)
+            }
         }
 
         /**
          * merge xml nodes from the host to their real xml files
          */
-
-        // collect all host resources
-        val hostingXmlResources = mapOf("layout" to arrayOf("youtube_controls_layout"))
-
         // copy nodes from host resources to their real xml files
-        hostingXmlResources.forEach { (path, resources) ->
-            resources.forEach { resource ->
-                val hostingResourceStream =
-                    this.javaClass.classLoader.getResourceAsStream("youtube/sponsorblock/host/$path/$resource.xml")!!
+        val hostingResourceStream =
+            this.javaClass.classLoader.getResourceAsStream("youtube/sponsorblock/shared/host/layout/youtube_controls_layout.xml")!!
 
-                val targetXmlEditor = context.xmlEditor["res/$path/$resource.xml"]
-                "RelativeLayout".copyXmlNode(
-                    context.xmlEditor[hostingResourceStream],
-                    targetXmlEditor
-                ).also {
-                    val children = targetXmlEditor.file.getElementsByTagName("RelativeLayout")
-                        .item(0).childNodes
+        val targetXmlEditor = context.xmlEditor["res/layout/youtube_controls_layout.xml"]
 
-                    // Replace the startOf with the voting button view so that the button does not overlap
-                    for (i in 1 until children.length) {
-                        val view = children.item(i)
+        "RelativeLayout".copyXmlNode(
+            context.xmlEditor[hostingResourceStream],
+            targetXmlEditor
+        ).also {
+            val children = targetXmlEditor.file.getElementsByTagName("RelativeLayout")
+                .item(0).childNodes
 
-                        // Replace the attribute for a specific node only
-                        if (!(view.hasAttributes() && view.attributes.getNamedItem("android:id").nodeValue.endsWith(
-                                "player_video_heading"
-                            ))
-                        ) continue
+            // Replace the startOf with the voting button view so that the button does not overlap
+            for (i in 1 until children.length) {
+                val view = children.item(i)
 
-                        // voting button id from the voting button view from the youtube_controls_layout.xml host file
-                        val votingButtonId = "@+id/sb_voting_button"
+                // Replace the attribute for a specific node only
+                if (!(view.hasAttributes() && view.attributes.getNamedItem("android:id").nodeValue.endsWith(
+                        "player_video_heading"
+                    ))
+                ) continue
 
-                        view.attributes.getNamedItem("android:layout_toStartOf").nodeValue =
-                            votingButtonId
+                // voting button id from the voting button view from the youtube_controls_layout.xml host file
+                val votingButtonId = "@+id/sb_voting_button"
 
-                        break
-                    }
-                }.close() // close afterwards
+                view.attributes.getNamedItem("android:layout_toStartOf").nodeValue =
+                    votingButtonId
+
+                break
             }
-        }
+        }.close() // close afterwards
+
 
         /**
          * Add ReVanced Extended Settings

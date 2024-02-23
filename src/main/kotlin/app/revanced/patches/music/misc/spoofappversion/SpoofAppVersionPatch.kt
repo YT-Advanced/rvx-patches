@@ -4,37 +4,28 @@ import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.music.general.oldstylelibraryshelf.OldStyleLibraryShelfPatch
+import app.revanced.patches.music.utils.integrations.Constants.MISC_PATH
 import app.revanced.patches.music.utils.intenthook.IntentHookPatch
+import app.revanced.patches.music.utils.settings.CategoryType
 import app.revanced.patches.music.utils.settings.SettingsPatch
 import app.revanced.patches.music.utils.settings.SettingsPatch.contexts
 import app.revanced.patches.shared.patch.versionspoof.AbstractVersionSpoofPatch
-import app.revanced.util.enum.CategoryType
-import app.revanced.util.integrations.Constants.MUSIC_MISC_PATH
-import app.revanced.util.resources.ResourceUtils.copyXmlNode
+import app.revanced.util.copyXmlNode
 
 @Patch(
     name = "Spoof app version",
-    description = "Spoof the YouTube Music client version.",
+    description = "Adds options to spoof the YouTube Music client version. " + 
+            "This can remove the radio mode restriction in Canadian regions or disable real-time lyrics.",
     dependencies = [
         IntentHookPatch::class,
         OldStyleLibraryShelfPatch::class,
         SettingsPatch::class
     ],
-    compatiblePackages = [
-        CompatiblePackage(
-            "com.google.android.apps.youtube.music",
-            [
-                "6.15.52",
-                "6.20.51",
-                "6.22.51",
-                "6.23.54"
-            ]
-        )
-    ]
+    compatiblePackages = [CompatiblePackage("com.google.android.apps.youtube.music")]
 )
 @Suppress("unused")
 object SpoofAppVersionPatch : AbstractVersionSpoofPatch(
-    "$MUSIC_MISC_PATH/SpoofAppVersionPatch;->getVersionOverride(Ljava/lang/String;)Ljava/lang/String;"
+    "$MISC_PATH/SpoofAppVersionPatch;->getVersionOverride(Ljava/lang/String;)Ljava/lang/String;"
 ) {
     override fun execute(context: BytecodeContext) {
         super.execute(context)

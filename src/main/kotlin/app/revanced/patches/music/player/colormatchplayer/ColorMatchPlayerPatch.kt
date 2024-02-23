@@ -1,21 +1,21 @@
 package app.revanced.patches.music.player.colormatchplayer
 
-import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.removeInstruction
-import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint.Companion.resolve
 import app.revanced.patcher.patch.BytecodePatch
+import app.revanced.patcher.patch.PatchException
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod
 import app.revanced.patcher.util.smali.ExternalLabel
 import app.revanced.patches.music.player.colormatchplayer.fingerprints.NewPlayerColorFingerprint
 import app.revanced.patches.music.utils.fingerprints.PlayerColorFingerprint
+import app.revanced.patches.music.utils.integrations.Constants.PLAYER
+import app.revanced.patches.music.utils.settings.CategoryType
 import app.revanced.patches.music.utils.settings.SettingsPatch
-import app.revanced.util.enum.CategoryType
-import app.revanced.util.integrations.Constants.MUSIC_PLAYER
+import app.revanced.util.exception
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.Instruction
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
@@ -25,19 +25,26 @@ import kotlin.properties.Delegates
 
 @Patch(
     name = "Enable color match player",
-    description = "Matches the color of the mini player and the fullscreen player.",
+    description = "Adds an option to match the color of the miniplayer to the fullscreen player. Deprecated on YT Music 6.34.51+.",
     dependencies = [SettingsPatch::class],
     compatiblePackages = [
         CompatiblePackage(
             "com.google.android.apps.youtube.music",
             [
-                "6.15.52",
-                "6.20.51",
-                "6.22.51",
-                "6.23.54"
+                "6.21.52",
+                "6.22.52",
+                "6.23.56",
+                "6.25.53",
+                "6.26.51",
+                "6.27.54",
+                "6.28.53",
+                "6.29.58",
+                "6.31.55",
+                "6.33.52"
             ]
         )
-    ]
+    ],
+    use = false
 )
 @Suppress("unused")
 object ColorMatchPlayerPatch : BytecodePatch(
@@ -94,7 +101,7 @@ object ColorMatchPlayerPatch : BytecodePatch(
 
                 addInstructionsWithLabels(
                     insertIndex, """
-                        invoke-static {}, $MUSIC_PLAYER->enableColorMatchPlayer()Z
+                        invoke-static {}, $PLAYER->enableColorMatchPlayer()Z
                         move-result v2
                         if-eqz v2, :off
                         iget v0, p0, $miniPlayerReference1
@@ -129,7 +136,7 @@ object ColorMatchPlayerPatch : BytecodePatch(
 
                     addInstructionsWithLabels(
                         insertIndex, """
-                            invoke-static {}, $MUSIC_PLAYER->enableColorMatchPlayer()Z
+                            invoke-static {}, $PLAYER->enableColorMatchPlayer()Z
                             move-result v1
                             if-eqz v1, :off
                             iget v0, p0, $miniPlayerReference1
@@ -158,7 +165,7 @@ object ColorMatchPlayerPatch : BytecodePatch(
                     removeInstruction(insertIndex - 1)
                 }
             } ?: throw NewPlayerColorFingerprint.exception
-        } ?: throw PlayerColorFingerprint.exception
+        } ?: throw PatchException("This version is not supported. Please use YT Music 6.33.52 or earlier.")
 
         SettingsPatch.addMusicPreference(
             CategoryType.PLAYER,

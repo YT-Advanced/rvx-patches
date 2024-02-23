@@ -9,7 +9,7 @@ import app.revanced.patches.youtube.utils.settings.SettingsPatch
 
 @Patch(
     name = "Hide collapse button",
-    description = "Hides the collapse button in the video player.",
+    description = "Adds an option to hide the collapse button in the video player.",
     dependencies =
     [
         PlayerButtonHookPatch::class,
@@ -19,7 +19,6 @@ import app.revanced.patches.youtube.utils.settings.SettingsPatch
         CompatiblePackage(
             "com.google.android.youtube",
             [
-                "18.24.37",
                 "18.25.40",
                 "18.27.36",
                 "18.29.38",
@@ -33,7 +32,17 @@ import app.revanced.patches.youtube.utils.settings.SettingsPatch
                 "18.37.36",
                 "18.38.44",
                 "18.39.41",
-                "18.40.34"
+                "18.40.34",
+                "18.41.39",
+                "18.42.41",
+                "18.43.45",
+                "18.44.41",
+                "18.45.43",
+                "18.46.45",
+                "18.48.39",
+                "18.49.37",
+                "19.01.34",
+                "19.02.39"
             ]
         )
     ]

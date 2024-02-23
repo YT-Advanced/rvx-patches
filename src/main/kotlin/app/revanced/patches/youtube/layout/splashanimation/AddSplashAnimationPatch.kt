@@ -4,19 +4,18 @@ import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
-import app.revanced.util.resources.ResourceUtils
-import app.revanced.util.resources.ResourceUtils.copyResources
-import app.revanced.util.resources.ResourceUtils.copyXmlNode
+import app.revanced.util.ResourceGroup
+import app.revanced.util.copyResources
+import app.revanced.util.copyXmlNode
 import kotlin.io.path.exists
 
 @Patch(
     name = "Add splash animation",
-    description = "Adds splash animation, which was removed in YT v18.19.36+. This patch cannot be used with 'custom-branding-icon' patch",
+    description = "Adds old style splash animation.",
     compatiblePackages = [
         CompatiblePackage(
             "com.google.android.youtube",
             [
-                "18.24.37",
                 "18.25.40",
                 "18.27.36",
                 "18.29.38",
@@ -30,7 +29,17 @@ import kotlin.io.path.exists
                 "18.37.36",
                 "18.38.44",
                 "18.39.41",
-                "18.40.34"
+                "18.40.34",
+                "18.41.39",
+                "18.42.41",
+                "18.43.45",
+                "18.44.41",
+                "18.45.43",
+                "18.46.45",
+                "18.48.39",
+                "18.49.37",
+                "19.01.34",
+                "19.02.39"
             ]
         )
     ],
@@ -53,7 +62,7 @@ object AddSplashAnimationPatch : ResourcePatch() {
              * extract from YouTube v18.18.39
              */
             arrayOf(
-                ResourceUtils.ResourceGroup(
+                ResourceGroup(
                     "drawable",
                     "\$\$avd_anim__1__0.xml",
                     "\$\$avd_anim__1__1.xml",

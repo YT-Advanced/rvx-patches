@@ -2,10 +2,13 @@ package app.revanced.meta
 
 import app.revanced.patcher.PatchSet
 import app.revanced.patcher.patch.Patch
-import com.unascribed.flexver.FlexVerComparator
 import java.io.File
 
 internal class ReadmeGenerator : PatchesFileGenerator {
+    private val exception = mapOf(
+        "com.google.android.apps.youtube.music" to "6.21.52"
+    )
+
     private companion object {
         private const val TABLE_HEADER =
             "| \uD83D\uDC8A Patch | \uD83D\uDCDC Description | \uD83C\uDFF9 Target Version |\n" +
@@ -26,42 +29,26 @@ internal class ReadmeGenerator : PatchesFileGenerator {
             }
             .entries
             .sortedByDescending { it.value.size }
-            .forEach { (`package`, patches) ->
-                val supportVersions = buildMap {
-                    patches.forEach { patch ->
-                        patch.compatiblePackages?.single { compatiblePackage -> compatiblePackage.name == `package` }?.versions?.let {
-                            it.forEach { version -> merge(version, 1, Integer::sum) }
-                        }
-                    }
-                }
-
-                val minVersion = supportVersions.let { commonMap ->
-                    commonMap.maxByOrNull { it.value }?.value?.let {
-                        commonMap.entries.filter { supported -> supported.value == it }
-                            .minOfWith(FlexVerComparator::compare, Map.Entry<String, Int>::key)
-                    } ?: "all"
-                }
-                val maxVersion = supportVersions.let { commonMap ->
-                    commonMap.maxByOrNull { it.value }?.value?.let {
-                        commonMap.entries.filter { supported -> supported.value == it }
-                            .maxOfWith(FlexVerComparator::compare, Map.Entry<String, Int>::key)
-                    } ?: "all"
-                }
-
+            .forEach { (pkg, patches) ->
                 output.apply {
-                    appendLine("### [\uD83D\uDCE6 `${`package`}`](https://play.google.com/store/apps/details?id=${`package`})")
+                    appendLine("### [\uD83D\uDCE6 `$pkg`](https://play.google.com/store/apps/details?id=$pkg)")
                     appendLine("<details>\n")
                     appendLine(TABLE_HEADER)
                     patches.sortedBy { it.name }.forEach { patch ->
+                        val supportedVersionArray =
+                            patch.compatiblePackages?.single { it.name == pkg }?.versions
                         val supportedVersion =
-                            if (
-                                patch.compatiblePackages?.single { it.name == `package` }?.versions?.isNotEmpty() == true
-                            ) {
+                            if (supportedVersionArray?.isNotEmpty() == true) {
+                                val minVersion = supportedVersionArray.elementAt(0)
+                                val maxVersion =
+                                    supportedVersionArray.elementAt(supportedVersionArray.size - 1)
                                 if (minVersion == maxVersion)
                                     maxVersion
                                 else
                                     "$minVersion ~ $maxVersion"
-                            } else
+                            } else if (exception.containsKey(pkg))
+                                exception[pkg] + "+"
+                            else
                                 "all"
 
                         appendLine(

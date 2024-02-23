@@ -1,6 +1,5 @@
 package app.revanced.patches.reddit.ad.comments
 
-import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
@@ -8,12 +7,13 @@ import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod
 import app.revanced.patcher.util.smali.ExternalLabel
 import app.revanced.patches.reddit.ad.comments.fingerprints.HideCommentAdsFingerprint
+import app.revanced.util.exception
 
 object HideCommentAdsPatch : BytecodePatch(
     setOf(HideCommentAdsFingerprint)
 ) {
     private const val INTEGRATION_METHOD_DESCRIPTOR =
-        "Lapp/revanced/reddit/patches/GeneralAdsPatch;" +
+        "Lapp/revanced/integrations/reddit/patches/GeneralAdsPatch;" +
                 "->hideCommentAds()Z"
 
     override fun execute(context: BytecodeContext) {

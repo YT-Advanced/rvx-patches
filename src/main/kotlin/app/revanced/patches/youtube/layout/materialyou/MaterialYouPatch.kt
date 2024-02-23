@@ -6,11 +6,11 @@ import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.youtube.layout.theme.GeneralThemePatch
 import app.revanced.patches.youtube.layout.theme.GeneralThemePatch.isMonetPatchIncluded
+import app.revanced.patches.youtube.utils.settings.ResourceUtils.updatePatchStatusTheme
 import app.revanced.patches.youtube.utils.settings.SettingsPatch
-import app.revanced.util.resources.ResourceHelper.updatePatchStatusTheme
-import app.revanced.util.resources.ResourceUtils
-import app.revanced.util.resources.ResourceUtils.copyResources
-import app.revanced.util.resources.ResourceUtils.copyXmlNode
+import app.revanced.util.ResourceGroup
+import app.revanced.util.copyResources
+import app.revanced.util.copyXmlNode
 
 @Patch(
     name = "MaterialYou",
@@ -23,7 +23,6 @@ import app.revanced.util.resources.ResourceUtils.copyXmlNode
         CompatiblePackage(
             "com.google.android.youtube",
             [
-                "18.24.37",
                 "18.25.40",
                 "18.27.36",
                 "18.29.38",
@@ -37,7 +36,17 @@ import app.revanced.util.resources.ResourceUtils.copyXmlNode
                 "18.37.36",
                 "18.38.44",
                 "18.39.41",
-                "18.40.34"
+                "18.40.34",
+                "18.41.39",
+                "18.42.41",
+                "18.43.45",
+                "18.44.41",
+                "18.45.43",
+                "18.46.45",
+                "18.48.39",
+                "18.49.37",
+                "19.01.34",
+                "19.02.39"
             ]
         )
     ],
@@ -48,16 +57,16 @@ object MaterialYouPatch : ResourcePatch() {
     override fun execute(context: ResourceContext) {
 
         arrayOf(
-            ResourceUtils.ResourceGroup(
+            ResourceGroup(
                 "drawable-night-v31",
                 "new_content_dot_background.xml"
             ),
-            ResourceUtils.ResourceGroup(
+            ResourceGroup(
                 "drawable-v31",
                 "new_content_count_background.xml",
                 "new_content_dot_background.xml"
             ),
-            ResourceUtils.ResourceGroup(
+            ResourceGroup(
                 "layout-v31",
                 "new_content_count.xml"
             )
@@ -71,7 +80,7 @@ object MaterialYouPatch : ResourcePatch() {
         /**
          * Add settings
          */
-        context.updatePatchStatusTheme("materialyou")
+        context.updatePatchStatusTheme("MaterialYou")
 
         isMonetPatchIncluded = true
 

@@ -1,7 +1,5 @@
 package app.revanced.patches.youtube.ads.general
 
-import app.revanced.extensions.doRecursively
-import app.revanced.extensions.startsWithAny
 import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
@@ -9,15 +7,17 @@ import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.youtube.ads.getpremium.HideGetPremiumPatch
 import app.revanced.patches.youtube.utils.fix.doublebacktoclose.DoubleBackToClosePatch
 import app.revanced.patches.youtube.utils.fix.swiperefresh.SwipeRefreshPatch
+import app.revanced.patches.youtube.utils.integrations.Constants.COMPONENTS_PATH
 import app.revanced.patches.youtube.utils.litho.LithoFilterPatch
 import app.revanced.patches.youtube.utils.settings.SettingsPatch
-import app.revanced.util.integrations.Constants.PATCHES_PATH
-import app.revanced.util.resources.ResourceUtils.copyXmlNode
+import app.revanced.util.copyXmlNode
+import app.revanced.util.doRecursively
+import app.revanced.util.startsWithAny
 import org.w3c.dom.Element
 
 @Patch(
     name = "Hide general ads",
-    description = "Hides general ads.",
+    description = "Adds options to hide general ads.",
     dependencies = [
         DoubleBackToClosePatch::class,
         GeneralAdsBytecodePatch::class,
@@ -30,7 +30,6 @@ import org.w3c.dom.Element
         CompatiblePackage(
             "com.google.android.youtube",
             [
-                "18.24.37",
                 "18.25.40",
                 "18.27.36",
                 "18.29.38",
@@ -44,7 +43,17 @@ import org.w3c.dom.Element
                 "18.37.36",
                 "18.38.44",
                 "18.39.41",
-                "18.40.34"
+                "18.40.34",
+                "18.41.39",
+                "18.42.41",
+                "18.43.45",
+                "18.44.41",
+                "18.45.43",
+                "18.46.45",
+                "18.48.39",
+                "18.49.37",
+                "19.01.34",
+                "19.02.39"
             ]
         )
     ]
@@ -73,7 +82,7 @@ object GeneralAdsPatch : ResourcePatch() {
     )
 
     override fun execute(context: ResourceContext) {
-        LithoFilterPatch.addFilter("$PATCHES_PATH/ads/AdsFilter;")
+        LithoFilterPatch.addFilter("$COMPONENTS_PATH/AdsFilter;")
 
         context.forEach {
 

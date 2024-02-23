@@ -23,7 +23,6 @@
     <string name="revanced_enable_black_navigation_bar_title">কালো নেভিগেশন বার সক্রিয় করুন</string>
     <string name="revanced_enable_color_match_player_summary">পূর্ণস্ক্রীন প্লেয়ারের রং মিনিমাইজ করা প্লেয়ারের রং এর সাথে মিলবে।</string>
     <string name="revanced_enable_color_match_player_title">প্লেয়ারের রং মিলানো সক্রিয় করুন</string>
-    <string name="revanced_enable_compact_dialog_summary">ফোনে কম্প্যাক্ট ডায়ালগ সক্রিয় করুন।</string>
     <string name="revanced_enable_compact_dialog_title">কম্প্যাক্ট ডায়ালগ সক্রিয় করুন</string>
     <string name="revanced_enable_debug_logging_summary">ডিবাগ লগ প্রিন্ট করে</string>
     <string name="revanced_enable_debug_logging_title">ডিবাগ লগ সক্রিয় করুন</string>
@@ -43,15 +42,12 @@
     <string name="revanced_enable_save_playback_speed_title">প্লেব্যাক স্পিড সংরক্ষণ সক্রিয় করুন</string>
     <string name="revanced_enable_save_video_quality_summary">যখনই আপনি ভিডিও কোয়ালিটি পরিবর্তন করবেন তখন ভিডিও কোয়ালিটি সংরক্ষণ করবে।</string>
     <string name="revanced_enable_save_video_quality_title">ভিডিও কোয়ালিটি সংরক্ষণ সক্রিয় করুন</string>
-    <string name="revanced_enable_sleep_timer_summary">ফ্লাইআউট মেনুতে sleep timer যুক্ত করুন।</string>
-    <string name="revanced_enable_sleep_timer_title">Sleep timer সক্রিয় করুন</string>
     <string name="revanced_enable_zen_mode_summary">চোখের চাপ কমাতে ভিডিও প্লেয়ারে ধূসর আভা যোগ করুন।</string>
     <string name="revanced_enable_zen_mode_title">জেন মোড সক্রিয় করুন</string>
     <string name="revanced_extended_settings_import">আমদানি করুন</string>
     <string name="revanced_extended_settings_import_copy">কপি করুন</string>
     <string name="revanced_extended_settings_import_export_summary">টেক্সট আকারে সেটিং আমদানি বা রপ্তানি করুন।</string>
     <string name="revanced_extended_settings_import_export_title">আমদানি / রপ্তানি</string>
-    <string name="revanced_extended_settings_import_failure_parse">আমদানি করা যায়নি: %s</string>
     <string name="revanced_extended_settings_import_reset">সেটিং পূর্ব নির্ধারিততে ফিরে গিয়েছে</string>
     <string name="revanced_extended_settings_import_success">%d সেটিং আমদানি হয়েছে</string>
     <string name="revanced_external_downloader_not_installed_warning" formatted="false">%s ইনস্টল করা হয়নি। অনুগ্রপূর্বক এটি ইনস্টল করুন।</string>
@@ -62,10 +58,6 @@
     <string name="revanced_hide_account_menu_empty_component_title">ফাঁকা উপাদান লুকান</string>
     <string name="revanced_hide_account_menu_summary">অ্যাকাউন্ট মেনু উপাদানগুলো লুকান।</string>
     <string name="revanced_hide_account_menu_title">অ্যাকাউন্ট মেনু লুকান</string>
-    <string name="revanced_hide_action_bar_label_summary">অ্যাকশন বারে লেবেল লুকান।</string>
-    <string name="revanced_hide_action_bar_label_title">অ্যাকশন বারের লেবেল লুকান</string>
-    <string name="revanced_hide_action_bar_radio_summary">স্টার্ট রেডিও বাটন লুকায়।</string>
-    <string name="revanced_hide_action_bar_radio_title">রেডিও বাটন লুকান</string>
     <string name="revanced_hide_button_shelf_summary">প্রধান পাতা ও এক্সপ্লোরার থেকে বাটন শেলফ লুকান।</string>
     <string name="revanced_hide_button_shelf_title">বাটন শেলফ লুকান</string>
     <string name="revanced_hide_carousel_shelf_summary">প্রধান পাতা ও এক্সপ্লোরার থেকে ক্যারোসেল শেলফ লুকান।</string>
@@ -116,10 +108,6 @@
     <string name="revanced_hide_terms_container_title">নীতিমালা কন্টেইনার লুকান</string>
     <string name="revanced_hide_upgrade_button_summary">আপগ্রেড বাটন লুকায়।</string>
     <string name="revanced_hide_upgrade_button_title">আপগ্রেড বাটন লুকান</string>
-    <string name="revanced_hook_action_bar_download_summary">অফলাইন ডাউনলোড বাটনকে বাহিরের ডাউনলোড বাটন দ্বারা পুনঃস্থাপন করে।</string>
-    <string name="revanced_hook_action_bar_download_title">ডাউনলোড বাটন হুক করুন</string>
-    <string name="revanced_reboot_first_run">লেআউটটি স্বাভাবিকভাবে লোড করতে পুনরায় চালু করুন</string>
-    <string name="revanced_reboot_message">রিফ্রেশ করুন এবং পুনঃচালু করুন</string>
     <string name="revanced_replace_flyout_panel_dismiss_queue_continue_watch_summary">যখন YouTube এ দেখবেন, বর্তমান সময় থেকেই দেখা শুরু করুন।</string>
     <string name="revanced_replace_flyout_panel_dismiss_queue_continue_watch_title">দেখা চালিয়ে যান</string>
     <string name="revanced_replace_flyout_panel_dismiss_queue_summary">ক্যিউ থেকে বাদ দিন মেনু YouTube এ দেখুন মেনু দ্বারা পুনঃস্থাপন করা হয়।</string>
@@ -134,18 +122,8 @@
     <string name="revanced_ryd_enabled_summary">ভিডিওর অপছন্দ কাউন্ট দেখায়।</string>
     <string name="revanced_ryd_failure_client_rate_limit_requested">অপছন্দ পাওয়া যাচ্ছে না (ক্লায়েন্ট API সর্বোচ্চ সীমা পৌঁছেছে)</string>
     <string name="revanced_ryd_video_likes_hidden_by_video_owner">লুকায়িত</string>
-    <string name="revanced_save_playback_speed">ডিফল্ট স্পিড পরিবর্তন হচ্ছে:</string>
-    <string name="revanced_save_video_quality_mobile">ডিফল্ট মোবাইল ডাটা কোয়ালিটি এতে পরিবর্তিত হচ্ছে:</string>
     <string name="revanced_save_video_quality_none">ভিডিওর কোয়ালিটি সেটিংস ব্যার্থ হয়েছে</string>
-    <string name="revanced_save_video_quality_wifi">ওয়াই-ফাই এর ডিফল্ট কোয়ালিটি এতে পরিবর্তন হচ্ছে:</string>
     <string name="revanced_spoof_app_version_title">অ্যাপ সংস্করণ স্পুফ করুন</string>
-    <string name="revanced_start_page_entry_chart">চার্ট</string>
-    <string name="revanced_start_page_entry_explore">এক্সপ্লোর করুন</string>
-    <string name="revanced_start_page_entry_home">হোম</string>
-    <string name="revanced_start_page_entry_library">লাইব্রেরি</string>
-    <string name="revanced_start_page_entry_subscription">সাবস্ক্রিপশন</string>
-    <string name="revanced_start_page_summary">শুরুর পাতা সেট করুন।</string>
-    <string name="revanced_start_page_title">শুরুর পাতা</string>
     <string name="sb_enabled">SponsorBlock সক্রিয় করুন</string>
     <string name="sb_enabled_sum">SponsorBlock হল ইউটিউব ভিডিওতে বিরক্তিকর অংশ গুলো এড়িয়ে যাওয়ার জন্য একটি ক্রাউড-সোর্স পদ্ধতি।</string>
     <string name="sb_toast_on_skip">স্বয়ংক্রিয়ভাবে এড়িয়ে যাওয়ার সময় একটি টোস্ট দেখান</string>

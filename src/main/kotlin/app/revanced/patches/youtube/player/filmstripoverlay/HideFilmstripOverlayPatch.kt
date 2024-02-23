@@ -1,12 +1,11 @@
 package app.revanced.patches.youtube.player.filmstripoverlay
 
-import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.removeInstruction
-import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint.Companion.resolve
 import app.revanced.patcher.patch.BytecodePatch
+import app.revanced.patcher.patch.PatchException
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod
@@ -16,9 +15,11 @@ import app.revanced.patches.youtube.player.filmstripoverlay.fingerprints.FilmStr
 import app.revanced.patches.youtube.player.filmstripoverlay.fingerprints.FilmStripOverlayParentFingerprint
 import app.revanced.patches.youtube.player.filmstripoverlay.fingerprints.FilmStripOverlayPreviewFingerprint
 import app.revanced.patches.youtube.player.filmstripoverlay.fingerprints.FineScrubbingOverlayFingerprint
+import app.revanced.patches.youtube.utils.controlsoverlay.DisableControlsOverlayConfigPatch
+import app.revanced.patches.youtube.utils.integrations.Constants.PLAYER
 import app.revanced.patches.youtube.utils.resourceid.SharedResourceIdPatch
 import app.revanced.patches.youtube.utils.settings.SettingsPatch
-import app.revanced.util.integrations.Constants.PLAYER
+import app.revanced.util.exception
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
@@ -30,8 +31,9 @@ import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 
 @Patch(
     name = "Hide filmstrip overlay",
-    description = "Hide filmstrip overlay on swipe controls.",
+    description = "Adds an option to hide filmstrip overlay in the video player.",
     dependencies = [
+        DisableControlsOverlayConfigPatch::class,
         SettingsPatch::class,
         SharedResourceIdPatch::class,
     ],
@@ -39,7 +41,6 @@ import com.android.tools.smali.dexlib2.iface.reference.MethodReference
         CompatiblePackage(
             "com.google.android.youtube",
             [
-                "18.24.37",
                 "18.25.40",
                 "18.27.36",
                 "18.29.38",
@@ -53,7 +54,17 @@ import com.android.tools.smali.dexlib2.iface.reference.MethodReference
                 "18.37.36",
                 "18.38.44",
                 "18.39.41",
-                "18.40.34"
+                "18.40.34",
+                "18.41.39",
+                "18.42.41",
+                "18.43.45",
+                "18.44.41",
+                "18.45.43",
+                "18.46.45",
+                "18.48.39",
+                "18.49.37",
+                "19.01.34",
+                "19.02.39"
             ]
         )
     ]
@@ -85,14 +96,13 @@ object HideFilmstripOverlayPatch : BytecodePatch(
 
         FineScrubbingOverlayFingerprint.result?.let {
             it.mutableMethod.apply {
-                val setOnClickListenerIndex = getIndex("setOnClickListener")
-                val jumpIndex = setOnClickListenerIndex + 3
-                val initialIndex = setOnClickListenerIndex - 1
-
                 if (SettingsPatch.upward1828) {
                     var insertIndex = it.scanResult.patternScanResult!!.startIndex + 2
+                    val jumpIndex = getTargetIndexUpTo(insertIndex, Opcode.GOTO, Opcode.GOTO_16)
+                    val initialIndex = jumpIndex - 1
+
                     if (getInstruction(insertIndex).opcode == Opcode.INVOKE_VIRTUAL)
-                        insertIndex ++
+                        insertIndex++
 
                     val replaceInstruction = getInstruction<TwoRegisterInstruction>(insertIndex)
                     val replaceReference =
@@ -110,6 +120,10 @@ object HideFilmstripOverlayPatch : BytecodePatch(
                     )
                     removeInstruction(insertIndex)
                 } else {
+                    val setOnClickListenerIndex = getIndex("setOnClickListener")
+                    val jumpIndex = setOnClickListenerIndex + 3
+                    val initialIndex = setOnClickListenerIndex - 1
+
                     val insertIndex = getIndex("bringChildToFront") + 1
                     val insertRegister =
                         getInstruction<TwoRegisterInstruction>(insertIndex).registerA
@@ -203,6 +217,20 @@ object HideFilmstripOverlayPatch : BytecodePatch(
 
             fixComponent += line
         }
+    }
+
+    private fun MutableMethod.getTargetIndexUpTo(
+        startIndex: Int,
+        opcode1: Opcode,
+        opcode2: Opcode
+    ): Int {
+        for (index in startIndex until implementation!!.instructions.size) {
+            if (getInstruction(index).opcode != opcode1 && getInstruction(index).opcode != opcode2)
+                continue
+
+            return index
+        }
+        throw PatchException("Failed to find hook method")
     }
 
     private fun MutableMethod.injectHook() {

@@ -1,15 +1,14 @@
 package app.revanced.patches.youtube.utils.playercontrols
 
-import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
-import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint.Companion.resolve
-import app.revanced.patcher.fingerprint.method.impl.MethodFingerprintResult
+import app.revanced.patcher.fingerprint.MethodFingerprintResult
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchException
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod
+import app.revanced.patches.youtube.utils.fingerprints.PlayerControlsVisibilityModelFingerprint
 import app.revanced.patches.youtube.utils.fingerprints.ThumbnailPreviewConfigFingerprint
 import app.revanced.patches.youtube.utils.fingerprints.YouTubeControlsOverlayFingerprint
 import app.revanced.patches.youtube.utils.playercontrols.fingerprints.BottomControlsInflateFingerprint
@@ -17,12 +16,12 @@ import app.revanced.patches.youtube.utils.playercontrols.fingerprints.ControlsLa
 import app.revanced.patches.youtube.utils.playercontrols.fingerprints.FullscreenEngagementSpeedEduVisibleFingerprint
 import app.revanced.patches.youtube.utils.playercontrols.fingerprints.FullscreenEngagementSpeedEduVisibleParentFingerprint
 import app.revanced.patches.youtube.utils.playercontrols.fingerprints.PlayerControlsVisibilityFingerprint
-import app.revanced.patches.youtube.utils.playercontrols.fingerprints.PlayerControlsVisibilityModelFingerprint
 import app.revanced.patches.youtube.utils.playercontrols.fingerprints.QuickSeekVisibleFingerprint
 import app.revanced.patches.youtube.utils.playercontrols.fingerprints.SeekEDUVisibleFingerprint
 import app.revanced.patches.youtube.utils.playercontrols.fingerprints.UserScrubbingFingerprint
 import app.revanced.patches.youtube.utils.resourceid.SharedResourceIdPatch
-import app.revanced.util.bytecode.getStringIndex
+import app.revanced.util.exception
+import app.revanced.util.getStringInstructionIndex
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
@@ -44,7 +43,7 @@ object PlayerControlsPatch : BytecodePatch(
     override fun execute(context: BytecodeContext) {
 
         fun MutableMethod.findReference(targetString: String): Reference {
-            val targetIndex = getStringIndex(targetString) + 2
+            val targetIndex = getStringInstructionIndex(targetString) + 2
             val targetOpcode = getInstruction(targetIndex).opcode
 
             if (targetOpcode == Opcode.INVOKE_VIRTUAL) {

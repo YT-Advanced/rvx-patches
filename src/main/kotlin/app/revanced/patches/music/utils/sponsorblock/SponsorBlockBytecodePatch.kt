@@ -1,11 +1,9 @@
 package app.revanced.patches.music.utils.sponsorblock
 
-import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
-import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint.Companion.resolve
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.music.utils.fingerprints.SeekBarConstructorFingerprint
@@ -14,6 +12,8 @@ import app.revanced.patches.music.utils.sponsorblock.bytecode.fingerprints.Music
 import app.revanced.patches.music.utils.sponsorblock.bytecode.fingerprints.MusicPlaybackControlsTimeBarOnMeasureFingerprint
 import app.revanced.patches.music.utils.sponsorblock.bytecode.fingerprints.SeekbarOnDrawFingerprint
 import app.revanced.patches.music.video.information.VideoInformationPatch
+import app.revanced.patches.music.video.videoid.VideoIdPatch
+import app.revanced.util.exception
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.builder.instruction.BuilderInstruction3rc
 import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
@@ -25,7 +25,8 @@ import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 @Patch(
     dependencies = [
         SharedResourceIdPatch::class,
-        VideoInformationPatch::class
+        VideoInformationPatch::class,
+        VideoIdPatch::class
     ]
 )
 object SponsorBlockBytecodePatch : BytecodePatch(
@@ -35,6 +36,10 @@ object SponsorBlockBytecodePatch : BytecodePatch(
         SeekBarConstructorFingerprint
     )
 ) {
+    private const val INTEGRATIONS_SEGMENT_PLAYBACK_CONTROLLER_CLASS_DESCRIPTOR =
+        "Lapp/revanced/integrations/music/sponsorblock/SegmentPlaybackController;"
+
+    private lateinit var rectangleFieldName: String
     override fun execute(context: BytecodeContext) {
 
         /**
@@ -44,10 +49,6 @@ object SponsorBlockBytecodePatch : BytecodePatch(
             videoTimeHook(
                 INTEGRATIONS_SEGMENT_PLAYBACK_CONTROLLER_CLASS_DESCRIPTOR,
                 "setVideoTime"
-            )
-            onCreateHook(
-                INTEGRATIONS_SEGMENT_PLAYBACK_CONTROLLER_CLASS_DESCRIPTOR,
-                "initialize"
             )
         }
 
@@ -164,11 +165,7 @@ object SponsorBlockBytecodePatch : BytecodePatch(
         /**
          * Set current video id
          */
-        VideoInformationPatch.injectCall("$INTEGRATIONS_SEGMENT_PLAYBACK_CONTROLLER_CLASS_DESCRIPTOR->setCurrentVideoId(Ljava/lang/String;)V")
+        VideoIdPatch.hookBackgroundPlayVideoId("$INTEGRATIONS_SEGMENT_PLAYBACK_CONTROLLER_CLASS_DESCRIPTOR->setVideoId(Ljava/lang/String;)V")
+        VideoIdPatch.hookVideoId("$INTEGRATIONS_SEGMENT_PLAYBACK_CONTROLLER_CLASS_DESCRIPTOR->setVideoId(Ljava/lang/String;)V")
     }
-
-    private const val INTEGRATIONS_SEGMENT_PLAYBACK_CONTROLLER_CLASS_DESCRIPTOR =
-        "Lapp/revanced/music/sponsorblock/SegmentPlaybackController;"
-
-    lateinit var rectangleFieldName: String
 }

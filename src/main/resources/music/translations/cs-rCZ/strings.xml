@@ -12,7 +12,6 @@
     <string name="revanced_enable_black_navigation_bar_title">Povolit černou navigační lištu</string>
     <string name="revanced_enable_color_match_player_summary">Odpovídá barvě mini přehrávače a režimu celé obrazovky.</string>
     <string name="revanced_enable_color_match_player_title">Povolit barevně shodný přehrávač</string>
-    <string name="revanced_enable_compact_dialog_summary">Povolit kompaktní dialogové okno na telefonu.</string>
     <string name="revanced_enable_compact_dialog_title">Povolit kompaktní dialogové okno</string>
     <string name="revanced_enable_debug_logging_summary">Vypíše protokol ladění</string>
     <string name="revanced_enable_debug_logging_title">Povolit režim ladění</string>
@@ -26,8 +25,6 @@
     <string name="revanced_enable_opus_codec_title">Povolit opus kodek</string>
     <string name="revanced_enable_save_video_quality_summary">Uložit hodnotu kvality videa kdykoli, kdy ji změníte.</string>
     <string name="revanced_enable_save_video_quality_title">Povolit ukládání kvality videa</string>
-    <string name="revanced_enable_sleep_timer_summary">Přidat časovač spánku do výsuvného menu.</string>
-    <string name="revanced_enable_sleep_timer_title">Povolit časovač spánku</string>
     <string name="revanced_enable_zen_mode_summary">Přidá šedý odstín do přehrávače videa ke snížení namáhání očí.</string>
     <string name="revanced_enable_zen_mode_title">Povolit zen mod</string>
     <string name="revanced_external_downloader_not_installed_warning" formatted="false">%s není instalován. Prosím, nainstalujte jej.</string>
@@ -51,10 +48,7 @@
     <string name="revanced_hide_new_playlist_button_title">Skrýt tlačitko pro vytvoření nového playlistu</string>
     <string name="revanced_hide_playlist_card_summary">Skryje panel playlist z domovské obrazovky.</string>
     <string name="revanced_hide_playlist_card_title">Skrýt panel playlistu</string>
-    <string name="revanced_reboot_message">Obnovit a restartovat</string>
     <string name="revanced_reset">Resetovat</string>
-    <string name="revanced_save_video_quality_mobile">Změna výchozí kvality při připojení na mobilní data na:</string>
     <string name="revanced_save_video_quality_none">Nepodařilo se nastavit kvalitu</string>
-    <string name="revanced_save_video_quality_wifi">Změna výchozí kvality při připojení na Wi-Fi na:</string>
     <string name="revanced_spoof_app_version_title">Zfalšovat verzi aplikace</string>
 </resources>

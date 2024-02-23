@@ -1,6 +1,5 @@
 package app.revanced.patches.reddit.misc.tracking.url
 
-import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
@@ -11,10 +10,11 @@ import app.revanced.patcher.util.smali.ExternalLabel
 import app.revanced.patches.reddit.misc.tracking.url.fingerprints.ShareLinkFormatterFingerprint
 import app.revanced.patches.reddit.utils.settings.SettingsBytecodePatch.updateSettingsStatus
 import app.revanced.patches.reddit.utils.settings.SettingsPatch
+import app.revanced.util.exception
 
 @Patch(
     name = "Sanitize sharing links",
-    description = "Removes (tracking) query parameters from the URLs when sharing links.",
+    description = "Adds an option to remove tracking query parameters from URLs when sharing links.",
     dependencies = [SettingsPatch::class],
     compatiblePackages = [CompatiblePackage("com.reddit.frontpage")]
 )
@@ -23,7 +23,7 @@ object SanitizeUrlQueryPatch : BytecodePatch(
     setOf(ShareLinkFormatterFingerprint)
 ) {
     private const val SANITIZE_METHOD_DESCRIPTOR =
-        "Lapp/revanced/reddit/patches/SanitizeUrlQueryPatch;" +
+        "Lapp/revanced/integrations/reddit/patches/SanitizeUrlQueryPatch;" +
                 "->stripQueryParameters()Z"
 
     override fun execute(context: BytecodeContext) {

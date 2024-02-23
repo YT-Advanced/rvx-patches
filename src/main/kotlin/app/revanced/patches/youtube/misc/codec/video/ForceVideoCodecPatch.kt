@@ -1,12 +1,10 @@
 package app.revanced.patches.youtube.misc.codec.video
 
-import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.removeInstruction
-import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint.Companion.resolve
-import app.revanced.patcher.fingerprint.method.impl.MethodFingerprintResult
+import app.revanced.patcher.fingerprint.MethodFingerprintResult
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
@@ -16,8 +14,9 @@ import app.revanced.patches.youtube.misc.codec.video.fingerprints.VideoPropsFing
 import app.revanced.patches.youtube.misc.codec.video.fingerprints.VideoPropsParentFingerprint
 import app.revanced.patches.youtube.misc.codec.video.fingerprints.VideoSecondaryFingerprint
 import app.revanced.patches.youtube.utils.fingerprints.LayoutSwitchFingerprint
+import app.revanced.patches.youtube.utils.integrations.Constants.MISC_PATH
 import app.revanced.patches.youtube.utils.settings.SettingsPatch
-import app.revanced.util.integrations.Constants.MISC_PATH
+import app.revanced.util.exception
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.dexbacked.reference.DexBackedFieldReference
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
@@ -25,13 +24,12 @@ import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 
 @Patch(
     name = "Force video codec",
-    description = "Forces the video codec for videos.",
+    description = "Adds an option to force the video codec.",
     dependencies = [SettingsPatch::class],
     compatiblePackages = [
         CompatiblePackage(
             "com.google.android.youtube",
             [
-                "18.24.37",
                 "18.25.40",
                 "18.27.36",
                 "18.29.38",
@@ -45,7 +43,17 @@ import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
                 "18.37.36",
                 "18.38.44",
                 "18.39.41",
-                "18.40.34"
+                "18.40.34",
+                "18.41.39",
+                "18.42.41",
+                "18.43.45",
+                "18.44.41",
+                "18.45.43",
+                "18.46.45",
+                "18.48.39",
+                "18.49.37",
+                "19.01.34",
+                "19.02.39"
             ]
         )
     ]

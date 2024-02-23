@@ -10,20 +10,22 @@ import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod
 import app.revanced.patches.youtube.misc.splashanimation.fingerprints.WatchWhileActivityWithInFlagsFingerprint
 import app.revanced.patches.youtube.misc.splashanimation.fingerprints.WatchWhileActivityWithOutFlagsFingerprint
+import app.revanced.patches.youtube.utils.integrations.Constants.MISC_PATH
+import app.revanced.patches.youtube.utils.mainactivity.MainActivityResolvePatch
+import app.revanced.patches.youtube.utils.mainactivity.MainActivityResolvePatch.mainActivityClassDef
 import app.revanced.patches.youtube.utils.resourceid.SharedResourceIdPatch
 import app.revanced.patches.youtube.utils.resourceid.SharedResourceIdPatch.DarkSplashAnimation
 import app.revanced.patches.youtube.utils.settings.SettingsPatch
-import app.revanced.util.bytecode.getWide32LiteralIndex
-import app.revanced.util.bytecode.getWideLiteralIndex
-import app.revanced.util.integrations.Constants.MISC_PATH
+import app.revanced.util.getWideLiteralInstructionIndex
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
 
 @Patch(
     name = "Enable new splash animation",
-    description = "Enables a new type of splash animation.",
+    description = "Adds an option to enable a new type of splash animation.",
     dependencies = [
+        MainActivityResolvePatch::class,
         SettingsPatch::class,
         SharedResourceIdPatch::class
     ],
@@ -31,7 +33,6 @@ import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
         CompatiblePackage(
             "com.google.android.youtube",
             [
-                "18.24.37",
                 "18.25.40",
                 "18.27.36",
                 "18.29.38",
@@ -45,19 +46,27 @@ import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
                 "18.37.36",
                 "18.38.44",
                 "18.39.41",
-                "18.40.34"
+                "18.40.34",
+                "18.41.39",
+                "18.42.41",
+                "18.43.45",
+                "18.44.41",
+                "18.45.43",
+                "18.46.45",
+                "18.48.39",
+                "18.49.37",
+                "19.01.34",
+                "19.02.39"
             ]
         )
     ]
 )
 @Suppress("unused")
-object NewSplashAnimationPatch : BytecodePatch(
-    setOf(
-        WatchWhileActivityWithInFlagsFingerprint,
-        WatchWhileActivityWithOutFlagsFingerprint
-    )
-) {
+object NewSplashAnimationPatch : BytecodePatch(emptySet()) {
     override fun execute(context: BytecodeContext) {
+
+        WatchWhileActivityWithInFlagsFingerprint.resolve(context, mainActivityClassDef)
+        WatchWhileActivityWithOutFlagsFingerprint.resolve(context, mainActivityClassDef)
 
         WatchWhileActivityWithInFlagsFingerprint.result
             ?: WatchWhileActivityWithOutFlagsFingerprint.result
@@ -68,10 +77,7 @@ object NewSplashAnimationPatch : BytecodePatch(
          */
         WatchWhileActivityWithInFlagsFingerprint.result?.let {
             it.mutableMethod.apply {
-                var targetIndex = getWide32LiteralIndex(45407550) + 3
-                if (getInstruction(targetIndex).opcode == Opcode.MOVE_RESULT)
-                    targetIndex += 1
-
+                val targetIndex = getWideLiteralInstructionIndex(45407550) + 3
                 inject(targetIndex)
             }
         }
@@ -81,7 +87,7 @@ object NewSplashAnimationPatch : BytecodePatch(
          */
         WatchWhileActivityWithOutFlagsFingerprint.result?.let {
             it.mutableMethod.apply {
-                var startIndex = getWideLiteralIndex(DarkSplashAnimation) - 1
+                var startIndex = getWideLiteralInstructionIndex(DarkSplashAnimation) - 1
                 val endIndex = startIndex - 30
 
                 for (index in startIndex downTo endIndex) {

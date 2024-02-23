@@ -1,6 +1,5 @@
 package app.revanced.patches.music.player.replace
 
-import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
@@ -9,18 +8,21 @@ import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.music.player.replace.fingerprints.CastButtonContainerFingerprint
-import app.revanced.patches.music.player.replace.fingerprints.PlaybackStartDescriptorFingerprint
+import app.revanced.patches.music.utils.integrations.Constants.PLAYER
+import app.revanced.patches.music.utils.integrations.Constants.UTILS_PATH
+import app.revanced.patches.music.utils.mainactivity.MainActivityResolvePatch
+import app.revanced.patches.music.utils.mainactivity.MainActivityResolvePatch.mainActivityClassDef
+import app.revanced.patches.music.utils.playerresponse.PlayerResponsePatch
 import app.revanced.patches.music.utils.resourceid.SharedResourceIdPatch
 import app.revanced.patches.music.utils.resourceid.SharedResourceIdPatch.PlayerCastMediaRouteButton
+import app.revanced.patches.music.utils.settings.CategoryType
 import app.revanced.patches.music.utils.settings.SettingsPatch
 import app.revanced.patches.music.utils.settings.SettingsPatch.contexts
 import app.revanced.patches.music.utils.videotype.VideoTypeHookPatch
-import app.revanced.util.bytecode.getWideLiteralIndex
-import app.revanced.util.enum.CategoryType
-import app.revanced.util.integrations.Constants.MUSIC_PLAYER
-import app.revanced.util.integrations.Constants.MUSIC_UTILS_PATH
-import app.revanced.util.resources.ResourceUtils
-import app.revanced.util.resources.ResourceUtils.copyResources
+import app.revanced.util.ResourceGroup
+import app.revanced.util.copyResources
+import app.revanced.util.exception
+import app.revanced.util.getWideLiteralInstructionIndex
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
@@ -30,37 +32,25 @@ import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 
 @Patch(
     name = "Replace cast button",
-    description = "Replace the cast button in the player with the open music button.",
+    description = "Adds an option to replace the cast button in the player with the \"Open music\" button.",
     dependencies = [
+        MainActivityResolvePatch::class,
+        PlayerResponsePatch::class,
         SettingsPatch::class,
         SharedResourceIdPatch::class,
         VideoTypeHookPatch::class
     ],
-    compatiblePackages = [
-        CompatiblePackage(
-            "com.google.android.apps.youtube.music",
-            [
-                "6.15.52",
-                "6.20.51",
-                "6.22.51",
-                "6.23.54"
-            ]
-        )
-    ],
+    compatiblePackages = [CompatiblePackage("com.google.android.apps.youtube.music")],
     use = false
 )
 @Suppress("unused")
-object ReplaceCastButtonPatch : BytecodePatch(
-    setOf(
-        CastButtonContainerFingerprint,
-        PlaybackStartDescriptorFingerprint
-    )
-) {
+object ReplaceCastButtonPatch : BytecodePatch(emptySet()) {
     override fun execute(context: BytecodeContext) {
+        CastButtonContainerFingerprint.resolve(context, mainActivityClassDef)
 
         CastButtonContainerFingerprint.result?.let {
             it.mutableMethod.apply {
-                val freeIndex = getWideLiteralIndex(PlayerCastMediaRouteButton) + 1
+                val freeIndex = getWideLiteralInstructionIndex(PlayerCastMediaRouteButton) + 1
                 val freeRegister = getInstruction<OneRegisterInstruction>(freeIndex).registerA
 
                 val getActivityIndex = freeIndex - 4
@@ -81,7 +71,7 @@ object ReplaceCastButtonPatch : BytecodePatch(
                     addInstruction(
                         index + 1,
                         "invoke-static {v$freeRegister, v${viewGroupInstruction.registerC}, v${viewGroupInstruction.registerD}}, " +
-                                MUSIC_PLAYER +
+                                PLAYER +
                                 "->" +
                                 "replaceCastButton(Landroid/app/Activity;Landroid/view/ViewGroup;Landroid/view/View;)V"
                     )
@@ -96,24 +86,14 @@ object ReplaceCastButtonPatch : BytecodePatch(
             }
         } ?: throw CastButtonContainerFingerprint.exception
 
-        PlaybackStartDescriptorFingerprint.result?.let {
-            it.mutableMethod.apply {
-                val videoIdRegister = 1
-                val playlistIdRegister = 4
-                val playlistIndexRegister = 5
-
-                addInstruction(
-                    0,
-                    "invoke-static {p$videoIdRegister, p$playlistIdRegister, p$playlistIndexRegister}, " +
-                            "$MUSIC_UTILS_PATH/CheckMusicVideoPatch;" +
-                            "->" +
-                            "playbackStart(Ljava/lang/String;Ljava/lang/String;I)V"
-                )
-            }
-        } ?: throw PlaybackStartDescriptorFingerprint.exception
+        PlayerResponsePatch.injectPlaylistCall(
+            "$UTILS_PATH/CheckMusicVideoPatch;" +
+                    "->" +
+                    "playbackStart(Ljava/lang/String;Ljava/lang/String;IZ)V"
+        )
 
         arrayOf(
-            ResourceUtils.ResourceGroup(
+            ResourceGroup(
                 "layout",
                 "open_music_button.xml"
             )

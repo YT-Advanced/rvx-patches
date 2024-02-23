@@ -1,6 +1,5 @@
 package app.revanced.patches.youtube.fullscreen.fullscreenpanels
 
-import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
@@ -14,12 +13,12 @@ import app.revanced.patcher.util.smali.ExternalLabel
 import app.revanced.patches.youtube.fullscreen.fullscreenpanels.fingerprints.FullscreenEngagementPanelFingerprint
 import app.revanced.patches.youtube.fullscreen.fullscreenpanels.fingerprints.FullscreenViewAdderFingerprint
 import app.revanced.patches.youtube.utils.fingerprints.LayoutConstructorFingerprint
+import app.revanced.patches.youtube.utils.integrations.Constants.FULLSCREEN
 import app.revanced.patches.youtube.utils.quickactions.QuickActionsHookPatch
 import app.revanced.patches.youtube.utils.resourceid.SharedResourceIdPatch.FullScreenEngagementPanel
 import app.revanced.patches.youtube.utils.settings.SettingsPatch
-import app.revanced.util.bytecode.getNarrowLiteralIndex
-import app.revanced.util.bytecode.getWideLiteralIndex
-import app.revanced.util.integrations.Constants.FULLSCREEN
+import app.revanced.util.exception
+import app.revanced.util.getWideLiteralInstructionIndex
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
@@ -27,7 +26,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
 
 @Patch(
     name = "Hide fullscreen panels",
-    description = "Hides video description and comments panel in fullscreen view.",
+    description = "Adds an option to hide panels such as live chat when in fullscreen.",
     dependencies = [
         QuickActionsHookPatch::class,
         SettingsPatch::class
@@ -36,7 +35,6 @@ import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
         CompatiblePackage(
             "com.google.android.youtube",
             [
-                "18.24.37",
                 "18.25.40",
                 "18.27.36",
                 "18.29.38",
@@ -50,7 +48,17 @@ import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
                 "18.37.36",
                 "18.38.44",
                 "18.39.41",
-                "18.40.34"
+                "18.40.34",
+                "18.41.39",
+                "18.42.41",
+                "18.43.45",
+                "18.44.41",
+                "18.45.43",
+                "18.46.45",
+                "18.48.39",
+                "18.49.37",
+                "19.01.34",
+                "19.02.39"
             ]
         )
     ]
@@ -67,7 +75,7 @@ object HideFullscreenPanelsPatch : BytecodePatch(
 
         FullscreenEngagementPanelFingerprint.result?.let {
             it.mutableMethod.apply {
-                val targetIndex = getWideLiteralIndex(FullScreenEngagementPanel) + 3
+                val targetIndex = getWideLiteralInstructionIndex(FullScreenEngagementPanel) + 3
                 val targetRegister = getInstruction<OneRegisterInstruction>(targetIndex).registerA
 
                 addInstruction(
@@ -96,7 +104,7 @@ object HideFullscreenPanelsPatch : BytecodePatch(
         LayoutConstructorFingerprint.result?.let {
             it.mutableMethod.apply {
                 val dummyRegister =
-                    getInstruction<OneRegisterInstruction>(getNarrowLiteralIndex(159962)).registerA
+                    getInstruction<OneRegisterInstruction>(getWideLiteralInstructionIndex(159962)).registerA
 
                 val invokeIndex = implementation!!.instructions.indexOfFirst { instruction ->
                     instruction.opcode == Opcode.INVOKE_VIRTUAL &&

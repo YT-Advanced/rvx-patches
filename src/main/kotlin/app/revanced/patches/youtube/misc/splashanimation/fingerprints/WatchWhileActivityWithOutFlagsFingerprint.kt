@@ -1,8 +1,8 @@
 package app.revanced.patches.youtube.misc.splashanimation.fingerprints
 
-import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint
+import app.revanced.patcher.fingerprint.MethodFingerprint
 import app.revanced.patches.youtube.utils.resourceid.SharedResourceIdPatch.DarkSplashAnimation
-import app.revanced.util.bytecode.isWideLiteralExists
+import app.revanced.util.containsWideLiteralInstructionIndex
 import com.android.tools.smali.dexlib2.Opcode
 
 object WatchWhileActivityWithOutFlagsFingerprint : MethodFingerprint(
@@ -20,8 +20,7 @@ object WatchWhileActivityWithOutFlagsFingerprint : MethodFingerprint(
         Opcode.IF_EQZ // target
     ),
     customFingerprint = { methodDef, _ ->
-        methodDef.definingClass.endsWith("/WatchWhileActivity;")
-                && methodDef.name == "onCreate"
-                && methodDef.isWideLiteralExists(DarkSplashAnimation)
+        methodDef.name == "onCreate"
+                && methodDef.containsWideLiteralInstructionIndex(DarkSplashAnimation)
     }
 )

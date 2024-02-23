@@ -1,22 +1,22 @@
 package app.revanced.patches.youtube.flyoutpanel.oldspeedlayout
 
-import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.extensions.InstructionExtensions.removeInstruction
 import app.revanced.patcher.extensions.or
 import app.revanced.patcher.patch.BytecodePatch
+import app.revanced.patcher.patch.PatchException
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.util.proxy.mutableTypes.MutableField.Companion.toMutable
 import app.revanced.patches.youtube.flyoutpanel.oldspeedlayout.fingerprints.CustomPlaybackSpeedIntegrationsFingerprint
-import app.revanced.patches.youtube.flyoutpanel.oldspeedlayout.fingerprints.PlaybackRateBottomSheetBuilderFingerprint
 import app.revanced.patches.youtube.flyoutpanel.oldspeedlayout.fingerprints.PlaybackRateBottomSheetClassFingerprint
 import app.revanced.patches.youtube.flyoutpanel.recyclerview.BottomSheetRecyclerViewPatch
 import app.revanced.patches.youtube.utils.fingerprints.RecyclerViewTreeObserverFingerprint
+import app.revanced.patches.youtube.utils.integrations.Constants.COMPONENTS_PATH
+import app.revanced.patches.youtube.utils.integrations.Constants.VIDEO_PATH
 import app.revanced.patches.youtube.utils.litho.LithoFilterPatch
-import app.revanced.util.integrations.Constants.PATCHES_PATH
-import app.revanced.util.integrations.Constants.VIDEO_PATH
+import app.revanced.util.exception
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.immutable.ImmutableField
 
@@ -31,19 +31,26 @@ object OldSpeedLayoutPatch : BytecodePatch(
     setOf(
         CustomPlaybackSpeedIntegrationsFingerprint,
         PlaybackRateBottomSheetClassFingerprint,
-        PlaybackRateBottomSheetBuilderFingerprint,
         RecyclerViewTreeObserverFingerprint
     )
 ) {
     override fun execute(context: BytecodeContext) {
 
         /**
-         * Find the values we need
+         * Input 'playbackRateBottomSheetClass' in FlyoutPanelPatch.
          */
-        PlaybackRateBottomSheetBuilderFingerprint.result?.let {
+        PlaybackRateBottomSheetClassFingerprint.result?.let {
             it.mutableMethod.apply {
                 PLAYBACK_RATE_BOTTOM_SHEET_CLASS = definingClass
-                PLAYBACK_RATE_BOTTOM_SHEET_BUILDER_METHOD = name
+                PLAYBACK_RATE_BOTTOM_SHEET_BUILDER_METHOD =
+                    it.mutableClass.methods.find { method -> method.parameters.isEmpty() && method.returnType == "V" }
+                        ?.name
+                        ?: throw PatchException("Could not find PlaybackRateBottomSheetBuilderMethod")
+
+                addInstruction(
+                    0,
+                    "sput-object p0, $INTEGRATIONS_CLASS_DESCRIPTOR->playbackRateBottomSheetClass:$PLAYBACK_RATE_BOTTOM_SHEET_CLASS"
+                )
             }
         } ?: throw PlaybackRateBottomSheetClassFingerprint.exception
 
@@ -82,23 +89,11 @@ object OldSpeedLayoutPatch : BytecodePatch(
         } ?: throw CustomPlaybackSpeedIntegrationsFingerprint.exception
 
         /**
-         * Input 'playbackRateBottomSheetClass' in FlyoutPanelPatch.
-         */
-        PlaybackRateBottomSheetClassFingerprint.result?.let {
-            it.mutableMethod.apply {
-                addInstruction(
-                    0,
-                    "sput-object p0, $INTEGRATIONS_CLASS_DESCRIPTOR->playbackRateBottomSheetClass:$PLAYBACK_RATE_BOTTOM_SHEET_CLASS"
-                )
-            }
-        } ?: throw PlaybackRateBottomSheetClassFingerprint.exception
-
-        /**
          * New method
          */
         RecyclerViewTreeObserverFingerprint.result?.let {
             it.mutableMethod.apply {
-                val insertIndex = it.scanResult.patternScanResult!!.startIndex + 2
+                val insertIndex = it.scanResult.patternScanResult!!.startIndex
                 val recyclerViewRegister = 2
 
                 addInstruction(
@@ -108,7 +103,7 @@ object OldSpeedLayoutPatch : BytecodePatch(
             }
         } ?: throw RecyclerViewTreeObserverFingerprint.exception
 
-        LithoFilterPatch.addFilter("$PATCHES_PATH/ads/PlaybackSpeedMenuFilter;")
+        LithoFilterPatch.addFilter("$COMPONENTS_PATH/PlaybackSpeedMenuFilter;")
 
     }
 

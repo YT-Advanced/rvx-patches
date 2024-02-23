@@ -4,32 +4,22 @@ import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
+import app.revanced.patches.music.utils.integrations.Constants.COMPONENTS_PATH
 import app.revanced.patches.music.utils.litho.LithoFilterPatch
+import app.revanced.patches.music.utils.settings.CategoryType
 import app.revanced.patches.music.utils.settings.SettingsPatch
-import app.revanced.util.enum.CategoryType
-import app.revanced.util.integrations.Constants.MUSIC_ADS_PATH
 
 @Patch(
     name = "Hide channel guidelines",
-    description = "Hides channel guidelines at the top of comments.",
+    description = "Adds an option to hide the channel guidelines at the top of the comments section.",
     dependencies = [
         LithoFilterPatch::class,
         SettingsPatch::class
     ],
-    compatiblePackages = [
-        CompatiblePackage(
-            "com.google.android.apps.youtube.music",
-            [
-                "6.15.52",
-                "6.20.51",
-                "6.22.51",
-                "6.23.54"
-            ]
-        )
-    ]
+    compatiblePackages = [CompatiblePackage("com.google.android.apps.youtube.music")]
 )
 @Suppress("unused")
-object HideChannelGuidelinesPatch : BytecodePatch() {
+object HideChannelGuidelinesPatch : BytecodePatch(emptySet()) {
     override fun execute(context: BytecodeContext) {
 
         SettingsPatch.addMusicPreference(
@@ -43,5 +33,5 @@ object HideChannelGuidelinesPatch : BytecodePatch() {
     }
 
     private const val FILTER_CLASS_DESCRIPTOR =
-        "$MUSIC_ADS_PATH/ChannelGuidelinesFilter;"
+        "$COMPONENTS_PATH/ChannelGuidelinesFilter;"
 }
