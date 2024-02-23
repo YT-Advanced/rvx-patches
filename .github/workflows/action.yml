@@ -1,3 +1,15 @@
-              - name: Action For Semantic Release
-                uses: cycjimmy/semantic-release-action@v4.0.0
-            
+
+steps:
+  - uses: actions/checkout@v3
+
+  - name: Install Dependencies
+    run: /install.sh
+
+  - name: Build artifacts
+    run: /build.sh
+
+  - uses: actions/cache/save@v3
+    id: cache
+    with:
+      path: path/to/dependencies
+      key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
