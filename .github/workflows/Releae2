@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: cycjimmy/semantic-release-action@v4.0.0
         with:
           # Make sure the release step uses its own credentials:
           # https://github.com/cycjimmy/semantic-release-action#private-packages
@@ -25,8 +25,7 @@ jobs:
           fetch-depth: 0
 
                     
-              - name: Action For Semantic Release
-                uses: cycjimmy/semantic-release-action@v4.0.0  
+              
 
       - name: Cache Node modules
         uses: actions/cache@v3
