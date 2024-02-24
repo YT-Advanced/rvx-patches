@@ -3,7 +3,7 @@ name: Open a PR to main
 on:
   push:
     branches:
-      - dev
+      - main
   workflow_dispatch:
 
 env:
