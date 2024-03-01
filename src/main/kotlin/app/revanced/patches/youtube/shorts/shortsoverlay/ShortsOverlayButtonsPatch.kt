@@ -1,10 +1,11 @@
 package app.revanced.patches.youtube.shorts.shortsoverlay
 
 import app.revanced.patcher.data.ResourceContext
+import app.revanced.patcher.patch.PatchException
 import app.revanced.patcher.patch.ResourcePatch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
-import app.revanced.patcher.patch.options.PatchOption.PatchExtensions.booleanPatchOption
+import app.revanced.patcher.patch.options.PatchOption.PatchExtensions.stringPatchOption
 import app.revanced.patches.youtube.utils.settings.SettingsPatch
 import app.revanced.util.ResourceGroup
 import app.revanced.util.copyResources
@@ -44,86 +45,76 @@ import app.revanced.util.copyResources
             ]
         )
     ],
-    use = false
+    use = true
 )
 @Suppress("unused")
 object ShortsOverlayButtonsPatch : ResourcePatch() {
-    private val OutlineIcon by booleanPatchOption(
-        key = "OutlineIcon",
-        default = false,
-        title = "Outline icons",
-        description = "Apply the outline icon",
-        required = true
-    )
+    private const val DEFAULT_ICON_KEY = "TikTok"
 
-    private val OutlineCircleIcon by booleanPatchOption(
-        key = "OutlineCircleIcon",
-        default = false,
-        title = "Outline circled icons",
-        description = "Apply the outline circled icon",
-        required = true
+    private val IconType by stringPatchOption(
+        key = "IconType",
+        default = DEFAULT_ICON_KEY,
+        values = mapOf(
+            "Outline" to "outline",
+            "OutlineCircle" to "outlinecircle",
+            DEFAULT_ICON_KEY to "tiktok"
+        ),
+        title = "Icon type of Shorts",
+        description = "Apply different icons for Shorts action buttons."
     )
 
     override fun execute(context: ResourceContext) {
+        IconType?.let { iconType ->
+            val selectedIconType = iconType.lowercase()
 
-        val commonResources = arrayOf(
-            ResourceGroup(
-                "drawable-xxhdpi",
-                "ic_remix_filled_white_24.webp", // for older versions only
-                "ic_remix_filled_white_shadowed.webp",
-                "ic_right_comment_shadowed.webp",
-                "ic_right_dislike_off_shadowed.webp",
-                "ic_right_dislike_on_shadowed.webp",
-                "ic_right_like_off_shadowed.webp",
-                "ic_right_like_on_shadowed.webp",
-                "ic_right_share_shadowed.webp"
-            )
-        )
-
-        if (OutlineIcon == true || OutlineCircleIcon == true) {
-            arrayOf(
-                "xxxhdpi",
-                "xxhdpi",
-                "xhdpi",
-                "hdpi",
-                "mdpi"
-            ).forEach { dpi ->
-                context.copyResources(
-                    "youtube/shorts/outline",
-                    ResourceGroup(
-                        "drawable-$dpi",
-                        "ic_right_dislike_on_32c.webp",
-                        "ic_right_like_on_32c.webp"
-                    ),
-                    ResourceGroup(
-                        "drawable",
-                        "ic_right_comment_32c.xml",
-                        "ic_right_dislike_off_32c.xml",
-                        "ic_right_like_off_32c.xml",
-                        "ic_right_share_32c.xml",
-                        "reel_camera_bold_24dp.xml",
-                        "reel_more_vertical_bold_24dp.xml",
-                        "reel_search_bold_24dp.xml"
-                    )
+            val commonResources = arrayOf(
+                ResourceGroup(
+                    "drawable-xxhdpi",
+                    "ic_remix_filled_white_24.webp", // for older versions only
+                    "ic_remix_filled_white_shadowed.webp",
+                    "ic_right_comment_shadowed.webp",
+                    "ic_right_dislike_off_shadowed.webp",
+                    "ic_right_dislike_on_shadowed.webp",
+                    "ic_right_like_off_shadowed.webp",
+                    "ic_right_like_on_shadowed.webp",
+                    "ic_right_share_shadowed.webp"
                 )
-            }
-        }
+            )
 
-        if (OutlineIcon == true) {
-            commonResources.forEach { resourceGroup ->
-                context.copyResources("youtube/shorts/outline", resourceGroup)
+            if (selectedIconType == "outline" || selectedIconType == "outlinecircle") {
+                arrayOf(
+                    "xxxhdpi",
+                    "xxhdpi",
+                    "xhdpi",
+                    "hdpi",
+                    "mdpi"
+                ).forEach { dpi ->
+                    context.copyResources(
+                        "youtube/shorts/outline",
+                        ResourceGroup(
+                            "drawable-$dpi",
+                            "ic_right_dislike_on_32c.webp",
+                            "ic_right_like_on_32c.webp"
+                        ),
+                        ResourceGroup(
+                            "drawable",
+                            "ic_right_comment_32c.xml",
+                            "ic_right_dislike_off_32c.xml",
+                            "ic_right_like_off_32c.xml",
+                            "ic_right_share_32c.xml",
+                            "reel_camera_bold_24dp.xml",
+                            "reel_more_vertical_bold_24dp.xml",
+                            "reel_search_bold_24dp.xml"
+                        )
+                    )
+                }
             }
-        } else if (OutlineCircleIcon == true) {
+
             commonResources.forEach { resourceGroup ->
-                context.copyResources("youtube/shorts/outlinecircle", resourceGroup)
+                context.copyResources("youtube/shorts/$selectedIconType", resourceGroup)
             }
-        } else {
-            commonResources.forEach { resourceGroup ->
-                context.copyResources("youtube/shorts/default", resourceGroup)
-            }
-        }
+        } ?: throw PatchException("Invalid icon type path.")
 
         SettingsPatch.updatePatchStatus("Shorts overlay buttons")
-
     }
 }
