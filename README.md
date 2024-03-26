@@ -152,7 +152,7 @@ ReX Patches.
 | `Enable old player background` | Adds an option to return the player background to the old style. Deprecated on YT Music 6.34.51+. | 6.21.52 ~ 6.33.52 |
 | `Enable old player layout` | Adds an option to return the player layout to the old style. Deprecated on YT Music 6.31.55+. | 6.21.52 ~ 6.33.52 |
 | `Enable old style library shelf` | Adds an option to return the library tab to the old style. | 6.21.52+ |
-| `Enable old style miniplayer` | Adds an option to return the miniplayer to the old style. | 6.21.52+ |
+| `Enable old style miniplayer` | Adds an option to return the miniplayer to the old style. | 6.21.52 ~ 6.41.59 |
 | `Enable opus codec` | Adds an option use the opus audio codec instead of the mp4a audio codec. | 6.21.52+ |
 | `Enable playback speed` | Adds an option to add a playback speed button to the flyout panel. | 6.21.52+ |
 | `Enable zen mode` | Adds an option to change the player background to light grey to reduce eye strain. Deprecated on YT Music 6.34.51+. | 6.21.52 ~ 6.33.52 |
