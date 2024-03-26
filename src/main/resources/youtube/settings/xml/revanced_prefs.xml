@@ -361,7 +361,7 @@
 
         <!-- PREFERENCE: MICROG_SETTINGS
         <Preference android:title="@string/microg_settings_title" android:summary="@string/microg_settings_summary">
-            <intent android:targetPackage="com.mgoogle.android.gms" android:targetClass="org.microg.gms.ui.SettingsActivity" />
+            <intent android:targetPackage="app.rvx.android.gms" android:targetClass="org.microg.gms.ui.SettingsActivity" />
         </Preference>PREFERENCE: MICROG_SETTINGS -->
 
         <!-- SETTINGS: SANITIZE_SHARING_LINKS
@@ -393,7 +393,7 @@
         <SwitchPreference android:title="@string/revanced_spoof_device_dimensions_title" android:key="revanced_spoof_device_dimensions" android:defaultValue="false" android:summary="@string/revanced_spoof_device_dimensions_summary" />SETTINGS: SPOOF_DEVICE_DIMENSIONS -->
 
         <!-- SETTINGS: SPOOF_PLAYER_PARAMETER
-        <SwitchPreference android:title="@string/revanced_spoof_player_parameter_title" android:key="revanced_spoof_player_parameter" android:defaultValue="true" android:summary="@string/revanced_spoof_player_parameter_summary" />
+        <SwitchPreference android:title="@string/revanced_spoof_player_parameter_title" android:key="revanced_spoof_player_parameter" android:defaultValue="false" android:summary="@string/revanced_spoof_player_parameter_summary" />
         <SwitchPreference android:title="@string/revanced_spoof_player_parameter_in_feed_title" android:key="revanced_spoof_player_parameter_in_feed" android:defaultValue="false" android:summaryOn="@string/revanced_spoof_player_parameter_in_feed_summary_on" android:summaryOff="@string/revanced_spoof_player_parameter_in_feed_summary_off" android:dependency="revanced_spoof_player_parameter" />SETTINGS: SPOOF_PLAYER_PARAMETER -->
 	
         <Preference android:title=" " android:selectable="false" android:summary="@string/pref_about_category" />

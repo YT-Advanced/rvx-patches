@@ -8,7 +8,7 @@ object Constants {
      * microG vendor name
      * aka. package prefix / package base
      */
-    const val MICROG_VENDOR = "com.mgoogle"
+    const val MICROG_VENDOR = "app.rvx"
 
     /**
      * microG package name
@@ -90,6 +90,9 @@ object Constants {
         // fido
         "com.google.android.gms.fido.fido2.privileged.START",
 
+        // gass
+        "com.google.android.gms.gass.START",
+
         // games
         "com.google.android.gms.games.service.START",
         "com.google.android.gms.games.PLAY_GAMES_UPGRADE",
@@ -110,7 +113,17 @@ object Constants {
         "com.google.android.gms.gmscompliance.service.START",
         "com.google.android.gms.oss.licenses.service.START",
         "com.google.android.gms.safetynet.service.START",
-        "com.google.android.gms.tapandpay.service.BIND"
+        "com.google.android.gms.tapandpay.service.BIND",
+        "com.google.android.gms.measurement.START",
+        "com.google.android.gms.languageprofile.service.START",
+        "com.google.android.gms.clearcut.service.START",
+        "com.google.android.gms.icing.LIGHTWEIGHT_INDEX_SERVICE",
+
+        // potoken
+        "com.google.android.gms.potokens.service.START",
+
+        // droidguard/ safetynet
+        "com.google.android.gms.droidguard.service.START",
     )
 
     /**
