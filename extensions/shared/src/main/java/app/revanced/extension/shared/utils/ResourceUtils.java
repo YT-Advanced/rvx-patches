@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import java.io.InputStream;
 
 import androidx.annotation.NonNull;
 
@@ -163,6 +164,15 @@ public class ResourceUtils extends Utils {
             return 0;
         }
         return getResources().getInteger(identifier);
+    }
+
+    public static InputStream openRawResource(@NonNull String str) {
+        final int identifier = getRawIdentifier(str);
+        if (identifier == 0) {
+            handleException(str, ResourceType.RAW);
+            return null;
+        }
+        return getResources().openRawResource(identifier);
     }
 
     private static void handleException(@NonNull String str, ResourceType resourceType) {

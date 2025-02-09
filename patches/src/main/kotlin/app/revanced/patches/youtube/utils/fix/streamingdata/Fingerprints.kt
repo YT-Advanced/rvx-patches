@@ -15,6 +15,12 @@ import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 const val STREAMING_DATA_INTERFACE =
     "Lcom/google/protos/youtube/api/innertube/StreamingDataOuterClass${'$'}StreamingData;"
 
+internal val badResponseFingerprint = legacyFingerprint(
+    name = "badResponseFingerprint",
+    strings = listOf("Response code: "),
+    opcodes = listOf(Opcode.CONST_16),
+)
+
 internal val buildMediaDataSourceFingerprint = legacyFingerprint(
     name = "buildMediaDataSourceFingerprint",
     accessFlags = AccessFlags.PUBLIC or AccessFlags.CONSTRUCTOR,

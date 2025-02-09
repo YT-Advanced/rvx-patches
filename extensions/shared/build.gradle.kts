@@ -24,7 +24,11 @@ android {
 dependencies {
     compileOnly(libs.annotation)
     compileOnly(libs.preference)
+
+    implementation(libs.coroutines.android)
+    implementation(libs.coroutines.core)
     implementation(libs.lang3)
+    implementation(libs.nanojson)
 
     compileOnly(project(":extensions:shared:stub"))
 }

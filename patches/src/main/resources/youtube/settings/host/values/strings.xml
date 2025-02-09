@@ -2071,19 +2071,6 @@ AVC has a maximum resolution of 1080p, Opus audio codec is not available, and vi
     <string name="revanced_spoof_streaming_data_stats_for_nerds_summary_off">Client used to fetch streaming data is hidden in Stats for nerds.</string>
     <string name="revanced_spoof_streaming_data_language_title">VR default audio stream language</string>
 
-    <!-- PreferenceScreen: Miscellaneous, PreferenceCategory: Miscellaneous, PreferenceScreen: Spoof streaming data, PreferenceCategory: PoToken / VisitorData -->
-    <string name="revanced_preference_category_po_token_visitor_data">PoToken / VisitorData</string>
-    <string name="revanced_spoof_streaming_data_po_token_title">PoToken to use</string>
-    <string name="revanced_spoof_streaming_data_po_token_summary">PoToken issued by BotGuard in a trusted browser.</string>
-    <string name="revanced_spoof_streaming_data_visitor_data_title">VisitorData to use</string>
-    <string name="revanced_spoof_streaming_data_visitor_data_summary">VisitorData issued by BotGuard in a trusted browser.</string>
-    <string name="revanced_spoof_streaming_data_po_token_visitor_data_about_title">About PoToken / VisitorData</string>
-    <string name="revanced_spoof_streaming_data_po_token_visitor_data_about_summary">"Some clients require PoToken and VisitorData to get a valid streaming data response.
-
-If you are trying to use iOS as the default client, you may need these values.
-
-Click to see more information."</string>
-
     <!-- PreferenceScreen: Miscellaneous, PreferenceCategory: Miscellaneous, PreferenceScreen: Watch history -->
     <string name="revanced_preference_screen_watch_history_title">Watch history</string>
     <string name="revanced_preference_screen_watch_history_summary">Change settings related with watch history.</string>

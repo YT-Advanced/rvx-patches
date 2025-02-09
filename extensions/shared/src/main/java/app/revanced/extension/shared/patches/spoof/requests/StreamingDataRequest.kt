@@ -2,6 +2,7 @@ package app.revanced.extension.shared.patches.spoof.requests
 
 import androidx.annotation.GuardedBy
 import app.revanced.extension.shared.patches.client.YouTubeAppClient
+import app.revanced.extension.shared.patches.spoof.potoken.PoTokenGenerator
 import app.revanced.extension.shared.patches.spoof.requests.PlayerRoutes.GET_STREAMING_DATA
 import app.revanced.extension.shared.patches.spoof.requests.PlayerRoutes.createApplicationRequestBody
 import app.revanced.extension.shared.patches.spoof.requests.PlayerRoutes.getPlayerResponseConnectionFromRoute
@@ -32,8 +33,7 @@ import java.util.concurrent.TimeoutException
  * did use its own client streams.
  */
 class StreamingDataRequest private constructor(
-    videoId: String, playerHeaders: Map<String, String>,
-    visitorId: String, botGuardPoToken: String
+    videoId: String, playerHeaders: Map<String, String>
 ) {
     private val videoId: String
     private val future: Future<ByteBuffer?>
@@ -42,12 +42,7 @@ class StreamingDataRequest private constructor(
         Objects.requireNonNull(playerHeaders)
         this.videoId = videoId
         this.future = Utils.submitOnBackgroundThread {
-            fetch(
-                videoId,
-                playerHeaders,
-                visitorId,
-                botGuardPoToken
-            )
+            fetch(videoId, playerHeaders)
         }
     }
 
@@ -103,6 +98,7 @@ class StreamingDataRequest private constructor(
 
         private var lastSpoofedClientType: YouTubeAppClient.ClientType? = null
 
+        private val poTokenGenerator = PoTokenGenerator()
 
         /**
          * TCP connection and HTTP read timeout.
@@ -132,17 +128,10 @@ class StreamingDataRequest private constructor(
 
         @JvmStatic
         fun fetchRequest(
-            videoId: String, fetchHeaders: Map<String, String>,
-            visitorId: String, botGuardPoToken: String
+            videoId: String, fetchHeaders: Map<String, String>
         ) {
             // Always fetch, even if there is an existing request for the same video.
-            cache[videoId] =
-                StreamingDataRequest(
-                    videoId,
-                    fetchHeaders,
-                    visitorId,
-                    botGuardPoToken
-                )
+            cache[videoId] = StreamingDataRequest(videoId, fetchHeaders)
         }
 
         @JvmStatic
@@ -157,9 +146,7 @@ class StreamingDataRequest private constructor(
         private fun send(
             clientType: YouTubeAppClient.ClientType,
             videoId: String,
-            playerHeaders: Map<String, String>,
-            visitorId: String,
-            botGuardPoToken: String
+            playerHeaders: Map<String, String>
         ): HttpURLConnection? {
             Objects.requireNonNull(clientType)
             Objects.requireNonNull(videoId)
@@ -174,47 +161,31 @@ class StreamingDataRequest private constructor(
                 connection.connectTimeout = HTTP_TIMEOUT_MILLISECONDS
                 connection.readTimeout = HTTP_TIMEOUT_MILLISECONDS
 
-                val usePoToken =
-                    clientType.requirePoToken && !StringUtils.isAnyEmpty(botGuardPoToken, visitorId)
-
                 for (key in REQUEST_HEADER_KEYS) {
                     var value = playerHeaders[key]
                     if (value != null) {
-                        if (key == AUTHORIZATION_HEADER) {
-                            if (!clientType.supportsCookies) {
-                                Logger.printDebug { "Not including request header: $key" }
-                                continue
-                            }
+                        if (key == AUTHORIZATION_HEADER && !clientType.supportsCookies) {
+                            Logger.printDebug { "Not including request header: $key" }
+                            continue
                         }
-                        if (key == VISITOR_ID_HEADER && usePoToken) {
-                            val originalVisitorId: String = value
-                            Logger.printDebug { "Original visitor id:\n$originalVisitorId" }
-                            Logger.printDebug { "Replaced visitor id:\n$visitorId" }
-                            value = visitorId
-                        }
-
                         connection.setRequestProperty(key, value)
                     }
                 }
 
-                val requestBody: ByteArray
-                if (usePoToken) {
-                    requestBody = createApplicationRequestBody(
-                        clientType = clientType,
-                        videoId = videoId,
-                        botGuardPoToken = botGuardPoToken,
-                        visitorId = visitorId,
-                        setLocale = DEFAULT_CLIENT_IS_ANDROID_VR_NO_AUTH,
-                    )
-                    Logger.printDebug { "Set poToken (botGuardPoToken):\n$botGuardPoToken" }
-                } else {
-                    requestBody =
-                        createApplicationRequestBody(
-                            clientType = clientType,
-                            videoId = videoId,
-                            setLocale = DEFAULT_CLIENT_IS_ANDROID_VR_NO_AUTH,
-                        )
+                var botGuardPoToken: String? = null
+                if (clientType.requirePoToken) {
+                    botGuardPoToken = poTokenGenerator.getPoTokenResult(Utils.getActivity())?.let {
+                        connection.setRequestProperty(VISITOR_ID_HEADER, it.visitorId)
+                        it.botGuardPoToken
+                    } ?: return null
                 }
+
+                val requestBody = createApplicationRequestBody(
+                    clientType = clientType,
+                    videoId = videoId,
+                    botGuardPoToken = botGuardPoToken,
+                    setLocale = DEFAULT_CLIENT_IS_ANDROID_VR_NO_AUTH,
+                )
 
                 connection.setFixedLengthStreamingMode(requestBody.size)
                 connection.outputStream.write(requestBody)
@@ -243,8 +214,7 @@ class StreamingDataRequest private constructor(
         }
 
         private fun fetch(
-            videoId: String, playerHeaders: Map<String, String>,
-            visitorId: String, botGuardPoToken: String
+            videoId: String, playerHeaders: Map<String, String>
         ): ByteBuffer? {
             lastSpoofedClientType = null
 
@@ -259,9 +229,7 @@ class StreamingDataRequest private constructor(
                 send(
                     clientType,
                     videoId,
-                    playerHeaders,
-                    visitorId,
-                    botGuardPoToken
+                    playerHeaders
                 )?.let { connection ->
                     try {
                         // gzip encoding doesn't response with content length (-1),

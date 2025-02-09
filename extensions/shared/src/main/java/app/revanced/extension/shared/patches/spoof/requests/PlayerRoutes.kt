@@ -65,6 +65,14 @@ object PlayerRoutes {
                 "videoDetails.isUpcoming"
     ).compile()
 
+    @JvmField
+    val GET_VISITOR_DATA: CompiledRoute = Route(
+        Route.Method.POST,
+        "visitor_id" +
+                "?prettyPrint=false" +
+                "&fields=responseContext.visitorData"
+    ).compile()
+
     private const val YT_API_URL = "https://youtubei.googleapis.com/youtubei/v1/"
 
     /**
@@ -85,8 +93,7 @@ object PlayerRoutes {
         clientType: YouTubeAppClient.ClientType,
         videoId: String,
         playlistId: String? = null,
-        botGuardPoToken: String = "",
-        visitorId: String = "",
+        botGuardPoToken: String? = null,
         setLocale: Boolean = false,
     ): ByteArray {
         val innerTubeBody = JSONObject()
@@ -129,7 +136,7 @@ object PlayerRoutes {
                 innerTubeBody.put("playlistId", playlistId)
             }
 
-            if (!StringUtils.isAnyEmpty(botGuardPoToken, visitorId)) {
+            if (botGuardPoToken != null) {
                 val serviceIntegrityDimensions = JSONObject()
                 serviceIntegrityDimensions.put("poToken", botGuardPoToken)
                 innerTubeBody.put("serviceIntegrityDimensions", serviceIntegrityDimensions)
@@ -166,6 +173,27 @@ object PlayerRoutes {
             innerTubeBody.put("videoId", videoId)
         } catch (e: JSONException) {
             Logger.printException({ "Failed to create web innerTubeBody" }, e)
+        }
+
+        return innerTubeBody.toString().toByteArray(StandardCharsets.UTF_8)
+    }
+
+    @JvmStatic
+    fun createVisitorDataInnertubeBody(
+        clientType: YouTubeWebClient.ClientType
+    ): ByteArray {
+        val innerTubeBody = JSONObject()
+
+        try {
+            val client = JSONObject()
+            client.put("clientName", clientType.clientName)
+            client.put("clientVersion", clientType.clientVersion)
+            val context = JSONObject()
+            context.put("client", client)
+
+            innerTubeBody.put("context", context)
+        } catch (e: JSONException) {
+            Logger.printException({ "Failed to create Visitor Data innerTubeBody" }, e)
         }
 
         return innerTubeBody.toString().toByteArray(StandardCharsets.UTF_8)
