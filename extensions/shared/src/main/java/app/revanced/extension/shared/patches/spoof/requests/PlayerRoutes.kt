@@ -85,8 +85,7 @@ object PlayerRoutes {
         clientType: YouTubeAppClient.ClientType,
         videoId: String,
         playlistId: String? = null,
-        botGuardPoToken: String = "",
-        visitorId: String = "",
+        botGuardPoToken: String? = null,
         setLocale: Boolean = false,
     ): ByteArray {
         val innerTubeBody = JSONObject()
@@ -129,7 +128,7 @@ object PlayerRoutes {
                 innerTubeBody.put("playlistId", playlistId)
             }
 
-            if (!StringUtils.isAnyEmpty(botGuardPoToken, visitorId)) {
+            if (botGuardPoToken != null) {
                 val serviceIntegrityDimensions = JSONObject()
                 serviceIntegrityDimensions.put("poToken", botGuardPoToken)
                 innerTubeBody.put("serviceIntegrityDimensions", serviceIntegrityDimensions)

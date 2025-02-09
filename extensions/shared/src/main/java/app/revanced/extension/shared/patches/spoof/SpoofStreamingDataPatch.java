@@ -1,8 +1,12 @@
 package app.revanced.extension.shared.patches.spoof;
 
+import static app.revanced.extension.shared.utils.Utils.runOnBackgroundThread;
+
+import android.app.Activity;
 import android.net.Uri;
 import android.text.TextUtils;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.nio.ByteBuffer;
@@ -11,6 +15,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import app.revanced.extension.shared.patches.client.YouTubeAppClient.ClientType;
+import app.revanced.extension.shared.patches.spoof.potoken.PoTokenGenerator;
 import app.revanced.extension.shared.patches.spoof.requests.StreamingDataRequest;
 import app.revanced.extension.shared.settings.BaseSettings;
 import app.revanced.extension.shared.settings.Setting;
@@ -19,11 +24,6 @@ import app.revanced.extension.shared.utils.Utils;
 
 @SuppressWarnings("unused")
 public class SpoofStreamingDataPatch extends BlockRequestPatch {
-    private static final String PO_TOKEN =
-            BaseSettings.SPOOF_STREAMING_DATA_PO_TOKEN.get();
-    private static final String VISITOR_DATA =
-            BaseSettings.SPOOF_STREAMING_DATA_VISITOR_DATA.get();
-
     /**
      * Any unreachable ip address.  Used to intentionally fail requests.
      */
@@ -53,6 +53,24 @@ public class SpoofStreamingDataPatch extends BlockRequestPatch {
 
     /**
      * Injection point.
+     * This method is invoked at the app startup.
+     * Called on the main thread
+     */
+    public static void initializePoTokenWebView(@NonNull Activity mActivity) {
+        if (!SPOOF_STREAMING_DATA) return;
+
+        runOnBackgroundThread(() -> {
+            try {
+                // Pass with a videoId to check if the PoToken is generated properly
+                new PoTokenGenerator().getPoToken("dQw4w9WgXcQ", mActivity, true);
+            } catch (Exception ex) {
+                Logger.printException(() -> "Failed to initialize PoToken WebView", ex);
+            }
+        });
+    }
+
+    /**
+     * Injection point.
      * This method is only invoked when playing a livestream on an iOS client.
      */
     public static boolean fixHLSCurrentTime(boolean original) {
@@ -75,7 +93,7 @@ public class SpoofStreamingDataPatch extends BlockRequestPatch {
                 return;
             }
 
-            StreamingDataRequest.fetchRequest(id, requestHeaders, VISITOR_DATA, PO_TOKEN);
+            StreamingDataRequest.fetchRequest(id, requestHeaders);
         }
     }
 
