@@ -100,6 +100,8 @@ class StreamingDataRequest private constructor(
 
         private val poTokenGenerator = PoTokenGenerator()
 
+        private var appLaunched = false
+
         /**
          * TCP connection and HTTP read timeout.
          */
@@ -220,6 +222,11 @@ class StreamingDataRequest private constructor(
                     playerHeaders[AUTHORIZATION_HEADER] == null
                 ) {
                     Logger.printDebug { "Skipped login-required client (incognito mode or not logged in)\nClient: $clientType\nVideo: $videoId" }
+                    continue
+                }
+                if (!appLaunched && clientType.requirePoToken) {
+                    Logger.printDebug { "Skipped potoken-required client at the app start" }
+                    appLaunched = true
                     continue
                 }
                 send(
