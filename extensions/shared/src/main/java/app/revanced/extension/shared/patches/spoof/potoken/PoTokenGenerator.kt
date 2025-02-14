@@ -19,22 +19,21 @@ class PoTokenGenerator {
         videoId: String, 
         mActivity: Activity? = getActivity(), 
         forceCreate: Boolean = false
-    ): String? {
+    ): String {
         if (!supportsWebView) {
-            printDebug { "WebView is not supported. Cannot obtain PoToken" }
-            return null
+            throw PoTokenException("WebView is not supported. Cannot obtain PoToken")
         }
 
         val (poTokenGenerator, hasBeenRecreated) = synchronized(PoTokenGenLock) {
             val shouldRecreate = forceCreate || webPoTokenGenerator == null || webPoTokenGenerator!!.isExpired()
 
-            if (mActivity != null && shouldRecreate) {
+            if (shouldRecreate) {
                 runBlocking {
                     // close the current webPoTokenGenerator on the main thread
                     webPoTokenGenerator?.let { Handler(Looper.getMainLooper()).post { it.close() } }
 
                     // create a new poTokenGenerator with Application Context
-                    webPoTokenGenerator = PoTokenWebView.newPoTokenGenerator(mActivity.getApplicationContext())
+                    webPoTokenGenerator = PoTokenWebView.newPoTokenGenerator(mActivity!!.getApplicationContext())
                 }
             }
 
